@@ -11,7 +11,7 @@
     </div>
     <ul class="sidebar-menu">
         <li class="active">
-            <a href="index.html">
+            <a href="<?php echo route('admin.root') ?>">
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
