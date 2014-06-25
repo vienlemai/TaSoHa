@@ -14,3 +14,5 @@ composer.lock
 nbproject
 /nbproject/private/
 /packages/
+app/storage/debugbar
+public/packages
