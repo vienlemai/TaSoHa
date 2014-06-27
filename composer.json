@@ -5,7 +5,10 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.1.*",
-		"barryvdh/laravel-debugbar": "1.x"
+		"barryvdh/laravel-debugbar": "1.*",
+		"laravelbook/ardent": "dev-master",
+		"anahkiasen/former": "dev-master",
+		"codesleeve/asset-pipeline": "dev-master"
 	},
 	"autoload": {
 		"classmap": [
