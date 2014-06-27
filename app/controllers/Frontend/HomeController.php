@@ -4,11 +4,13 @@ namespace Frontend;
 
 class HomeController extends \BaseController {
 
+    protected $layout = 'layouts.frontend';
+
     /**
      * GET /
      */
     public function index() {
-        return 'Hello';
+        $this->layout->content = \View::make('frontend.home.index');
     }
 
 }

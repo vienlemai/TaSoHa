@@ -1,0 +1,46 @@
+/* 
+    Document   : Ribbons
+    Created on : Jan 21, 2013, 7:11:25 PM
+    Author     : Aslam
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+
+/*SHOW ALL RIBBONS*/
+
+#phone{display: none;}
+.spanwidget{width: 265px;}
+.spanwidget-post{width: 285px;}
+.offset0 {
+    margin-left: 40px;
+}
+@media (max-width: 979px) and (min-width: 768px){
+    .spanwidget {
+        width: 200px;
+    }
+    .sidebar-title{font-size: 20px; }
+}
+@media only screen and (max-width: 767px){
+
+
+    .entry-title{margin-left: -20px; margin-right: -20px;}
+    .blog-title{margin-right: 0px;}
+    .blog-title {
+        margin-left: -15px;
+        /*margin-left: 0px;*/
+    } 
+    .sidebar-title{margin-left: 0px; margin-right: 0px;}
+
+
+}
+@media only screen and (max-width: 480px){
+    .blog-title {
+        margin-left: 0px;
+        /*margin-left: 0px;*/
+    } 
+    .entry-title{margin-left:-10px; margin-right: -10px;    }
+    .sidebar-title{margin-left: 0px; margin-right: 0px;}
+
+
+}

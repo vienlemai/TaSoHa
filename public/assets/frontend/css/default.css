@@ -1,0 +1,20 @@
+/*====================================================================== */
+/* Default Color Already in Style.css - You can 
+
+======================================================================
+Uncomment From Below and Use your own color
+Simply change the Color Code, in this case its #f38630
+=======================================================================
+
+
+/* =================================================================== */
+/* Green is Default #72b626
+====================================================================== */
+a:hover, a:focus,.testimonial-nav i:hover,#twitter a:hover,#footer-bottom a:hover,#contact-top a:hover,.theme-color{color: #72b626;}
+.entry-title,#current,.headline h4, .feature-boxes .feature-circle:hover,.menu > li:hover > a{background: #72b626;}
+#scroll-to-top a:hover,.message-top{background-color: #72b626;}
+section a:hover,.feature-boxes i,.ptable h3 i{color: #72b626;}
+#current,.menu > li > a:hover,.menu > li:hover > a,#wrapper,.menu ul a:hover,.headline-page h3,.feature-boxes:hover{border-color: #72b626;}
+.nav-tabs > .active > a, .nav-tabs > .active > a:hover{border-top-color: #72b626;}
+.btn-times-changing  {background:#72b626;} 
+.btn-times-changing:hover  {background:rgb(132, 218, 36);color: #fff;} 
