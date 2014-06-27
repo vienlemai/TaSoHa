@@ -2,9 +2,7 @@
 
 namespace Frontend;
 
-class HomeController extends \BaseController {
-
-    protected $layout = 'layouts.frontend';
+class HomeController extends FrontendBaseController {
 
     /**
      * GET /
