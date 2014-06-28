@@ -8,6 +8,7 @@ class HomeController extends AdminBaseController {
      * GET /
      */
     public function index() {
+
         if (false) { // Not logged in
             return \View::make('shared/login');
         } else {
@@ -26,8 +27,8 @@ class HomeController extends AdminBaseController {
         if ($checkLogin) {
             return \Redirect::intended('/admin');
         } else {
-            Session::flash('error', \Lang::get('login_fail'));
-            return Redirect::back()->withInput();
+            \Session::flash('error', \Lang::get('login_fail'));
+            return \Redirect::back()->withInput();
         }
     }
 

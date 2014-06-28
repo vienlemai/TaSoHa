@@ -7,11 +7,22 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
             'as' => 'admin.logout',
             'uses' => 'HomeController@logout',
         ));
+
+        Route::get('list-routes', function() {
+            $routeCollection = \Route::getRoutes();
+
+            foreach ($routeCollection as $value) {
+                var_dump($value->getName());
+            }
+            exit();
+        });
+
+        Route::get('paths', function() {
+            $destinationPath = app_path() . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'assets' . DIRECTORY_SEPARATOR . 'img' . DIRECTORY_SEPARATOR;
+            var_dump($destinationPath);
+        });
         Route::resource('articles', 'ArticleController');
-//        Route::get('article',  array(
-//            'as'=>'article',
-//            'uses'=>'ArticleController@index'
-//        ));
+        Route::resource('categories', 'ArticleCategoryController');
     });
 
     Route::get('/login', array(

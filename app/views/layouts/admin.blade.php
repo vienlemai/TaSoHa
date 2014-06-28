@@ -34,9 +34,11 @@
         <script src="{{asset('assets/js/jquery-ui-1.10.3.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/daterangepicker.js')}}" type="text/javascript"></script>
-        <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
+         <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/lte/app.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/lte/dashboard.js')}}" type="text/javascript"></script>     
         <script src="{{asset('assets/js/lte/demo.js')}}" type="text/javascript"></script>
+        <script src="{{asset('assets/js/admin.js')}}" type="text/javascript"></script>
     </body>
 </html>
