@@ -5,15 +5,10 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateArticleTable extends Migration {
 
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up() {
         Schema::create('articles', function($t) {
             $t->increments('id');
-            $t->integer('categor_id');
+            $t->integer('category_id');
             $t->string('title', 255);
             $t->text('content');
             $t->string('thumbnail', 255)->nullable();
@@ -23,11 +18,6 @@ class CreateArticleTable extends Migration {
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down() {
         Schema::dropIfExists('articles');
     }
