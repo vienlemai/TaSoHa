@@ -16,11 +16,12 @@
             <ul>
 <!--                <li><i class="icon-envelope"></i><a href="#">support@aabu.com</a></li>
                 <li><i class="icon-phone"></i>+1 123 456-789</li>-->
+                <a href="#">Đăng nhập</a> / Quên mật khẩu?   
+                <br>
                 <div class="input-append">
                     <input class="span2" type="text" placeholder='Tìm kiếm ...'>
                     <button class="btn" type="button"><i class="fa fa-search"></i></button>
                 </div>
-                <a href="#">Đăng nhập</a> / Quên mật khẩu?    
             </ul>
         </div>
     </div>
