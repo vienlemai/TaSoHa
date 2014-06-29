@@ -1,6 +1,5 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 <?php
+exit ('ok');
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -36,7 +35,7 @@ require __DIR__.'/bootstrap/autoload.php';
 
 $app = require_once __DIR__.'/bootstrap/start.php';
 var_dump($app);
-exit ();
+
 /*
 |--------------------------------------------------------------------------
 | Run The Application
