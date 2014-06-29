@@ -12,7 +12,7 @@
           <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
     </head>
-    <body class="skin-black">
+    <body class="skin-black fixed">
 
         @include('layouts/admin/_header')
         <div class="wrapper row-offcanvas row-offcanvas-left">
@@ -37,8 +37,6 @@
          <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/lte/app.js')}}" type="text/javascript"></script>
-        <script src="{{asset('assets/js/lte/dashboard.js')}}" type="text/javascript"></script>     
-        <script src="{{asset('assets/js/lte/demo.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/admin.js')}}" type="text/javascript"></script>
     </body>
 </html>

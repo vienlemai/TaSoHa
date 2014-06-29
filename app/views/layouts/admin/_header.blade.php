@@ -22,7 +22,7 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="<?php echo route('admin.logout') ?>" class="btn btn-default btn-flat"><?php echo trans('messages.sign_out'); ?></a>
+                            <a href="<?php echo route('admin.logout') ?>" class=""><?php echo trans('messages.sign_out'); ?></a>
                         </li>
                     </ul>
                 </li>
