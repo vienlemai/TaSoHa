@@ -73,8 +73,8 @@
 
         <div id="myCarousel" class="carousel slide">
             <div class="pull-right marginbottom testimonial-nav">
-                <a href="#myCarousel" data-slide="prev"><i class="icon-circle-arrow-left icon-2x icon-muted"></i></a>
-                <a href="#myCarousel" data-slide="next"><i class="icon-circle-arrow-right icon-2x icon-muted"></i></a>
+                <a href="#myCarousel" data-slide="prev"><i class="fa fa-arrow-circle-left fa-2x"></i></a>
+                <a href="#myCarousel" data-slide="next"><i class="fa fa-arrow-circle-right fa-2x"></i></a>
 
             </div>
             <div class="carousel-inner">
