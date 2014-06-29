@@ -23,7 +23,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="{{route('admin.articles.index')}}"><i class="fa fa-angle-double-right"></i> <?php echo trans('messages.list_article'); ?></a></li>
-                <li><a href="{{route('admin.categories.index')}}"><i class="fa fa-angle-double-right"></i> <?php echo trans('messages.article_categories'); ?></a></li>
+                <li><a href="{{route('admin.article_categories.index')}}"><i class="fa fa-angle-double-right"></i> <?php echo trans('messages.article_categories'); ?></a></li>
             </ul>
         </li>
     </ul>

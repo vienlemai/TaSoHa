@@ -22,7 +22,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
             var_dump($destinationPath);
         });
         Route::resource('articles', 'ArticleController');
-        Route::resource('categories', 'ArticleCategoryController');
+        Route::resource('article_categories', 'ArticleCategoryController');
     });
 
     Route::get('/login', array(

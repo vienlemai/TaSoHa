@@ -20,7 +20,7 @@
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="row">
-                    <a href="{{route('admin.categories.create')}}" class="pull-left btn btn-primary" style="margin: 15px">
+                    <a href="{{route('admin.article_categories.create')}}" class="pull-left btn btn-primary" style="margin: 15px">
                         <?php echo trans('messages.add_category'); ?>
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                                 <td>{{$category->parent_category->name or ''}}</td>
                                 <td><?php echo $category->created_at->format('d/m/Y, H:i') ?></td>
                                 <td>
-                                    <a href="<?php echo route('admin.categories.edit', $category->id) ?>" class="text-blue">
+                                    <a href="<?php echo route('admin.article_categories.edit', $category->id) ?>" class="text-blue">
                                         <i class="fa-edit"><?php echo trans('messages.edit'); ?></i>
                                     </a>
                                     <a href="#" class="text-danger">

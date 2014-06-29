@@ -19,7 +19,7 @@
                 <h3 class="box-title"><?php echo trans('messages.input_category'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <?php echo Former::open(route('admin.categories.update', $category->id))->method('put') ?>
+            <?php echo Former::open(route('admin.article_categories.update', $category->id))->method('put') ?>
             <div class="box-body">
                 <?php
                 echo Former::select('parent_id')

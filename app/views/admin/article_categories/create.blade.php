@@ -19,7 +19,7 @@
                 <h3 class="box-title"><?php echo trans('messages.input_category'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <?php echo Former::open(route('admin.categories.store'))->method('Post') ?>
+            <?php echo Former::open(route('admin.article_categories.store'))->method('Post') ?>
             <div class="box-body">
 
                 <?php
