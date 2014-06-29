@@ -1327,7 +1327,7 @@ or wrap each row of columns in a <div class="row"> */
 .post-video{margin-bottom: -6px;}
 
 
-.post-meta .readmore{display: none; }
+/*.post-meta .readmore{display: none; }*/
 
 .post:hover .post-meta .readmore{
     display: block;

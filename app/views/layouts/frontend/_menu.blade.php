@@ -17,9 +17,9 @@
 
             <!-- Second Level / Start -->
             <ul>
-                <li><a href="about.html"><i class="icon-bell"></i> About</a></li>
-                <li><a href="services.html"><i class="icon-gift"></i> Our Services</a></li>
-                <li><a href="faq.html">Faq</a></li>
+                <li><a href="#"><i class="icon-bell"></i> About</a></li>
+                <li><a href="#"><i class="icon-gift"></i> Our Services</a></li>
+                <li><a href="#">Faq</a></li>
             </ul>
             <!-- Second Level / End -->
         </li>
@@ -27,10 +27,10 @@
         <li> <a href="#">Mỹ phẩm</a>
             <!-- Second Level / Start -->
             <ul>
-                <li><a href="elements.html">Elements</a></li>
-                <li><a href="icons.html">Icons</a></li>
-                <li><a href="pricing_tables.html">Pricing Tables</a></li>
-                <li><a href="typography.html">Typography</a></li>
+                <li><a href="#">Elements</a></li>
+                <li><a href="#">Icons</a></li>
+                <li><a href="#">Pricing Tables</a></li>
+                <li><a href="#">Typography</a></li>
             </ul>
             <!-- Second Level / End -->
         </li>
@@ -38,10 +38,10 @@
         <li><a href="#">Hàng tiêu dùng</a>
             <!-- Second Level / Start -->
             <ul>
-                <li><a href="portfolio-2.html">2 Columns</a></li>
-                <li><a href="portfolio-3.html">3 Columns</a></li>
-                <li><a href="portfolio-4.html">4 Columns</a></li>
-                <li><a href="single-project.html">Single Project</a></li>
+                <li><a href="#">2 Columns</a></li>
+                <li><a href="#">3 Columns</a></li>
+                <li><a href="#">4 Columns</a></li>
+                <li><a href="#">Single Project</a></li>
             </ul>
             <!-- Second Level / End -->
         </li>
@@ -49,19 +49,25 @@
         <li><a href="#">Hàng gia dụng</a>
             <!-- Second Level / Start -->
             <ul>
-                <li><a href="blog.html">Default Blog</a></li>
-                <li><a href="floated-blog.html">Floated Blog</a></li>
-                <li><a href="blog-filter.html">Filtered Blog</a></li>
-                <li><a href="blog-post.html">Single Post</a></li>
+                <li><a href="#">Default Blog</a></li>
+                <li><a href="#">Floated Blog</a></li>
             </ul>
             <!-- Second Level / End -->
         </li>
         <li><a href="#">Mặt hàng khác</a>
             <ul>
-                <li><a href="gallery.html">Normal Gallery</a></li>
-                <li><a href="floated-gallery.html">Floated Gallery</a></li>
+                <li><a href="#">Normal Gallery</a></li>
+                <li><a href="#">Floated Gallery</a></li>
             </ul>
         </li>
-        <li><a href="contact.html"><i class="fa fa-group"></i> Tasoha Group</a></li>
+        <li><a href="contact.html"><i class="fa fa-group"></i> Tasoha Group</a>
+            <ul>
+                <li><a href="#">Sứ mệnh</a></li>
+                <li><a href="#">Tasoha LAND</a></li>
+                <li><a href="#">Tasoha ECOM</a></li>
+                <li><a href="#">Tasoha EDU</a></li>
+                <li><a href="#">Tasoha INVEST</a></li>
+            </ul>
+        </li>
     </ul>
 </div>

@@ -28,7 +28,7 @@
     </div>
 </section>
 <?php echo View::make('layouts/frontend/_flash')->render() ?>
-<section class="margintop60"  id="features">
+<!--<section class="margintop60"  id="features">
     <div class="row center">
         <div class="headline margintop marginbottom60"><h4><i class="icon-star"></i> Our Exciting Features</h4></div>
     </div>
@@ -63,11 +63,11 @@
             </article>
         </div>
     </div>
-</section>
+</section>-->
 
-<section class="margintop60" id="comments">
+<section class="margintop20" id="comments">
     <div class="row center">
-        <div class="headline  marginbottom40"><h4><i class="icon-group"></i> How good we are?</h4></div>
+        <!--<div class="headline  marginbottom40"><h4><i class="icon-group"></i> Tin tức Tasoha</h4></div>-->
     </div>
     <div class="span9 offset1">
 
@@ -81,11 +81,16 @@
                 <div class="item active">
                     <div class="well well-small well-transparent">
                         <div class="row">
-                            <div class="span1"><img src="assets/img/t1.png" class=" img-circle testimonial-image">
-                            </div><div class="span6">
+<!--                            <div class="span1"><img src="assets/img/t1.png" class=" img-circle testimonial-image">
+                            </div>-->
+                            <div class="span7">
                                 <blockquote>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                                     <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+                                    <div class="post-meta">
+                                        <span class="post-date"><i class="icon-calendar"></i>Jan 04, 2014</span>
+                                        <span class="pull-right readmore"><a href="#"><i class="icon-link"></i>Chi tiết</a></span>
+                                    </div>
                                 </blockquote></div>
                         </div>
                     </div>
@@ -93,11 +98,16 @@
                 <div class="item">
                     <div class="well well-small well-transparent">
                         <div class="row">
-                            <div class="span1"><img src="assets/img/t2.png" class=" img-circle testimonial-image">
-                            </div><div class="span6">
+<!--                            <div class="span1"><img src="assets/img/t2.png" class=" img-circle testimonial-image">
+                            </div>-->
+                            <div class="span7">
                                 <blockquote>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                                     <small>Someone famous <cite title="Source Title">Source Title</cite></small>
+                                    <div class="post-meta">
+                                        <span class="post-date"><i class="icon-calendar"></i>Jan 04, 2014</span>
+                                        <span class="pull-right readmore"><a href="#"><i class="icon-link"></i>Chi tiết</a></span>
+                                    </div>
                                 </blockquote></div>
                         </div>
                     </div>
@@ -105,12 +115,18 @@
                 <div class="item">
                     <div class="well well-small well-transparent">
                         <div class="row">
-                            <div class="span1"><img src="assets/img/t1.png" class=" img-circle testimonial-image">
-                            </div><div class="span6">
+<!--                            <div class="span1"><img src="assets/img/t1.png" class=" img-circle testimonial-image">
+                            </div>-->
+                            <div class="span7">
                                 <blockquote>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
                                     <small>Someone famous <cite title="Source Title">Source Title</cite></small>
-                                </blockquote></div>
+                                    <div class="post-meta">
+                                        <span class="post-date"><i class="icon-calendar"></i>Jan 04, 2014</span>
+                                        <span class="pull-right readmore"><a href="#"><i class="icon-link"></i>Chi tiết</a></span>
+                                    </div>
+                                </blockquote>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,43 +135,30 @@
     </div>
     <div class="clearfix"></div>
 </section>
-<section class="margintop60" id="blog">
-    <div class="row center">
-        <div class="headline  marginbottom40"><h4><i class="icon-bullhorn"></i> Fresh from our Blog!</h4></div>
-    </div>
+<section class="margintop20" id="blog">
+    <!--    <div class="row center">
+            <div class="headline  marginbottom40"><h4><i class="icon-bullhorn"></i> Fresh from our Blog!</h4></div>
+        </div>-->
     <div class="row">
         <div class="span4 blog-item">
-
             <div class="picture"><a href="blog-post.html"><img src="assets/img/4.jpg" alt=""><div class="image-overlay-link"></div></a></div>
             <div class="item-description">
-                <h5><a href="#">Aliquam elementum nec, auctor penatibus nisi.</a></h5>
+                <h3><a href="#">Thông tin sản phẩm mới</a></h3>
                 <p>Mauris sit amet ligula est, eget conseact etur lectus maecenas hendrerit suscipit.</p>
-            </div>
-            <div class="post-meta">
-                <span class="post-date"><i class="icon-calendar"></i>Jan 04, 2013</span>
-                <span class="pull-right readmore"><a href="#"><i class="icon-link icon-2x"></i></a></span>
             </div>
         </div>
         <div class="span4 blog-item">
             <div class="picture"><a href="blog-post.html"><img src="assets/img/3.jpg" alt=""><div class="image-overlay-link"></div></a></div>
             <div class="item-description">
-                <h5><a href="#">Aliquam elementum nec, auctor penatibus nisi.</a></h5>
+                <h3><a href="#">Công tác tập huấn</a></h3>
                 <p>Mauris sit amet ligula est, eget conseact etur lectus maecenas hendrerit suscipit.</p>
-            </div>
-            <div class="post-meta">
-                <span class="post-date"><i class="icon-calendar"></i>Jan 04, 2013</span>
-                <span class="pull-right readmore"><a href="#"><i class="icon-link icon-2x"></i></a></span>
             </div>
         </div>
         <div class="span4 blog-item">
             <div class="picture"><a href="blog-post.html"><img src="assets/img/5.jpg" alt=""><div class="image-overlay-link"></div></a></div>
             <div class="item-description">
-                <h5><a href="#">Aliquam elementum nec, auctor penatibus nisi.</a></h5>
+                <h3><a href="#">Tin tức và sự kiện</a></h3>
                 <p>Mauris sit amet ligula est, eget conseact etur lectus maecenas hendrerit suscipit.</p>
-            </div>
-            <div class="post-meta">
-                <span class="post-date"><i class="icon-calendar"></i>Jan 04, 2013</span>
-                <span class="pull-right readmore"><a href="#"><i class="icon-link icon-2x"></i></a></span>
             </div>
         </div>
     </div>
