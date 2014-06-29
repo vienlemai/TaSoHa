@@ -12,56 +12,68 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-12 center">
-        <div class="box">
-            <div class="box-header">
-                <h3 class="box-title"><?php echo trans('messages.categories'); ?></h3>
-                <?php echo View::make('admin.partials.search_tool', array('input' => $input))->render(); ?>
-            </div><!-- /.box-header -->
-            <div class="box-body">
-                <div class="row">
-                    <a href="{{route('admin.articles.create')}}" class="pull-left btn btn-primary" style="margin: 15px">
-                        <?php echo trans('messages.add_article'); ?>
-                    </a>
+    <div class="col-md-12">
+        <div class="table-wrap">
+            <div class="table-header">
+                <a href="{{route('admin.articles.create')}}" class="btn btn-sm btn-primary">
+                    <i class="fa fa-plus"></i> <?php echo trans('messages.add_article'); ?>
+                </a>
+                <div class="col-md-4 pull-right no-padding">
+                    <?php echo View::make('admin.partials.search_tool', array('input' => $input))->render(); ?>
                 </div>
-                <table class="table table-bordered table-striped">
-                    <thead>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width: 5%">#</th>
+                        <th><?php echo trans('messages.article_title'); ?></th>
+                        <th><?php echo trans('messages.article_category'); ?></th>
+                        <th><?php echo trans('messages.created_at'); ?></th>
+                        <th style="width: 15%"><?php echo trans('messages.actions'); ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $index = $articles->getFrom(); ?>
+                    <?php foreach ($articles as $article): ?>
                         <tr>
-                            <th style="width: 5%">#</th>
-                            <th><?php echo trans('messages.article_title'); ?></th>
-                            <th><?php echo trans('messages.article_category'); ?></th>
-                            <th><?php echo trans('messages.created_at'); ?></th>
-                            <th style="width: 15%"><?php echo trans('messages.actions'); ?></th>
+                            <td><?php echo $index++ ?></td>
+                            <td><?php echo $article->title ?></td>
+                            <td>{{$article->category->name or ''}}</td>
+                            <td><?php echo $article->created_at->format('d/m/Y, H:i') ?></td>
+                            <td>
+                                <a href="<?php echo route('admin.articles.edit', $article->id) ?>" class="text-blue">
+                                    <i class="fa-edit"><?php echo trans('messages.edit'); ?></i>
+                                </a>
+                                <a href="#" class="text-danger">
+                                    <i class="fa-ban"><?php echo trans('messages.delete'); ?></i>
+                                </a>
+                            </td>
+
                         </tr>
-                    </thead>
-                    <tbody>
-                        <?php $index = $articles->getFrom(); ?>
-                        <?php foreach ($articles as $article): ?>
-                            <tr>
-                                <td><?php echo $index++ ?></td>
-                                <td><?php echo $article->title ?></td>
-                                <td>{{$article->category->name or ''}}</td>
-                                <td><?php echo $article->created_at->format('d/m/Y, H:i') ?></td>
-                                <td>
-                                    <a href="<?php echo route('admin.articles.edit', $article->id) ?>" class="text-blue">
-                                        <i class="fa-edit"><?php echo trans('messages.edit'); ?></i>
-                                    </a>
-                                    <a href="#" class="text-danger">
-                                        <i class="fa-ban"><?php echo trans('messages.delete'); ?></i>
-                                    </a>
-                                </td>
-
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
-                <?php
-                echo View::make('admin.partials.table_paging', array(
-                    'collection' => $articles
-                ))->render();
-
-                ?>
-            </div><!-- /.box-body -->
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+            <div class="table-footer">
+                <div class="info-left">
+                    <?php
+                    echo trans('messages.paging_info', array(
+                        'from' => $articles->getFrom(),
+                        'to' => $articles->getTo(),
+                        'total' => $articles->getTotal(),
+                    ));
+                    ?>
+                </div>
+                <div class="info-right">
+                    <?php echo $articles->links(); ?>
+                    <ul class="pagination pagination-sm">
+                        <li><a href="#">«</a></li>
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">»</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </div>
 </div>

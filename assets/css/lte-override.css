@@ -1,0 +1,12 @@
+.table-wrap .table-header {
+    padding-bottom: 10px;
+}
+.table-wrap .table-footer .info-left {
+    float: left;
+}
+.table-wrap .table-footer .info-right {
+    float: right;
+}
+.table-wrap .table-footer .pagination {
+    margin: 5px 0;
+}

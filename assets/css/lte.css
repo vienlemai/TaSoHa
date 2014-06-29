@@ -3402,3 +3402,6 @@ fieldset[disabled] .btn-vk.active {
 label {
     font-weight: 600;
 }
+table th, table tr td {
+    font-size: 13px;
+}
