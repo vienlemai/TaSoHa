@@ -22,7 +22,7 @@
             <?php echo Former::open(route('admin.articles.store'))->method('Post') ?>
             <div class="box-body">
                 <?php
-                echo Former::select('category_id')
+                echo Former::select('categor_id')
                     ->label(Lang::get('messages.categories'))
                     ->options($categories)
                     ->class('form-control');

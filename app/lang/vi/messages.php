@@ -33,5 +33,9 @@ return array(
     'input_article' => 'Nhập nội dung bài viết/tin tức',
     'article_content' => 'Nội dung bài viết',
     'article_title' => 'Tiêu đề bài viết',
-    'article_thumbnail'=>'Ảnh đại diện bài viết',
+    'article_thumbnail' => 'Ảnh đại diện bài viết',
+    'article_category' => 'Danh mục',
+    'article_save_success' => 'Lưu thành công bài viết :name',
+    'add_category'=>'Thêm danh mục',
+    'add_article'=>'Đăng bài viết',
 );

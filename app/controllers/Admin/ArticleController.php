@@ -10,7 +10,11 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function index() {
-        return \View::make('admin.article.index');
+        $articles = \Article::paging(\Input::all());
+        return \View::make('admin.article.index', array(
+                'articles' => $articles,
+                'input' => \Input::all(),
+        ));
     }
 
     /**
@@ -54,7 +58,12 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        //
+        $categories = \ArticleCategory::listCategories();
+        $article = \Article::find($id);
+        return \View::make('admin.article.edit', array(
+                'article' => $article,
+                'categories' => $categories
+        ));
     }
 
     /**
@@ -64,7 +73,10 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function update($id) {
-        //
+        $article = \Article::findOrFail($id);
+        $article->update(\Input::all());
+        \Session::flash('success', \Lang::get('messages.article_save_success', array('name' => $article->title)));
+        return \Redirect::route('admin.articles.index');
     }
 
     /**

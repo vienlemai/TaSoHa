@@ -22,7 +22,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="pages/charts/morris.html"><i class="fa fa-angle-double-right"></i> <?php echo trans('messages.list_article'); ?></a></li>
+                <li><a href="{{route('admin.articles.index')}}"><i class="fa fa-angle-double-right"></i> <?php echo trans('messages.list_article'); ?></a></li>
                 <li><a href="{{route('admin.categories.index')}}"><i class="fa fa-angle-double-right"></i> <?php echo trans('messages.article_categories'); ?></a></li>
             </ul>
         </li>

@@ -10,7 +10,7 @@ class Article extends LaravelBook\Ardent\Ardent {
     );
 
     public function category() {
-        return $this->belongsTo('Category');
+        return $this->belongsTo('ArticleCategory', 'categor_id', 'id');
     }
 
     public static function boot() {
@@ -31,11 +31,17 @@ class Article extends LaravelBook\Ardent\Ardent {
         $this->save();
     }
 
-    public static function paging($param) {
+    public static function paging($params) {
         $query = self::with('category');
-        if (isset($param['keyword'])) {
-            $query->where('title');
+        if (isset($params['keyword'])) {
+            $query->where('title', 'like', '%' . $params['keyword'] . '%');
         }
+        if (isset($params['category_id'])) {
+            $query->where('category_id', $params['category_id']);
+        }
+        $result = $query->paginate();
+        //dd($result->toArray());
+        return $result;
     }
 
 }
