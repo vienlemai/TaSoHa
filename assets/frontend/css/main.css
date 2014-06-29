@@ -30,7 +30,7 @@ Reset Rules End*/
 
 body {
     background: url(../../img/bg/noise_pattern_with_crosslines.png);
-    font-size: 12px;
+    font-size: 13px;
     font-family: 'Open Sans', sans-serif !important;
     color: #666;
     -webkit-font-smoothing: antialiased; /* Fix for webkit rendering */

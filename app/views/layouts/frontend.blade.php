@@ -4,19 +4,17 @@
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"><!--<![endif]-->
     <head>
         <meta charset="utf-8">
-        <title>Tasoha</title>
+        <title>Tasoha Group</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap.css')}}">
+                <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/override-template.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-2.3.2.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/style.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/style-responsive.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/override.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/ribbons.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/sequence.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/default.css')}}">
         <!-- Styles Switcher -->
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/switcher.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/override-template.css')}}">
 
         <!-- Java Script  -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -46,60 +44,7 @@
             <div class="push"></div>
             <div id="scroll-to-top" ><a href="#" title="Go to Top"></a></div>
         </div>
-        <section id="phone">
-            <div class="row">
-                <div class="center margintop60 marginbottom60">
-                    <h1><i class="icon-phone"></i> Call us now +123-456-789</h1>
-                </div>
-            </div>
-        </section>
-        <section id="footer-section">
-            <!-- Footer Top -->
-            <div id="footer" class=" paddingbottom" >
-                <div class="border-footer-left"></div>
-                <div class="border-footer-right"></div>
-                <div class="container">
-                    <div class="row">
-
-                        <!-- Subscribe  -->
-                        <div class="span4">
-                            <div class="footer-headline"><h4>Subscribe</h4></div>
-                            <p>Keep updated with our news</p><p>Your email is safe with us!</p>
-                            <div class="input-append">
-                                <input  id="appendedInputButton"  type="text" class="span2" placeholder="Enter Email Address">
-                                <button class="btn" type="button">Subscribe!</button>
-                            </div>
-                        </div>
-
-                        <!-- Photo Stream -->
-                        <div class="span4">
-                            <div class="footer-headline"><h4>Photo Stream</h4></div>
-                            <div class="flickr-widget">
-                                <div class="clear"></div>
-                            </div>
-                        </div>
-
-                        <!-- Latest Tweets -->
-                        <div class="span4">
-                            <div class="footer-headline"><h4>Latest Tweets</h4></div>
-                            <ul id="twitter"></ul>
-                            <div class="clear"></div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- Footer / Bottom -->
-            <div id="footer" class="footer-bottom" style="background: #111;">
-                <div class="container">
-                    <div class="span12">
-                        <div id="footer-bottom">
-                            © Copyright 2012 by <a href="#">aabu</a>. All rights reserved.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <?php echo View::make('layouts/frontend/_footer')->render() ?>
         <!-- Styles Switcher -->
 <!--        <div id="style-switcher" style="right: -300px;">
             <h2>Color Switcher Options<a href="#">Settings</a></h2>

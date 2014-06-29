@@ -5,7 +5,7 @@
         <a href="#"><img src="http://placehold.it/200x80/&text=LOGO+HERE" alt="logo" /></a>
     </div>
     <!-- Social / Contact -->
-    <div class="span4 pull-right">
+    <div class="span5 pull-right">
         <!-- Social Icons -->
         <!--        <ul class="social-icons">
                     <li class="facebook"><a href="#">Facebook</a></li>
@@ -20,12 +20,7 @@
                     <input class="span2" type="text" placeholder='Tìm kiếm ...'>
                     <button class="btn" type="button"><i class="fa fa-search"></i></button>
                 </div>
-                <!--                <form class="form-inline" id='form-login'>
-                                    <div class="input-append">
-                                        <input class="span2" type="text">
-                                        <button class="btn" type="button">Search</button>
-                                    </div>
-                                </form>-->
+                <a href="#">Đăng nhập</a> / Quên mật khẩu?    
             </ul>
         </div>
     </div>
