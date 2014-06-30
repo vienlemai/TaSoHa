@@ -23,31 +23,26 @@
             <div class="box-body">
                 <?php
                 echo Former::select('categor_id')
-                    ->label(Lang::get('messages.categories'))
-                    ->options($categories)
-                    ->class('form-control');
+                        ->label(Lang::get('messages.categories'))
+                        ->options($categories)
+                        ->class('form-control');
                 echo Former::text('title')
-                    ->label(Lang::get('messages.article_title'))
-                    ->class('form-control');
-                echo Former::files('thumbnail')
-                    ->label(Lang::get('messages.article_thumbnail'))
-                    ->accept('image')
-
+                        ->label(Lang::get('messages.article_title'))
+                        ->class('form-control');
+                echo Former::file('thumbnail')
+                        ->label(Lang::get('messages.article_thumbnail'))
+                        ->accept('image');
+                echo Former::textarea('content')
+                        ->label(Lang::get('messages.article_content'))
+                        ->id('ck-editor')
                 ?>
-                <div class="control-group">
-                    <label for="name" class="control-label"><?php echo trans('messages.article_content'); ?></label>
-                    <div class="controls">
-                        <textarea id="ck-editor" name="content"></textarea>
-                    </div>
-                </div>
             </div><!-- /.box-body -->
 
             <div class="box-footer">
                 <?php
                 echo Former::actions()
-                    ->primary_submit(Lang::get('messages.save'))
-                    ->inverse_reset(Lang::get('messages.reset'))
-
+                        ->primary_submit(Lang::get('messages.save'))
+                        ->inverse_reset(Lang::get('messages.reset'))
                 ?>
             </div>
             <?php echo Former::close(); ?>

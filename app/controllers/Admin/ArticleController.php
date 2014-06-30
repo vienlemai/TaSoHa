@@ -6,7 +6,7 @@ use \Request;
 use \Route;
 use \View;
 use \Redirect;
-use \Auth;
+use \Session;
 use \Input;
 use \Article;
 use \ArticleCategory;
@@ -19,10 +19,9 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function index() {
-        $articles = Article::paging(\Input::all());
+        $articles = Article::paging(Input::all());
         return View::make('admin.article.index', array(
-                    'articles' => $articles,
-                    'input' => \Input::all(),
+                    'articles' => $articles
         ));
     }
 
@@ -45,9 +44,12 @@ class ArticleController extends AdminBaseController {
      */
     public function store() {
         $article = new Article(Input::all());
-        $article->save();
-        Session::flash('success', trans('messages.article_save_success', array('name' => $article->title)));
-        return Redirect::route('admin.articles.index');
+        if ($article->save()) {
+            Session::flash('success', trans('messages.article_save_success', array('name' => $article->title)));
+            return Redirect::route('admin.articles.index');
+        } else {
+            return Redirect::back()->withInput()->withErrors($article->errors());
+        }
     }
 
     /**
@@ -67,9 +69,9 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        $categories = \ArticleCategory::listCategories();
-        $article = \Article::find($id);
-        return \View::make('admin.article.edit', array(
+        $categories = ArticleCategory::listCategories();
+        $article = Article::find($id);
+        return View::make('admin.article.edit', array(
                     'article' => $article,
                     'categories' => $categories
         ));
@@ -82,10 +84,10 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function update($id) {
-        $article = \Article::findOrFail($id);
-        $article->update(\Input::all());
-        \Session::flash('success', \Lang::get('messages.article_save_success', array('name' => $article->title)));
-        return \Redirect::route('admin.articles.index');
+        $article = Article::findOrFail($id);
+        $article->update(Input::all());
+        Session::flash('success', trans('messages.article_save_success', array('name' => $article->title)));
+        return Redirect::route('admin.articles.index');
     }
 
     /**

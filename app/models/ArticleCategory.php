@@ -1,6 +1,6 @@
 <?php
 
-class ArticleCategory extends \Illuminate\Database\Eloquent\Model {
+class ArticleCategory extends LaravelBook\Ardent\Ardent {
     /*
      * PROPERTIES
      */
@@ -9,6 +9,15 @@ class ArticleCategory extends \Illuminate\Database\Eloquent\Model {
     public $fillable = array(
         'name',
         'parent_id',
+    );
+    /*
+     * VALIDATIONS
+     */
+    public static $rules = array(
+        'name' => 'required'
+    );
+    public static $customMessages = array(
+        'required' => 'The :attribute field is required.'
     );
 
     /*
