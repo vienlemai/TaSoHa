@@ -3,6 +3,7 @@
 namespace Admin;
 
 class AdminBaseController extends \BaseController {
+
     protected $layout = 'layouts.admin';
 
     public function __construct() {

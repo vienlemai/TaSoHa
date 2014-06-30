@@ -1,27 +1,53 @@
 <?php
 
 class ArticleCategory extends \Illuminate\Database\Eloquent\Model {
+    /*
+     * PROPERTIES
+     */
+
     protected $table = 'article_categories';
     public $fillable = array(
         'name',
         'parent_id',
     );
 
+    /*
+     * ASSOCIATIONS
+     */
+
     public function articles() {
-        return $this->hasMany('Article');
+        return $this->hasMany('Article', 'category_id');
+    }
+
+    public function parentCategory() {
+        return $this->belongsTo('ArticleCategory', 'parent_id', 'id');
+    }
+
+    /*
+     * STATIC FUNCTIONS
+     */
+
+    static function boot() {
+        parent::boot();
+        static::saving(function($object) {
+                    if (!$object->parent_id) {
+                        $object->parent_id = NULL;
+                    }
+                    $object->slug = strtolower(StringHelper::slug($object->name));
+                });
     }
 
     public static function parentCategoryList($except = null) {
         if ($except !== null) {
             $categories = self::where('id', '!=', $except)
-                ->get(array(
+                    ->get(array(
                 'id',
                 'name',
             ));
         } else {
             $categories = self::get(array(
-                    'id',
-                    'name',
+                        'id',
+                        'name',
             ));
         }
         $data = array();
@@ -35,14 +61,14 @@ class ArticleCategory extends \Illuminate\Database\Eloquent\Model {
     public static function listCategories($except = null) {
         if ($except !== null) {
             $categories = self::where('id', '!=', $except)
-                ->get(array(
+                    ->get(array(
                 'id',
                 'name',
             ));
         } else {
             $categories = self::get(array(
-                    'id',
-                    'name',
+                        'id',
+                        'name',
             ));
         }
         $data = array();
@@ -50,10 +76,6 @@ class ArticleCategory extends \Illuminate\Database\Eloquent\Model {
             $data[$category->id] = $category->name;
         }
         return $data;
-    }
-
-    public function parentCategory() {
-        return $this->belongsTo('ArticleCategory', 'parent_id', 'id');
     }
 
     public static function paging($params) {
