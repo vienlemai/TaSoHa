@@ -44,9 +44,12 @@ class ArticleCategoryController extends AdminBaseController {
      */
     public function store() {
         $category = new ArticleCategory(Input::all());
-        $category->save();
-        Session::flash('success', trans('messages.category_save_success', array('name' => $category->name)));
-        return Redirect::route('admin.article_categories.index');
+        if ($category->save()) {
+            Session::flash('success', trans('messages.category_save_success', array('name' => $category->name)));
+            return Redirect::route('admin.article_categories.index');
+        } else {
+            return Redirect::back()->withInput()->withErrors($category->errors());
+        }
     }
 
     /**

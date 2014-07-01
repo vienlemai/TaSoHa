@@ -19,7 +19,7 @@
                     <i class="fa fa-plus"></i> <?php echo trans('messages.add_article'); ?>
                 </a>
                 <div class="col-md-4 pull-right no-padding">
-                    <?php echo View::make('admin.partials.search_tool', array('input' => $input))->render(); ?>
+                    <?php echo View::make('admin.partials.search_tool')->render(); ?>
                 </div>
             </div>
             <table class="table table-bordered">

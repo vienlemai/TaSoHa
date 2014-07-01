@@ -16,11 +16,11 @@
 
         <div class="table-wrap">
             <div class="table-header">
-                <a href="{{route('admin.article_categories.create')}}" class="btn btn-primary">
+                <a href="{{route('admin.article_categories.create')}}" class="btn btn-sm btn-primary">
                     <i class="fa fa-plus"></i> <?php echo trans('messages.add_category'); ?>
                 </a>
                 <div class="col-md-4 pull-right no-padding">
-                    <?php echo View::make('admin.partials.search_tool', array('keyword' => $keyword))->render(); ?>
+                    <?php echo View::make('admin.partials.search_tool')->render(); ?>
                 </div>
             </div>
             <table class="table table-bordered">
@@ -38,7 +38,9 @@
                     <?php foreach ($categories as $category): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
-                            <td><?php echo $category->name ?></td>
+                            <td>
+                                <a href="<?php echo route('admin.article_categories.edit', $category->id) ?>"><?php echo $category->name ?></a>
+                            </td>
                             <td>{{$category->parent_category->name or ''}}</td>
                             <td><?php echo $category->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
