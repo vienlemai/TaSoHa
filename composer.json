@@ -8,7 +8,8 @@
 		"barryvdh/laravel-debugbar": "1.*",
 		"laravelbook/ardent": "dev-master",
 		"anahkiasen/former": "dev-master",
-		"codesleeve/asset-pipeline": "dev-master"
+		"codesleeve/asset-pipeline": "dev-master",
+		"baum/baum": "~1.0"
 	},
 	"autoload": {
 		"classmap": [
@@ -28,7 +29,7 @@
 		"post-update-cmd": [
 			"php artisan clear-compiled",
 			"php artisan optimize",
-            "php artisan debugbar:publish"
+			"php artisan debugbar:publish"
 		],
 		"post-create-project-cmd": [
 			"php artisan key:generate"
