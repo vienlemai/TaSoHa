@@ -41,29 +41,37 @@ class Member extends Node {
         $rightLeaves = count($availableRight['leaves']);
         $leftOnlyLeft = count($availableLeft['onlyLeft']);
         $rightOnlyLeft = count($availableRight['onlyLeft']);
-//        var_dump('left-leaves '.$leftLeaves);
-//        var_dump('right-leaves '.$rightLeaves);
-//        var_dump('left-only-left '.$leftOnlyLeft);
-//        var_dump('right-only-left '.$rightOnlyLeft);
-//        exit();
+        var_dump('left-leaves ' . $leftLeaves);
+        var_dump('right-leaves ' . $rightLeaves);
+        var_dump('left-only-left ' . $leftOnlyLeft);
+        var_dump('right-only-left ' . $rightOnlyLeft);
+        //exit();
         $result = null;
-        if ($leftLeaves == $rightLeaves && $leftOnlyLeft == $rightOnlyLeft && $leftLeaves != 0) {
-            $result['node'] = $availableLeft['leaves'][0];
-            $result['position'] = 'left';
-        } else if ($leftOnlyLeft == 0 && $rightOnlyLeft > 0) {
-            $result['node'] = $availableRight['onlyLeft'][0];
-            $result['position'] = 'right';
-        } else if ($leftLeaves < $rightLeaves) {
-            $result['node'] = $availableRight['leaves'][0];
-            $result['position'] = 'right';
-        } else {
-            $result['position'] = 'left';
-            if (count($availableLeft['leaves']) > 0) {
+        if ($leftLeaves > 0) {
+            if ($rightOnlyLeft > 0 && $rightOnlyLeft != $leftOnlyLeft) {
+                $result['node'] = $availableRight['onlyLeft'][0];
+                $result['position'] = 'right';
+            } else if ($leftLeaves == $rightLeaves) {
                 $result['node'] = $availableLeft['leaves'][0];
+                $result['position'] = 'left';
             } else {
+                $result['node'] = $availableRight['leaves'][0];
+                $result['position'] = 'right';
+            }
+        } else {
+            //exit('else');
+            if ($rightLeaves > 0) {
+                $result['node'] = $availableRight['leaves'][0];
+                $result['position'] = 'right';
+            } else if ($leftOnlyLeft == $rightOnlyLeft) {
                 $result['node'] = $availableLeft['onlyLeft'][0];
+                $result['position'] = 'left';
+            } else {
+                $result['node'] = $availableRight['leaves'][0];
+                $result['position'] = 'right';
             }
         }
+        exit();
         return $result;
     }
 
