@@ -64,3 +64,6 @@
 .jOrgChart .line {
     width: 2px;
 }
+.jOrgChart {
+    overflow-x: scroll;
+}

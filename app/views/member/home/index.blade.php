@@ -8,7 +8,7 @@
             <br/>
             <input class="" type="password" name="password" value="" placeholder="Mật khẩu"/>
             <br/>-->
-            <input class="" type="text" name="full_name" value="" placeholder="Họ tên"/>
+            <input class="" type="text" name="full_name" value="" placeholder="Họ tên" autofocus='true'/>
             <br/>
             <input class="" type="submit" value="Lưu"/>
         </form>
