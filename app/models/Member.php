@@ -110,7 +110,24 @@ class Member extends Node {
     }
 
     public function renderDescendents() {
-        
+        $descendants = $this->getDescendantsAndSelf()->toHierarchy();
+        $root = $descendants->first();
+        $html = $this->_build($root);
+        return $html;
+    }
+
+    private function _build($node) {
+        if ($node->children->isEmpty()) {
+            return '<li>' . $node->full_name . '</li>';
+        } else {
+
+            $item = '<li>' . $node->full_name . '<ul>';
+            foreach ($node->children as $child) {
+                $item.=$this->_build($child);
+            }
+            $item.='</ul></li>';
+            return $item;
+        }
     }
 
 }

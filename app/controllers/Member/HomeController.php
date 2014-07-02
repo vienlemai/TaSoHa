@@ -11,9 +11,10 @@ class HomeController extends MemberBaseController {
      */
     public function index() {
         $root = Member::roots()->first();
-        $treeJson = $root->getListJson();
+        $html = $root->renderDescendents();
+        //$treeJson = $root->getListJson();
         $this->layout->content = \View::make('member.home.index', array(
-                'treeData' => $treeJson,
+                'treeData' => $html,
         ));
     }
 

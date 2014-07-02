@@ -13,9 +13,9 @@
             <input class="" type="submit" value="Lưu"/>
         </form>
     </div>
-    <ul id="member-tree" class="ztree"></ul>
+    <ul id="org" style="display:none">
+        <?php echo $treeData ?>
+    </ul>
+    <div id="chart" class="orgChart"></div>
 </div>
-<script type="text/javascript">
-    var treeData = <?php echo $treeData ?>;
-</script>
 @stop

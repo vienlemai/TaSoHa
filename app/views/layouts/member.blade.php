@@ -15,7 +15,9 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/default.css')}}">
         <!-- Styles Switcher -->
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/switcher.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/ztree/zTreeStyle.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/js/plugins/jorgchar/css/jquery.jOrgChart.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/js/plugins/jorgchar/css/custom.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/js/plugins/jorgchar/css/prettify.css')}}">
 
         <!-- Java Script  -->
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
@@ -28,7 +30,8 @@
         <script type="text/javascript" src="{{asset('assets/frontend/js/jquery.fitvids.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/custom.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/switcher.js')}}"></script>
-        <script type="text/javascript" src="{{asset('assets/js/plugins/ztree/jquery.ztree.core-3.5.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/prettify.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/jquery.jOrgChart.js')}}"></script>
     </head>
     <body>
         <!-- Wrapper Start -->
