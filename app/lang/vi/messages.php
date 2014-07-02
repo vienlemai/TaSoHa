@@ -7,7 +7,7 @@ return array(
     'password' => 'Mật khẩu',
     'remember_me' => 'Ghi nhớ mật khẩu',
     'forgot_password' => 'Quên mật khẩu',
-    'login_fail' => 'Tên đăng nhập hoặc mật khẩu không đúng',
+    'login_fail' => 'Sai tên đăng nhập hoặc mật khẩu',
     'profile' => 'Trang cá nhân',
     'sign_out' => 'Đăng xuất',
     'actions' => 'Thao tác',

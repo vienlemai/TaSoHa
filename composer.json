@@ -10,7 +10,8 @@
 		"anahkiasen/former": "dev-master",
 		"codesleeve/asset-pipeline": "dev-master",
 		"baum/baum": "~1.0",
-		"ollieread/multiauth": "dev-master"
+		"ollieread/multiauth": "dev-master",
+        "darsain/laravel-console": "dev-master"
 	},
 	"autoload": {
 		"classmap": [

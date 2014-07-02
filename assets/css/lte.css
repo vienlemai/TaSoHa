@@ -1954,8 +1954,8 @@ Component: timeline
 ------------------------
 */
 .alert {
-  padding-left: 30px;
   margin-left: 15px;
+  margin-right: 15px;
   position: relative;
 }
 .alert > .fa,

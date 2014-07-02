@@ -23,8 +23,8 @@ class CreateMembersTable extends Migration {
             $table->integer('depth')->nullable();
             $table->boolean('is_left')->nullable();
             $table->boolean('is_right')->nullable();
-            $table->integer('created_by');
-            $table->integer('managed_by');
+            $table->integer('created_by')->nullable();;
+            $table->integer('managed_by')->nullable();;
             $table->string('username');
             $table->string('password');
             $table->string('full_name');

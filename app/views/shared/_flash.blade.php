@@ -6,7 +6,7 @@
         <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>
     @elseif(Session::has('error'))
-    <div class="alert alert-error">
+    <div class="alert alert-danger">
         {{Session::get('error')}}
         <button type="button" class="close" data-dismiss="alert">&times;</button>
     </div>

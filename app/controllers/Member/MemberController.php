@@ -9,6 +9,7 @@ use \Lang;
 use \Member;
 use \Hash;
 use \Redirect;
+use \StringHelper;
 
 class MemberController extends \BaseController {
 
@@ -32,7 +33,7 @@ class MemberController extends \BaseController {
         $newMember = new Member(array(
             'email' => Input::get('full_name') . '@gmail.com',
             'password' => Hash::make('123456'),
-            'username' => Input::get('email'),
+            'username' => StringHelper::slug(Input::get('full_name')),
             'sex' => false,
             'day_of_birth' => '',
             'full_name' => Input::get('full_name'),

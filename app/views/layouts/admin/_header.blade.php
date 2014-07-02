@@ -1,11 +1,8 @@
 <header class="header">
     <a href="<?php echo route('admin.root') ?>" class="logo">
-        <!-- Add the class icon to your logo image or logo icon to add the margining -->
         Tasoha Administration
     </a>
-    <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top" role="navigation">
-        <!-- Sidebar toggle button-->
         <a href="#" class="navbar-btn sidebar-toggle" data-toggle="offcanvas" role="button">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
@@ -28,7 +25,7 @@
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="glyphicon glyphicon-user"></i> <span><?php echo Auth::user()->full_name ?> <i class="caret"></i></span>
+                        <i class="glyphicon glyphicon-user"></i> <span><?php echo Auth::admin()->get()->full_name ?> <i class="caret"></i></span>
                     </a>
                     <ul class="dropdown-menu">
                         <li>

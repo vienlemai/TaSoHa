@@ -33,7 +33,7 @@ class Admin extends LaravelBook\Ardent\Ardent implements UserInterface, Remindab
      * @return string
      */
     public function getAuthPassword() {
-        return $this->password;
+            return $this->password;
     }
 
     /**

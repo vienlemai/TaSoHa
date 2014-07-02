@@ -80,7 +80,7 @@ return array(
      */
     'providers' => array(
         'Illuminate\Foundation\Providers\ArtisanServiceProvider',
-        'Illuminate\Auth\AuthServiceProvider',
+//        'Illuminate\Auth\AuthServiceProvider',
         'Illuminate\Cache\CacheServiceProvider',
         'Illuminate\Session\CommandsServiceProvider',
         'Illuminate\Foundation\Providers\ConsoleSupportServiceProvider',
@@ -108,6 +108,8 @@ return array(
         'Barryvdh\Debugbar\ServiceProvider',
         'Former\FormerServiceProvider',
         'Baum\BaumServiceProvider',
+        'Ollieread\Multiauth\MultiauthServiceProvider',
+        'Darsain\Console\ConsoleServiceProvider',
     ),
     /*
       |--------------------------------------------------------------------------
