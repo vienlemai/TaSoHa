@@ -45,7 +45,6 @@ class Member extends Node {
         var_dump('right-leaves ' . $rightLeaves);
         var_dump('left-only-left ' . $leftOnlyLeft);
         var_dump('right-only-left ' . $rightOnlyLeft);
-        //exit();
         $result = null;
         if ($leftLeaves > 0) {
             //add to leave
@@ -72,7 +71,6 @@ class Member extends Node {
                 $result['position'] = 'right';
             }
         }
-        //exit();
         return $result;
     }
 
@@ -109,6 +107,10 @@ class Member extends Node {
         $json = $result->toJson();
         $json = str_ireplace('null', '0', $json);
         return $json;
+    }
+
+    public function renderDescendents() {
+        
     }
 
 }
