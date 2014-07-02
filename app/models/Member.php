@@ -48,6 +48,7 @@ class Member extends Node {
         //exit();
         $result = null;
         if ($leftLeaves > 0) {
+            //add to leave
             if ($rightOnlyLeft > 0 && $rightOnlyLeft != $leftOnlyLeft) {
                 $result['node'] = $availableRight['onlyLeft'][0];
                 $result['position'] = 'right';
@@ -59,7 +60,7 @@ class Member extends Node {
                 $result['position'] = 'right';
             }
         } else {
-            //exit('else');
+            //add to node that have only children
             if ($rightLeaves > 0) {
                 $result['node'] = $availableRight['leaves'][0];
                 $result['position'] = 'right';
@@ -67,11 +68,11 @@ class Member extends Node {
                 $result['node'] = $availableLeft['onlyLeft'][0];
                 $result['position'] = 'left';
             } else {
-                $result['node'] = $availableRight['leaves'][0];
+                $result['node'] = $availableRight['onlyLeft'][0];
                 $result['position'] = 'right';
             }
         }
-        exit();
+        //exit();
         return $result;
     }
 
@@ -83,8 +84,16 @@ class Member extends Node {
             array_push($availableLeft['onlyLeft'], $node);
             return;
         } else {
-            foreach ($node->children as $child) {
-                self::explodeDescendant($child, $availableLeft);
+            $leftNode = $node->children->first();
+            $rightNode = $node->children->last();
+            if ($leftNode->children->count() == $rightNode->children->count()) {
+                self::explodeDescendant($leftNode, $availableLeft);
+                self::explodeDescendant($rightNode, $availableLeft);
+            } else if ($rightNode->children->count() == 1) {
+                self::explodeDescendant($rightNode, $availableLeft);
+            } else {
+                self::explodeDescendant($leftNode, $availableLeft);
+                self::explodeDescendant($rightNode, $availableLeft);
             }
         }
     }
