@@ -1,28 +1,15 @@
-<!-- Header -->
-<div class="row" id="header">
-    <!-- Logo -->
-    <div class="span5 logo">
-        <a href="#"><img src="http://placehold.it/200x80/&text=LOGO+HERE" alt="logo" /></a>
+<div id="header" class="col-lg-12">
+    <a href="/" class="pull-left"><img id="logo" src="{{asset('assets/img/tasoha.png')}}" alt="TASOHA GROUP"></a>
+    <div class="pull-right">
+        <p class="text-right">
+            <a href="#" class="text-primary"><i class="fa fa-facebook-square fa-2x"></i></a>
+            <a href="#" class="text-danger"><i class="fa fa-youtube-square fa-2x"></i></a>
+        </p>
+        <form id="login-form" class="form-inline">
+            <input class="form-control input-sm" type="text" placeholder="Username">
+            <input class="form-control input-sm" type="password" placeholder="Mật khẩu">
+            <button class="btn btn-sm btn-info" type="submit">Đăng nhập</button>
+        </form>
     </div>
-    <!-- Social / Contact -->
-    <div class="span5 pull-right">
-        <!-- Social Icons -->
-        <!--        <ul class="social-icons">
-                    <li class="facebook"><a href="#">Facebook</a></li>
-                    <li class="twitter"><a href="#">Youtube</a></li>
-                </ul>-->
-        <!-- Contact Details -->
-        <div id="contact-top">
-            <ul>
-<!--                <li><i class="icon-envelope"></i><a href="#">support@aabu.com</a></li>
-                <li><i class="icon-phone"></i>+1 123 456-789</li>-->
-                <a href="#">Đăng nhập</a> / Quên mật khẩu?   
-                <br>
-                <div class="input-append">
-                    <input class="span2" type="text" placeholder='Tìm kiếm ...'>
-                    <button class="btn" type="button"><i class="fa fa-search"></i></button>
-                </div>
-            </ul>
-        </div>
-    </div>
+    
 </div>
