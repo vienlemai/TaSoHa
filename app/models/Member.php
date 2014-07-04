@@ -8,7 +8,6 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * Member
  */
 class Member extends Node implements UserInterface, RemindableInterface {
-
     /**
      * Table name.
      *
@@ -26,6 +25,36 @@ class Member extends Node implements UserInterface, RemindableInterface {
         'is_right',
         'managed_by',
     );
+
+    public function bonus() {
+        return $this->belongsToMany('Bonus', 'member_bonus', 'member_id', 'bonus_id');
+    }
+
+    public function getBonus() {
+        
+    }
+
+    public static function paging($params) {
+        $instance = new static;
+        $query = $instance->newQuery();
+        if (isset($params['keyword'])) {
+            $query->where(function($query) use ($params) {
+                $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
+            });
+        }
+        $result = $query->paginate();
+        return $result;
+    }
+
+    public function creator() {
+        return $this->belongsTo('Member', 'created_by');
+    }
+
+    public function getSexName() {
+        return $this->sex == 0 ? 'Nam' : 'Nữ';
+    }
 
     public function findNodeToAdd() {
         $descendants = $this->getDescendantsAndSelf()->toHierarchy();
@@ -50,32 +79,59 @@ class Member extends Node implements UserInterface, RemindableInterface {
         var_dump('right-leaves ' . $rightLeaves);
         var_dump('left-only-left ' . $leftOnlyLeft);
         var_dump('right-only-left ' . $rightOnlyLeft);
+        //exit();
         $result = null;
-        if ($leftLeaves > 0) {
-            //add to leave
-            if ($rightOnlyLeft > 0 && $rightOnlyLeft != $leftOnlyLeft) {
-                $result['node'] = $availableRight['onlyLeft'][0];
+        if (($leftLeaves + $leftOnlyLeft) > ($rightLeaves + $rightOnlyLeft)) {
+            if ($rightLeaves > 0) {
                 $result['position'] = 'right';
-            } else if ($leftLeaves == $rightLeaves) {
-                $result['node'] = $availableLeft['leaves'][0];
-                $result['position'] = 'left';
-            } else {
                 $result['node'] = $availableRight['leaves'][0];
+            } else if ($rightOnlyLeft > 0) {
                 $result['position'] = 'right';
+                $result['node'] = $availableRight['onlyLeft'][0];
+            }
+        } else if ($leftLeaves > 0 || $rightLeaves > 0) {
+            if ($leftLeaves == $rightLeaves) {
+                $result['position'] = 'left';
+                $result['node'] = $availableLeft['leaves'][0];
+            } else {
+                $result['position'] = 'right';
+                $result['node'] = $availableRight['leaves'][0];
             }
         } else {
-            //add to node that have only children
-            if ($rightLeaves > 0) {
-                $result['node'] = $availableRight['leaves'][0];
-                $result['position'] = 'right';
-            } else if ($leftOnlyLeft == $rightOnlyLeft) {
-                $result['node'] = $availableLeft['onlyLeft'][0];
+            if ($leftOnlyLeft == $rightOnlyLeft) {
                 $result['position'] = 'left';
+                $result['node'] = $availableLeft['onlyLeft'][0];
             } else {
-                $result['node'] = $availableRight['onlyLeft'][0];
                 $result['position'] = 'right';
+                $result['node'] = $availableRight['onlyLeft'][0];
             }
         }
+
+        /* if ($leftLeaves > 0) {
+          //add to leave
+          if ($rightOnlyLeft > 0 && $rightOnlyLeft != $leftOnlyLeft) {
+          $result['node'] = $availableRight['onlyLeft'][0];
+          $result['position'] = 'right';
+          } else if ($leftLeaves == $rightLeaves) {
+          $result['node'] = $availableLeft['leaves'][0];
+          $result['position'] = 'left';
+          } else {
+          $result['node'] = $availableRight['leaves'][0];
+          $result['position'] = 'right';
+          }
+          } else {
+          //add to node that have only children
+          if ($rightLeaves > 0) {
+          $result['node'] = $availableRight['leaves'][0];
+          $result['position'] = 'right';
+          } else if ($leftOnlyLeft == $rightOnlyLeft) {
+          $result['node'] = $availableLeft['onlyLeft'][0];
+          $result['position'] = 'left';
+          } else {
+          $result['node'] = $availableRight['onlyLeft'][0];
+          $result['position'] = 'right';
+          }
+          } */
         return $result;
     }
 
@@ -125,7 +181,6 @@ class Member extends Node implements UserInterface, RemindableInterface {
         if ($node->children->isEmpty()) {
             return '<li>' . $node->full_name . '</li>';
         } else {
-
             $item = '<li>' . $node->full_name . '<ul>';
             foreach ($node->children as $child) {
                 $item.=$this->_build($child);
@@ -133,6 +188,14 @@ class Member extends Node implements UserInterface, RemindableInterface {
             $item.='</ul></li>';
             return $item;
         }
+    }
+
+    private function _getDetailHtml($node) {
+        $div = '<div style="display:none">'
+            . '<p>Họ tên: ' . $node->full_name . '</p>'
+            . '<p> Email: ' . $node->email . '</p>'
+            . '</div>';
+        return $div;
     }
 
     public function getAuthIdentifier() {

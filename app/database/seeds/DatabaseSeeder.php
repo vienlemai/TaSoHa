@@ -10,7 +10,7 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         Eloquent::unguard();
 
-        $this->call('MemberSeeder');
+        $this->call('BonusSeeder');
     }
 
 }
@@ -25,6 +25,13 @@ class AdminUserSeeder extends Seeder {
             'full_name' => 'Admin',
         ));
         $admin->save();
+        $subAdmin = new Admin(array(
+            'email' => 'subadmin@gmail.com',
+            'password' => Hash::make('123456'),
+            'full_name' => 'Sub Admin',
+            'is_subadmin' => true
+        ));
+        $subAdmin->save();
     }
 
 }
@@ -56,6 +63,50 @@ class MemberSeeder extends Seeder {
             $node->save();
             $node->makeChildOf($root);
         }
+    }
+
+}
+
+class BonusSeeder extends Seeder {
+
+    public function run() {
+        DB::table('bonus')->truncate();
+        DB::table('bonus')->insert(array(
+            'name' => 'Lợi nhuận bán lẻ hằng ngày',
+            'description' => '',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+        ));
+        DB::table('bonus')->insert(array(
+            'name' => 'Thưởng nhanh',
+            'description' => '',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+        ));
+        DB::table('bonus')->insert(array(
+            'name' => 'Hoa hồng đồng đội',
+            'description' => '',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+        ));
+        DB::table('bonus')->insert(array(
+            'name' => 'Hoa hồng trực hệ',
+            'description' => '',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+        ));
+        DB::table('bonus')->insert(array(
+            'name' => 'Hoa hồng cội nguồn',
+            'description' => '',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+        ));
+        DB::table('bonus')->insert(array(
+            'name' => 'Hoa hồng lãnh đạo',
+            'description' => '',
+            'created_at' => Carbon\Carbon::now(),
+            'updated_at' => Carbon\Carbon::now(),
+        ));
     }
 
 }

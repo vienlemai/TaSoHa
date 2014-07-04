@@ -1,17 +1,15 @@
 <?php
 
-namespace Member;
+namespace Admin;
 
 use \Input;
-use \Session;
 use \View;
-use \Lang;
-use \Member;
-use \Hash;
+use \Session;
 use \Redirect;
-use \StringHelper;
+use \Member;
+use \MyBonus;
 
-class MemberController extends \BaseController {
+class MemberController extends AdminBaseController {
 
     /**
      * Display a listing of the resource.
@@ -19,7 +17,11 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function index() {
-        //
+        $members = Member::paging(\Input::all());
+        $this->layout->content = View::make('admin.members.index', array(
+                'members' => $members,
+                'input' => Input::all(),
+        ));
     }
 
     /**
@@ -27,24 +29,8 @@ class MemberController extends \BaseController {
      *
      * @return Response
      */
-    public function create($rootId, $parentId) {
-        $root = Member::findOrFail($rootId);
-        $nodeToAdd = Member::with('children')->findOrFail($parentId);
-        dd($nodeToAdd->toArray());
-        $newMember = new Member(array(
-            'email' => Input::get('full_name') . '@gmail.com',
-            'password' => Hash::make('123456'),
-            'username' => StringHelper::slug(Input::get('full_name')),
-            'sex' => false,
-            'day_of_birth' => '',
-            'full_name' => Input::get('full_name'),
-            'is_left' => $nodeToAdd['position'] == 'left' ? true : false,
-            'is_right' => $nodeToAdd['position'] == 'right' ? true : false,
-        ));
-        $newMember->save();
-        $newMember->makeChildOf($nodeToAdd['node']);
-        //Session::flash('success', 'Thêm thành công thành viên ' . $newMember->full_name);
-        return Redirect::back();
+    public function create() {
+        //
     }
 
     /**
@@ -63,7 +49,16 @@ class MemberController extends \BaseController {
      * @return Response
      */
     public function show($id) {
-        //
+        $member = Member::with('creator', 'parent')
+            ->findOrFail($id);
+        $bonus = MyBonus::lists('name','id');
+        $bonusAmoun();
+        foreach ($bonus as $k=>$v) {
+            $bonusAmoun[$k] = 
+        }
+        $this->layout->content = View::make('admin.members.show',  array(
+            'member'=>$member
+        ));
     }
 
     /**

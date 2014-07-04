@@ -18,7 +18,11 @@
         @include('layouts/admin/_header')
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <aside class="left-side sidebar-offcanvas">
+                @if(Auth::admin()->get()->is_admin == 0)
+                @include('layouts/admin/_subadmin_sidebar')
+                @else
                 @include('layouts/admin/_sidebar')
+                @endif
             </aside>
             <aside class="right-side">
                 <section class="content-header">

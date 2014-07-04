@@ -3,4 +3,9 @@ jQuery(document).ready(function() {
 		chartElement: '#chart',
 		dragAndDrop: false
 	});
+	$('.node').on('mouseover', function(e) {
+		alert('hover');
+	}, function(e) {
+
+	});
 });

@@ -1,7 +1,6 @@
 <?php
 
 class Article extends LaravelBook\Ardent\Ardent {
-
     protected $table = 'articles';
     public $fillable = array(
         'categor_id',
@@ -28,9 +27,9 @@ class Article extends LaravelBook\Ardent\Ardent {
     public static function boot() {
         parent::boot();
         static::creating(function($article) {
-                    $article->created_by = Auth::user()->id;
-                    $article->is_active = true;
-                });
+            $article->created_by = Auth::user()->id;
+            $article->is_active = true;
+        });
     }
 
     public function makeActive() {

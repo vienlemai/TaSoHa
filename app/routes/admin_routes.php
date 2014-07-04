@@ -10,6 +10,15 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
 
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');
+        Route::resource('members', 'MemberController');
+        Route::get('bonus/{memberId}/create', array(
+            'as' => 'admin.bonus.create',
+            'uses' => 'BonusController@create',
+        ));
+        Route::post('bonus/{memberId}/store', array(
+            'uses' => 'BonusController@store',
+            'as' => 'admin.bonus.store'
+        ));
     });
 
     Route::get('/login', array(
