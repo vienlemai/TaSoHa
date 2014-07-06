@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder {
 class AdminUserSeeder extends Seeder {
 
     public function run() {
+        DB::table('admins')->truncate();
         $admin = new Admin(
                 array(
             'email' => 'admin@admin.com',

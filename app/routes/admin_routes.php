@@ -11,6 +11,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');
         Route::resource('members', 'MemberController');
+        Route::resource('users', 'AdminUserController');
         Route::get('bonus/{memberId}/create', array(
             'as' => 'admin.bonus.create',
             'uses' => 'BonusController@create',

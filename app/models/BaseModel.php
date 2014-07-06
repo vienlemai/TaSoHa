@@ -1,6 +1,7 @@
 <?php
 
 class BaseModel extends LaravelBook\Ardent\Ardent {
+    public $autoPurgeRedundantAttributes = true;
 
     /**
      * scopeSearchLike

@@ -25,5 +25,15 @@
                 <li><a href="{{route('admin.article_categories.index')}}"><?php echo trans('messages.article_categories'); ?></a></li>
             </ul>
         </li>
+        <li class="treeview">
+            <a href="#">
+                <i class="fa fa-bar-chart-o"></i>
+                <span><?php echo trans('messages.manage_users'); ?></span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.users.index')}}"><?php echo trans('messages.list_user'); ?></a></li>
+            </ul>
+        </li>
     </ul>
 </section>

@@ -1,6 +1,14 @@
 <?php
 
-class AdminUserController extends \BaseController {
+namespace Admin;
+
+use \Input;
+use \Redirect;
+use \Session;
+use \View;
+use \AdminUser;
+
+class AdminUserController extends AdminBaseController {
 
     /**
      * Display a listing of the resource.
@@ -8,7 +16,11 @@ class AdminUserController extends \BaseController {
      * @return Response
      */
     public function index() {
-        //
+        $users = \AdminUser::paging(\Input::all());
+        $this->layout->content = \View::make('admin.users.index', array(
+                'users' => $users,
+                'input' => \Input::all(),
+        ));
     }
 
     /**
@@ -17,7 +29,8 @@ class AdminUserController extends \BaseController {
      * @return Response
      */
     public function create() {
-        //
+        $this->layout->content = \View::make('admin.users.create', array(
+        ));
     }
 
     /**
@@ -26,7 +39,14 @@ class AdminUserController extends \BaseController {
      * @return Response
      */
     public function store() {
-        //
+        $user = new \AdminUser(\Input::all());
+        if ($user->save()) {
+            
+        } else {
+            return Redirect::back()->withErrors($user->errors());
+        }
+        \Session::flash('success', \Lang::get('messages.user_saved_successfully', array('name' => $user->full_name)));
+        return \Redirect::route('admin.users.index');
     }
 
     /**
@@ -46,7 +66,10 @@ class AdminUserController extends \BaseController {
      * @return Response
      */
     public function edit($id) {
-        //
+        $user = \AdminUser::findOrFail($id);
+        return \View::make('admin.users.edit', array(
+                'user' => $user,
+        ));
     }
 
     /**
@@ -56,7 +79,14 @@ class AdminUserController extends \BaseController {
      * @return Response
      */
     public function update($id) {
-        //
+        $user = AdminUser::findOrFail($id);
+        $user->fill(\Input::all());
+        if ($user->updateUniques()) {
+            \Session::flash('success', \Lang::get('messages.user_saved_successfully', array('name' => $user->full_name)));
+            return \Redirect::route('admin.users.index');
+        } else {
+            return Redirect::back()->withErrors($user->errors());
+        }
     }
 
     /**

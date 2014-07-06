@@ -18,7 +18,7 @@
         @include('layouts/admin/_header')
         <div class="wrapper row-offcanvas row-offcanvas-left">
             <aside class="left-side sidebar-offcanvas">
-                @if(Auth::admin()->get()->is_admin == 0)
+                @if(Auth::admin()->get()->is_subadmin == 1)
                 @include('layouts/admin/_subadmin_sidebar')
                 @else
                 @include('layouts/admin/_sidebar')
@@ -34,12 +34,15 @@
                 </section>
             </aside>
         </div>
-
+        <script type="text/javascript">
+            var dataToken = <?php echo Session::token(); ?>;
+        </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="{{asset('assets/js/jquery-ui-1.10.3.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('assets/js/bootbox.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/daterangepicker.js')}}" type="text/javascript"></script>
-         <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/lte/app.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/admin.js')}}" type="text/javascript"></script>
