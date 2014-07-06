@@ -1,5 +1,32 @@
 body {
     background: url(../../img/bg/brushed_alu.png);    
+} 
+
+/* Bootstrap override */
+.carousel-inner>.item>img, .carousel-inner>.item>a>img {
+    width: 100%;
+}
+.carousel-control.left , .carousel-control.right{
+    background-image: none;
+}
+.carousel-control .icon-prev, .carousel-control .icon-next, .carousel-control .glyphicon-circle-arrow-left, .carousel-control .glyphicon-circle-arrow-right {
+    position: absolute;
+    top: 50%;
+    z-index: 5;
+    display: inline-block;
+}
+.carousel-control {
+    width: 5%;
+}
+/* Helper classes */
+.text-i {
+    font-style: italic;
+}
+.text-bold {
+    font-weight: 800;
+}
+#today {
+    padding-right: 30px;
 }
 #wrapper {
     width: 1024px;
