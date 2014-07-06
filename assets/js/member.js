@@ -27,7 +27,8 @@ jQuery(document).ready(function() {
         var $_input = $(this).find('input');
 //        var template = '<div class="popover" role="tooltip"><div class="arrow"></div><h3 class="popover-title"></h3><div class="popover-content"></div></div>';
         var dismissBtn = '<button type="button" class="close" data-toggle="popover">×</button>';
-        var detailLink = '<br><a href="#" class="btn btn-default btn-xs pull-right btn-view-member-detail"><i class="fa fa-eye"></i> Chi tiết</a>';
+        var detailLink = '<a href="#" class="btn btn-default btn-xs btn-view-member-detail"><i class="fa fa-eye"></i> Chi tiết</a>';
+        var addNodeLink = '<a href="#" class="btn btn-success btn-xs btn-add-node"><i class="fa fa-plus"></i> Thêm thành viên</a>';
         var content = 'Họ tên: ' + $_input.data('fullname');
         var options = {
             title: 'Thông tin thành viên',
@@ -45,6 +46,10 @@ jQuery(document).ready(function() {
             if (!$_this.hasClass('popovered')) {
                 $_this.popover('show').addClass('popovered');
                 $_this.next('.popover').find('.popover-title').append(dismissBtn);
+                $_this.next('.popover').find('.popover-content').append('<hr>');
+                if ($_this.find('input').data('addable') == 1) {
+                    $_this.next('.popover').find('.popover-content').append(addNodeLink);
+                }
                 $_this.next('.popover').find('.popover-content').append(detailLink);
             }
         });
@@ -72,7 +77,7 @@ jQuery(document).ready(function() {
             success: function(result) {
                 $_node.popover('hide');
                 $(result).modal();
-                
+
             },
             error: function() {
                 alert('Đã có lỗi xảy ra, vui lòng thử lại');
@@ -80,4 +85,14 @@ jQuery(document).ready(function() {
         });
         return false;
     });
+    $(document).on('click', '.popover .btn-add-node', function() {
+        var $_node = $(this).closest('.popover').prev('.node');
+        $_node.popover('hide');
+        var memberID = $_node.find('input').val();
+        var $_modal = $('#modal-add-node');
+        $_modal.find('input[name="parent_id"]').val(memberID);
+        $('#modal-add-node').modal('show');
+    });
+
+
 });

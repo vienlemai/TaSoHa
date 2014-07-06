@@ -1,5 +1,5 @@
-<div id="bModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog modal-lg">
+<div id="modal-add-node" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -8,6 +8,7 @@
             <div class="modal-body">
                 <?php
                 echo Former::open(route('admin.members.store'))->method('post');
+                echo Former::hidden('parent_id');
                 echo Former::text('full_name')
                     ->label('Họ tên')
                     ->class('form-control');

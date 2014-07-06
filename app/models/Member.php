@@ -201,7 +201,8 @@ class Member extends Node implements UserInterface, RemindableInterface {
     }
 
     private function _build($node) {
-        $tmp = '<input type="hidden" class="member-id" data-fullname="' . $node->full_name . '" value="' . $node->id . '"/>' . $node->full_name;
+        $canAdd = $node->children->count() < 2;
+        $tmp = '<input type="hidden" addable="' . $canAdd . '" class="member-id" data-fullname="' . $node->full_name . '" value="' . $node->id . '"/>' . $node->full_name;
         if ($node->children->isEmpty()) {
             return '<li>' . $tmp . '</li>';
         } else {
