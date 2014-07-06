@@ -18,7 +18,7 @@ jQuery(document).ready(function() {
 			content: content,
 			placement: 'top',
 			delay: {
-				show: 500,
+				show: 700,
 				hide: 100
 			},
 			trigger: 'manual'
@@ -76,32 +76,4 @@ jQuery(document).ready(function() {
 		$_modal.find('input[name="parent_id"]').val(memberID);
 		$('#modal-add-node').modal('show');
 	});
-	$(document).on('submit', '#form-create-member', function(e) {
-		var action = $(this).attr('action');
-		$.ajax({
-			url: action,
-			type: 'post',
-			dataType: 'json',
-			data: $(this).serialize(),
-			success: function(data) {
-				if (data.status == false) {
-					var $alert = $('#modal-add-node').find('.alert');
-					var errorHtml = '<ul>';
-					for (var i in data.errors) {
-						errorHtml += data.errors[i];
-					}
-					errorHtml += '</ul>';
-					$alert.find('span.msg-content').html(errorHtml);
-					$alert.show();
-				} else {
-					window.location.href = data.redirect;
-				}
-			},
-			error: function(e) {
-				alert('Đã có lỗi xảy ra, vui lòng thử lại');
-			}
-		});
-		e.preventDefault();
-	});
-
 });

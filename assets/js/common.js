@@ -35,15 +35,15 @@ $('body').on('submit', '.form-ajax', function() {
         },
         success: function(response) {
             if (response.success) {
+                if ($_this.hasClass('refresh-on-success')) {
+                    location.reload();
+                    return;
+                }
                 if ($_this.data('update-html-for')) {
                     var $replace_html_to = $($_this.data('update-html-for'));
                     if (response.html !== 'undefined') {
                         $replace_html_to.html('');
                         $replace_html_to.html(response.html);
-                    }
-                } else {
-                    if ($_this.hasClass('refresh-on-success')) {
-                        location.reload();
                     }
                 }
                 if ($_this.hasClass('resetable')) {
@@ -56,15 +56,23 @@ $('body').on('submit', '.form-ajax', function() {
                 }
                 if ($_this.closest('.modal').length !== 0) {
                     $_this.closest('.modal').modal('hide');
-                } 
+                }
 
             } else {
+                if ($_this.data('update-html-for')) {
+                    var $replace_html_to = $($_this.data('update-html-for'));
+                    if (response.html !== 'undefined') {
+                        $replace_html_to.html('');
+                        $replace_html_to.html(response.html);
+                    }
+                }
                 if ($_this.find('.form-messages').length !== 0) {
                     Helper.flash_message('error', response.message, $_this.find('.form-messages'));
                     if ($_this.closest('.modal').length === 0) {
                         Helper.scroll_to($_this.find('.form-messages'), 500);
                     }
                 }
+
             }
         },
         complete: function() {
@@ -96,4 +104,14 @@ $(document).on('change', '.select-as-link', function() {
 
 $(document).on('change', '.submit-on-change', function() {
     $(this).closest('form').submit();
+});
+
+//$('.datepicker').datepicker();
+
+/* Toggle loading indicator */
+$(document).ajaxStart(function() {
+    Helper.togglePageLoadingIndicator(true);
+});
+$(document).ajaxComplete(function() {
+    Helper.togglePageLoadingIndicator(false);
 });

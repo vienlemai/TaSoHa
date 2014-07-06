@@ -46,12 +46,11 @@ class MemberController extends MemberBaseController {
             $member = new Member(Input::all());
             $member->save();
             $member->makeChildOf($parent);
-            $result['status'] = true;
-            $result['redirect'] = route('member.root');
+            $result['success'] = true;
         } else {
-            $result['status'] = false;
-            $errors = $v->messages()->all('<li>:message</li>');
-            $result['errors'] = $errors;
+            $result['success'] = false;
+            \Former::withErrors($v->messages());
+            $result['html'] = View::make('member.partials._form_add_member')->render();
         }
         return \Response::json($result);
     }
