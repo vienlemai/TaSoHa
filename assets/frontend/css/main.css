@@ -18,6 +18,14 @@ body {
 .carousel-control {
     width: 5%;
 }
+.popover-title .close {
+    color: #707070;
+    margin-left: 10px;
+   
+}
+.popover-title .close:focus ,.popover-title .close:active{
+     outline: none;
+} 
 /* Helper classes */
 .text-i {
     font-style: italic;
