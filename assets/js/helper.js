@@ -26,7 +26,7 @@ Helper = {
             $(div).addClass('alert-warning');
         } else if (type == 'success') {
             $(div).addClass('alert-success');
-        } 
+        }
         $(div).append(message);
         return $(div);
     },

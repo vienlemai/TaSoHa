@@ -35,6 +35,7 @@
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/prettify.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/jquery.jOrgChart.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/member.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>

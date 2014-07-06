@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-lumen.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/font-awesome.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/main.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/addon.css')}}">        
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -31,6 +32,8 @@
         <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>        
         @yield('inline_scripts')
     </body>
 </html>
