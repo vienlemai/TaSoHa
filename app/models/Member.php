@@ -26,9 +26,16 @@ class Member extends Node implements UserInterface, RemindableInterface {
         'managed_by',
     );
 
+    public static function boot() {
+        parent::boot();
+        static::creating(function($member) {
+            $member->password = Hash::make($member->password);
+        });
+    }
+
     public static function validate($input) {
         $rules = array(
-            'email' => 'required|email|unique,members',
+            'email' => 'required|email|unique:members',
             'full_name' => 'required',
             'username' => 'required',
             'password' => 'required|min:6',

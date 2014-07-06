@@ -41,16 +41,19 @@ class MemberController extends MemberBaseController {
     public function store() {
         $v = Member::validate(Input::all());
         if ($v->passes()) {
+            $parentId = Input::get('parent_id');
+            $parent = Member::findOrFail($parentId);
             $member = new Member(Input::all());
             $member->save();
+            $member->makeChildOf($parent);
             $result['status'] = true;
-            $result['redirect'] = Route::route('member.root');
+            $result['redirect'] = route('member.root');
         } else {
             $result['status'] = false;
             $errors = $v->messages()->all('<li>:message</li>');
             $result['errors'] = $errors;
-            return \Response::json($result);
         }
+        return \Response::json($result);
     }
 
     /**

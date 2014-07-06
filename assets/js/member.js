@@ -110,6 +110,8 @@ jQuery(document).ready(function() {
 					errorHtml += '</ul>';
 					$alert.find('span.msg-content').html(errorHtml);
 					$alert.show();
+				} else {
+					window.location.href = data.redirect;
 				}
 			},
 			error: function(e) {
