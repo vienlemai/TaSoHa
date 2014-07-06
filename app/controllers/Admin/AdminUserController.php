@@ -7,7 +7,7 @@ use \Redirect;
 use \Session;
 use \View;
 use \AdminUser;
-
+use \Lang;
 class AdminUserController extends AdminBaseController {
 
     /**
@@ -96,7 +96,10 @@ class AdminUserController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $user = AdminUser::findOrFail($id);
+        $user->delete();
+        Session::flash('success', Lang::get('messages.user_deleted_successfully', array('name' => $user->full_name)));
+        return Redirect::route('admin.users.index');
     }
 
 }

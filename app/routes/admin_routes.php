@@ -1,5 +1,10 @@
 <?php
 
+Route::group(array('prefix' => 'admin', 'before' => 'admin.auth'), function() {
+    Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
+    Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
+});
+
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
     Route::group(array('before' => 'admin.auth'), function() {
         Route::get('/', array('as' => 'admin.root', 'uses' => 'HomeController@index'));
@@ -7,6 +12,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
             'as' => 'admin.logout',
             'uses' => 'HomeController@logout',
         ));
+
 
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');

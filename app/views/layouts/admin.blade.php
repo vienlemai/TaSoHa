@@ -35,12 +35,11 @@
             </aside>
         </div>
         <script type="text/javascript">
-            var dataToken = <?php echo Session::token(); ?>;
+            var dataToken = '<?php echo Session::token(); ?>';
         </script>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
         <script src="{{asset('assets/js/jquery-ui-1.10.3.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
-        <script src="{{asset('assets/js/bootbox.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/daterangepicker.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}" type="text/javascript"></script>

@@ -7,17 +7,26 @@ use \Input;
 use \Session;
 use \Redirect;
 use \Auth;
-
+use \MyBonus;
+use \DB;
 class HomeController extends MemberBaseController {
 
     /**
      * GET /
      */
     public function index() {
-        $root = Member::roots()->first();
+        $member = Auth::member()->get();
+        $root = Member::findOrFail($member->id);
         $html = $root->renderDescendents();
+        $bonus = MyBonus::lists('name', 'id');
+        $bonusAmoun = array();
+        foreach ($bonus as $k => $v) {
+            $bonusAmoun[$k]['name'] = $v;
+            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')->where('member_id', $member->id)->where('bonus_id', $k)->sum('amount');
+        }
         $this->layout->content = \View::make('member.home.index', array(
                 'treeData' => $html,
+                'bonus' => $bonusAmoun
         ));
     }
 

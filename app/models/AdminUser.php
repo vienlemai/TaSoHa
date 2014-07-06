@@ -105,7 +105,7 @@ class AdminUser extends BaseModel implements UserInterface, RemindableInterface 
         $instance = new static;
         $query = $instance->newQuery();
         if (isset($params['keyword'])) {
-            $query->searchLike($params['keyword'], array('first_name', 'last_name'));
+            $query->searchLike($params['keyword'], 'full_name');
         }
         $result = $query->paginate();
         return $result;

@@ -59,6 +59,7 @@ return array(
     'group_name' => 'Tên nhóm',
     'group_saved_successfully' => 'Lưu thành công nhóm ":name"',
     'user_saved_successfully' => 'Lưu thành công người dùng ":name"',
+    'user_deleted_successfully' => 'Xóa thành công người dùng ":name"',
     'list_group' => 'Dánh sách nhóm',
     'input_user' => 'Nhập thông tin người dùng',
 );

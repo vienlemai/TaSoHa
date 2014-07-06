@@ -13,7 +13,7 @@
 
 	// Width of labels for horizontal forms expressed as viewport => grid columns
 	'labelWidths' => array(
-		'large' => 4,
+		'large' => 3,
 		'small' => 4,
 	),
 

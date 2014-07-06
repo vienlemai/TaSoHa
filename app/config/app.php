@@ -110,6 +110,7 @@ return array(
         'Baum\BaumServiceProvider',
         'Ollieread\Multiauth\MultiauthServiceProvider',
         'Darsain\Console\ConsoleServiceProvider',
+        'Barryvdh\Elfinder\ElfinderServiceProvider'
     ),
     /*
       |--------------------------------------------------------------------------

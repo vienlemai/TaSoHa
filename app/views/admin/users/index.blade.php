@@ -40,13 +40,17 @@
                             <td><?php echo $index++ ?></td>
                             <td><?php echo $user->full_name ?></td>
                             <td><?php echo $user->email ?></td>
-                            <td><?php echo $user->getRule();  ?></td>
+                            <td><?php echo $user->getRule(); ?></td>
                             <td><?php echo $user->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
                                 <a href="<?php echo route('admin.users.edit', $user->id) ?>" class="action-item text-blue" title="<?php echo trans('messages.edit'); ?>">
                                     <i class="fa fa-fw fa-edit"></i><?php echo trans('messages.edit'); ?>
                                 </a>
-                                <a href="#" class="action-item text-danger" title="<?php echo trans('messages.delete'); ?>">
+                                <a href="<?php echo route('admin.users.destroy', $user->id) ?>" 
+                                   class="action-item text-danger" 
+                                   title="<?php echo trans('messages.delete'); ?>"
+                                   data-method="delete" 
+                                   >
                                     <i class="fa fa-fw fa-ban"></i><?php echo trans('messages.delete'); ?>
                                 </a>
                             </td>
