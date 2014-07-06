@@ -35,5 +35,6 @@
         <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/prettify.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/jquery.jOrgChart.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/member.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>
     </body>
 </html>
