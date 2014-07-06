@@ -3,9 +3,14 @@
 Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
     Route::group(array('before' => 'member.auth'), function() {
         Route::get('/', array('as' => 'member.root', 'uses' => 'HomeController@index'));
-        Route::get('create/{parentId}', array(
+        Route::get('member/create', array(
             'as' => 'member.create',
             'uses' => 'MemberController@create',
+        ));
+
+        Route::post('member/store', array(
+            'as' => 'member.store',
+            'uses' => 'MemberController@store',
         ));
 
         Route::get('{id}/show', array(
