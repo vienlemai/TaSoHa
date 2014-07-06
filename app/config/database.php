@@ -6,12 +6,12 @@ return array(
     'connections' => array(
         'mysql' => array(
             'driver' => 'mysql',
-            'host' => 'localhost',
+            'host' => '127.10.129.2',
             'database' => 'tasoha',
-            'username' => 'root',
-            'password' => '',
+            'username' => 'adminMl4uygt',
+            'password' => 'PjhCemc6Aysp',
             'charset' => 'utf8',
-            'collation' => 'utf8_unicode_ci',
+            'collation' => 'utf8_unicode_ci', 
             'prefix' => '',
         )
     ),
