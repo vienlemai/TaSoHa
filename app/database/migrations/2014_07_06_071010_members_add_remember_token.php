@@ -12,7 +12,7 @@ class MembersAddRememberToken extends Migration {
      */
     public function up() {
         Schema::table('members', function($t) {
-            $t->string('remember_token');
+            $t->string('remember_token')->nullable();
         });
     }
 

@@ -2,21 +2,12 @@
 
 class DatabaseSeeder extends Seeder {
 
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run() {
         Eloquent::unguard();
 
-<<<<<<< HEAD
-        $this->call('MemberSeeder');
-=======
         $this->call('AdminUserSeeder');
         $this->call('MemberSeeder');
         $this->call('BonusSeeder');
->>>>>>> 097986c1f830853c299ba84ebceb4aca1d8bc910
     }
 
 }
@@ -25,7 +16,7 @@ class AdminUserSeeder extends Seeder {
 
     public function run() {
         $admin = new Admin(
-            array(
+                array(
             'email' => 'admin@admin.com',
             'password' => Hash::make('123456'),
             'full_name' => 'Admin',
