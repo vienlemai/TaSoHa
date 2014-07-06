@@ -15,12 +15,9 @@ $(document).ready(function() {
         });
         return false;
     });
-    
+
     $('#go-top').on('click', function() {
-        console.log('top');
         Helper.scoll_to_top();
-         return false;
+        return false;
     });
-
-
 });
