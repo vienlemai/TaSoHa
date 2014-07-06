@@ -11,19 +11,19 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="http://placehold.it/995x440&text=Slide+One" alt="...">
+                <img src="<?php echo asset('/assets/img/slide-sample/slide1.jpg')?>" alt="...">
                 <div class="carousel-caption">
                     The caption slide one
                 </div>
             </div>
             <div class="item">
-                <img src="http://placehold.it/995x440&text=Slide+Two" alt="...">
+                <img src="<?php echo asset('/assets/img/slide-sample/slide2.jpg')?>" alt="...">
                 <div class="carousel-caption">
                     The caption slide two
                 </div>
             </div>
             <div class="item">
-                <img src="http://placehold.it/995x440&text=Slide+Three" alt="...">
+                <img src="<?php echo asset('/assets/img/slide-sample/slide3.jpg')?>" alt="...">
                 <div class="carousel-caption">
                     The caption slide three
                 </div>
@@ -32,10 +32,10 @@
 
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-chevron-left"></span>
+             <span class="glyphicon glyphicon-circle-arrow-left"></span>
         </a>
         <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-chevron-right"></span>
+             <span class="glyphicon glyphicon-circle-arrow-right"></span>
         </a>
     </div>
 </div>

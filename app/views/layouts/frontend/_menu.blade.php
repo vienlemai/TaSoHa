@@ -41,9 +41,9 @@
             <ul class="nav navbar-nav navbar-right">
                 <form action="<?php echo route('fe.search') ?>" method="GET" class="navbar-form navbar-left">
                     <div class="input-group">
-                        <input type="text" class="form-control input-sm" placeholder="Tìm kiếm ...">
+                        <input type="text" class="form-control input-sm" placeholder="Tìm kiếm ..." name="keyword">
                         <span class="input-group-btn">
-                            <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-search"></i></button>
+                            <button class="btn btn-primary btn-sm" type="submit"><i class="fa fa-search"></i></button>
                         </span>
                     </div>
                 </form> 
