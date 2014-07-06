@@ -26,6 +26,28 @@ class Member extends Node implements UserInterface, RemindableInterface {
         'managed_by',
     );
 
+    public static function validate($input) {
+        $rules = array(
+            'email' => 'required|email',
+            'full_name' => 'required',
+            'username' => 'required',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        );
+        $messages = array(
+            'email.required' => 'Không được để trống email',
+            'email.email' => 'Email không hợp lệ',
+            'full_name.required' => 'Họ tên không được để trống',
+            'username.required' => 'Tên đăng nhập không được để trống',
+            'password.required' => 'Không được để trống mật khẩu',
+            'password.min' => 'Mật khẩu phải tối thiểu 6 kí tự',
+            'password_confirmation.same' => 'Mật khẩu phải giống nhau',
+            'password_confirmation.required' => 'Không được để trống',
+        );
+        return Validator::make($input, $rules, $messages)
+        ;
+    }
+
     public function bonus() {
         return $this->belongsToMany('Bonus', 'member_bonus', 'member_id', 'bonus_id');
     }
@@ -179,9 +201,9 @@ class Member extends Node implements UserInterface, RemindableInterface {
 
     private function _build($node) {
         if ($node->children->isEmpty()) {
-            return '<li>' . $node->full_name . '</li>';
+            return '<li><input type="hidden" class="member-id" value="' . $node->id . '"/>' . $node->full_name . '</li>';
         } else {
-            $item = '<li>' . $node->full_name . '<ul>';
+            $item = '<li><input type="hidden" class="member-id" value="' . $node->id . '"/>' . $node->full_name . '<ul>';
             foreach ($node->children as $child) {
                 $item.=$this->_build($child);
             }

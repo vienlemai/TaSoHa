@@ -16,29 +16,33 @@
             <div class="box-header">
                 <i class="fa fa-user"></i>
                 <h3 class="box-title">Thông tin thành viên</h3>
+                <div class="box-tools pull-right">
+                    <a href="<?php echo route('admin.members.index') ?>" class="btn btn-info">
+                        <i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
+                </div>
             </div>
             <div class="box-body">
-                <table>
+                <table class="table">
                     <tbody>
                         <tr>
                             <td style="width: 30%">Họ tên</td>
-                            <td>: <?php echo $member->full_name ?></td>
+                            <td><?php echo $member->full_name ?></td>
                         </tr>
                         <tr>
                             <td>Email</td>
-                            <td>: <?php echo $member->email ?></td>
+                            <td><?php echo $member->email ?></td>
                         </tr>
                         <tr>
                             <td>Tên đăng nhập</td>
-                            <td>: <?php echo $member->username ?></td>
+                            <td><?php echo $member->username ?></td>
                         </tr>
                         <tr>
                             <td>Ngày sinh</td>
-                            <td>: <?php echo $member->day_of_birth ?></td>
+                            <td><?php echo $member->day_of_birth ?></td>
                         </tr>
                         <tr>
                             <td>Giới tính</td>
-                            <td>: <?php echo $member->getSexName(); ?></td>
+                            <td><?php echo $member->getSexName(); ?></td>
                         </tr>
                     </tbody>
                 </table>
@@ -52,11 +56,12 @@
                 <i class="fa fa-money"></i>
                 <h3 class="box-title">Thông tin hoa hồng</h3>
                 <div class="box-tools pull-right">
-                    <a href="<?php echo route('admin.bonus.create', $member->id) ?>" class="btn btn-primary">Nhập hoa hồng</a>
+                    <a href="<?php echo route('admin.bonus.create', $member->id) ?>" class="btn btn-primary">
+                        <i class="fa fa-plus"></i> Nhập hoa hồng</a>
                 </div>
             </div>
             <div class="box-body">
-                <table>
+                <table class="table">
                     <thead>
                         <tr>
                             <td>Tên hoa hồng</td>
@@ -64,9 +69,12 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Lợi nhuận b</td>
-                        </tr> 
+                        <?php foreach ($bonus as $b): ?>
+                            <tr>
+                                <td><?php echo $b['name']; ?></td>
+                                <td><?php echo $b['amount'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
                     </tbody>
                 </table>
             </div>

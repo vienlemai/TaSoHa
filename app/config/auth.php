@@ -4,7 +4,7 @@ return array(
     'multi' => array(
         'member' => array(
             'driver' => 'database',
-            'model' => 'Member'
+            'table' => 'members'
         ),
         'admin' => array(
             'driver' => 'eloquent',

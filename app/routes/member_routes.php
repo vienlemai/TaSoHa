@@ -1,9 +1,24 @@
 <?php
 
 Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
-    Route::get('/', array('as' => 'member.root', 'uses' => 'HomeController@index'));
-    Route::post('member/{parentId}/create', array(
-        'as' => 'member.create',
-        'uses' => 'MemberController@create',
+    Route::group(array('before' => 'member.auth'), function() {
+        Route::get('/', array('as' => 'member.root', 'uses' => 'HomeController@index'));
+        Route::get('create/{parentId}', array(
+            'as' => 'member.create',
+            'uses' => 'MemberController@create',
+        ));
+
+        Route::get('member/{id}/show', array(
+            'as' => 'member.show',
+            'uses' => 'MemberController@show'
+        ));
+        Route::get('member/logout', array(
+            'as' => 'member.logout',
+            'uses' => 'HomeController@getLogout',
+        ));
+    });
+    Route::post('login', array(
+        'as' => 'member.login',
+        'uses' => 'HomeController@postLogin',
     ));
 });

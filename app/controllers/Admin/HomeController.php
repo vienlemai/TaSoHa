@@ -9,7 +9,6 @@ use \Redirect;
 use \Auth;
 use \Input;
 use \Session;
-
 class HomeController extends AdminBaseController {
 
     public function index() {

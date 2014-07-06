@@ -73,7 +73,7 @@
 
                 ?>
             </div>
-<?php echo Former::close(); ?>
+            <?php echo Former::close(); ?>
         </div>
     </div>
 </div>

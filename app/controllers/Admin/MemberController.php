@@ -8,6 +8,7 @@ use \Session;
 use \Redirect;
 use \Member;
 use \MyBonus;
+use \DB;
 
 class MemberController extends AdminBaseController {
 
@@ -30,7 +31,7 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        //
+        $this->layout->content = View::make('admin.members.create');
     }
 
     /**
@@ -39,7 +40,15 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function store() {
-        //
+        $v = Member::validate(Input::all());
+        if ($v->passes()) {
+            $member = new Member(Input::all());
+            $member->save();
+            Session::flash('success', 'Lưu thành công thành viên cấp 1 ' . $member->full_name);
+            return Redirect::route('admin.members.index');
+        } else {
+            return Redirect::back()->withErrors($v->messages());
+        }
     }
 
     /**
@@ -51,13 +60,18 @@ class MemberController extends AdminBaseController {
     public function show($id) {
         $member = Member::with('creator', 'parent')
             ->findOrFail($id);
-        $bonus = MyBonus::lists('name','id');
-        $bonusAmoun();
-        foreach ($bonus as $k=>$v) {
-            $bonusAmoun[$k] = 
+        $bonus = MyBonus::lists('name', 'id');
+        $bonusAmoun = array();
+        foreach ($bonus as $k => $v) {
+            $bonusAmoun[$k]['name'] = $v;
+            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
+                ->where('member_id', $member->id)
+                ->where('bonus_id', $k)
+                ->sum('amount');
         }
-        $this->layout->content = View::make('admin.members.show',  array(
-            'member'=>$member
+        $this->layout->content = View::make('admin.members.show', array(
+                'member' => $member,
+                'bonus' => $bonusAmoun,
         ));
     }
 
