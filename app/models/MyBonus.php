@@ -18,4 +18,14 @@ class MyBonus extends Eloquent {
         return Validator::make($input, $rules, $messages);
     }
 
+    public static function getBonus($memberId) {
+        $bonus = MyBonus::lists('name', 'id');
+        $bonusAmoun = array();
+        foreach ($bonus as $k => $v) {
+            $bonusAmoun[$k]['name'] = $v;
+            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')->where('member_id', $memberId)->where('bonus_id', $k)->sum('amount');
+        }
+        return $bonusAmoun;
+    }
+
 }
