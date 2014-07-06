@@ -11,8 +11,8 @@ jQuery(document).ready(function() {
 			url: dataUrl,
 			type: 'get',
 			data: null,
-			success: function(resurl) {
-				$(resurl).modal();
+			success: function(result) {
+				$(result).modal();
 			},
 			error: function() {
 				alert('Đã có lỗi xảy ra, vui lòng thử lại');
