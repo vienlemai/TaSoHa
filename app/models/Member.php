@@ -8,7 +8,6 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * Member
  */
 class Member extends Node implements UserInterface, RemindableInterface {
-
     /**
      * Table name.
      *
@@ -29,13 +28,14 @@ class Member extends Node implements UserInterface, RemindableInterface {
 
     public static function validate($input) {
         $rules = array(
-            'email' => 'required|email',
+            'email' => 'required|email|unique,members',
             'full_name' => 'required',
             'username' => 'required',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         );
         $messages = array(
+            'email.unique' => 'Email đã tồn tài',
             'email.required' => 'Không được để trống email',
             'email.email' => 'Email không hợp lệ',
             'full_name.required' => 'Họ tên không được để trống',
@@ -43,7 +43,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
             'password.required' => 'Không được để trống mật khẩu',
             'password.min' => 'Mật khẩu phải tối thiểu 6 kí tự',
             'password_confirmation.same' => 'Mật khẩu phải giống nhau',
-            'password_confirmation.required' => 'Không được để trống',
+            'password_confirmation.required' => 'Không được để trống xác nhận mật khẩu',
         );
         return Validator::make($input, $rules, $messages)
         ;
@@ -62,10 +62,10 @@ class Member extends Node implements UserInterface, RemindableInterface {
         $query = $instance->newQuery();
         if (isset($params['keyword'])) {
             $query->where(function($query) use ($params) {
-                        $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
-                        $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
-                        $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
-                    });
+                $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
+            });
         }
         $result = $query->paginate();
         return $result;
@@ -201,8 +201,8 @@ class Member extends Node implements UserInterface, RemindableInterface {
     }
 
     private function _build($node) {
-        $canAdd = $node->children->count() < 2;
-        $tmp = '<input type="hidden" addable="' . $canAdd . '" class="member-id" data-fullname="' . $node->full_name . '" value="' . $node->id . '"/>' . $node->full_name;
+        $canAdd = $node->children->count() < 2 ? 1 : 0;
+        $tmp = '<input type="hidden" data-addable="' . $canAdd . '" class="member-id" data-fullname="' . $node->full_name . '" value="' . $node->id . '"/>' . $node->full_name;
         if ($node->children->isEmpty()) {
             return '<li>' . $tmp . '</li>';
         } else {
@@ -217,9 +217,9 @@ class Member extends Node implements UserInterface, RemindableInterface {
 
     private function _getDetailHtml($node) {
         $div = '<div style="display:none">'
-                . '<p>Họ tên: ' . $node->full_name . '</p>'
-                . '<p> Email: ' . $node->email . '</p>'
-                . '</div>';
+            . '<p>Họ tên: ' . $node->full_name . '</p>'
+            . '<p> Email: ' . $node->email . '</p>'
+            . '</div>';
         return $div;
     }
 

@@ -29,11 +29,8 @@ class MemberController extends MemberBaseController {
      *
      * @return Response
      */
-    public function create($parentId) {
-        $parent = Member::findOrFail($parentId);
-        $this->layout->content = View::make('member.member.create', array(
-                'parent' => $parent,
-        ));
+    public function create() {
+        $this->layout->content = View::make('member.member.create');
     }
 
     /**
@@ -42,7 +39,18 @@ class MemberController extends MemberBaseController {
      * @return Response
      */
     public function store() {
-        //
+        $v = Member::validate(Input::all());
+        if ($v->passes()) {
+            $member = new Member(Input::all());
+            $member->save();
+            $result['status'] = true;
+            $result['redirect'] = Route::route('member.root');
+        } else {
+            $result['status'] = false;
+            $errors = $v->messages()->all('<li>:message</li>');
+            $result['errors'] = $errors;
+            return \Response::json($result);
+        }
     }
 
     /**
@@ -53,15 +61,10 @@ class MemberController extends MemberBaseController {
      */
     public function show($id) {
         $member = Member::with('creator', 'children')->findOrFail($id);
-        $bonus = MyBonus::lists('name', 'id');
-        $bonusAmoun = array();
-        foreach ($bonus as $k => $v) {
-            $bonusAmoun[$k]['name'] = $v;
-            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')->where('member_id', $member->id)->where('bonus_id', $k)->sum('amount');
-        }
+        $bonus = \MyBonus::getBonus($member->id);
         return View::make('member.member.show', array(
                 'member' => $member,
-                'bonus' => $bonusAmoun,
+                'bonus' => $bonus,
         ));
     }
 

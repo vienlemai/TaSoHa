@@ -7,7 +7,8 @@
             </div>
             <div class="modal-body">
                 <?php
-                echo Former::open(route('admin.members.store'))->method('post');
+                echo Former::open(route('admin.members.store'))->method('post')
+                    ->class('form-create-member');
                 echo Former::hidden('parent_id');
                 echo Former::text('full_name')
                     ->label('Họ tên')
