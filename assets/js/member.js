@@ -12,7 +12,7 @@ jQuery(document).ready(function() {
 			type: 'get',
 			data: null,
 			success: function(resurl) {
-				$(resurl).modal({dropback:false});
+				$(resurl).modal();
 			},
 			error: function() {
 				alert('Đã có lỗi xảy ra, vui lòng thử lại');
