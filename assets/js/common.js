@@ -52,24 +52,17 @@ $('body').on('submit', '.form-ajax', function() {
 
                 // Close modal if the current form wrapp by a modal
                 if (!$_this.hasClass('refresh-on-success')) {
-                    AppHelper.flash_message('success', response.message, null, 7000);
+                    Helper.flash_message('success', response.message, null, 7000);
                 }
                 if ($_this.closest('.modal').length !== 0) {
                     $_this.closest('.modal').modal('hide');
-                } else {
-                    AppHelper.scroll_to('html', 500);
-                }
+                } 
 
             } else {
                 if ($_this.find('.form-messages').length !== 0) {
-                    AppHelper.flash_message('error', response.message, $_this.find('.form-messages'));
+                    Helper.flash_message('error', response.message, $_this.find('.form-messages'));
                     if ($_this.closest('.modal').length === 0) {
-                        AppHelper.scroll_to($_this.find('.form-messages'), 500);
-                    }
-                } else {
-                    AppHelper.flash_message('error', response.message);
-                    if (!$_this.hasClass('keep-offset')) {
-                        AppHelper.scroll_to('html', 500);
+                        Helper.scroll_to($_this.find('.form-messages'), 500);
                     }
                 }
             }

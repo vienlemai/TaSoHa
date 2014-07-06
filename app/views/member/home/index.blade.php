@@ -11,7 +11,7 @@
 <hr>
 <div id="bonus-overview-wrap">
     <div class="pull-right margin-bottom-10">
-        <form action='<?php echo route('member.filter_bonus') ?>' class='form-inline form-ajax' data-update-html-for='#bonus-info-wrap' method='GET'>
+        <form action='<?php echo route('member.filter_bonus') ?>' class='form-inline form-ajax keep-offset' data-update-html-for='#bonus-info-wrap' method='GET'>
             <label class='control-label text-bold'>Chọn tháng</label>
             <select class='form-control input-sm submit-on-change' name='month'>
                 <?php foreach (monthsForSelect(5) as $month) : ?>
