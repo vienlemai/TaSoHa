@@ -8,11 +8,11 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'uses' => 'MemberController@create',
         ));
 
-        Route::get('member/{id}/show', array(
+        Route::get('{id}/show', array(
             'as' => 'member.show',
             'uses' => 'MemberController@show'
         ));
-        Route::get('member/logout', array(
+        Route::get('logout', array(
             'as' => 'member.logout',
             'uses' => 'HomeController@getLogout',
         ));

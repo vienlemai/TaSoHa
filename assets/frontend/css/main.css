@@ -19,6 +19,11 @@ body {
     display: inline-block;
 }
 #logo{
-	width: 100px;
-	height: 70px;
+    width: 100px;
+    height: 70px;
+}
+#members-tree-wrap {
+    overflow-x: scroll;
+    padding: 15px 5px;
+    border: 2px solid #eee;
 }
