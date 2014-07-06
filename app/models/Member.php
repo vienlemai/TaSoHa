@@ -8,6 +8,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * Member
  */
 class Member extends Node implements UserInterface, RemindableInterface {
+
     /**
      * Table name.
      *
@@ -61,10 +62,10 @@ class Member extends Node implements UserInterface, RemindableInterface {
         $query = $instance->newQuery();
         if (isset($params['keyword'])) {
             $query->where(function($query) use ($params) {
-                $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
-                $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
-                $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
-            });
+                        $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
+                        $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
+                        $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
+                    });
         }
         $result = $query->paginate();
         return $result;
@@ -200,10 +201,11 @@ class Member extends Node implements UserInterface, RemindableInterface {
     }
 
     private function _build($node) {
+        $tmp = '<input type="hidden" class="member-id" data-fullname="' . $node->full_name . '" value="' . $node->id . '"/>' . $node->full_name;
         if ($node->children->isEmpty()) {
-            return '<li><input type="hidden" class="member-id" value="' . $node->id . '"/>' . $node->full_name . '</li>';
+            return '<li>' . $tmp . '</li>';
         } else {
-            $item = '<li><input type="hidden" class="member-id" value="' . $node->id . '"/>' . $node->full_name . '<ul>';
+            $item = '<li>' . $tmp . '<ul>';
             foreach ($node->children as $child) {
                 $item.=$this->_build($child);
             }
@@ -214,9 +216,9 @@ class Member extends Node implements UserInterface, RemindableInterface {
 
     private function _getDetailHtml($node) {
         $div = '<div style="display:none">'
-            . '<p>Họ tên: ' . $node->full_name . '</p>'
-            . '<p> Email: ' . $node->email . '</p>'
-            . '</div>';
+                . '<p>Họ tên: ' . $node->full_name . '</p>'
+                . '<p> Email: ' . $node->email . '</p>'
+                . '</div>';
         return $div;
     }
 

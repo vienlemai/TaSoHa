@@ -49,8 +49,96 @@ body {
     width: 100px;
     height: 70px;
 }
-#members-tree-wrap {
+.members-tree-wrap {
     overflow-x: scroll;
     padding: 15px 5px;
     border: 2px solid #eee;
+}
+
+
+/* OrgChart */
+.jOrgChart .right{
+    border-left: 2px solid #c9c9c9;
+} 
+.jOrgChart .left {
+    border-right: 2px solid #c9c9c9;
+}
+.jOrgChart .top {
+    border-top: 2px solid #c9c9c9;
+}
+.jOrgChart .down {
+    background-color: #c9c9c9;
+}
+
+.members-tree-wrap .node{
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 6px 12px;
+    font-size: 12px;
+    line-height: 1.42857143;
+    border-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+
+    padding: 8px 12px 7px;
+    border-width: 0 1px 4px 1px;
+    width: 110px;
+}
+
+/*.members-tree-wrap .node:hover {
+    margin-top: 1px;
+    border-bottom-width: 3px;
+}*/
+
+/* Default button style */
+.members-tree-wrap.default .node {
+    color: #555555;
+    background-color: #eeeeee;
+    border-color: #e2e2e2;
+}
+.members-tree-wrap.default .node:hover, .members-tree-wrap.default .node:focus {
+    background-color: #eeeeee;
+    border-color: #e2e2e2;
+}
+/* Primary button style */
+.members-tree-wrap.primary .node {
+    color: #ffffff;
+    background-color: #158cba;
+    border-color: #127ba3;
+}
+.members-tree-wrap.primary .node:hover, .members-tree-wrap.primary .node:focus {
+    background-color: #158cba;
+    border-color: #127ba3;
+}
+/* Info button style */
+
+.members-tree-wrap.info .node {
+    color: #ffffff;
+    background-color: #75caeb;
+    border-color: #5fc1e8;
+}
+.members-tree-wrap.info .node:hover, .members-tree-wrap.info .node:focus {
+    background-color: #75caeb;
+    border-color: #5fc1e8;
+}
+
+/* Success button style */
+
+.members-tree-wrap.success .node {
+    color: #ffffff;
+    background-color: #28b62c;
+    border-color: #23a127;
+
+}
+.members-tree-wrap.success .node:hover, .members-tree-wrap.success .node:focus {
+    background-color: #1f8c22;
+    border-color: #186f1b;
 }

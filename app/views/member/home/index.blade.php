@@ -14,7 +14,7 @@
 </div>
 <h3><i class="fa fa-sitemap"></i> Sơ đồ thành viên</h3>
 <hr>
-<div id="members-tree-wrap">
+<div class="members-tree-wrap primary">
     <ul id="org" style="display:none">
         <?php echo $treeData ?>
     </ul>
