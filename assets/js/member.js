@@ -4,23 +4,6 @@ jQuery(document).ready(function() {
 		dragAndDrop: false
 	});
 
-//    $('.node').on('click', function() {
-//        var dataUrl = $('#url-show-member').val();
-//        var memberId = $(this).find('.member-id').val();
-//        var dataUrl = dataUrl.replace('-1', memberId);
-//        $.ajax({
-//            url: dataUrl,
-//            type: 'get',
-//            data: null,
-//            success: function(result) {
-//                $(result).modal();
-//            },
-//            error: function() {
-//                alert('Đã có lỗi xảy ra, vui lòng thử lại');
-//            }
-//        });
-//    });
-
 	/* Handle mouse hover on tree nodes */
 	$('.members-tree-wrap .node').each(function() {
 		var $_this = $(this);
@@ -46,7 +29,7 @@ jQuery(document).ready(function() {
 			if (!$_this.hasClass('popovered')) {
 				$_this.popover('show').addClass('popovered');
 				$_this.next('.popover').find('.popover-title').append(dismissBtn);
-				$_this.next('.popover').find('.popover-content').append('<hr>');
+				$_this.next('.popover').find('.popover-content').append('<br>');
 				if ($_this.find('input').data('addable') == 1) {
 					$_this.next('.popover').find('.popover-content').append(addNodeLink);
 				}
@@ -61,7 +44,7 @@ jQuery(document).ready(function() {
 
 	// Handler close popover button
 	$(document).on('click', '.popover .close', function() {
-		$(this).closest('.popover').prev('.node').popover('hide');
+		$(this).closest('.popover').prev('.node').popover('hide').removeClass('popovered');
 	});
 
 	//

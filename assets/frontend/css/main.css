@@ -21,10 +21,10 @@ body {
 .popover-title .close {
     color: #707070;
     margin-left: 10px;
-   
+
 }
 .popover-title .close:focus ,.popover-title .close:active{
-     outline: none;
+    outline: none;
 } 
 /* Helper classes */
 .text-i {
@@ -33,6 +33,26 @@ body {
 .text-bold {
     font-weight: 800;
 }
+.margin-10 {
+    margin: 10px;
+}
+.margin-bottom-10 {
+    margin-bottom: 10px;
+}
+.margin-15 {
+    margin-bottom: 15px;
+}
+.margin-bottom-15 {
+    margin: 15px;
+}
+.margin-20 {
+    margin: 20px;
+}
+.margin-bottom-20 {
+    margin-bottom: 20px;
+}
+
+
 #today {
     padding-right: 30px;
 }

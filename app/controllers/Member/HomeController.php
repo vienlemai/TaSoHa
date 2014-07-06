@@ -4,11 +4,13 @@ namespace Member;
 
 use Member;
 use \Input;
+use \View;
 use \Session;
 use \Redirect;
 use \Auth;
 use \MyBonus;
-use \DB;
+use \Response;
+
 class HomeController extends MemberBaseController {
 
     /**
@@ -18,20 +20,24 @@ class HomeController extends MemberBaseController {
         $member = Auth::member()->get();
         $root = Member::findOrFail($member->id);
         $html = $root->renderDescendents();
-        $bonus = MyBonus::lists('name', 'id');
-        $bonusAmoun = array();
-        foreach ($bonus as $k => $v) {
-            $bonusAmoun[$k]['name'] = $v;
-            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')->where('member_id', $member->id)->where('bonus_id', $k)->sum('amount');
-        }
-        $this->layout->content = \View::make('member.home.index', array(
-                'treeData' => $html,
-                'bonus' => $bonusAmoun
+        $bonus = \MyBonus::getBonus($member->id);
+        $this->layout->content = View::make('member.home.index', array(
+                    'treeData' => $html,
+                    'bonus' => $bonus
         ));
     }
 
+    public function filterBonus() {
+        $res = array();
+        $bonus = MyBonus::getBonus(Auth::member()->get()->id);
+        $res['success'] = true;
+        $res['html'] = View::make('member.partials._bonus_list')
+                        ->with('bonus', $bonus)->render();
+        return Response::json($res);
+    }
+
     public function postLogin() {
-        $checkLogin = \Auth::member()->attempt(array(
+        $checkLogin = Auth::member()->attempt(array(
             'username' => Input::get('username'),
             'password' => Input::get('password')), Input::has('remember_me')
         );

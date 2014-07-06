@@ -21,6 +21,10 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'as' => 'member.logout',
             'uses' => 'HomeController@getLogout',
         ));
+        Route::get('filter-bonus', array(
+            'as' => 'member.filter_bonus',
+            'uses' => 'HomeController@filterBonus',
+        ));        
     });
     Route::post('login', array(
         'as' => 'member.login',
