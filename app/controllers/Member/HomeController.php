@@ -22,8 +22,8 @@ class HomeController extends MemberBaseController {
         $html = $root->renderDescendents();
         $bonus = \MyBonus::getBonus($member->id);
         $this->layout->content = View::make('member.home.index', array(
-                    'treeData' => $html,
-                    'bonus' => $bonus
+                'treeData' => $html,
+                'bonus' => $bonus
         ));
     }
 
@@ -32,7 +32,7 @@ class HomeController extends MemberBaseController {
         $bonus = MyBonus::getBonus(Auth::member()->get()->id);
         $res['success'] = true;
         $res['html'] = View::make('member.partials._bonus_list')
-                        ->with('bonus', $bonus)->render();
+                ->with('bonus', $bonus)->render();
         return Response::json($res);
     }
 

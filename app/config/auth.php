@@ -3,8 +3,8 @@
 return array(
     'multi' => array(
         'member' => array(
-            'driver' => 'database',
-            'table' => 'members'
+            'driver' => 'eloquent',
+            'model' => 'Member'
         ),
         'admin' => array(
             'driver' => 'eloquent',

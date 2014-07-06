@@ -38,39 +38,39 @@ class MemberSeeder extends Seeder {
 
     public function run() {
         DB::table('members')->truncate();
-        $root = new Member(array(
-            'full_name' => 'Nguyễn Văn A',
-            'email' => 'nguyenvana@gmail.com',
-            'username' => 'nguyenvana',
-            'password' => Hash::make('123456'),
-            'day_of_birth' => '',
-            'sex' => false,
-        ));
-        $root->save();
-        $node = new Member(array(
-            'full_name' => 'Nguyễn Văn B',
-            'email' => 'nguyenvanb@gmail.com',
-            'username' => 'nguyenvanb',
-            'password' => Hash::make('123456'),
-            'day_of_birth' => '',
-            'sex' => false,
-            'is_left' => true,
-            'is_right' => false,
-        ));
-        $node->save();
-        $node->makeChildOf($root);
-        $node = new Member(array(
-            'full_name' => 'Nguyễn Văn C',
-            'email' => 'nguyenvanc@gmail.com',
-            'username' => 'nguyenvanc',
-            'password' => Hash::make('123456'),
-            'day_of_birth' => '',
-            'sex' => false,
-            'is_left' => false,
-            'is_right' => true,
-        ));
-        $node->save();
-        $node->makeChildOf($root);
+//        $root = new Member(array(
+//            'full_name' => 'Nguyễn Văn A',
+//            'email' => 'nguyenvana@gmail.com',
+//            'username' => 'nguyenvana',
+//            'password' => Hash::make('123456'),
+//            'day_of_birth' => '',
+//            'sex' => false,
+//        ));
+//        $root->save();
+//        $node = new Member(array(
+//            'full_name' => 'Nguyễn Văn B',
+//            'email' => 'nguyenvanb@gmail.com',
+//            'username' => 'nguyenvanb',
+//            'password' => Hash::make('123456'),
+//            'day_of_birth' => '',
+//            'sex' => false,
+//            'is_left' => true,
+//            'is_right' => false,
+//        ));
+//        $node->save();
+//        $node->makeChildOf($root);
+//        $node = new Member(array(
+//            'full_name' => 'Nguyễn Văn C',
+//            'email' => 'nguyenvanc@gmail.com',
+//            'username' => 'nguyenvanc',
+//            'password' => Hash::make('123456'),
+//            'day_of_birth' => '',
+//            'sex' => false,
+//            'is_left' => false,
+//            'is_right' => true,
+//        ));
+//        $node->save();
+//        $node->makeChildOf($root);
     }
 
 }

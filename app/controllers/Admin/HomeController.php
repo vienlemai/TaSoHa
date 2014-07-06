@@ -9,6 +9,7 @@ use \Redirect;
 use \Auth;
 use \Input;
 use \Session;
+
 class HomeController extends AdminBaseController {
 
     public function index() {
@@ -34,7 +35,7 @@ class HomeController extends AdminBaseController {
     }
 
     public function logout() {
-        Auth::logout();
+        Auth::admin()->logout();
         return Redirect::route('admin.login');
     }
 

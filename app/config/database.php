@@ -6,10 +6,10 @@ return array(
     'connections' => array(
         'mysql' => array(
             'driver' => 'mysql',
-            'host' => '127.10.129.2',
+            'host' => 'localhost',
             'database' => 'tasoha',
-            'username' => 'adminMl4uygt',
-            'password' => 'PjhCemc6Aysp',
+            'username' => 'root',
+            'password' => '',
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
