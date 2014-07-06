@@ -10,15 +10,14 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#" class="text-info">Thực phẩm chức năng <b class="caret"></b></a></li>
-                <li><a href="#">Mỹ phẩm <b class="caret"></b></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hàng tiêu dùng <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                    </ul>
+                <li class="active">
+                    <a href="#" class="text-info">Thực phẩm chức năng</a>
+                </li>
+                <li>
+                    <a href="#">Mỹ phẩm</a>
+                </li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hàng tiêu dùng</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Mặt hàng khác <b class="caret"></b></a>
@@ -28,13 +27,8 @@
                         <li><a href="#">Something else here</a></li>
                     </ul>
                 </li>
-            </ul>
-            <!--                                    <form class="navbar-form navbar-left">
-                                                    <input type="text" class="form-control col-lg-8" placeholder="Tìm kiếm">
-                                                </form>-->
-            <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Tasoha Group <b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">TASOHA Group <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="#">Sứ mệnh</a></li>
                         <li><a href="#">Tasoha LAND</a></li>
@@ -43,6 +37,17 @@
                         <li><a href="#">Tasoha INVEST</a></li>
                     </ul>
                 </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <form action="<?php echo route('fe.search') ?>" method="GET" class="navbar-form navbar-left">
+                    <div class="input-group">
+                        <input type="text" class="form-control input-sm" placeholder="Tìm kiếm ...">
+                        <span class="input-group-btn">
+                            <button class="btn btn-primary btn-sm" type="button"><i class="fa fa-search"></i></button>
+                        </span>
+                    </div>
+                </form> 
+
             </ul>
         </div>
     </div>

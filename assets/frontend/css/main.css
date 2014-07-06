@@ -1,6 +1,17 @@
 body {
     background: url(../../img/bg/brushed_alu.png);    
 }
+
+/* Helper classes */
+.text-i {
+    font-style: italic;
+}
+.text-bold {
+    font-weight: 800;
+}
+#today {
+    padding-right: 30px;
+}
 #wrapper {
     width: 1024px;
     background-color: #fff;

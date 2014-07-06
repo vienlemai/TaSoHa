@@ -50,7 +50,7 @@
 	        	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
 	        	<small>Someone famous in <cite title="Source Title">Source Title</cite></small>
 	      	</blockquote>
-	      	<a href="#" class="btn btn-info btn-xs">Chi tiết <i class="fa fa-angle-double-right"></i></a>
+	      	<a href="#" class="btn btn-primary btn-xs">Chi tiết <i class="fa fa-angle-double-right"></i></a>
 	  	</div>
   </div>
 </div>
@@ -65,7 +65,7 @@
 	                <h3>Sản phẩm mới</h3>
 	                <hr>
 	                <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-	                <p><a class="btn btn-info btn-sm">Xem thêm</a></p>
+	                <p><a class="btn btn-primary btn-sm">Xem thêm</a></p>
 			</div>	
 		</div>	
 
@@ -74,7 +74,7 @@
                 <h3>Công tác tập huấn</h3>
                 <hr>
                 <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p><a class="btn btn-info btn-sm">Xem thêm</a></p>
+                <p><a class="btn btn-primary btn-sm">Xem thêm</a></p>
             </div>    
 		</div>
 
@@ -83,7 +83,7 @@
                 <h3>Sự kiện</h3>
                 <hr>
                 <p>This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-                <p><a class="btn btn-info btn-sm">Xem thêm</a></p>
+                <p><a class="btn btn-primary btn-sm">Xem thêm</a></p>
  			</div>                    
 		</div>
 	</div>
