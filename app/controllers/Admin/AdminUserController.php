@@ -8,6 +8,7 @@ use \Session;
 use \View;
 use \AdminUser;
 use \Lang;
+
 class AdminUserController extends AdminBaseController {
 
     /**
@@ -41,12 +42,11 @@ class AdminUserController extends AdminBaseController {
     public function store() {
         $user = new \AdminUser(\Input::all());
         if ($user->save()) {
-            
+            \Session::flash('success', \Lang::get('messages.user_saved_successfully', array('name' => $user->full_name)));
+            return \Redirect::route('admin.users.index');
         } else {
             return Redirect::back()->withErrors($user->errors());
         }
-        \Session::flash('success', \Lang::get('messages.user_saved_successfully', array('name' => $user->full_name)));
-        return \Redirect::route('admin.users.index');
     }
 
     /**
