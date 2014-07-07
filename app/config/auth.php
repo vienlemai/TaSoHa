@@ -8,7 +8,7 @@ return array(
         ),
         'admin' => array(
             'driver' => 'eloquent',
-            'model' => 'Admin'
+            'model' => 'AdminUser'
         )
     ),
     'reminder' => array(
