@@ -29,9 +29,15 @@
                 echo Former::text('title')
                     ->label(Lang::get('messages.article_title'))
                     ->class('form-control');
-                echo Former::file('thumbnail')
-                    ->label(Lang::get('messages.article_thumbnail'))
-                    ->accept('image');
+
+                ?>
+                <div class="form-group">
+                    <label for="title" class="control-label col-lg-3 col-sm-4">Hình đại diện</label>
+                    <div class="col-lg-9 col-sm-8">
+                        <div class="thumbnail-select" id="elfinder_button">Click để chọn hình</div>
+                    </div>
+                </div>
+                <?php
                 echo Former::textarea('content')
                     ->label(Lang::get('messages.article_content'))
                     ->id('ck-editor')
@@ -47,9 +53,35 @@
 
                 ?>
             </div>
-<?php echo Former::close(); ?>
+            <?php echo Former::close(); ?>
         </div><!-- /.box -->
     </div>
 </div>
-
+@stop
+@section('addon_css')
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link href="{{asset('packages/barryvdh/laravel-elfinder/css/elfinder.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('packages/barryvdh/laravel-elfinder/css/theme.css')}}" rel="stylesheet" type="text/css" />
+@stop
+@section('addon_js')
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="{{asset('packages/barryvdh/laravel-elfinder/js/elfinder.min.js')}}"></script>
+@stop
+@section('inline_js')
+<script type="text/javascript">
+$().ready(function() {
+    $('#elfinder_button').on('click', function() {
+        $('<div id="editor" />').dialogelfinder({
+            url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
+            getFileCallback: function(file) {
+                $('#editor').dialogelfinder('close');
+                $('#editor').closest('.elfinder').val(file.path);
+                var imageHtml = '<img src="'+file.url+'"/>';
+                $('#elfinder_button').html(imageHtml);
+                console.log(file.url);
+            }
+        });
+    });
+});
+</script>
 @stop

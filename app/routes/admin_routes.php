@@ -3,6 +3,7 @@
 Route::group(array('prefix' => 'admin', 'before' => 'admin.auth'), function() {
     Route::get('elfinder', 'Barryvdh\Elfinder\ElfinderController@showIndex');
     Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
+    Route::get('elfinder/ckeditor4', 'Barryvdh\Elfinder\ElfinderController@showCKeditor4');
 });
 
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
