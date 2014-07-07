@@ -3,6 +3,9 @@ body {
 } 
 
 /* Bootstrap override */
+.btn {
+    text-transform: none;
+}
 .carousel-inner>.item>img, .carousel-inner>.item>a>img {
     width: 100%;
 }
@@ -70,7 +73,6 @@ body {
     border-bottom: 1px solid #eeeeee;
 }
 #form-login {
-    width: 455px;
     display: inline-block;
 }
 #logo{
@@ -120,11 +122,6 @@ body {
     border-width: 0 1px 4px 1px;
     width: 110px;
 }
-
-/*.members-tree-wrap .node:hover {
-    margin-top: 1px;
-    border-bottom-width: 3px;
-}*/
 
 /* Default button style */
 .members-tree-wrap.default .node {
