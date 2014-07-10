@@ -17,6 +17,10 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
 
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');
+        
+        Route::resource('product', 'ProductController');
+        Route::resource('product_category', 'ProductCategoryController');
+        
         Route::resource('members', 'MemberController');
         Route::resource('users', 'AdminUserController');
         Route::get('member/tree', array(
