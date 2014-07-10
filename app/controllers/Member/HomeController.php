@@ -41,11 +41,8 @@ class HomeController extends MemberBaseController {
             'username' => Input::get('username'),
             'password' => Input::get('password')), Input::has('remember_me')
         );
-        $mem = Member::where('username', Input::get('username'))->first();
-        Auth::member()->login($mem);
-
         $res = array();
-        if (true) {
+        if ($checkLogin) {
             $res['success'] = true;
         } else {
             $res['success'] = false;
