@@ -19,6 +19,14 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
         Route::resource('article_categories', 'ArticleCategoryController');
         Route::resource('members', 'MemberController');
         Route::resource('users', 'AdminUserController');
+        Route::get('member/tree', array(
+            'as' => 'admin.members.tree',
+            'uses' => 'MemberController@tree'
+        ));
+        Route::get('member/tree/children/{parentId?}', function($parentId = null) {
+            $data = Member::getChildren($parentId);
+            return Response::json($data);
+        });
         Route::get('bonus/{memberId}/create', array(
             'as' => 'admin.bonus.create',
             'uses' => 'BonusController@create',

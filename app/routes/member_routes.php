@@ -12,6 +12,7 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'as' => 'member.store',
             'uses' => 'MemberController@store',
         ));
+        
 
         Route::get('{id}/show', array(
             'as' => 'member.show',

@@ -25,6 +25,11 @@ class MemberController extends AdminBaseController {
         ));
     }
 
+    public function tree() {
+
+        $this->layout->content = View::make('admin.members.tree');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

@@ -30,3 +30,17 @@ $('a[data-method="delete"]').on('click', function() {
 	}
 	return false;
 });
+$('#member-tree').jstree({
+	'core': {
+		"multiple": false,
+		'data': {
+			'url': function(node) {
+				return node.id === '#' ? baseUrl + '/member/tree/children' : baseUrl + '/member/tree/children/' + node.id;
+			},
+			'data': function(node) {
+				return {'id': node.id};
+			}
+		}
+	}}).on('select_node.jstree', function(e, data) {
+	console.log(data);
+});

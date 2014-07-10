@@ -222,6 +222,21 @@ class Member extends Node implements UserInterface, RemindableInterface {
         }
     }
 
+    public static function getChildren($parenId = null) {
+        $nodes = self::with('children')->where('parent_id', $parenId)
+            ->get();
+        $data = array();
+        foreach ($nodes as $node) {
+            $nodeItem = array(
+                'id' => $node->id,
+                'text' => $node->full_name,
+                'children' => $node->children->isEmpty() ? false : true,
+            );
+            array_push($data, $nodeItem);
+        }
+        return ($data);
+    }
+
     private function _getDetailHtml($node) {
         $div = '<div style="display:none">'
             . '<p>Họ tên: ' . $node->full_name . '</p>'
