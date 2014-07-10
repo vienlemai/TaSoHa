@@ -41,6 +41,40 @@ $('#member-tree').jstree({
 				return {'id': node.id};
 			}
 		}
-	}}).on('select_node.jstree', function(e, data) {
-	console.log(data);
+	}}).on('select_node.jstree', function(event, data) {
+	var curentTarget = data.event.currentTarget;
+	var popoverTitle = data.node.text;
+	var detailLink = '<a href="javascript:void(0)" class="btn btn-default btn-xs btn-view-member-detail" data-id="' + data.node.id + '"><i class="fa fa-eye"></i> Chi tiết</a>';
+	var addNodeLink = '<a href="javascript:void(0)" class="btn btn-success btn-xs btn-add-node" data-id="' + data.node.id + '"><i class="fa fa-plus"></i> Thêm thành viên</a>';
+	var popoverContent = detailLink + addNodeLink;
+	var options = {
+		title: popoverTitle,
+		content: popoverContent,
+		placement: 'right',
+		trigger: 'focus',
+		html: true
+	};
+	$(curentTarget).popover(options);
+	$(curentTarget).popover('show');
+});
+
+$(document).on('click', '.popover .btn-view-member-detail', function() {
+	var $_node = $(this).closest('.popover').prev('.node');
+	var dataUrl = $('#url-show-member').val();
+	var memberId = $(this).attr('data-id');
+	var dataUrl = dataUrl.replace('-1', memberId);
+	$.ajax({
+		url: dataUrl,
+		type: 'get',
+		data: null,
+		success: function(result) {
+			$_node.popover('hide');
+			$(result).modal();
+
+		},
+		error: function() {
+			alert('Đã có lỗi xảy ra, vui lòng thử lại');
+		}
+	});
+	return false;
 });

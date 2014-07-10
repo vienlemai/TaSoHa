@@ -74,6 +74,12 @@ class MemberController extends AdminBaseController {
                 ->where('bonus_id', $k)
                 ->sum('amount');
         }
+        if (\Request::ajax()) {
+            return View::make('admin.members.show_modal', array(
+                    'member' => $member,
+                    'bonus' => $bonusAmoun,
+            ));
+        }
         $this->layout->content = View::make('admin.members.show', array(
                 'member' => $member,
                 'bonus' => $bonusAmoun,

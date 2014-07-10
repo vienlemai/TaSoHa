@@ -32,6 +32,7 @@
         </div>
     </div>
     <div class="col-md-12">
+        <input id="url-show-member" type="hidden" name="" value="<?php echo route('admin.members.show', -1) ?>"/>
         <div id="member-tree"></div>
     </div>
 </div>
