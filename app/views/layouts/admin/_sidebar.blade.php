@@ -53,8 +53,9 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{route('admin.articles.index')}}"><?php echo trans('messages.list_article'); ?></a></li>
-                <li><a href="{{route('admin.article_categories.index')}}"><?php echo trans('messages.article_categories'); ?></a></li>
+               <li><a href="{{route('admin.articles.index')}}"><?php echo trans('menu.list_articles'); ?></a></li>
+                <li><a href="{{route('admin.articles.create')}}"><?php echo trans('menu.new_article'); ?></a></li>
+                <li><a href="{{route('admin.article_categories.index')}}"><?php echo trans('menu.list_article_categories'); ?></a></li>
             </ul>
         </li>
         <li class="treeview active">
