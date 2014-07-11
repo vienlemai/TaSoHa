@@ -8,7 +8,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-lumen.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/font-awesome.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/main.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/addon.css')}}">        
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/css/addon.css')}}">        
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>

@@ -20,10 +20,9 @@ class ArticleCategoryController extends AdminBaseController {
      * @return Response
      */
     public function index() {
-        $categories = ArticleCategory::paging(Input::all());
+        $categories = ArticleCategory::all();
         return View::make('admin.article_categories.index', array(
-                    'categories' => $categories,
-                    'keyword' => Input::has('keyword') ? Input::get('keyword') : '',
+                    'categories' => $categories
         ));
     }
 
@@ -33,8 +32,7 @@ class ArticleCategoryController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        $categories = ArticleCategory::parentCategoryList();
-        return View::make('admin.article_categories.create', array('categories' => $categories));
+        return View::make('admin.article_categories.create');
     }
 
     /**
@@ -69,11 +67,9 @@ class ArticleCategoryController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        $categories = ArticleCategory::parentCategoryList($id);
         $category = ArticleCategory::findOrFail($id);
         return View::make('admin.article_categories.edit', array(
-                    'category' => $category,
-                    'categories' => $categories,
+                    'category' => $category
         ));
     }
 

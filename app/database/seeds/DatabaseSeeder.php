@@ -5,9 +5,10 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         Eloquent::unguard();
 
-        $this->call('AdminUserSeeder');
-        $this->call('MemberSeeder');
-        $this->call('BonusSeeder');
+//        $this->call('AdminUserSeeder');
+//        $this->call('MemberSeeder');
+//        $this->call('BonusSeeder');
+        $this->call('ArticleCategorySeeder');
     }
 
 }
@@ -116,6 +117,35 @@ class BonusSeeder extends Seeder {
             'created_at' => Carbon\Carbon::now(),
             'updated_at' => Carbon\Carbon::now(),
         ));
+    }
+
+}
+
+class ArticleCategorySeeder extends Seeder {
+
+    public function run() {
+        DB::table('article_categories')->truncate();
+        $cats = array(
+            array(
+                'name' => 'Thông tin sản phẩm mới',
+                'description' => 'Giới thiệu các sản phẩm mới',
+                'removalable' => false
+            ),
+            array(
+                'name' => 'Công tác tập huấn',
+                'description' => 'Mô tả danh mục công tác tập huấn',
+                'removalable' => false
+            ),
+            array(
+                'name' => 'Sự kiện',
+                'description' => 'Mô tả danh mục sự kiện',
+                'removalable' => false
+            )
+        );
+        foreach ($cats as $catAttrs) {
+            $cat = new ArticleCategory($catAttrs);
+            $cat->save();
+        }
     }
 
 }

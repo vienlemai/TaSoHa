@@ -5,7 +5,6 @@ namespace Admin;
 use \View;
 use \Input;
 use \Redirect;
-use \Lang;
 use \Session;
 use \Auth;
 
@@ -28,14 +27,13 @@ class HomeController extends AdminBaseController {
     }
 
     public function postLogin() {
-        $remember = Input::has('remember_me') ? true : false;
         $checkLogin = Auth::admin()->attempt(array(
             'email' => Input::get('email'),
-            'password' => Input::get('password')), $remember);
+            'password' => Input::get('password')), Input::has('remember_me'));
         if ($checkLogin) {
             return Redirect::intended('/admin');
         } else {
-            Session::flash('error', Lang::get('login_fail'));
+            Session::flash('error', trans('auth.login_failed'));
             return Redirect::back()->withInput();
         }
     }
