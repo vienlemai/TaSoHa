@@ -16,10 +16,9 @@ class HomeController extends AdminBaseController {
      */
     public function index() {
 
-        if (false) { // Not logged in
-            return View::make('shared/login');
+        if (!Auth::admin()->check()) { // Not logged in
+            return View::make('admin/home/login');
         } else {
-            Session::flash('success', 'Welcome to dashboard');
             $this->layout->content = View::make('admin/home/index');
         }
     }
@@ -42,7 +41,7 @@ class HomeController extends AdminBaseController {
     }
 
     public function logout() {
-        Auth::logout();
+        Auth::admin()->logout();
         return Redirect::route('admin.login');
     }
 
