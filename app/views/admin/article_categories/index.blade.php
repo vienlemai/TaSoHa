@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('header_content')
 <h1>
-    <?php echo trans('messages.article_management'); ?>
-    <small><?php echo trans('messages.categories'); ?></small>
+    <?php echo trans('menu.manage_articles'); ?>
+    <small><?php echo trans('menu.list_article_categories'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('messages.categories'); ?></li>
+    <li class="active"><?php echo trans('menu.manage_articles'); ?></li>
 </ol>
 @stop
 
@@ -19,9 +19,7 @@
                 <a href="{{route('admin.article_categories.create')}}" class="btn btn-sm btn-primary">
                     <i class="fa fa-plus"></i> <?php echo trans('messages.add_category'); ?>
                 </a>
-                <div class="col-md-4 pull-right no-padding">
-                    <?php echo View::make('admin.partials.search_tool')->render(); ?>
-                </div>
+               
             </div>
             <table class="table table-bordered">
                 <thead>

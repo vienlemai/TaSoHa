@@ -38,7 +38,7 @@
         <?php endif; ?>
         <li class="treeview active">
             <a href="#">
-                <i class="fa fa-bar-chart-o"></i>
+                <i class="fa fa-group"></i>
                 <span>Quản lý thành viên</span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
@@ -48,8 +48,8 @@
         </li>
         <li class="treeview active">
             <a href="#">
-                <i class="fa fa-bar-chart-o"></i>
-                <span><?php echo trans('messages.manage_articles'); ?></span>
+                <i class="fa fa-list"></i>
+                <span><?php echo trans('menu.manage_articles'); ?></span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">

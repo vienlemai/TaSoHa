@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('header_content')
 <h1>
-    <?php echo trans('messages.article_management'); ?>
-    <small><?php echo trans('messages.categories'); ?></small>
+    <?php echo trans('menu.manage_articles'); ?>
+    <small><?php echo trans('menu.list_article_categories'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('messages.categories'); ?></li>
+    <li class="active"><?php echo trans('menu.manage_articles'); ?></li>
 </ol>
 @stop
 
@@ -20,16 +20,9 @@
             </div><!-- /.box-header -->
             <!-- form start -->
             <?php echo Former::open(route('admin.article_categories.update', $category->id))->method('put') ?>
+            <?php Former::populate($category) ?>
             <div class="box-body">
-                <?php
-                echo Former::text('name')
-                        ->label(Lang::get('messages.category_name'))
-                        ->value($category->name)
-                        ->class('form-control');
-                echo Former::textarea('description')->rows(4)
-                        ->label(trans('model.ArticleCategory.description'))
-                        ->class('form-control');
-                ?>
+                <?php echo View::make('admin.article_categories._form')->render() ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">

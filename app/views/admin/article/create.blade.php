@@ -1,33 +1,33 @@
 @extends('layouts.admin')
 @section('header_content')
 <h1>
-    <?php echo trans('messages.article_management'); ?>
-    <small><?php echo trans('messages.categories'); ?></small>
+    <?php echo trans('menu.manage_articles'); ?>
+    <small><?php echo trans('menu.list_article_categories'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('messages.categories'); ?></li>
+    <li class="active"><?php echo trans('menu.manage_articles'); ?></li>
 </ol>
 @stop
 
 @section('content')
 <div class="row">
-    <div class="col-md-12 center">
+    <div class="col-md-12">
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <?php echo Former::open(route('admin.articles.store'))->method('Post') ?>
+            <?php echo Former::open(route('admin.articles.store'))->method('POST') ?>
             <div class="box-body">
                 <?php
-                echo Former::select('categor_id')
-                    ->label(Lang::get('messages.categories'))
-                    ->options($categories)
+                echo Former::select('category_id')
+                    ->label(trans('model.Article.category_id'))
+                    ->fromQuery($categories,'name','id')
                     ->class('form-control');
                 echo Former::text('title')
-                    ->label(Lang::get('messages.article_title'))
+                    ->label(trans('model.Article.title'))
                     ->class('form-control');
 
                 ?>

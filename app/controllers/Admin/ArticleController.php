@@ -31,7 +31,7 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        $categories = ArticleCategory::listCategories();
+        $categories = ArticleCategory::all();
         return View::make('admin.article.create', array(
                     'categories' => $categories,
         ));
