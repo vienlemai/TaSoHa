@@ -82,7 +82,23 @@ $('#member-tree-binary').jstree({
 		"multiple": false,
 		'data': {
 			'url': function(node) {
-				return node.id === '#' ? baseUrl + '/member/tree/children' : baseUrl + '/member/tree/children/' + node.id;
+				return node.id === '#' ? baseUrl + '/member/tree-binary/children' : baseUrl + '/member/tree-binary/children/' + node.id;
+			},
+			'data': function(node) {
+				return {'id': node.id};
+			}
+		}
+	}}).on('select_node.jstree', function(event, data) {
+	var memberId = data.node.id;
+	showMemberDetail(memberId);
+	return false;
+});
+$('#member-tree-sun').jstree({
+	'core': {
+		"multiple": false,
+		'data': {
+			'url': function(node) {
+				return node.id === '#' ? baseUrl + '/member/tree-sun/children' : baseUrl + '/member/tree-sun/children/' + node.id;
 			},
 			'data': function(node) {
 				return {'id': node.id};

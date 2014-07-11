@@ -69,8 +69,8 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
             $data = Member::getBinaryChildren($parentId);
             return Response::json($data);
         });
-        Route::get('member/tree-sun/children/{parentId?}', function($parentId = null) {
-            $data = Member::getChildren($parentId);
+        Route::get('member/tree-sun/children/{parentId?}', function($introducerId = null) {
+            $data = Member::getSunChildren($introducerId);
             return Response::json($data);
         });
         Route::get('bonus/{memberId}/create', array(

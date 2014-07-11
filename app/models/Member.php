@@ -33,6 +33,10 @@ class Member extends Node implements UserInterface, RemindableInterface {
         });
     }
 
+    public function sunlight() {
+        return $this->hasMany('Member', 'introduced_by');
+    }
+
     public static function validate($input) {
         $rules = array(
             'email' => 'required|email|unique:members',
@@ -231,6 +235,21 @@ class Member extends Node implements UserInterface, RemindableInterface {
                 'id' => $node->id,
                 'text' => $node->full_name,
                 'children' => $node->children->isEmpty() ? false : true,
+            );
+            array_push($data, $nodeItem);
+        }
+        return ($data);
+    }
+
+    public static function getSunChildren($introducerId = null) {
+        $nodes = self::with('sunlight')->where('introduced_by', $introducerId)
+            ->get();
+        $data = array();
+        foreach ($nodes as $node) {
+            $nodeItem = array(
+                'id' => $node->id,
+                'text' => $node->full_name,
+                'children' => $node->sunlight->isEmpty() ? false : true,
             );
             array_push($data, $nodeItem);
         }

@@ -22,12 +22,12 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="<?php echo route('admin.members.index') ?>">Danh sách</a></li>
-                        <li><a href="<?php echo route('admin.members.tree', array('type'=>'binary')) ?>">Cây nhị phân</a></li>
-                        <li><a href="<?php echo route('admin.members.tree', array('type'=>'sun')) ?>">Cây mặt trời</a></li>
+                        <li><a href="<?php echo route('admin.members.tree', array('type' => 'binary')) ?>">Cây nhị phân</a></li>
+                        <li><a href="<?php echo route('admin.members.tree', array('type' => 'sun')) ?>">Cây mặt trời</a></li>
                     </ul>
                 </div>
                 <a href="{{route('admin.members.create')}}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-plus"></i> Thêm mới thành viên cấp 1
+                    <i class="fa fa-plus"></i> Thêm mới thành viên
                 </a>
             </div>
         </div>
