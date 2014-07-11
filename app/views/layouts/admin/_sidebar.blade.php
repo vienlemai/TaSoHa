@@ -1,3 +1,4 @@
+<?php $current = Route::currentRouteName() ?>
 <section class="sidebar">
     <!-- Sidebar user panel -->
     <div class="user-panel">
@@ -14,6 +15,37 @@
                 <i class="fa fa-dashboard"></i> <span>Dashboard</span>
             </a>
         </li>
+        <?php if (in_array('admin.users.index', $allowed_routes) || in_array('admin.groups.index', $allowed_routes)): ?>
+            <li class="treeview active">
+                <a href="#">
+                    <i class="fa fa-bar-chart-o"></i>
+                    <span><?php echo trans('messages.manage_users'); ?></span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <?php if (in_array('admin.users.index', $allowed_routes)): ?>
+                        <li class="<?php echo in_array($current, ['admin.users.index', 'admin.users.create', 'admin.users.edit']) ? 'active' : '' ?>">
+                            <a href="{{route('admin.users.index')}}"><?php echo trans('messages.list_user'); ?></a>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (in_array('admin.groups.index', $allowed_routes)): ?>
+                        <li class="<?php echo in_array($current, ['admin.groups.index', 'admin.groups.create', 'admin.groups.edit', 'admin.groups.permission']) ? 'active' : '' ?>">
+                            <a href="{{route('admin.groups.index')}}"><?php echo trans('messages.list_group'); ?></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+        <?php endif; ?>
+        <li class="treeview active">
+            <a href="#">
+                <i class="fa fa-bar-chart-o"></i>
+                <span>Quản lý thành viên</span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.members.index')}}">Danh sách thành viên</a></li>
+            </ul>
+        </li>
         <li class="treeview active">
             <a href="#">
                 <i class="fa fa-bar-chart-o"></i>
@@ -23,16 +55,6 @@
             <ul class="treeview-menu">
                 <li><a href="{{route('admin.articles.index')}}"><?php echo trans('messages.list_article'); ?></a></li>
                 <li><a href="{{route('admin.article_categories.index')}}"><?php echo trans('messages.article_categories'); ?></a></li>
-            </ul>
-        </li>
-        <li class="treeview active">
-            <a href="#">
-                <i class="fa fa-bar-chart-o"></i>
-                <span><?php echo trans('messages.manage_users'); ?></span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('admin.users.index')}}"><?php echo trans('messages.list_user'); ?></a></li>
             </ul>
         </li>
         <li class="treeview active">

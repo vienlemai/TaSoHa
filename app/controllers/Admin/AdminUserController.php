@@ -2,12 +2,17 @@
 
 namespace Admin;
 
-use \Input;
-use \Redirect;
-use \Session;
+use \AdminGroup;
 use \View;
-use \AdminUser;
+use \Response;
 use \Lang;
+use \Session;
+use \Input;
+use \AdminUser;
+use \Redirect;
+use \Auth;
+use \App;
+use \Hash;
 
 class AdminUserController extends AdminBaseController {
 
@@ -17,10 +22,10 @@ class AdminUserController extends AdminBaseController {
      * @return Response
      */
     public function index() {
-        $users = \AdminUser::paging(\Input::all());
-        $this->layout->content = \View::make('admin.users.index', array(
+        $users = AdminUser::paging(Input::all());
+        return View::make('admin.users.index', array(
                 'users' => $users,
-                'input' => \Input::all(),
+                'input' => Input::all(),
         ));
     }
 
@@ -30,7 +35,9 @@ class AdminUserController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        $this->layout->content = \View::make('admin.users.create', array(
+        $groups = AdminGroup::lists('name', 'id');
+        return View::make('admin.users.create', array(
+                'groups' => $groups
         ));
     }
 
@@ -40,10 +47,11 @@ class AdminUserController extends AdminBaseController {
      * @return Response
      */
     public function store() {
-        $user = new \AdminUser(\Input::all());
+        $user = new AdminUser(Input::all());
         if ($user->save()) {
-            \Session::flash('success', \Lang::get('messages.user_saved_successfully', array('name' => $user->full_name)));
-            return \Redirect::route('admin.users.index');
+            $user->attachGroup(Input::get('groups', ''));
+            Session::flash('success', Lang::get('messages.user_saved_successfully', array('name' => $user->getFullName())));
+            return Redirect::route('admin.users.index');
         } else {
             return Redirect::back()->withErrors($user->errors());
         }
@@ -66,9 +74,13 @@ class AdminUserController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        $user = \AdminUser::findOrFail($id);
-        return \View::make('admin.users.edit', array(
+        $groups = AdminGroup::lists('name', 'id');
+        $user = AdminUser::findOrFail($id);
+        $curentGroup = $user->groups()->lists('group_id');
+        return View::make('admin.users.edit', array(
                 'user' => $user,
+                'groups' => $groups,
+                'curentGroup' => $curentGroup
         ));
     }
 
@@ -80,10 +92,11 @@ class AdminUserController extends AdminBaseController {
      */
     public function update($id) {
         $user = AdminUser::findOrFail($id);
-        $user->fill(\Input::all());
+        $user->fill(Input::all());
         if ($user->updateUniques()) {
-            \Session::flash('success', \Lang::get('messages.user_saved_successfully', array('name' => $user->full_name)));
-            return \Redirect::route('admin.users.index');
+            $user->attachGroup(Input::get('groups', ''));
+            Session::flash('success', Lang::get('messages.user_saved_successfully', array('name' => $user->getFullName())));
+            return Redirect::route('admin.users.index');
         } else {
             return Redirect::back()->withErrors($user->errors());
         }
@@ -96,10 +109,63 @@ class AdminUserController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        $user = AdminUser::findOrFail($id);
+        $user = \AdminUser::findOrFail($id);
+        $user->groups()->detach();
         $user->delete();
-        Session::flash('success', Lang::get('messages.user_deleted_successfully', array('name' => $user->full_name)));
-        return Redirect::route('admin.users.index');
+        Session::flash('success', Lang::get('messages.user_deleted', array('name' => $user->getFullName())));
+        return Redirect::back();
+    }
+
+    /**
+     * Show the form to edit profile
+     * @return Response
+     */
+    public function profile() {
+        $user = Auth::admin()->get();
+        $resources = \AdminResource::$resources;
+        $allowedRoutes = App::make('allowed_routes');
+        $this->layout->content = View::make('admin.users.profile', array(
+                'user' => $user,
+                'resources' => $resources,
+                'allowedRoutes' => $allowedRoutes,
+        ));
+    }
+
+    /**
+     * Update profile
+     * @return Response
+     */
+    public function postProfile() {
+        $user = Auth::admin()->get();
+        $user->fill(Input::all());
+        if ($user->updateUniques(AdminUser::$profileRules)) {
+            Session::flash('success', Lang::get('messages.profile_saved'));
+            return Redirect::back();
+        }
+        return Redirect::back()->withErrors($user->errors());
+    }
+
+    /**
+     * Show the form to change password
+     * @return Response
+     */
+    public function password() {
+        $this->layout->content = View::make('admin.users.password');
+    }
+
+    public function postPassword() {
+        $user = Auth::admin()->get();
+        if (!Hash::check(Input::get('old_password'), $user->password)) {
+            Session::flash('error', Lang::get('messages.old_password_not_match'));
+            return Redirect::back();
+        }
+        $user->fill(Input::all());
+        if ($user->save(AdminUser::$passwordRules)) {
+            Session::flash('success', Lang::get('messages.password_updated'));
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withErrors($user->errors());
+        }
     }
 
 }

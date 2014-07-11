@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AdminsTableAddIsSubadmin extends Migration {
+class CrateAdminGroupsTable extends Migration {
 
     /**
      * Run the migrations.
@@ -11,9 +11,12 @@ class AdminsTableAddIsSubadmin extends Migration {
      * @return void
      */
     public function up() {
-        Schema::table('admins', function($t) {
-
-            $t->boolean('is_subadmin')->default(0);
+        Schema::create('admin_groups', function($t) {
+            $t->increments('id');
+            $t->string('name');
+            $t->text('description');
+            $t->text('permissions');
+            $t->timestamps();
         });
     }
 
@@ -23,9 +26,7 @@ class AdminsTableAddIsSubadmin extends Migration {
      * @return void
      */
     public function down() {
-        Schema::table('admins', function($t) {
-            $t->dropColumn('is_subadmin');
-        });
+        Schema::drop('admin_groups');
     }
 
 }

@@ -22,7 +22,8 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="<?php echo route('admin.members.index') ?>">Danh sách</a></li>
-                        <li><a href="<?php echo route('admin.members.tree') ?>">Cây</a></li>
+                        <li><a href="<?php echo route('admin.members.tree', 'binary') ?>">Cây nhị phân</a></li>
+                        <li><a href="<?php echo route('admin.members.tree', 'sun') ?>">Cây mặt trời</a></li>
                     </ul>
                 </div>
                 <a href="{{route('admin.members.create')}}" class="btn btn-sm btn-primary">
@@ -56,9 +57,9 @@
                             <td><?php echo $member->full_name ?></td>
                             <td><?php echo $member->email ?></td>
                             <td><?php echo $member->username ?></td>
-                            <td><?php echo $member->created_at->format('d/m/Y, H:i') ?></td>
+                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary">
+                                <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary btn-view-member-detail">
                                     <i class="fa fa-search">Xem chi tiết</i>
                                 </a>
                             </td>
@@ -73,6 +74,21 @@
             ))->render();
 
             ?>
+        </div>
+    </div>
+</div>
+<div id="modal-member-detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3>Thông tin chi tiết thành viên</h3>
+            </div>
+            <div class="modal-body" id='form-add-node-wrap'>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Đóng</button>            
+            </div>
         </div>
     </div>
 </div>

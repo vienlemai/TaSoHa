@@ -23,6 +23,25 @@ Route::filter('admin.auth', function() {
     if (!Auth::admin()->check()) {
         Session::put('url.intended', URL::full());
         return Redirect::route('admin.login');
+    } else {
+        if (Auth::admin()->get()->is_supper) {
+            $allowed_routes = AdminResource::allRoutes();
+        } else {
+            $allowed_routes = AdminGroup::getPermissionsByUser(Auth::admin()->get()->id);
+        }
+        App::singleton('allowed_routes', function() use ($allowed_routes) {
+            return $allowed_routes;
+        });
+        View::share('allowed_routes', $allowed_routes);
+    }
+});
+
+Route::filter('admin.permission', function() {
+    if (!Auth::admin()->get()->is_supper) {
+        $allowed_routes = App::make('allowed_routes');
+        if (!in_array(Route::currentRouteName(), $allowed_routes)) {
+            return Redirect::route('admin.error', 'permission');
+        }
     }
 });
 Route::filter('member.auth', function() {

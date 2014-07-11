@@ -25,9 +25,10 @@ class MemberController extends AdminBaseController {
         ));
     }
 
-    public function tree() {
-
-        $this->layout->content = View::make('admin.members.tree');
+    public function tree($type = 'binary') {
+        $this->layout->content = View::make('admin.members.tree', array(
+                'type' => $type,
+        ));
     }
 
     /**

@@ -7,27 +7,69 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin.auth'), function() {
 });
 
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
-    Route::group(array('before' => 'admin.auth'), function() {
-        Route::get('/', array('as' => 'admin.root', 'uses' => 'HomeController@index'));
-        Route::get('/logout', array(
-            'as' => 'admin.logout',
-            'uses' => 'HomeController@logout',
-        ));
+    Route::get('/login', array(
+        'as' => 'admin.login',
+        'uses' => 'HomeController@getLogin'
+    ));
+    Route::post('/login', array(
+        'as' => 'admin.login',
+        'uses' => 'HomeController@postLogin'
+    ));
+    Route::get('error/{type}', array(
+        'as' => 'admin.error',
+        'uses' => 'HomeController@error'
+    ));
+});
 
-
+Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'admin.auth'), function() {
+    Route::get('/', array('as' => 'admin.root', 'uses' => 'HomeController@index'));
+    Route::get('/logout', array(
+        'as' => 'admin.logout',
+        'uses' => 'HomeController@logout',
+    ));
+    Route::get('/users/profile', array(
+        'as' => 'admin.users.profile',
+        'uses' => 'AdminUserController@profile'
+    ));
+    Route::post('users/profile', array(
+        'as' => 'admin.users.profile',
+        'uses' => 'AdminUserController@postProfile'
+    ));
+    Route::get('users/password', array(
+        'as' => 'admin.users.password',
+        'uses' => 'AdminUserController@password'
+    ));
+    Route::post('users/password', array(
+        'as' => 'admin.users.password',
+        'uses' => 'AdminUserController@postPassword'
+    ));
+    Route::group(array('before' => 'admin.permission'), function() {
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');
-        
+
         Route::resource('product', 'ProductController');
         Route::resource('product_category', 'ProductCategoryController');
-        
+
         Route::resource('members', 'MemberController');
         Route::resource('users', 'AdminUserController');
-        Route::get('member/tree', array(
+        Route::resource('groups', 'AdminGroupController');
+        Route::get('group/{id}/permission', array(
+            'as' => 'admin.groups.permission',
+            'uses' => 'AdminGroupController@getPermission'
+        ));
+        Route::post('group/{id}/permission', array(
+            'as' => 'admin.groups.permission',
+            'uses' => 'AdminGroupController@postPermission',
+        ));
+        Route::get('member/{type?}/tree', array(
             'as' => 'admin.members.tree',
             'uses' => 'MemberController@tree'
         ));
-        Route::get('member/tree/children/{parentId?}', function($parentId = null) {
+        Route::get('member/tree-binary/children/{parentId?}', function($parentId = null) {
+            $data = Member::getBinaryChildren($parentId);
+            return Response::json($data);
+        });
+        Route::get('member/tree-sun/children/{parentId?}', function($parentId = null) {
             $data = Member::getChildren($parentId);
             return Response::json($data);
         });
@@ -40,14 +82,4 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
             'as' => 'admin.bonus.store'
         ));
     });
-
-    Route::get('/login', array(
-        'as' => 'admin.login',
-        'uses' => 'HomeController@getLogin'
-    ));
-    Route::post('/login', array(
-        'as' => 'admin.login',
-        'uses' => 'HomeController@postLogin'
-    ));
 });
-

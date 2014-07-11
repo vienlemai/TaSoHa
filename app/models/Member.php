@@ -222,7 +222,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
         }
     }
 
-    public static function getChildren($parenId = null) {
+    public static function getBinaryChildren($parenId = null) {
         $nodes = self::with('children')->where('parent_id', $parenId)
             ->get();
         $data = array();

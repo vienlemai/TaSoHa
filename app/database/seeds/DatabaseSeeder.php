@@ -15,21 +15,22 @@ class DatabaseSeeder extends Seeder {
 class AdminUserSeeder extends Seeder {
 
     public function run() {
-        DB::table('admins')->truncate();
-        $admin = new AdminUser(
-                array(
+        DB::table('admin_users')->truncate();
+        DB::table('admin_groups')->truncate();
+        DB::table('admin_user_groups')->truncate();
+        $group = new AdminGroup(['name' => 'Administrator']);
+        $group->description = '';
+        $group->permissions = '';
+        $group->save();
+        $admin = new AdminUser(array(
             'email' => 'admin@admin.com',
-            'password' => ('123456'),
-            'full_name' => 'Admin',
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'password' => '123456',
+            'is_supper' => true,
         ));
         $admin->save();
-        $subAdmin = new AdminUser(array(
-            'email' => 'subadmin@gmail.com',
-            'password' => ('123456'),
-            'full_name' => 'Sub Admin',
-            'is_subadmin' => true
-        ));
-        $subAdmin->save();
+        $admin->groups()->attach($group->id);
     }
 
 }
