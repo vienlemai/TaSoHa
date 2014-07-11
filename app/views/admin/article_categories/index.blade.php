@@ -26,22 +26,19 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 5%">#</th>
+                        <th style="width: 2%">#</th>
                         <th><?php echo trans('messages.category_name'); ?></th>
-                        <th><?php echo trans('messages.category_parent'); ?></th>
                         <th><?php echo trans('messages.created_at'); ?></th>
                         <th style="width: 15%"><?php echo trans('messages.actions'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = $categories->getFrom(); ?>
                     <?php foreach ($categories as $category): ?>
                         <tr>
-                            <td><?php echo $index++ ?></td>
+                            <td><?php echo $category->id ?></td>
                             <td>
                                 <a href="<?php echo route('admin.article_categories.edit', $category->id) ?>"><?php echo $category->name ?></a>
                             </td>
-                            <td>{{$category->parent_category->name or ''}}</td>
                             <td><?php echo $category->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
                                 <a href="<?php echo route('admin.article_categories.edit', $category->id) ?>" class="btn btn-xs btn-primary">
@@ -56,27 +53,6 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <div class="table-footer">
-                <div class="info-left">
-                    <?php
-                    echo trans('messages.paging_info', array(
-                        'from' => $categories->getFrom(),
-                        'to' => $categories->getTo(),
-                        'total' => $categories->getTotal(),
-                    ));
-                    ?>
-                </div>
-                <div class="info-right">
-                    <?php echo $categories->links(); ?>
-                    <ul class="pagination pagination-sm">
-                        <li><a href="#">«</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">»</a></li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 </div>

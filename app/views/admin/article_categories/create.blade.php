@@ -23,23 +23,20 @@
             <div class="box-body">
 
                 <?php
-                echo Former::select('parent_id')
-                    ->label(Lang::get('messages.category_parent'))
-                    ->options($categories)
-                    ->class('form-control');
                 echo Former::text('name')
-                    ->label(Lang::get('messages.category_name'))
-                    ->class('form-control');
-
+                        ->label(trans('model.ArticleCategory.name'))
+                        ->class('form-control');
+                echo Former::textarea('description')->rows(4)
+                        ->label(trans('model.ArticleCategory.description'))
+                        ->class('form-control');
                 ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">
                 <?php
                 echo Former::actions()
-                    ->primary_submit('Lưu')
-                    ->inverse_reset('Nhập lại')
-
+                        ->primary_submit('Lưu')
+                        ->inverse_reset('Nhập lại')
                 ?>
             </div>
             <?php echo Former::close(); ?>
