@@ -4,6 +4,7 @@ namespace Admin;
 
 use \Request;
 use \Route;
+use \Auth;
 use \View;
 use \Redirect;
 use \Session;
@@ -21,7 +22,7 @@ class ArticleController extends AdminBaseController {
     public function index() {
         $articles = Article::paging(Input::all());
         return View::make('admin.article.index', array(
-                    'articles' => $articles
+                'articles' => $articles
         ));
     }
 
@@ -33,7 +34,7 @@ class ArticleController extends AdminBaseController {
     public function create() {
         $categories = ArticleCategory::all();
         return View::make('admin.article.create', array(
-                    'categories' => $categories,
+                'categories' => $categories,
         ));
     }
 
@@ -44,6 +45,7 @@ class ArticleController extends AdminBaseController {
      */
     public function store() {
         $article = new Article(Input::all());
+        $article->created_by = Auth::admin()->get()->id;
         if ($article->save()) {
             Session::flash('success', trans('messages.article_save_success', array('name' => $article->title)));
             return Redirect::route('admin.articles.index');
@@ -69,11 +71,11 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        $categories = ArticleCategory::listCategories();
-        $article = Article::find($id);
+        $categories = ArticleCategory::all();
+        $article = Article::findOrFail($id);
         return View::make('admin.article.edit', array(
-                    'article' => $article,
-                    'categories' => $categories
+                'categories' => $categories,
+                'article' => $article
         ));
     }
 

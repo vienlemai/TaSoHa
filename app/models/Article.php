@@ -3,7 +3,7 @@
 class Article extends LaravelBook\Ardent\Ardent {
     protected $table = 'articles';
     public $fillable = array(
-        'categor_id',
+        'category_id',
         'title',
         'content',
         'thumbnail',
@@ -12,7 +12,7 @@ class Article extends LaravelBook\Ardent\Ardent {
      * VALIDATIONS
      */
     public static $rules = array(
-        'categor_id' => 'required',
+        'category_id' => 'required',
         'title' => 'required',
         'content' => 'required'
     );
@@ -27,7 +27,6 @@ class Article extends LaravelBook\Ardent\Ardent {
     public static function boot() {
         parent::boot();
         static::creating(function($article) {
-            $article->created_by = Auth::user()->id;
             $article->is_active = true;
         });
     }

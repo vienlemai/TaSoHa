@@ -37,11 +37,16 @@
                     <?php foreach ($articles as $article): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
-                            <td><?php echo $article->title ?></td>
+                            <td>
+                                <a href="<?php echo route('admin.articles.edit', $article->id) ?>">
+                                    <?php echo $article->title ?>
+                                </a>
+                                
+                            </td>
                             <td>{{$article->category->name or ''}}</td>
                             <td><?php echo $article->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.articles.edit', $article->id) ?>" class="text-blue">
+                                <a href="<?php echo route('admin.articles.edit', $article->id) ?>">
                                     <i class="fa-edit"><?php echo trans('messages.edit'); ?></i>
                                 </a>
                                 <a href="#" class="text-danger">

@@ -19,28 +19,10 @@
                 <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <?php echo Former::open(route('admin.articles.update',$article->id))->method('put') ?>
+            <?php echo Former::open(route('admin.articles.update', $article->id))->method('put') ?>
+            <?php Former::populate($article) ?>
             <div class="box-body">
-                <?php
-                echo Former::select('categor_id')
-                    ->label(Lang::get('messages.categories'))
-                    ->options($categories, $article->categor_id)
-                    ->class('form-control');
-                echo Former::text('title')
-                    ->label(Lang::get('messages.article_title'))
-                    ->value($article->title)
-                    ->class('form-control');
-                echo Former::files('thumbnail')
-                    ->label(Lang::get('messages.article_thumbnail'))
-                    ->accept('image')
-
-                ?>
-                <div class="control-group">
-                    <label for="name" class="control-label"><?php echo trans('messages.article_content'); ?></label>
-                    <div class="controls">
-                        <textarea id="ck-editor" name="content"><?php echo $article->content ?></textarea>
-                    </div>
-                </div>
+                <?php echo View::make('admin.article._form')->with('categories',$categories)->render() ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">
@@ -48,7 +30,6 @@
                 echo Former::actions()
                     ->primary_submit(Lang::get('messages.save'))
                     ->inverse_reset(Lang::get('messages.reset'))
-
                 ?>
             </div>
             <?php echo Former::close(); ?>
@@ -56,4 +37,33 @@
     </div>
 </div>
 
+@stop
+@section('addon_css')
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link href="{{asset('packages/barryvdh/laravel-elfinder/css/elfinder.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('packages/barryvdh/laravel-elfinder/css/theme.css')}}" rel="stylesheet" type="text/css" />
+@stop
+@section('addon_js')
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('packages/barryvdh/laravel-elfinder/js/elfinder.min.js')}}"></script>
+@stop
+@section('inline_js')
+<script type="text/javascript">
+$().ready(function() {
+    $('#elfinder_button').on('click', function() {
+        $('<div id="editor" />').dialogelfinder({
+            url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
+            getFileCallback: function(file) {
+                $('#editor').dialogelfinder('close');
+                $('#editor').closest('.elfinder').val(file.path);
+                var imageHtml = '<img src="'+file.url+'"/>';
+                $('#elfinder_button').html(imageHtml);
+                $($('#elfinder_button').attr('for')).val(file.path);
+                console.log(file.url);
+            }
+        });
+    });
+});
+</script>
 @stop
