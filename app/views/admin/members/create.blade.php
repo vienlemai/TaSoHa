@@ -11,7 +11,7 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-lg-12">
         <div class="box box-info">
             <div class="box-header">
                 <i class="fa fa-user"></i>
@@ -22,7 +22,7 @@
                 </div>
             </div>
             <?php echo Former::open(route('admin.members.store'))->method('post') ?>
-            <div class="box-body">
+            <div class="box-body col-lg-10">
                 <?php
                 echo Former::select('introduced_by')
                     ->label('Người giới thiệu')
@@ -86,4 +86,10 @@
         </div>
     </div>
 </div>
+@stop
+@section('addon_css')
+<link href="{{asset('assets/css/bsdatepicker/datepicker3.css')}}" rel="stylesheet" type="text/css" />
+@stop
+@section('addon_js')
+<script src="{{asset('assets/js/plugins/bsdatepicker/bootstrap-datepicker.js')}}"></script>
 @stop
