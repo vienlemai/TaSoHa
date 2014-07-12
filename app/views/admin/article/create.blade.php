@@ -19,8 +19,8 @@
                 <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <?php echo Former::open(route('admin.articles.store'))->method('POST') ?>
-            <div class="box-body">
+            <?php echo Former::horizontal_open(route('admin.articles.store'))->method('POST') ?>
+            <div class="box-body col-md-10">
                 <?php
                 echo Former::select('category_id')
                     ->label(trans('model.Article.category_id'))
@@ -29,11 +29,10 @@
                 echo Former::text('title')
                     ->label(trans('model.Article.title'))
                     ->class('form-control');
-
                 ?>
                 <div class="form-group">
-                    <label for="title" class="control-label col-lg-4 col-sm-4">Hình đại diện</label>
-                    <div class="col-lg-8 col-sm-8">
+                    <label for="title" class="control-label col-lg-3 col-sm-3">Hình đại diện</label>
+                    <div class="col-lg-9 col-sm-9">
                         <div class="thumbnail-select" id="elfinder_button">Click để chọn hình</div>
                     </div>
                 </div>

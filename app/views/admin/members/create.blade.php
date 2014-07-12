@@ -33,7 +33,7 @@
                     ->label('Người quản lý')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
-                     ->options($members);
+                    ->fromQuery($members, 'full_name', 'id');
                 echo Former::text('full_name')
                     ->label('Họ tên')
                     ->class('form-control');
