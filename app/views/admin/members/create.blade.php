@@ -28,12 +28,12 @@
                     ->label('Người giới thiệu')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
-                    ->fromQuery($members, 'full_name', 'id');
+                    ->options($members);
                 echo Former::select('parent_id')
                     ->label('Người quản lý')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
-                    ->fromQuery($members, 'full_name', 'id');
+                     ->options($members);
                 echo Former::text('full_name')
                     ->label('Họ tên')
                     ->class('form-control');

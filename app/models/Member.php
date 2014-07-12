@@ -30,6 +30,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
         parent::boot();
         static::creating(function($member) {
             $member->password = Hash::make($member->password);
+            $this->uid = time();
         });
     }
 
@@ -61,6 +62,10 @@ class Member extends Node implements UserInterface, RemindableInterface {
 
     public function getBonus() {
         
+    }
+
+    public function getNameUidAttribute() {
+        return $this->full_name . ' (' . $this->id . ')';
     }
 
     public static function paging($params) {
