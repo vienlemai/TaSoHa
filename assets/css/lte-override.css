@@ -58,3 +58,10 @@
 label.radio input[type="radio"]{
 	margin-left: 0px;
 }
+.select2-container .select2-choice , .select2-container .select2-choice .select2-arrow{
+    border-radius: 0px;
+}
+.select2-container .select2-choice {
+    height: 34px;
+    padding: 2px 0 0 8px;
+}
