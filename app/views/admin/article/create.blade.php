@@ -32,8 +32,8 @@
 
                 ?>
                 <div class="form-group">
-                    <label for="title" class="control-label col-lg-3 col-sm-4">Hình đại diện</label>
-                    <div class="col-lg-9 col-sm-8">
+                    <label for="title" class="control-label col-lg-4 col-sm-4">Hình đại diện</label>
+                    <div class="col-lg-8 col-sm-8">
                         <div class="thumbnail-select" id="elfinder_button">Click để chọn hình</div>
                     </div>
                 </div>

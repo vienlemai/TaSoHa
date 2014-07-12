@@ -37,7 +37,10 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        $this->layout->content = View::make('admin.members.create');
+        $members = \Member::all();
+        $this->layout->content = View::make('admin.members.create', array(
+                'members' => $members
+        ));
     }
 
     /**
