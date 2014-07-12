@@ -1,6 +1,10 @@
 if (typeof (CKEDITOR) !== 'undefined') {
 	CKEDITOR.replace('ck-editor');
 }
+$('.datepicker').datepicker({
+	language: 'vi',
+	format: 'dd/mm/yyyy'
+});
 var $formGroup = $('#form-admin-group'), $formUser = $('#form-admin-user');
 //select users for group
 $('.select2').select2();
