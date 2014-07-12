@@ -41,9 +41,14 @@ class Member extends Node implements UserInterface, RemindableInterface {
         $rules = array(
             'email' => 'required|email|unique:members',
             'full_name' => 'required',
-            'username' => 'required',
+            //'username' => 'required',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
+            'day_of_birth' => 'date',
+            'identify_number' => 'number',
+            'identify_location' => 'required',
+            'identify_date' => 'date',
+            'location' => 'required',
         );
 
         return Validator::make($input, $rules)

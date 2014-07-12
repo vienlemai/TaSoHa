@@ -55,3 +55,6 @@
 .list-resource .resource-group ul.resource-children label{
 	font-weight: normal;
 }
+label.radio input[type="radio"]{
+	margin-left: 0px;
+}

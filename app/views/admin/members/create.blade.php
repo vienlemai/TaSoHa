@@ -40,21 +40,25 @@
                 echo Former::text('email')
                     ->label('email')
                     ->class('form-control');
-                echo Former::text('username')
-                    ->label('Tên đăng nhập')
-                    ->class('form-control');
+//                echo Former::text('username')
+//                    ->label('Tên đăng nhập')
+//                    ->class('form-control');
                 echo Former::password('password')
                     ->label('Mật khẩu')
                     ->class('form-control');
                 echo Former::password('password_confirmation')
                     ->label('Nhập lại mật khẩu')
                     ->class('form-control');
+                echo Former::text('day_of_birth')
+                    ->label('Ngày tháng năm sinh')
+                    ->class('form-control datepicker');
                 echo Former::radios('sex')
                     ->label('Giới tính')
                     ->radios(array(
                         'Nam' => array('name' => 'sex', 'value' => 0),
                         'Nữ' => array('name' => 'sex', 'value' => 1),
-                ));
+                    ))->check(0)
+                    ->inline();
                 echo Former::text('identify_number')
                     ->label('Số chứng minh nhân dân')
                     ->class('form-control');
