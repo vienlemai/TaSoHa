@@ -5,9 +5,9 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         Eloquent::unguard();
 
-//        $this->call('AdminUserSeeder');
-//        $this->call('MemberSeeder');
-//        $this->call('BonusSeeder');
+        $this->call('AdminUserSeeder');
+        $this->call('MemberSeeder');
+        $this->call('BonusSeeder');
         $this->call('ArticleCategorySeeder');
     }
 

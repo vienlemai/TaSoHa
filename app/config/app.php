@@ -110,7 +110,8 @@ return array(
         'Baum\BaumServiceProvider',
         'Ollieread\Multiauth\MultiauthServiceProvider',
         'Darsain\Console\ConsoleServiceProvider',
-        'Barryvdh\Elfinder\ElfinderServiceProvider'
+        'Barryvdh\Elfinder\ElfinderServiceProvider',
+        'Intervention\Image\ImageServiceProvider'
     ),
     /*
       |--------------------------------------------------------------------------
@@ -172,5 +173,6 @@ return array(
         'Validator' => 'Illuminate\Support\Facades\Validator',
         'View' => 'Illuminate\Support\Facades\View',
         'Former' => 'Former\Facades\Former',
+        'Image' => 'Intervention\Image\Facades\Image'
     ),
 );

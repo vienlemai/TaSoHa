@@ -12,7 +12,8 @@
 		"baum/baum": "~1.0",
 		"ollieread/multiauth": "dev-master",
         "darsain/laravel-console": "dev-master",
-		"barryvdh/laravel-elfinder": "0.1.x"
+		"barryvdh/laravel-elfinder": "0.1.x",
+        "intervention/image": "2.*"
 	},
 	"autoload": {
 		"classmap": [
