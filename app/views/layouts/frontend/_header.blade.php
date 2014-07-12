@@ -10,7 +10,7 @@
 
         <?php if (!Auth::member()->check()) : ?>
             <form id="form-login" class="form-inline" action="<?php echo route('member.login') ?>" method="post">
-                <input class="form-control input-sm" type="text" placeholder="Tên đăng nhập" name="username">
+                <input class="form-control input-sm" type="text" placeholder="Email" name="email">
                 <input class="form-control input-sm" type="password" placeholder="Mật khẩu" name="password">
                 <button class="btn btn-sm btn-primary" type="submit">Đăng nhập</button>
             </form>

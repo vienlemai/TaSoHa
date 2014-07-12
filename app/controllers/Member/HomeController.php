@@ -17,13 +17,15 @@ class HomeController extends MemberBaseController {
      * GET /
      */
     public function index() {
+        $type = Input::get('type', 'binary');
         $member = Auth::member()->get();
         $root = Member::findOrFail($member->id);
         $html = $root->renderDescendents();
         $bonus = \MyBonus::getBonus($member->id);
         $this->layout->content = View::make('member.home.index', array(
                 'treeData' => $html,
-                'bonus' => $bonus
+                'bonus' => $bonus,
+                'type' => $type,
         ));
     }
 
@@ -38,7 +40,7 @@ class HomeController extends MemberBaseController {
 
     public function postLogin() {
         $checkLogin = Auth::member()->attempt(array(
-            'username' => Input::get('username'),
+            'email' => Input::get('email'),
             'password' => Input::get('password')), Input::has('remember_me')
         );
         $res = array();

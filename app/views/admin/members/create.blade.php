@@ -1,7 +1,7 @@
 @section('header_content')
 <h1>
     Quản lý thành viên
-    <small>Thêm mới thành viên cấp 1</small>
+    <small>Thêm mới thành viên</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
@@ -51,6 +51,7 @@
                     ->class('form-control');
                 echo Former::text('day_of_birth')
                     ->label('Ngày tháng năm sinh')
+                    ->readonly()
                     ->class('form-control datepicker');
                 echo Former::radios('sex')
                     ->label('Giới tính')
@@ -59,6 +60,9 @@
                         'Nữ' => array('name' => 'sex', 'value' => 1),
                     ))->check(0)
                     ->inline();
+                echo Former::text('phone')
+                    ->label('Số điện thoại')
+                    ->class('form-control');
                 echo Former::text('identify_number')
                     ->label('Số chứng minh nhân dân')
                     ->class('form-control');
@@ -67,7 +71,7 @@
                     ->class('form-control');
                 echo Former::text('identify_date')
                     ->label('Ngày cấp CMND')
-                    ->class('form-control');
+                    ->class('form-control datepicker');
                 echo Former::text('location')
                     ->label('Chỗ ở hiện tại')
                     ->class('form-control');
@@ -92,4 +96,13 @@
 @stop
 @section('addon_js')
 <script src="{{asset('assets/js/plugins/bsdatepicker/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('assets/js/plugins/bsdatepicker/locales/bootstrap-datepicker.vi.js')}}"></script>
+@stop
+@section('inline_js')
+<script>
+$('.datepicker').datepicker({
+    language: 'vi',
+    format: 'dd/mm/yyyy'
+});
+</script>
 @stop

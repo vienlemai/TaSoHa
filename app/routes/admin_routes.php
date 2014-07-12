@@ -53,6 +53,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::resource('members', 'MemberController');
         Route::resource('users', 'AdminUserController');
         Route::resource('groups', 'AdminGroupController');
+        Route::resource('bills', 'BillController');
         Route::get('group/{id}/permission', array(
             'as' => 'admin.groups.permission',
             'uses' => 'AdminGroupController@getPermission'

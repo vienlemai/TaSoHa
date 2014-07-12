@@ -30,33 +30,43 @@
         </div>
     </div>
 </div>
-
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-sitemap"></i> Sơ đồ thành viên</h3>
     </div>
     <div class="panel-body">
-        <div class="members-tree-wrap primary">
-            <ul id="org" style="display:none">
-                <?php echo $treeData ?>
+        <div class="btn-group">
+            <button type="button" class="btn btn-default">Chọn kiểu hiển thị</button>
+            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span class="caret"></span>
+                <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li><a href="<?php echo route('member.root', array('type'=>'binary')) ?>">Cây nhị phân</a></li>
+                <li><a href="<?php echo route('member.root', array('type'=>'sun'))?>">Cây mặt trời</a></li>
             </ul>
+        </div>
+        <div class="members-tree-wrap primary">
+            <div class="col-md-12">
+                <input id="url-show-member" type="hidden" name="" value="<?php echo route('admin.members.show', -1) ?>"/>
+                <?php if ($type == 'binary'): ?>
+                    <div id="member-tree-binary"></div>
+                <?php elseif ($type == 'sun'): ?>
+                    <div id="member-tree-sun"></div>
+                <?php endif; ?>
+            </div>
             <input id="url-show-member" type="hidden" name="" value="<?php echo route('member.show', -1) ?>"/>
-            <div id="chart" class="orgChart"></div>
         </div>
     </div>
 </div>
-
-
-<div id="modal-add-node" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
+<div id="modal-member-detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3>Thêm mới thành viên</h3>
+                <h3>Thông tin chi tiết thành viên</h3>
             </div>
             <div class="modal-body" id='form-add-node-wrap'>
-                <?php echo View::make('member.partials._form_add_member')->render() ?>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Đóng</button>            
@@ -64,6 +74,4 @@
         </div>
     </div>
 </div>
-
-
 @stop

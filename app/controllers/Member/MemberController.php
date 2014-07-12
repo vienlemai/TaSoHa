@@ -20,8 +20,16 @@ class MemberController extends MemberBaseController {
      *
      * @return Response
      */
-    public function index() {
-        //
+    public function index($type = 'binary') {
+        $this->layout->content = View::make('member.home.index', array(
+                'type' => $type,
+        ));
+    }
+
+    public function tree($type = 'binary') {
+        $this->layout->content = View::make('member.member.tree', array(
+                'type' => $type,
+        ));
     }
 
     /**
@@ -62,11 +70,26 @@ class MemberController extends MemberBaseController {
      * @return Response
      */
     public function show($id) {
-        $member = Member::with('creator', 'children')->findOrFail($id);
-        $bonus = \MyBonus::getBonus($member->id);
-        return View::make('member.member.show', array(
+        $member = Member::with('creator', 'parent')
+            ->findOrFail($id);
+        $bonus = MyBonus::lists('name', 'id');
+        $bonusAmoun = array();
+        foreach ($bonus as $k => $v) {
+            $bonusAmoun[$k]['name'] = $v;
+            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
+                ->where('member_id', $member->id)
+                ->where('bonus_id', $k)
+                ->sum('amount');
+        }
+        if (\Request::ajax()) {
+            return View::make('admin.members.show_modal', array(
+                    'member' => $member,
+                    'bonus' => $bonusAmoun,
+            ));
+        }
+        $this->layout->content = View::make('admin.members.show', array(
                 'member' => $member,
-                'bonus' => $bonus,
+                'bonus' => $bonusAmoun,
         ));
     }
 

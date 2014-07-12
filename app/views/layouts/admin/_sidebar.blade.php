@@ -44,6 +44,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="{{route('admin.members.index')}}">Danh sách thành viên</a></li>
+                <li><a href="{{route('admin.bills.create')}}">Nhập hóa đơn</a></li>
             </ul>
         </li>
         <li class="treeview active">

@@ -96,14 +96,17 @@ return array(
      */
     'attributes' => array(
         'full_name' => 'Họ tên',
-        'password'=>'Mật khẩu',
-        'email'=>'Email',
-        'location'=>'Chỗ ở hiện tại',
-        'username'=>'Tên đăng nhập',
-        'password_confirmation'=>'Xác nhận mật khẩu',
-        'day_of_birth'=>'Ngày tháng năm sinh',
-        'identify_number'=>'Số CMND',
-        'identify_location'=>'Nơi cấp CMND',
-        'identify_date'=>'Ngày cấp CMND',
+        'password' => 'Mật khẩu',
+        'email' => 'Email',
+        'location' => 'Chỗ ở hiện tại',
+        'username' => 'Tên đăng nhập',
+        'password_confirmation' => 'Xác nhận mật khẩu',
+        'day_of_birth' => 'Ngày tháng năm sinh',
+        'identify_number' => 'Số CMND',
+        'identify_location' => 'Nơi cấp CMND',
+        'identify_date' => 'Ngày cấp CMND',
+        'product_name' => 'Tên sản phẩm',
+        'price' => 'Giá',
+        'score' => 'Điểm'
     ),
 );

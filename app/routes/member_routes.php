@@ -12,7 +12,7 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'as' => 'member.store',
             'uses' => 'MemberController@store',
         ));
-        
+
 
         Route::get('{id}/show', array(
             'as' => 'member.show',
@@ -25,7 +25,15 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
         Route::get('filter-bonus', array(
             'as' => 'member.filter_bonus',
             'uses' => 'HomeController@filterBonus',
-        ));        
+        ));
+        Route::get('member/tree-binary/children/{parentId?}', function($parentId = null) {
+            $data = Member::getBinaryChildren($parentId);
+            return Response::json($data);
+        });
+        Route::get('member/tree-sun/children/{parentId?}', function($introducerId = null) {
+            $data = Member::getSunChildren($introducerId);
+            return Response::json($data);
+        });
     });
     Route::post('login', array(
         'as' => 'member.login',

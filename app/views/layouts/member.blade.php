@@ -7,7 +7,7 @@
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-lumen.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/font-awesome.min.css')}}">
-        <link rel="stylesheet" type="text/css" href="{{asset('assets/js/plugins/jorgchar/css/jquery.jOrgChart.css')}}">
+        <link href="{{asset('assets/js/plugins/jstree/themes/default/style.min.css')}}" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" type="text/css" href="{{asset('assets/js/plugins/jorgchar/css/prettify.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/main.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/addon.css')}}">
@@ -31,10 +31,15 @@
             </div>
             <?php echo View::make('layouts.frontend._footer') ?>  
         </div>
+         <input class="" type="hidden" name="" id="current-member-id" value="{{Auth::member()->get()->id}}"/>
+        <script type="text/javascript">
+            var dataToken = '<?php echo Session::token(); ?>';
+            var baseUrl = '<?php echo route('member.root'); ?>';
+        </script>
         <script src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/prettify.js')}}"></script>
-        <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/jquery.jOrgChart.js')}}"></script>
+        <script src="{{asset('assets/js/plugins/jstree/jstree.min.js')}}" type="text/javascript"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/member.js')}}"></script>

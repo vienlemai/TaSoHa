@@ -18,7 +18,8 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function index() {
-        $members = Member::paging(\Input::all());
+        $query = \Member::buildQuery(Input::all());
+        $members = $query->with('parent', 'introducer')->paginate();
         $this->layout->content = View::make('admin.members.index', array(
                 'members' => $members,
                 'input' => Input::all(),
@@ -37,7 +38,7 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        $members = \Member::get()->lists('name_uid','id');
+        $members = \Member::get()->lists('name_uid', 'id');
         $this->layout->content = View::make('admin.members.create', array(
                 'members' => $members
         ));
@@ -56,7 +57,7 @@ class MemberController extends AdminBaseController {
             Session::flash('success', 'Lưu thành công thành viên cấp 1 ' . $member->full_name);
             return Redirect::route('admin.members.index');
         } else {
-            return Redirect::back()->withErrors($v->messages());
+            return Redirect::back()->withInput()->withErrors($v->messages());
         }
     }
 

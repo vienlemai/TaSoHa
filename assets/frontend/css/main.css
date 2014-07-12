@@ -80,9 +80,9 @@ body {
     height: 70px;
 }
 .members-tree-wrap {
-    overflow-x: scroll;
     padding: 15px 5px;
-    border: 2px solid #eee;
+	border: 2px solid #eee;
+	min-height: 300px;
 }
 
 

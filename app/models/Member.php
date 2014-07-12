@@ -21,21 +21,36 @@ class Member extends Node implements UserInterface, RemindableInterface {
         'full_name',
         'sex',
         'day_of_birth',
-        'is_left',
-        'is_right',
-        'managed_by',
+        'parent_id',
+        'identify_number',
+        'introduced_by',
+        'identify_location',
+        'identify_date',
+        'location',
+        'phone',
+        'regency',
     );
 
     public static function boot() {
         parent::boot();
         static::creating(function($member) {
             $member->password = Hash::make($member->password);
-            $this->uid = time();
+            $member->uid = time();
+            if (!$member->parent_id) {
+                $member->parent_id = null;
+            }
+            if (!$member->introduced_by) {
+                $member->introduced_by = null;
+            }
         });
     }
 
     public function sunlight() {
         return $this->hasMany('Member', 'introduced_by');
+    }
+
+    public function introducer() {
+        return $this->belongsTo('Member', 'introduced_by');
     }
 
     public static function validate($input) {
@@ -45,15 +60,15 @@ class Member extends Node implements UserInterface, RemindableInterface {
             //'username' => 'required',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
-            'day_of_birth' => 'date',
-            'identify_number' => 'number',
-            'identify_location' => 'required',
-            'identify_date' => 'date',
+            'day_of_birth' => 'required',
+            'identify_number' => 'required|numeric',
+            'identify_location' => 'required|required',
+            'identify_date' => 'required',
             'location' => 'required',
+            'phone' => 'required|numeric'
         );
 
-        return Validator::make($input, $rules)
-        ;
+        return Validator::make($input, $rules);
     }
 
     public function bonus() {
@@ -65,12 +80,27 @@ class Member extends Node implements UserInterface, RemindableInterface {
     }
 
     public function getNameUidAttribute() {
-        return $this->full_name . ' (' . $this->id . ')';
+        return $this->full_name . ' (' . $this->uid . ')';
+    }
+
+    public static function buildQuery($params) {
+        $instance = new static;
+        $query = $instance->newQuery();
+
+        if (isset($params['keyword'])) {
+            $query->where(function($query) use ($params) {
+                $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
+            });
+        }
+        return $query;
     }
 
     public static function paging($params) {
         $instance = new static;
         $query = $instance->newQuery();
+
         if (isset($params['keyword'])) {
             $query->where(function($query) use ($params) {
                 $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
