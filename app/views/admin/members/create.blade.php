@@ -26,9 +26,8 @@
                 <?php
                 echo Former::select('introduced_by')
                     ->label('Người giới thiệu')
-                    ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
-                    ->fromQuery($members, 'full_name', 'id');
+                    ->options(MemberHelper::introducersForSelect($members));
                 echo Former::select('parent_id')
                     ->label('Người quản lý')
                     ->addOption('-- Là thành viên cấp 1', null)
