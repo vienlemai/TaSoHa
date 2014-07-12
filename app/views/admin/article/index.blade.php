@@ -47,10 +47,10 @@
                             <td><?php echo $article->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
                                 <a href="<?php echo route('admin.articles.edit', $article->id) ?>">
-                                    <i class="fa-edit"><?php echo trans('messages.edit'); ?></i>
+                                    <i class="fa fa-edit"> <?php echo trans('messages.edit'); ?></i>
                                 </a>
                                 <a href="#" class="text-danger">
-                                    <i class="fa-ban"><?php echo trans('messages.delete'); ?></i>
+                                    <i class="fa fa-ban"> <?php echo trans('messages.delete'); ?></i>
                                 </a>
                             </td>
 

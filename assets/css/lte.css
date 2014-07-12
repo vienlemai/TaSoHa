@@ -1027,10 +1027,10 @@ body > .header .logo .icon {
   box-shadow: none;
 }
 .form-group.has-error label {
-  color: #f56954;
+  color: #a94442;
 }
 .form-group.has-error .form-control {
-  border-color: #f56954 !important;
+  border-color: #a94442 !important;
   box-shadow: none;
 }
 /* Input group */
