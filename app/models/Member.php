@@ -45,18 +45,8 @@ class Member extends Node implements UserInterface, RemindableInterface {
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         );
-        $messages = array(
-            'email.unique' => 'Email đã tồn tài',
-            'email.required' => 'Không được để trống email',
-            'email.email' => 'Email không hợp lệ',
-            'full_name.required' => 'Họ tên không được để trống',
-            'username.required' => 'Tên đăng nhập không được để trống',
-            'password.required' => 'Không được để trống mật khẩu',
-            'password.min' => 'Mật khẩu phải tối thiểu 6 kí tự',
-            'password_confirmation.same' => 'Mật khẩu phải giống nhau',
-            'password_confirmation.required' => 'Không được để trống xác nhận mật khẩu',
-        );
-        return Validator::make($input, $rules, $messages)
+
+        return Validator::make($input, $rules)
         ;
     }
 

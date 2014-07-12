@@ -65,6 +65,7 @@
 @stop
 @section('addon_js')
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script>
 <script src="{{asset('packages/barryvdh/laravel-elfinder/js/elfinder.min.js')}}"></script>
 @stop
 @section('inline_js')
