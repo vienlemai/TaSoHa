@@ -82,6 +82,9 @@ class AdminUser extends BaseModel implements UserInterface, RemindableInterface 
         $this->password = Hash::make($this->password);
     }
 
+    public function fullname() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
     /**
      * Get the unique identifier for the user.
      *

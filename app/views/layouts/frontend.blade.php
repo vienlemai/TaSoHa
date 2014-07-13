@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-lumen.min.css')}}">
+        <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-override.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/font-awesome.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/main.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/addon.css')}}">        

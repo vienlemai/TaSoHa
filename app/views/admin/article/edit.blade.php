@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('header_content')
 <h1>
-    <?php echo trans('messages.article_management'); ?>
+    <?php echo trans('menu.manage_articles'); ?>
     <small><?php echo trans('messages.categories'); ?></small>
 </h1>
 <ol class="breadcrumb">
@@ -13,17 +13,15 @@
 @section('content')
 <div class="row">
     <div class="col-md-12 center">
-        <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
-            </div><!-- /.box-header -->
-            <!-- form start -->
+            </div>
             <?php echo Former::open(route('admin.articles.update', $article->id))->method('put') ?>
             <?php Former::populate($article) ?>
-            <div class="box-body">
+            <div class="box-body col-md-10">
                 <?php echo View::make('admin.article._form')->with('categories',$categories)->render() ?>
-            </div><!-- /.box-body -->
+            </div>
 
             <div class="box-footer">
                 <?php
@@ -33,7 +31,7 @@
                 ?>
             </div>
             <?php echo Former::close(); ?>
-        </div><!-- /.box -->
+        </div>
     </div>
 </div>
 

@@ -1,6 +1,7 @@
 <?php
 
 return array(
+    'dashboard' => 'Bảng điều khiển',
     'product' => 'Sản phẩm',
     'add_product' => 'Thêm sản phẩm',
     'all_products' => 'Tất cả sản phẩm',

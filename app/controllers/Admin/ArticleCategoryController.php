@@ -93,7 +93,17 @@ class ArticleCategoryController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $category = ArticleCategory::findOrFail($id);
+
+        if ($category->articles->count() > 0) {
+            Session::flash('error', trans('messages.article_category_delete_failed_cause_inused'));
+        } elseif (!$category->removalable) {
+            Session::flash('error', trans('messages.article_category_delete_failed_cause_not_removalable'));
+        } else {
+            $category->delete();
+            Session::flash('success', trans('messages.article_category_delete_success', array('name' => $category->name)));
+        }
+        return Redirect::route('admin.article_categories.index');
     }
 
 }
