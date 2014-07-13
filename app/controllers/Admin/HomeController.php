@@ -18,7 +18,13 @@ class HomeController extends AdminBaseController {
         if (!Auth::admin()->check()) { // Not logged in
             return View::make('admin/home/login');
         } else {
-            $this->layout->content = View::make('admin/home/index');
+            $count = array(
+                'members' => \Member::count(),
+                'articles' => \Article::count(),
+                'products' => \Product::count(),
+                'users' => \AdminUser::count(),
+            );
+            $this->layout->content = View::make('admin/home/index')->with('count',$count);
         }
     }
 

@@ -43,12 +43,12 @@
 //                echo Former::text('username')
 //                    ->label('Tên đăng nhập')
 //                    ->class('form-control');
-                echo Former::password('password')
-                    ->label('Mật khẩu')
-                    ->class('form-control');
-                echo Former::password('password_confirmation')
-                    ->label('Nhập lại mật khẩu')
-                    ->class('form-control');
+//                echo Former::password('password')
+//                    ->label('Mật khẩu')
+//                    ->class('form-control');
+//                echo Former::password('password_confirmation')
+//                    ->label('Nhập lại mật khẩu')
+//                    ->class('form-control');
                 echo Former::text('day_of_birth')
                     ->label('Ngày tháng năm sinh')
                     ->readonly()

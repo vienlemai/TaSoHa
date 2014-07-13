@@ -35,8 +35,8 @@
                             <td><?php echo $member->uid ?></td>
                             <td><?php echo $member->full_name ?></td>
                             <td><?php echo $member->email ?></td>
-                            <td>{{$member->parent->full_name or ''}}</td>
                             <td>{{$member->introducer->full_name or ''}}</td>
+                            <td>{{$member->parent->full_name or ''}}</td>
                             <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y, H:i') ?></td>
                             <td>
                                 <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary btn-view-member-detail">

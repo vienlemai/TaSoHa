@@ -53,8 +53,17 @@ class MemberController extends AdminBaseController {
         $v = Member::validate(Input::all());
         if ($v->passes()) {
             $member = new Member(Input::all());
+            $password = \Common::randomPassword(6);
+            $member->password = $password;
             $member->save();
-            Session::flash('success', 'Lưu thành công thành viên cấp 1 ' . $member->full_name);
+            $viewData = array(
+                'member' => $member,
+                'password' => $password,
+            );
+            \Mail::send('admin.members.mail', $viewData, function($message)use($member) {
+                $message->to($member->email, 'TASOHA GROUP')->subject('Thông báo về tài khoản tại tasoha.com');
+            });
+            Session::flash('success', 'Lưu thành công thành viên' . $member->full_name . '. Đã gửi mail thông báo đến địa chỉ ' . $member->email);
             return Redirect::route('admin.members.index');
         } else {
             return Redirect::back()->withInput()->withErrors($v->messages());
