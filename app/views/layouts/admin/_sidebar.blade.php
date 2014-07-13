@@ -1,14 +1,5 @@
 <?php $current = Route::currentRouteName() ?>
 <section class="sidebar">
-    <!-- Sidebar user panel -->
-    <div class="user-panel text-center">
-        <div class="image">
-            <img src="{{asset('assets/img/avatar5.png')}}" class="img-circle" alt="User Image" />
-        </div>
-        <div class="info">
-            <p>Xin chào, <?php echo Auth::admin()->get()->fullname() ?></p>
-        </div>
-    </div>
     <ul class="sidebar-menu">
         <li class="active">
             <a href="<?php echo route('admin.root') ?>">
@@ -49,16 +40,29 @@
         </li>
         <li class="treeview active">
             <a href="#">
+                <i class="fa fa-bullhorn"></i>
+                <span><?php echo trans('menu.manage_news'); ?></span>
+                <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+                <li><a href="{{route('admin.news.index')}}"><?php echo trans('menu.list_news'); ?></a></li>
+                <li><a href="{{route('admin.news.create')}}"><?php echo trans('menu.new_news'); ?></a></li>
+            </ul>
+        </li>
+        <li class="treeview active">
+            <a href="#">
                 <i class="fa fa-list"></i>
                 <span><?php echo trans('menu.manage_articles'); ?></span>
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-               <li><a href="{{route('admin.articles.index')}}"><?php echo trans('menu.list_articles'); ?></a></li>
+                <li><a href="{{route('admin.articles.index')}}"><?php echo trans('menu.list_articles'); ?></a></li>
                 <li><a href="{{route('admin.articles.create')}}"><?php echo trans('menu.new_article'); ?></a></li>
                 <li><a href="{{route('admin.article_categories.index')}}"><?php echo trans('menu.list_article_categories'); ?></a></li>
             </ul>
         </li>
+
+
         <li class="treeview active">
             <a href="#">
                 <i class="fa fa-list"></i>

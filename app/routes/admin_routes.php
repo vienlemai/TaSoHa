@@ -49,6 +49,8 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
 
         Route::resource('product', 'ProductController');
         Route::resource('product_category', 'ProductCategoryController');
+        
+        Route::resource('news', 'NewsController');
 
         Route::resource('members', 'MemberController');
         Route::resource('users', 'AdminUserController');
