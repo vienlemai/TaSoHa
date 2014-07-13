@@ -58,4 +58,8 @@ class HomeController extends MemberBaseController {
         return Redirect::route('fe.root');
     }
 
+    public function changePassword() {
+        return Response::json(View::make('member.home.change_passowrd')->render());
+    }
+
 }

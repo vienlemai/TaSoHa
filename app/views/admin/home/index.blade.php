@@ -13,82 +13,90 @@
 @stop
 @section('content')
 <div class="row">
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-aqua">
-            <div class="inner">
-                <h3>
-                    <?php echo $count['members'] ?>
-                </h3>
-                <p>
-                    Thành viên
-                </p>
+    <?php if (in_array('admin.members.index', $allowed_routes)): ?>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+                <div class="inner">
+                    <h3>
+                        <?php echo $count['members'] ?>
+                    </h3>
+                    <p>
+                        Thành viên
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-contact"></i>
+                </div>
+                <a href="<?php echo route('admin.members.index') ?>" class="small-box-footer">
+                    Xem danh sách <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <div class="icon">
-                <i class="ion ion-android-contact"></i>
+        </div><!-- ./col -->
+    <?php endif; ?>
+    <?php if (in_array('admin.articles.index', $allowed_routes)): ?>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+                <div class="inner">
+                    <h3>
+                        <?php echo $count['articles'] ?>
+                    </h3>
+                    <p>
+                        Tin tức
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-folder"></i>
+                </div>
+                <a href="<?php echo route('admin.articles.index') ?>" class="small-box-footer">
+                    Xem danh sách <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <a href="<?php echo route('admin.members.index') ?>" class="small-box-footer">
-                Xem danh sách <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-green">
-            <div class="inner">
-                <h3>
-                    <?php echo $count['articles'] ?>
-                </h3>
-                <p>
-                    Tin tức
-                </p>
+        </div><!-- ./col -->
+    <?php endif; ?>
+    <?php if (in_array('admin.product.index', $allowed_routes)): ?>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+                <div class="inner">
+                    <h3>
+                        <?php echo $count['products'] ?>
+                    </h3>
+                    <p>
+                        Sản phẩm
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-pricetag"></i>
+                </div>
+                <a href="<?php echo route('admin.product.index') ?>" class="small-box-footer">
+                    Xem danh sách <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <div class="icon">
-                <i class="ion ion-android-folder"></i>
+        </div><!-- ./col -->
+    <?php endif; ?>
+    <?php if (in_array('admin.users.index', $allowed_routes)): ?>
+        <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+                <div class="inner">
+                    <h3>
+                        <?php echo $count['users'] ?>
+                    </h3>
+                    <p>
+                        Người dùng hệ thống
+                    </p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-android-friends"></i>
+                </div>
+                <a href="<?php echo route('admin.users.index') ?>" class="small-box-footer">
+                    Xem danh sách <i class="fa fa-arrow-circle-right"></i>
+                </a>
             </div>
-            <a href="<?php echo route('admin.articles.index') ?>" class="small-box-footer">
-                Xem danh sách <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-yellow">
-            <div class="inner">
-                <h3>
-                    <?php echo $count['products'] ?>
-                </h3>
-                <p>
-                    Sản phẩm
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-pricetag"></i>
-            </div>
-            <a href="<?php echo route('admin.product.index') ?>" class="small-box-footer">
-                Xem danh sách <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
-    <div class="col-lg-3 col-xs-6">
-        <!-- small box -->
-        <div class="small-box bg-red">
-            <div class="inner">
-                <h3>
-                    <?php echo $count['users'] ?>
-                </h3>
-                <p>
-                    Người dùng hệ thống
-                </p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-android-friends"></i>
-            </div>
-            <a href="<?php echo route('admin.users.index') ?>" class="small-box-footer">
-                Xem danh sách <i class="fa fa-arrow-circle-right"></i>
-            </a>
-        </div>
-    </div><!-- ./col -->
+        </div><!-- ./col -->
+    <?php endif; ?>
 </div>
 
 @stop

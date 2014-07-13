@@ -15,22 +15,25 @@
                 <button class="btn btn-sm btn-primary" type="submit">Đăng nhập</button>
             </form>
         <?php else: ?>
-        <div class="pull-right">
-            <div class="dropdown">
-                <a data-toggle="dropdown" href="#">Xin chào, <span class="text-bold"> <?php echo Auth::member()->get()->full_name; ?></span><span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <li>
-                        <a href="<?php echo route('member.root') ?> ">Thành viên</a>
-                    </li>
-                    <li>
-                        <a href="#">Thông tin cá nhân</a>
-                    </li>
-                    <li class="divider"></li>
-                    <li>
-                        <a href="<?php echo route('member.logout') ?>">Đăng Xuất</a>
-                    </li>
-                </ul>
-            </div>
+            <div class="pull-right">
+                <div class="dropdown">
+                    <a data-toggle="dropdown" href="#">Xin chào, <span class="text-bold"> <?php echo Auth::member()->get()->full_name; ?></span><span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li>
+                            <a href="<?php echo route('member.root') ?> ">Thành viên</a>
+                        </li>
+                        <li>
+                            <a href="#">Thông tin cá nhân</a>
+                        </li>
+                        <li>
+                            <a href="<?php echo route('fe.change_password') ?>" id="btn-change-password">Đổi mật khẩu</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="<?php echo route('member.logout') ?>">Đăng Xuất</a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         <?php endif; ?>
     </div>

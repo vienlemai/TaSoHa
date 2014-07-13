@@ -35,6 +35,23 @@
             </div>
             <?php echo View::make('layouts.frontend._footer') ?>  
         </div>
+        <?php if (Auth::member()->check()): ?>
+            <div id="modal-change-password" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
+                <div class="modal-dialog modal-md">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <h3>Đổi mật khẩu</h3>
+                        </div>
+                        <div class="modal-body" id='form-add-node-wrap'>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn" data-dismiss="modal" aria-hidden="true">Đóng</button>            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <?php endif; ?>
         <script type="text/javascript" src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
