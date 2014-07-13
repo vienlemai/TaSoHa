@@ -8,6 +8,9 @@ return array(
     'Article' => array(
         'title' => 'Tiêu đề',
         'category_id' => 'Danh mục',
+    ),
+    'News' => array(
+        'title' => 'Tiêu đề'
     )
 );
 ?>

@@ -11,5 +11,8 @@ return array(
     'list_article_categories' => 'Danh mục',
     'new_article' => 'Thêm bài viết mới',
     'list_articles' => 'Danh sách bài viết',
+    'manage_news' => 'Tin tức/ Thông báo',
+    'list_news' => 'Danh sách tin',
+    'new_news' => 'Thêm tin mới',
 );
 ?>
