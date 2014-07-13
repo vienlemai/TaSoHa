@@ -10,4 +10,10 @@ Route::group(array('namespace' => 'Frontend'), function() {
             Route::get('/article/{article}', array(
                 'as' => 'fe.article.show', 'uses' => 'ArticleController@show')
             );
+            Route::get('/news', array(
+                'as' => 'fe.news.index', 'uses' => 'NewsController@index')
+            );
+            Route::get('/news/{news}', array(
+                'as' => 'fe.news.show', 'uses' => 'NewsController@show')
+            );
         });

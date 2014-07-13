@@ -43,7 +43,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            <h3><i class="fa fa-bullhorn"></i> Tin tức / Hoạt động</h3>
+            <h3><a href="<?php echo route('fe.news.index') ?>"><i class="fa fa-bullhorn"></i> Tin tức / Thông báo</a></h3>
         </div>  
         <div class="col-lg-10">
             <blockquote>
