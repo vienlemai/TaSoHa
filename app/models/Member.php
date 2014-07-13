@@ -71,6 +71,20 @@ class Member extends Node implements UserInterface, RemindableInterface {
         return Validator::make($input, $rules);
     }
 
+    public static function validateChangePassword($input) {
+        $rules = array(
+            'old_password' => 'required|passmembercheck',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        );
+        $messages = array(
+            'required' => 'Không được để trống',
+            'passmembercheck' => 'Mật khẩu không đúng',
+            'same' => 'Mật khẩu phải giống nhau',
+        );
+        return Validator::make($input, $rules, $messages);
+    }
+
     public function bonus() {
         return $this->belongsToMany('Bonus', 'member_bonus', 'member_id', 'bonus_id');
     }

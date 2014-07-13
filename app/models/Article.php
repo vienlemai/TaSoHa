@@ -32,6 +32,9 @@ class Article extends LaravelBook\Ardent\Ardent {
         static::creating(function($article) {
                     $article->is_active = true;
                 });
+        static::saving(function($article) {
+                    $article->slug = strtolower(StringHelper::slug($article->title));
+                });
     }
 
     public function makeActive() {
@@ -45,7 +48,8 @@ class Article extends LaravelBook\Ardent\Ardent {
     }
 
     public function toParam() {
-        return $this->id . '-' . strtolower(StringHelper::slug($this->title));;
+        return $this->id . '-' . $this->slug;
+        ;
     }
 
     public function getThumbnailUrl() {

@@ -33,7 +33,7 @@ Helper = {
     flash_message: function(type, message, container, delay_time, append) {
         var msg_panel = this.create_message_panel(type, message);
         if (!container)
-            container = ".alert-page"; // Fixed
+            container = "#flash"; // Fixed
         if (append)
             $(container).append(msg_panel);
         else

@@ -6,7 +6,6 @@
         <li class="active">Thành viên</li>
     </ul>
 </div>-->
-<?php echo View::make('layouts/frontend/_flash')->render() ?>
 
 <div class="panel panel-primary">
     <div class="panel-heading">

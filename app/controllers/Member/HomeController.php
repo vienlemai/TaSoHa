@@ -59,7 +59,24 @@ class HomeController extends MemberBaseController {
     }
 
     public function changePassword() {
-        return Response::json(View::make('member.home.change_passowrd')->render());
+        $v = \Member::validateChangePassword(Input::all());
+        if ($v->passes()) {
+            $member = Auth::member()->get();
+            $member->update(Input::all());
+            $member->save();
+            Session::flash('success', 'Đổi mật khẩu thành công');
+            $result['success'] = true;
+            $result['message'] = 'Đổi mật khẩu thành công';
+        } else {
+            $result['success'] = false;
+            \Former::withErrors($v->messages());
+            $result['html'] = View::make('member.home._form_change_password')->render();
+        }
+        return Response::json($result);
+    }
+
+    public function profile() {
+        $this->layout->content = View::make('member.home.profile');
     }
 
 }

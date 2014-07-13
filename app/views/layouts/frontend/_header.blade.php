@@ -23,10 +23,7 @@
                             <a href="<?php echo route('member.root') ?> ">Thành viên</a>
                         </li>
                         <li>
-                            <a href="#">Thông tin cá nhân</a>
-                        </li>
-                        <li>
-                            <a href="<?php echo route('fe.change_password') ?>" id="btn-change-password">Đổi mật khẩu</a>
+                            <a href="<?php echo route('member.profile') ?>">Thông tin cá nhân</a>
                         </li>
                         <li class="divider"></li>
                         <li>

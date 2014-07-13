@@ -7,7 +7,11 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'as' => 'member.create',
             'uses' => 'MemberController@create',
         ));
-        Route::get('change-password', array('as' => 'fe.change_password', 'uses' => 'HomeController@changePassword'));
+        Route::get('profile', array(
+            'as' => 'member.profile',
+            'uses' => 'HomeController@profile'
+        ));
+        Route::post('change-password', array('as' => 'member.change_password', 'uses' => 'HomeController@changePassword'));
 
 
         Route::post('member/store', array(
