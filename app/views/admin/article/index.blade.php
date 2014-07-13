@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 @section('header_content')
 <h1>
-    <?php echo trans('messages.article_management'); ?>
-    <small><?php echo trans('messages.categories'); ?></small>
+    <?php echo trans('menu.manage_articles'); ?>
+    <small><?php echo trans('menu.list_articles'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('messages.categories'); ?></li>
+    <li class="active"><?php echo trans('menu.list_articles'); ?></li>
 </ol>
 @stop
 

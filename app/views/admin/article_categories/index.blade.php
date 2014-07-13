@@ -42,7 +42,11 @@
                                 <a href="<?php echo route('admin.article_categories.edit', $category->id) ?>" class="btn btn-xs btn-primary">
                                     <i class="fa fa-pencil"> <?php echo trans('messages.edit'); ?></i>
                                 </a>
-                                <a href="#" class="btn btn-xs btn-danger">
+                                    <?php 
+                                    $deleteUrl = route('admin.article_categories.destroy', $category->id);
+                                    $confirmMsg = trans('confirmation.delete_article_category',array('name' => $category->name ));
+                                    ?>
+                                <a href="<?php echo $deleteUrl ?>" class="btn btn-xs btn-danger" data-method="delete" data-confirm="<?php echo $confirmMsg ?>">
                                     <i class="fa fa-times"> <?php echo trans('messages.delete'); ?></i>
                                 </a>
                             </td>

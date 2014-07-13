@@ -12,27 +12,28 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 center">
+    <div class="col-md-12">
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title"><?php echo trans('messages.input_category'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
-            <?php echo Former::open(route('admin.article_categories.update', $category->id))->method('put') ?>
+            <?php echo Former::horizontal_open(route('admin.article_categories.update', $category->id))->method('put') ?>
             <?php Former::populate($category) ?>
-            <div class="box-body">
+            <div class="box-body col-md-8">
                 <?php echo View::make('admin.article_categories._form')->render() ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">
-                <?php
-                echo Former::actions()
-                        ->primary_submit('Lưu')
-                        ->inverse_reset('Nhập lại')
-                ?>
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-sm-offset-3 col-lg-9 col-sm-9">
+                        <input class="btn-primary btn" type="submit" value="Lưu"> 
+                        <a class="btn btn-default" href="<?php echo route('admin.article_categories.index') ?>">Hủy</a>
+                    </div>
+                </div>
             </div>
-                <?php echo Former::close(); ?>
+            <?php echo Former::close(); ?>
         </div><!-- /.box -->
     </div>
 </div>

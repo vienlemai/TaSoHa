@@ -12,17 +12,15 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6 center">
-        <!-- general form elements -->
+    <div class="col-lg-12">
         <div class="box box-primary">
             <div class="box-header">
                 <h3 class="box-title"><?php echo trans('messages.input_category'); ?></h3>
-            </div><!-- /.box-header -->
-            <!-- form start -->
+            </div>
             <?php echo Former::open(route('admin.article_categories.store'))->method('Post') ?>
-            <div class="box-body">
+            <div class="box-body col-md-8">
                 <?php echo View::make('admin.article_categories._form')->render() ?>
-            </div><!-- /.box-body -->
+            </div>
 
             <div class="box-footer">
                 <?php
@@ -32,7 +30,7 @@
                 ?>
             </div>
             <?php echo Former::close(); ?>
-        </div><!-- /.box -->
+        </div>
     </div>
 </div>
 

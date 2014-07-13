@@ -1,18 +1,18 @@
 <?php $current = Route::currentRouteName() ?>
 <section class="sidebar">
     <!-- Sidebar user panel -->
-    <div class="user-panel">
-        <div class="pull-left image">
+    <div class="user-panel text-center">
+        <div class="image">
             <img src="{{asset('assets/img/avatar5.png')}}" class="img-circle" alt="User Image" />
         </div>
-        <div class="pull-left info">
-            <p>Welcome, Admin</p>
+        <div class="info">
+            <p>Xin chào, <?php echo Auth::admin()->get()->fullname() ?></p>
         </div>
     </div>
     <ul class="sidebar-menu">
         <li class="active">
             <a href="<?php echo route('admin.root') ?>">
-                <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <i class="fa fa-dashboard"></i> <span><?php echo trans('menu.dashboard') ?></span>
             </a>
         </li>
         <?php if (in_array('admin.users.index', $allowed_routes) || in_array('admin.groups.index', $allowed_routes)): ?>

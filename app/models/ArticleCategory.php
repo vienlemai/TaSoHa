@@ -30,6 +30,10 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
         return $this->hasMany('Article', 'category_id');
     }
 
+    public function toParam() {
+        return $this->id . '-' . $this->slug;
+    }
+
     /*
      * STATIC FUNCTIONS
      */
