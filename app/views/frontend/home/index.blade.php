@@ -67,7 +67,7 @@
                     <h4><?php echo $ac->name ?></h4>
                     <hr>
                     <p><?php echo $ac->description ?></p>
-                    <p><a class="btn btn-primary btn-sm">Xem thêm</a></p>
+                    <p><a href="<?php echo route('fe.category', $ac->toParam() ) ?>" class="btn btn-primary btn-sm">Xem thêm</a></p>
                 </div>	
             </div>	
         <?php endforeach; ?>

@@ -1,6 +1,9 @@
 <?php
 
 class Article extends LaravelBook\Ardent\Ardent {
+
+    const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
+
     protected $table = 'articles';
     public $fillable = array(
         'category_id',
@@ -27,8 +30,8 @@ class Article extends LaravelBook\Ardent\Ardent {
     public static function boot() {
         parent::boot();
         static::creating(function($article) {
-            $article->is_active = true;
-        });
+                    $article->is_active = true;
+                });
     }
 
     public function makeActive() {
@@ -41,6 +44,18 @@ class Article extends LaravelBook\Ardent\Ardent {
         $this->save();
     }
 
+    public function toParam() {
+        return $this->id . '-' . strtolower(StringHelper::slug($this->title));;
+    }
+
+    public function getThumbnailUrl() {
+        if ($this->thumbnail && file_exists(public_path($this->thumbnail))) {
+            return asset($this->thumbnail);
+        } else {
+            return asset(self::DEFAULT_THUMBNAIL);
+        }
+    }
+
     public static function paging($params) {
         $query = self::with('category');
         if (isset($params['keyword'])) {
@@ -50,7 +65,7 @@ class Article extends LaravelBook\Ardent\Ardent {
             $query->where('category_id', $params['category_id']);
         }
         $result = $query->paginate();
-        //dd($result->toArray());
+//dd($result->toArray());
         return $result;
     }
 

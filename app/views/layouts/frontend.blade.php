@@ -19,18 +19,23 @@
     <body>
         <div class="container" id="wrapper">
             <div class="row">
-               <?php echo View::make('layouts.frontend._header')?>     
+                <?php echo View::make('layouts.frontend._header') ?>     
             </div>
             <div class="row clearfix">
-                <?php echo View::make('layouts.frontend._menu')?>   
+                <?php echo View::make('layouts.frontend._menu') ?>   
             </div>
 
             <div id="content-wrapper">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @yield('breadcrumb')
+                    </div>
+                </div>
                 @yield('content')
             </div>
-            <?php echo View::make('layouts.frontend._footer')?>  
+            <?php echo View::make('layouts.frontend._footer') ?>  
         </div>
-        <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+        <script type="text/javascript" src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>

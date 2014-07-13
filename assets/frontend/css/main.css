@@ -54,8 +54,8 @@ body {
 }
 .members-tree-wrap {
     padding: 15px 5px;
-	border: 2px solid #eee;
-	min-height: 300px;
+    border: 2px solid #eee;
+    min-height: 300px;
 }
 
 
@@ -139,4 +139,14 @@ body {
 .members-tree-wrap.success .node:hover, .members-tree-wrap.success .node:focus {
     background-color: #1f8c22;
     border-color: #186f1b;
+}
+.article {
+    clear: both;
+}
+.article-thumbnail-wrap {
+    padding: 25px 10px;
+}
+.article-thumbnail {
+    max-width: 200px;
+    border: 1px solid #eee;
 }

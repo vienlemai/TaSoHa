@@ -28,3 +28,6 @@
 .well {
     border-radius: 1px;
 }
+.breadcrumb {
+    border-style: none;
+}
