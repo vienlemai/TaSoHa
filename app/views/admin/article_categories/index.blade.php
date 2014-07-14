@@ -12,7 +12,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12 center">
-
+        
         <div class="table-wrap">
             <div class="table-header">
                 <a href="{{route('admin.article_categories.create')}}" class="btn btn-sm btn-primary">

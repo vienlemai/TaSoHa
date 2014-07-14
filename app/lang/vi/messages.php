@@ -25,7 +25,7 @@ return array(
     'search' => 'Tìm kiếm',
     'save' => 'Lưu',
     'reset' => 'Nhập lại',
-    'back_to_list'=>'Trở lại danh sách :name',
+    'back_to_list' => 'Trở lại danh sách :name',
 //article, categories
     'manage_articles' => 'Quản lý tin tức',
     'list_article' => 'Danh sách bài viết',
@@ -87,4 +87,5 @@ return array(
     'set_group_permission' => 'Phân quyền cho nhóm :name',
     'group_permission_saved' => 'Phân quyền thành công cho nhóm :name',
     'profile_saved' => 'Lưu thành công thông tin tài khoản',
+    'slider_saved' => 'Lưu thành công ảnh cho slider'
 );

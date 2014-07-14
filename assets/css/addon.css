@@ -134,3 +134,6 @@
     opacity:0.1}
 
 } 
+.slide-thumbnail {
+    max-width: 100px;
+}

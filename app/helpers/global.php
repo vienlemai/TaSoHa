@@ -9,6 +9,7 @@ function monthsForSelect($count = 3) {
     }
     return $months;
 }
+
 /**
  * 
  * @param string $text      -> the string wants to truncate
@@ -16,8 +17,10 @@ function monthsForSelect($count = 3) {
  * @param string $pad       -> replace truncated string by
  * @return string
  */
-function truncate($text, $limit, $pad = "...") {
-
+function truncate($text, $limit, $pad = "...", $stripTag = true) {
+    if ($stripTag) {
+        $text = strip_tags($text);
+    }
     $words = explode(' ', $text, ($limit + 1));
     if (count($words) > $limit) {
         array_pop($words);

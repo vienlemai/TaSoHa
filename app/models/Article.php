@@ -49,7 +49,6 @@ class Article extends LaravelBook\Ardent\Ardent {
 
     public function toParam() {
         return $this->id . '-' . $this->slug;
-        ;
     }
 
     public function getThumbnailUrl() {
@@ -69,7 +68,6 @@ class Article extends LaravelBook\Ardent\Ardent {
             $query->where('category_id', $params['category_id']);
         }
         $result = $query->paginate();
-//dd($result->toArray());
         return $result;
     }
 

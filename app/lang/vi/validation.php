@@ -34,7 +34,7 @@ return array(
     "digits_between" => ":attribute must be between :min and :max digits.",
     "email" => ":attribute phải đúng định dạng email.",
     "exists" => "selected :attribute không hợp lệ.",
-    "image" => ":attribute phải là ảnh.",
+    "image" => "chỉ được chọn ảnh",
     "in" => "selected :attribute is invalid.",
     "integer" => ":attribute phải là số nguyên.",
     "ip" => ":attribute phải đúng định dạng IP.",

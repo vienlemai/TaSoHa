@@ -6,5 +6,7 @@ return array(
     'created_at' => 'Ngày tạo',
     'created_by' => 'Người tạo',
     'actions' => 'Thao tác',
+    'photo' => 'Hình',
+    'description' => 'Mô tả'
 );
 ?>

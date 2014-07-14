@@ -45,6 +45,7 @@
         <script src="{{asset('assets/js/plugins/jstree/jstree.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/daterangepicker.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/bootstrap3-wysihtml5.min.js')}}" type="text/javascript"></script>
+        <script src="{{asset('assets/js/plugins/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>
         <script src="{{asset('assets/js/lte/app.js')}}" type="text/javascript"></script>
