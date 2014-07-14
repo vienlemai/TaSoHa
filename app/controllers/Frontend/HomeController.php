@@ -28,6 +28,8 @@ class HomeController extends FrontendBaseController {
     public function page($name) {
         if (Page::checkNameValid($name)) {
             $page = Page::findOrCreateByName($name);
+            $this->layout->content = View::make('frontend.home.page')
+                ->with(compact('page'));
         } else {
 
             Session::flash('error', trans('not_found'));
