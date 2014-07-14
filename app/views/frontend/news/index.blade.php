@@ -15,7 +15,7 @@
             <h3><a href="<?php echo $url ?>"><?php echo $n->title ?></a></h3>
         </div>
         <div class="article-body">
-            <p><?php echo truncate($article->content, 100) ?></p>
+            <p><?php echo truncate($n->content, 80) ?></p>
         </div>
         <div class="article-footer">
             <div class="pull-right">

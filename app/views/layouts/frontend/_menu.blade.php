@@ -30,11 +30,9 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">TASOHA Group <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Sứ mệnh</a></li>
-                        <li><a href="#">Tasoha LAND</a></li>
-                        <li><a href="#">Tasoha ECOM</a></li>
-                        <li><a href="#">Tasoha EDU</a></li>
-                        <li><a href="#">Tasoha INVEST</a></li>
+                        <?php foreach (Page::$NAME_TO_TEXT as $name => $text) : ?>
+                            <li><a href="<?php echo route('fe.page.show', $name) ?>"><?php echo $text ?></a></li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
             </ul>

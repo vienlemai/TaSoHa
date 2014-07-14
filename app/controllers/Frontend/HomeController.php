@@ -2,14 +2,12 @@
 
 namespace Frontend;
 
-use \Request;
-use \Route;
-use \Auth;
 use \View;
 use \Redirect;
-use \Article;
+use \Session;
 use \ArticleCategory;
 use \News;
+use \Page;
 
 class HomeController extends FrontendBaseController {
 
@@ -20,11 +18,21 @@ class HomeController extends FrontendBaseController {
         $articleCategories = ArticleCategory::take(3)->get();
         $recentNews = News::recent();
         $this->layout->content = View::make('frontend.home.index')
-                ->with(compact('articleCategories', 'recentNews'));
+            ->with(compact('articleCategories', 'recentNews'));
     }
 
     public function search() {
         
+    }
+
+    public function page($name) {
+        $page = Page::where('name', $name)->first();
+        if ($page) {
+            
+        } else {
+            Session::flash('error', trans('not_found'));
+            return Redirect::route('fe.root');
+        }
     }
 
 }

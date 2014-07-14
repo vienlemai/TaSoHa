@@ -31,3 +31,6 @@
 .breadcrumb {
     border-style: none;
 }
+.page-header {
+    margin: 20px 0;
+}
