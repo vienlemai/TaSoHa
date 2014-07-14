@@ -9,7 +9,6 @@ class DatabaseSeeder extends Seeder {
 //        $this->call('MemberSeeder');
 //        $this->call('BonusSeeder');
 //        $this->call('ArticleCategorySeeder');
-        $this->call('PageSeeder');
     }
 
 }
@@ -146,23 +145,6 @@ class ArticleCategorySeeder extends Seeder {
         foreach ($cats as $catAttrs) {
             $cat = new ArticleCategory($catAttrs);
             $cat->save();
-        }
-    }
-
-}
-
-class PageSeeder extends Seeder {
-
-    public function run() {
-        DB::table('pages')->truncate();
-
-        foreach (Page::$NAME_TO_TEXT as $name => $title) {
-            $page = new Page(array(
-                'title' => $title,
-                'content' => 'Nội dung trang ' . $title
-            ));
-            $page->name = $name;
-            $page->save();
         }
     }
 

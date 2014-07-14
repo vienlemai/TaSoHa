@@ -26,10 +26,10 @@ class HomeController extends FrontendBaseController {
     }
 
     public function page($name) {
-        $page = Page::where('name', $name)->first();
-        if ($page) {
-            
+        if (Page::checkNameValid($name)) {
+            $page = Page::findOrCreateByName($name);
         } else {
+
             Session::flash('error', trans('not_found'));
             return Redirect::route('fe.root');
         }

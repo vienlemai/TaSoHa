@@ -36,6 +36,24 @@ class Page extends \LaravelBook\Ardent\Ardent {
         'content' => 'required'
     );
 
+    public static function checkNameValid($name) {
+        return isset(self::$NAME_TO_TEXT[$name]);
+    }
+
+    public static function findOrCreateByName($name) {
+        $page = self::where('name', $name)->first();
+        if (is_null($page)) {
+            $page = new static(array(
+                'name' => $name,
+                'title' => self::$NAME_TO_TEXT[$name],
+                'content' => 'Nội dung cho trang:' . self::$NAME_TO_TEXT[$name]
+            ));
+            $page->name = $name;
+            $page->save();
+        }
+        return $page;
+    }
+
     public static function textForPage($name) {
         if (isset(self::$NAME_TO_TEXT[$name])) {
             return self::$NAME_TO_TEXT[$name];
