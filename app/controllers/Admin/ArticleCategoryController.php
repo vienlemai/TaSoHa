@@ -21,8 +21,8 @@ class ArticleCategoryController extends AdminBaseController {
      */
     public function index() {
         $categories = ArticleCategory::all();
-        return View::make('admin.article_categories.index', array(
-                    'categories' => $categories
+        $this->layout->content = View::make('admin.article_categories.index', array(
+                'categories' => $categories
         ));
     }
 
@@ -32,7 +32,7 @@ class ArticleCategoryController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-        return View::make('admin.article_categories.create');
+        $this->layout->content = View::make('admin.article_categories.create');
     }
 
     /**
@@ -68,8 +68,8 @@ class ArticleCategoryController extends AdminBaseController {
      */
     public function edit($id) {
         $category = ArticleCategory::findOrFail($id);
-        return View::make('admin.article_categories.edit', array(
-                    'category' => $category
+        $this->layout->content = View::make('admin.article_categories.edit', array(
+                'category' => $category
         ));
     }
 

@@ -1,4 +1,3 @@
-@extends('layouts.admin')
 @section('header_content')
 <h1>
     <?php echo trans('menu.manage_articles'); ?>

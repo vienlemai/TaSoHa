@@ -21,7 +21,7 @@ class ArticleController extends AdminBaseController {
      */
     public function index() {
         $articles = Article::paging(Input::all());
-        return View::make('admin.article.index', array(
+        $this->layout->content = View::make('admin.article.index', array(
                 'articles' => $articles
         ));
     }
@@ -33,7 +33,7 @@ class ArticleController extends AdminBaseController {
      */
     public function create() {
         $categories = ArticleCategory::all();
-        return View::make('admin.article.create', array(
+        $this->layout->content = View::make('admin.article.create', array(
                 'categories' => $categories,
         ));
     }
@@ -73,7 +73,7 @@ class ArticleController extends AdminBaseController {
     public function edit($id) {
         $categories = ArticleCategory::all();
         $article = Article::findOrFail($id);
-        return View::make('admin.article.edit', array(
+        $this->layout->content = View::make('admin.article.edit', array(
                 'categories' => $categories,
                 'article' => $article
         ));

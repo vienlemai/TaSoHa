@@ -1,38 +1,47 @@
 @section('header_content')
 <h1>
-    <?php echo trans('menu.manage_articles'); ?>
-    <small><?php echo trans('menu.list_article_categories'); ?></small>
+    <?php echo trans('menu.manage_tasoha_pages');
+    ?>
+    <small><?php echo $page->title ?></small>
 </h1>
 <ol class="breadcrumb">
-    <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('menu.manage_articles'); ?></li>
+    <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('menu.dashboard'); ?></a></li>
+    <li class="active"><?php echo trans('menu.manage_tasoha_pages'); ?></li>
 </ol>
 @stop
 
 @section('content')
 <div class="row">
-    <div class="col-md-12">
-        <!-- general form elements -->
+    <div class="col-md-12 center">
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
-            </div><!-- /.box-header -->
-            <!-- form start -->
-            <?php echo Former::horizontal_open(route('admin.articles.store'))->method('POST') ?>
+                <h3 class="box-title"><?php echo trans('messages.input_page'); ?></h3>
+            </div>
+            <?php echo Former::open(route('admin.page.update', $page->name))->method('put') ?>
+            <?php Former::populate($page) ?>
             <div class="box-body col-md-10">
-                <?php echo View::make('admin.article._form')->with('categories',$categories)->render() ?>
-            </div><!-- /.box-body -->
-
-            <div class="box-footer">
                 <?php
-                echo Former::actions()
-                    ->primary_submit(Lang::get('messages.save'))
-                    ->inverse_reset(Lang::get('messages.reset'))
-
+                echo Former::text('title')
+                    ->label(trans('common.title'))
+                    ->class('form-control');
+                ?>
+                <?php
+                echo Former::textarea('content')
+                    ->label(trans('common.content'))
+                    ->id('ck-editor')
                 ?>
             </div>
+
+            <div class="box-footer">
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-sm-offset-3 col-lg-9 col-sm-9">
+                        <input class="btn-primary btn" type="submit" value="<?php echo trans('button.save') ?>">
+                        <a class="btn-default btn" href='<?php echo route('admin.page.index') ?>'><?php echo trans('button.cancel') ?></a>
+                    </div>
+                </div>
+            </div>
             <?php echo Former::close(); ?>
-        </div><!-- /.box -->
+        </div>
     </div>
 </div>
 @stop

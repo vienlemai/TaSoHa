@@ -14,5 +14,6 @@ return array(
     'manage_news' => 'Tin tức/ Thông báo',
     'list_news' => 'Danh sách tin',
     'new_news' => 'Thêm tin mới',
+    'manage_tasoha_pages' => 'TASOHA Group'
 );
 ?>

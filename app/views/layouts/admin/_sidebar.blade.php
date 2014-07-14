@@ -59,6 +59,7 @@
                 <li><a href="{{route('admin.articles.index')}}"><?php echo trans('menu.list_articles'); ?></a></li>
                 <li><a href="{{route('admin.articles.create')}}"><?php echo trans('menu.new_article'); ?></a></li>
                 <li><a href="{{route('admin.article_categories.index')}}"><?php echo trans('menu.list_article_categories'); ?></a></li>
+                <li><a href="{{route('admin.page.index')}}"><?php echo trans('menu.manage_tasoha_pages'); ?></a></li>
             </ul>
         </li>
 

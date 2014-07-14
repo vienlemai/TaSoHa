@@ -31,7 +31,6 @@ class HomeController extends FrontendBaseController {
             $this->layout->content = View::make('frontend.home.page')
                 ->with(compact('page'));
         } else {
-
             Session::flash('error', trans('not_found'));
             return Redirect::route('fe.root');
         }
