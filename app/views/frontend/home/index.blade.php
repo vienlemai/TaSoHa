@@ -39,26 +39,46 @@
         </a>
     </div>
 </div>
-<!--New -->
-<div class="row">
-    <div class="col-lg-12">
-        <div class="page-header">
-            <h3><a href="<?php echo route('fe.news.index') ?>"><i class="fa fa-bullhorn"></i> Tin tức / Thông báo</a></h3>
-        </div>  
-        <div class="col-lg-10">
-            <blockquote>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                <small>Someone famous in <cite title="Source Title">Source Title</cite></small>
-            </blockquote>
-            <a href="#" class="btn btn-primary btn-xs">Chi tiết <i class="fa fa-angle-double-right"></i></a>
+<!--News -->
+<?php if (count($recentNews) > 0) : ?>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h3><a href="<?php echo route('fe.news.index') ?>" class="text-primary"><i class="fa fa-bullhorn"></i> Tin tức / Thông báo</a>
+                    <div class="pull-right">
+                        <a href="#carousel-news" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-circle-arrow-left"></span>
+                        </a>
+                        <a href="#carousel-news" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-circle-arrow-right"></span>
+                        </a>
+                    </div> 
+                </h3>
+            </div>  
+            <div class="col-lg-12">
+                <div id="carousel-news" class="carousel slide" data-ride="carousel" data-interval="2500">
+                    <div class="carousel-inner">
+                        <?php foreach ($recentNews as $key => $news) : ?>
+                            <div class="item <?php echo $key == 0 ? 'active' : ''?>">
+                                <blockquote>
+                                    <p><?php echo $news->title ?></p>
+                                    <small class='text-muted text-o'>
+                                    Ngày đăng: <?php echo $news->created_at ?>
+                                    </small>
+                                    <a href="<?php echo route('fe.news.show', $news->toParam())?>" class="btn btn-primary btn-xs">Chi tiết <i class="fa fa-angle-double-right"></i></a>
+                                </blockquote>
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
-
+<?php endif; ?>
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            <h3><i class="fa fa-file-text-o"></i> Bài viết</h3>
+            <h3><a href="javascript:void(0)" class="text-primary"><i class="fa fa-file-text-o"></i> Bài viết</a></h3>
         </div>  	
 
         <?php foreach ($articleCategories as $ac) : ?>
@@ -67,11 +87,10 @@
                     <h4><?php echo $ac->name ?></h4>
                     <hr>
                     <p><?php echo $ac->description ?></p>
-                    <p><a href="<?php echo route('fe.category', $ac->toParam() ) ?>" class="btn btn-primary btn-sm">Xem thêm</a></p>
+                    <p><a href="<?php echo route('fe.category', $ac->toParam()) ?>" class="btn btn-primary btn-xs">Xem thêm</a></p>
                 </div>	
             </div>	
         <?php endforeach; ?>
     </div>
 </div>
-
 @stop

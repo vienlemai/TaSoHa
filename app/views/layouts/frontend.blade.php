@@ -43,6 +43,6 @@
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>        
-        @yield('inline_scripts')
+        @yield('inline_js')
     </body>
 </html>

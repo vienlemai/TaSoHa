@@ -150,3 +150,6 @@ body {
     max-width: 200px;
     border: 1px solid #eee;
 }
+.page-header a, .page-header a:hover, .page-header a:focus, .page-header a:active {
+    text-decoration: none;
+}

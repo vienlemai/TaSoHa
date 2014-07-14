@@ -18,7 +18,9 @@ class NewsController extends FrontendBaseController {
     }
 
     public function show($id) {
-        
+        $new = News::findOrFail($id);
+        $this->layout->content = View::make('frontend.news.show')
+                ->with(compact('new'));
     }
 
 }
