@@ -1,11 +1,11 @@
 @extends('layouts.admin')
 @section('header_content')
 <h1>
-    <?php echo trans('messages.profile'); ?>
+    <?php echo trans('messages.my_profile'); ?>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('messages.profile'); ?></li>
+    <li class="active"><?php echo trans('messages.my_profile'); ?></li>
 </ol>
 @stop
 
@@ -15,7 +15,7 @@
         <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title"><i class="fa fa-user"></i> <?php echo trans('messages.profile'); ?></h3>
+                <h3 class="box-title"><i class="fa fa-user"></i> <?php echo trans('messages.account'); ?></h3>
             </div><!-- /.box-header -->
             <!-- form start -->
             <?php

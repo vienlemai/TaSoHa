@@ -1,7 +1,9 @@
 @section('header_content')
 <h1>
-    <?php echo trans('menu.manage_tasoha_pages');
-    ?>
+    <?php echo trans('menu.manage_articles'); ?>
+    <small>
+    <?php echo trans('menu.manage_tasoha_pages')?>    
+    </small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('menu.dashboard'); ?></a></li>

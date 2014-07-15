@@ -54,6 +54,7 @@ class AdminUser extends BaseModel implements UserInterface, RemindableInterface 
         'email',
         'full',
         'first_name',
+        'last_name',
         'password',
         'password_confirmation',
     );

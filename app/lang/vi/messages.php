@@ -15,6 +15,8 @@ return array(
     'password_updated' => 'Đổi mật khẩu thành công',
     'login_fail' => 'Tên đăng nhập hoặc mật khẩu không đúng',
     'profile' => 'Tài khoản',
+    'account' => 'Tài khoản',
+    'my_profile' => 'Hồ sơ của tôi',
     'sign_out' => 'Đăng xuất',
     'actions' => 'Thao tác',
     'created_at' => 'Ngày tạo',
