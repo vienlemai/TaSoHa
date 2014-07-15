@@ -78,9 +78,7 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="page-header">
-            <h3><a href="javascript:void(0)" class="text-primary"><i class="fa fa-file-text-o"></i> Bài viết</a></h3>
         </div>  	
-
         <?php foreach ($articleCategories as $ac) : ?>
             <div class="col-lg-4">
                 <div class="well">

@@ -20,9 +20,14 @@ class SlideImage extends \LaravelBook\Ardent\Ardent {
         'required' => 'The :attribute field is required.'
     );
 
+    public function scopeActive($query) {
+        return $query->where('is_active', true);
+    }
+
     public function afterSave() {
         $this->position = $this->id;
     }
+
     public function beforeCreate() {
         $this->created_at = date('Y-m-d H:i:s');
     }
