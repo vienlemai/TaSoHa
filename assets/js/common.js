@@ -95,6 +95,80 @@ $('body').on('submit', '.form-ajax', function() {
     return false;
 });
 
+/**
+ * Author: Lht
+ * 
+ * Styling file inputs with bootstrap 3 input group css
+ * Reference: http://getbootstrap.com/components/#input-groups
+ * 
+ * Required:
+ *  - Bootstrap 3
+ *  - JQuery ~> 1.7
+ *  - Input file has class 'bt-input-file'*  
+ *  
+ *  Caution: Don't use HTML5 required attribute for the input file
+ */
+// FIXME: Undone
+$(':file.input-file-bt').each(function() {
+    var $_this = $(this);
+    var default_options = {
+        inputGroupClass: 'input-group',
+        inputClass: 'form-control',
+        inputPlaceholder: 'Choose a file',
+        browseButtonClass: 'btn btn-default',
+        browseButtonText: 'Browse'
+    }
+
+    var userOptions = {};
+    if ($_this.attr('placeholder')) {
+        userOptions['inputPlaceholder'] = $_this.attr('placeholder');
+    }
+    if ($_this.data('browse-button-text')) {
+        userOptions['browseButtonText'] = $_this.data('browse-button-text');
+    }
+
+
+    var options = $.extend( default_options, userOptions );
+
+
+    var $inputName = $_this.attr('name');
+    var multiple = $(this).attr('multiple');
+    var wrapper_html = '<div class="' + options.inputGroupClass + '">' +
+      '<input type="text" autocomplete="off" placeholder="' + options.inputPlaceholder + '" class="' + options.inputClass + '" data-for-input-name="' + $inputName + '">' +
+      '<span class="input-group-btn">' +
+      '<a class="' + options.browseButtonClass + '" data-for-input-name="' + $inputName + '">' + options.browseButtonText + '</a>' + '</span>' +
+      +'</div>';
+    // Hide the real input
+    // $_this.css('display', 'none'); Cannot trigger click on Safari if we do this.
+    // Here is alternative solution:
+    $_this.css('visibility', 'hidden');
+    $_this.css('position', 'absolute');
+
+    // Insert text input after the file input
+    $(wrapper_html).insertBefore($_this);
+    // Show browse dialog when clicked on to input text or button
+    $('[data-for-input-name="' + $inputName + '"]').on('click', function() {
+        $_this.trigger('click');
+    });
+
+    // Handler change event on file input
+    $_this.change(function() {
+
+        var selected_file_path = $_this.val();
+        var selectedFiles = '';
+        for (var i = 0; i < $_this[0].files.length; i++) {
+            var fileName = $_this[0].files[i].name;
+            // Get actually the selected file name
+            // fileName = fileName.split("\\").pop();
+            selectedFiles += fileName;
+            if ((i + 1) !== $_this[0].files.length) {
+                selectedFiles += ' , ';
+            }
+        }
+        $('input[data-for-input-name="' + $inputName + '"]').val(selectedFiles);
+    });
+});
+
 $(document).on('change', '.select-as-link', function() {
     var $_checkedElmt = $(this).find('option:checked');
     if ($_checkedElmt.data('url')) {

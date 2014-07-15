@@ -85,7 +85,7 @@
                 <i class="fa fa-angle-left pull-right"></i>
             </a>
             <ul class="treeview-menu">
-                <li><a href="{{route('admin.slide.index')}}"><?php echo trans('menu.all_slide_images'); ?></a></li>
+                <li><a href="{{route('admin.slide.index')}}"><?php echo trans('menu.manage_slides'); ?></a></li>
             </ul>
         </li>
     </ul>

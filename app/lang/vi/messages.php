@@ -38,6 +38,7 @@ return array(
     'input_category' => 'Nhập thông tin danh mục',
     'input_news' => 'Nhập thông tin tin tức',
     'input_page' => 'Cập nhật nội dung trang',
+    'input_slide' => 'Chọn ảnh và nhập thông tin slide',
     'category_save_success' => 'Lưu thành công danh mục :name',
     'news_save_successfully' => 'Lưu thành công tin tức <b>:title</b>',
     'news_delete_successfully' => 'Xóa thành công tin tức <b>:title</b>',
@@ -50,7 +51,8 @@ return array(
     'article_title' => 'Tiêu đề bài viết',
     'article_thumbnail' => 'Ảnh đại diện bài viết',
     'article_category' => 'Danh mục',
-    'article_save_success' => 'Lưu thành công bài viết <b>:name</b>',
+    'article_save_success' => 'Lưu thành công bài viết <b>:title</b>',
+    'article_delete_success' => 'Xóa thành công bài viết <b>:title</b>',
     'add_category' => 'Thêm danh mục',
     'add_article' => 'Đăng bài viết',
     //manage user, group

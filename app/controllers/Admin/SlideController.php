@@ -9,7 +9,7 @@ use \Redirect;
 use \Input;
 use \SlideImage;
 
-class SlideImageController extends AdminBaseController {
+class SlideController extends AdminBaseController {
 
     /**
      * Display a listing of the resource.

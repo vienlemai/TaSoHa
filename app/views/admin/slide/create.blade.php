@@ -2,11 +2,12 @@
 @section('header_content')
 <h1>
     <?php echo trans('menu.manage_slides'); ?>
-    <small><?php echo trans('menu.list_slides'); ?></small>
+    <small><?php echo trans('menu.new_slide'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('menu.list_slides'); ?></li>
+    <li><?php echo trans('menu.list_slides'); ?></li>
+    <li class="active"><?php echo trans('menu.new_slide'); ?></li>
 </ol>
 @stop
 

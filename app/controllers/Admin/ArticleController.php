@@ -88,7 +88,7 @@ class ArticleController extends AdminBaseController {
     public function update($id) {
         $article = Article::findOrFail($id);
         $article->update(Input::all());
-        Session::flash('success', trans('messages.article_save_success', array('name' => $article->title)));
+        Session::flash('success', trans('messages.article_save_success', array('title' => $article->title)));
         return Redirect::route('admin.articles.index');
     }
 
@@ -99,7 +99,10 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $article = Article::findOrFail($id);
+        $article->delete();
+        Session::flash('success', trans('messages.article_delete_success', array('title' => $article->title)));
+        return Redirect::route('admin.articles.index');
     }
 
 }

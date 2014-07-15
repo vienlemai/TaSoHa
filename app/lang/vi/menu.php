@@ -14,6 +14,10 @@ return array(
     'manage_news' => 'Tin tức/ Thông báo',
     'list_news' => 'Danh sách tin',
     'new_news' => 'Thêm tin mới',
-    'manage_tasoha_pages' => 'TASOHA Group'
+    'manage_tasoha_pages' => 'TASOHA Group',
+    'site_setting' => 'Cài đặt site',
+    'manage_slides' => 'Quản lý slide',
+    'list_slides' => 'Danh sách slide',
+    'new_slide' => 'Slide mới',
 );
 ?>
