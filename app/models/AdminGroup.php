@@ -60,7 +60,7 @@ class AdminGroup extends BaseModel {
     }
 
     public function beforeCreate() {
-        $this->permissions = json_encode([]);
+        $this->permissions = "[]";
     }
 
     public function afterSave() {
