@@ -3,17 +3,17 @@
 class AdminResource {
     public static $resources = array(
         'manage_users' => array(
-            'list_user' => ['admin.users.index'],
-            'create_user' => ['admin.users.create', 'admin.users.store'],
-            'edit_user' => ['admin.users.edit', 'admin.users.update'],
-            'delete_user' => ['admin.users.destroy']
+            'list_user' => array('admin.users.index'),
+            'create_user' => array('admin.users.create', 'admin.users.store'),
+            'edit_user' => array('admin.users.edit', 'admin.users.update'),
+            'delete_user' => array('admin.users.destroy')
         ),
         'manage_groups' => array(
-            'list_group' => ['admin.groups.index'],
-            'create_group' => ['admin.groups.create', 'admin.users.store'],
-            'edit_group' => ['admin.groups.edit', 'admin.groups.store'],
-            'delete_group' => ['admin.groups.destroy'],
-            'set_permission' => ['admin.groups.permission']
+            'list_group' => array('admin.groups.index'),
+            'create_group' => array('admin.groups.create', 'admin.users.store'),
+            'edit_group' => array('admin.groups.edit', 'admin.groups.store'),
+            'delete_group' => array('admin.groups.destroy'),
+            'set_permission' => array('admin.groups.permission')
         ),
     );
 
