@@ -11,40 +11,6 @@
 
 @section('content')
 <div class="row">
-    <div class="col-md-6">
-        <div class="box box-info">
-            <div class="box-header">
-                <i class="fa fa-user"></i>
-                <h3 class="box-title">Thông tin thành viên</h3>
-            </div>
-            <div class="box-body">
-                <table>
-                    <tbody>
-                        <tr>
-                            <td style="width: 30%">Họ tên</td>
-                            <td>: <?php echo $member->full_name ?></td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>: <?php echo $member->email ?></td>
-                        </tr>
-                        <tr>
-                            <td>Tên đăng nhập</td>
-                            <td>: <?php echo $member->username ?></td>
-                        </tr>
-                        <tr>
-                            <td>Ngày sinh</td>
-                            <td>: <?php echo $member->day_of_birth ?></td>
-                        </tr>
-                        <tr>
-                            <td>Giới tính</td>
-                            <td>: <?php echo $member->getSexName(); ?></td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
     <!--Hoa hong-->
     <div class="col-md-6">
         <div class="box box-primary">
@@ -60,7 +26,7 @@
                     ->class('form-control')
                     ->options($bonus);
                 echo Former::text('amount')
-                    ->label('Số tiền')
+                    ->label('Số điểm')
                     ->class('form-control');
 
                 ?>
@@ -74,6 +40,60 @@
                 ?>
             </div>
             <?php echo Former::close(); ?>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box box-info">
+            <div class="box-header">
+                <i class="fa fa-user"></i>
+                <h3 class="box-title">Thông tin thành viên</h3>
+            </div>
+            <div class="box-body">
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>Mã số</td>
+                            <td><?php echo $member->uid ?></td>
+                        </tr>
+                        <tr>
+                            <td>Họ tên</td>
+                            <td><?php echo $member->full_name ?></td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td><?php echo $member->email ?></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày tham gia</td>
+                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y') ?></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày sinh</td>
+                            <td><?php echo $member->day_of_birth ?></td>
+                        </tr>
+                        <tr>
+                            <td>Chỗ ở hiện tại</td>
+                            <td><?php echo $member->location ?></td>
+                        </tr>
+                        <tr>
+                            <td>Điện thoại</td>
+                            <td><?php echo $member->phone; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Chứng minh nhân dân</td>
+                            <td><?php echo $member->identify_number; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Nơi cấp</td>
+                            <td><?php echo $member->identify_location; ?></td>
+                        </tr>
+                        <tr>
+                            <td>Ngày cấp</td>
+                            <td><?php echo $member->identify_date; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>
