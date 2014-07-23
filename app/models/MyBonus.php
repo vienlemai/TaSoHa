@@ -18,7 +18,7 @@ class MyBonus extends Eloquent {
             'amount' => 'required|numeric',
         );
         $messages = array(
-            'amount.required' => 'Phải nhập số tiền cho hoa hồng',
+            'amount.required' => 'Phải nhập số điểm cho hoa hồng',
             'amount.numeric' => 'Số tiền phải là chữ số',
         );
         return Validator::make($input, $rules, $messages);

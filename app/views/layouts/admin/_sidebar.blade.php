@@ -27,29 +27,43 @@
                 </ul>
             </li>
         <?php endif; ?>
-        <li class="treeview active">
-            <a href="#">
-                <i class="fa fa-group"></i>
-                <span>Quản lý thành viên</span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('admin.members.index')}}">Danh sách thành viên</a></li>
-                <li><a href="{{route('admin.bills.index')}}">Danh sách hóa đơn</a></li>
-                <li><a href="{{route('admin.bills.create')}}">Nhập hóa đơn</a></li>
-            </ul>
-        </li>
-        <li class="treeview active">
-            <a href="#">
-                <i class="fa fa-bullhorn"></i>
-                <span><?php echo trans('menu.manage_news'); ?></span>
-                <i class="fa fa-angle-left pull-right"></i>
-            </a>
-            <ul class="treeview-menu">
-                <li><a href="{{route('admin.news.index')}}"><?php echo trans('menu.list_news'); ?></a></li>
-                <li><a href="{{route('admin.news.create')}}"><?php echo trans('menu.new_news'); ?></a></li>
-            </ul>
-        </li>
+        <?php if (in_array('admin.members.index', $allowed_routes) || in_array('admin.bills.index', $allowed_routes) || in_array('admin.bills.create', $allowed_routes)): ?>
+            <li class="treeview active">
+                <a href="#">
+                    <i class="fa fa-group"></i>
+                    <span>Quản lý thành viên</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <?php if (in_array('admin.members.index', $allowed_routes)): ?>
+                        <li><a href="{{route('admin.members.index')}}">Danh sách thành viên</a></li>
+                    <?php endif; ?>
+                    <?php if (in_array('admin.bills.index', $allowed_routes)) : ?>
+                        <li><a href="{{route('admin.bills.index')}}">Danh sách hóa đơn</a></li>
+                    <?php endif; ?>
+                    <?php if (in_array('admin.bills.create', $allowed_routes)) : ?>
+                        <li><a href="{{route('admin.bills.create')}}">Nhập hóa đơn</a></li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+        <?php endif; ?>
+        <?php if (in_array('admin.members.index', $allowed_routes) || in_array('admin.bills.index', $allowed_routes) || in_array('admin.bills.create', $allowed_routes)): ?>
+            <li class="treeview active">
+                <a href="#">
+                    <i class="fa fa-bullhorn"></i>
+                    <span><?php echo trans('menu.manage_news'); ?></span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <?php if (in_array('admin.news.index', $allowed_routes)): ?>
+                        <li><a href="{{route('admin.news.index')}}"><?php echo trans('menu.list_news'); ?></a></li>
+                    <?php endif; ?>
+                    <?php if (in_array('admin.news.create', $allowed_routes)): ?>
+                        <li><a href="{{route('admin.news.create')}}"><?php echo trans('menu.new_news'); ?></a></li>
+                    <?php endif; ?>
+                </ul>
+            </li>
+        <?php endif; ?>
         <li class="treeview active">
             <a href="#">
                 <i class="fa fa-list"></i>

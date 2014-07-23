@@ -32,12 +32,12 @@
                 ?>
             </div>
             <div class="box-footer">
-                <?php
-                echo Former::actions()
-                    ->primary_submit(Lang::get('messages.save'))
-                    ->inverse_reset(Lang::get('messages.reset'))
-
-                ?>
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-sm-offset-4 col-lg-9 col-sm-8">
+                        <input class="btn-primary btn" type="submit" value="<?php echo trans('messages.save'); ?>"> 
+                        <a href="<?php echo route('admin.members.index') ?>" class="btn btn-default">Hủy</a>
+                    </div>
+                </div>
             </div>
             <?php echo Former::close(); ?>
         </div>
@@ -47,6 +47,10 @@
             <div class="box-header">
                 <i class="fa fa-user"></i>
                 <h3 class="box-title">Thông tin thành viên</h3>
+                <div class="box-tools pull-right">
+                    <a href="<?php echo route('admin.members.index') ?>" class="btn btn-info">
+                        <i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
+                </div>
             </div>
             <div class="box-body">
                 <table class="table">
