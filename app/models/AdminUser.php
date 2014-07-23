@@ -65,6 +65,11 @@ class AdminUser extends BaseModel implements UserInterface, RemindableInterface 
         'password' => 'required|min:6',
         'password_confirmation' => 'same:password',
     );
+    public static $updateRules = array(
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'email' => 'required|email|unique:admin_users,email',
+    );
     public static $profileRules = array(
         'first_name' => 'required',
         'last_name' => 'required',
@@ -79,13 +84,20 @@ class AdminUser extends BaseModel implements UserInterface, RemindableInterface 
         return $this->belongsToMany('AdminGroup', 'admin_user_groups', 'user_id', 'group_id');
     }
 
-    public function beforeCreate() {
-        $this->password = Hash::make($this->password);
+    public function beforeSave() {
+        if (Hash::needsRehash($this->password)) {
+            $this->password = Hash::make($this->password);
+        }
     }
 
     public function fullname() {
         return $this->first_name . ' ' . $this->last_name;
     }
+
+    public function getFullNamedAttribute() {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     /**
      * Get the unique identifier for the user.
      *

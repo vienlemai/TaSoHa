@@ -31,14 +31,6 @@
                     ->label(Lang::get('messages.email'))
                     ->value($user->email)
                     ->class('form-control');
-                echo Former::password('password')
-                    ->label(Lang::get('messages.password'))
-                    ->value('')
-                    ->class('form-control');
-                echo Former::password('password_confirmation')
-                    ->label(Lang::get('messages.password_confirmation'))
-                    ->value('')
-                    ->class('form-control');
                 echo Former::text('first_name')
                     ->label(Lang::get('messages.first_name'))
                     ->value($user->first_name)

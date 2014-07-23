@@ -5,10 +5,12 @@ class DatabaseSeeder extends Seeder {
     public function run() {
         Eloquent::unguard();
 
+
 //        $this->call('AdminUserSeeder');
 //        $this->call('MemberSeeder');
-//        $this->call('BonusSeeder');
+        $this->call('BonusSeeder');
 //        $this->call('ArticleCategorySeeder');
+        //$this->call('ConfigSeeder');
     }
 
 }
@@ -82,12 +84,6 @@ class BonusSeeder extends Seeder {
     public function run() {
         DB::table('bonus')->truncate();
         DB::table('bonus')->insert(array(
-            'name' => 'Lợi nhuận bán lẻ hằng ngày',
-            'description' => '',
-            'created_at' => Carbon\Carbon::now(),
-            'updated_at' => Carbon\Carbon::now(),
-        ));
-        DB::table('bonus')->insert(array(
             'name' => 'Thưởng nhanh',
             'description' => '',
             'created_at' => Carbon\Carbon::now(),
@@ -146,6 +142,18 @@ class ArticleCategorySeeder extends Seeder {
             $cat = new ArticleCategory($catAttrs);
             $cat->save();
         }
+    }
+
+}
+
+class ConfigSeeder extends Seeder {
+
+    public function run() {
+        DB::table('configs')
+            ->insert(array(
+                'key' => 'need_to_update_bonus',
+                'value' => json_encode([]),
+        ));
     }
 
 }

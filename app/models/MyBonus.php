@@ -1,6 +1,12 @@
 <?php
 
 class MyBonus extends Eloquent {
+    const HH_THUONG_NHANH = 1;
+    const HH_DONG_DOI = 2;
+    const HH_TRUC_HE = 3;
+    const HH_COI_NGUON = 4;
+    const HH_LANH_DAO = 5;
+
     protected $table = 'bonus';
     public $fillable = array(
         'name',

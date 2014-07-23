@@ -64,7 +64,7 @@ class AdminGroup extends BaseModel {
     }
 
     public function afterSave() {
-        Cache::forget(self::$cacheName);
+        //Cache::forget(self::$cacheName);
     }
 
     public static function paging($params) {
@@ -110,7 +110,7 @@ class AdminGroup extends BaseModel {
         $groups = DB::table('admin_groups')
             ->join('admin_user_groups', 'admin_groups.id', '=', 'admin_user_groups.group_id')
             ->where('admin_user_groups.user_id', $userId)
-            ->remember(60, self::$cacheName)
+            //->remember(60, self::$cacheName)
             ->get(array('permissions'));
         $resoureces = array();
         foreach ($groups as $groups) {

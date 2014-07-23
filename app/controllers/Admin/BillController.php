@@ -20,7 +20,12 @@ class BillController extends AdminBaseController {
      * @return Response
      */
     public function index() {
-        //
+        $bills = \Bill::with('creator', 'buyer')
+            ->condition(Input::all())
+            ->paginate();
+        $this->layout->content = View::make('admin.bills.index', array(
+                'bills' => $bills,
+        ));
     }
 
     /**
@@ -43,7 +48,7 @@ class BillController extends AdminBaseController {
     public function store() {
         $bill = new Bill(Input::all());
         if ($bill->save()) {
-            Session::flash('success', 'Luư thành công hóa đơn');
+            Session::flash('success', 'Nhập thành công hóa đơn');
             return Redirect::route('admin.bills.index');
         } else {
             return Redirect::back()->withInput()->withErrors($bill->errors());
@@ -57,7 +62,11 @@ class BillController extends AdminBaseController {
      * @return Response
      */
     public function show($id) {
-        //
+        $bill = \Bill::with('buyer')
+            ->findOrFail($id);
+        $this->layout->content = View::make('admin.bills.show', array(
+                'bill' => $bill,
+        ));
     }
 
     /**
@@ -87,7 +96,19 @@ class BillController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $bill = Bill::findOrFail($id);
+        $bill->delete();
+        Session::flash('success', 'Xóa thành công 1 hóa đơn của khách hàng : <b>' . $bill->buyer->full_name . '</b>');
+        return Redirect::route('admin.bills.index');
+    }
+
+    public function printBill($id) {
+        $bill = Bill::with('buyer')
+            ->findOrFail($id);
+        $this->setPrintLayout();
+        $this->layout->content = View::make('admin.bills.print', array(
+                'bill' => $bill
+        ));
     }
 
 }

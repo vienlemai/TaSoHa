@@ -7,5 +7,5 @@
 @stop
 
 @section('content')
-
+<?php echo $new->content ?>
 @stop

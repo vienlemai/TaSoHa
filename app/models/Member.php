@@ -14,6 +14,11 @@ class Member extends Node implements UserInterface, RemindableInterface {
      * @var string
      */
     protected $table = 'members';
+
+    const CAP_BAN_HANG = 'ban_hang';
+    const CAP_CHUYEN_VIEN = 'chuyen_vien';
+    const CAP_QUAN_LY = 'quan_ly';
+
     public $fillable = array(
         'username',
         'password',
@@ -53,9 +58,9 @@ class Member extends Node implements UserInterface, RemindableInterface {
         return $this->belongsTo('Member', 'introduced_by');
     }
 
-    public static function validate($input) {
+    public static function validate($input, $id = null) {
         $rules = array(
-            'email' => 'required|email|unique:members',
+            'email' => 'required|email|unique:members,email,' . $id,
             'full_name' => 'required',
             //'username' => 'required',
             //'password' => 'required|min:6',

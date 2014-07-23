@@ -58,6 +58,10 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::resource('groups', 'AdminGroupController');
         Route::resource('slide', 'SlideController');
         Route::resource('bills', 'BillController');
+        Route::get('bills/{id}/print', array(
+            'as' => 'admin.bills.print',
+            'uses' => 'BillController@printBill'
+        ));
         Route::get('group/{id}/permission', array(
             'as' => 'admin.groups.permission',
             'uses' => 'AdminGroupController@getPermission'

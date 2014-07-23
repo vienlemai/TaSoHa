@@ -107,7 +107,12 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        //
+        $members = \Member::get()->lists('name_uid', 'id');
+        $member = \Member::findOrFail($id);
+        $this->layout->content = View::make('admin.members.edit', array(
+                'members' => $members,
+                'member' => $member
+        ));
     }
 
     /**
@@ -117,7 +122,16 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function update($id) {
-        //
+        $member = \Member::findOrFail($id);
+        $v = Member::validate(Input::all(), $id);
+        if ($v->passes()) {
+            $member->fill(Input::all());
+            $member->save();
+            Session::flash('success', 'Chỉnh sửa thành công thành viên <b>' . $member->full_name.'</b>');
+            return Redirect::route('admin.members.index');
+        } else {
+            return Redirect::back()->withInput()->withErrors($v->messages());
+        }
     }
 
     /**
@@ -127,7 +141,10 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $member = \Member::findOrFail($id);
+        $member->delete();
+        Session::flash('success', 'Xóa thành công thành viên <b>' . $member->full_name . '</b>');
+        return Redirect::route('admin.members.index');
     }
 
 }

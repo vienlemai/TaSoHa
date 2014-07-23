@@ -44,7 +44,8 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="page-header">
-                <h3><a href="<?php echo route('fe.news.index') ?>" class="text-primary"><i class="fa fa-bullhorn"></i> Tin tức / Thông báo</a>
+                <h3>
+                    <!--<a href="<?php echo route('fe.news.index') ?>" class="text-primary"><i class="fa fa-bullhorn"></i> Tin tức / Thông báo</a>-->
                     <div class="pull-right">
                         <a href="#carousel-news" role="button" data-slide="prev">
                             <span class="glyphicon glyphicon-circle-arrow-left"></span>
@@ -59,13 +60,9 @@
                 <div id="carousel-news" class="carousel slide" data-ride="carousel" data-interval="2500">
                     <div class="carousel-inner">
                         <?php foreach ($recentNews as $key => $news) : ?>
-                            <div class="item <?php echo $key == 0 ? 'active' : ''?>">
+                            <div class="item <?php echo $key == 0 ? 'active' : '' ?>">
                                 <blockquote>
-                                    <p><?php echo $news->title ?></p>
-                                    <small class='text-muted text-o'>
-                                    Ngày đăng: <?php echo $news->created_at ?>
-                                    </small>
-                                    <a href="<?php echo route('fe.news.show', $news->toParam())?>" class="btn btn-primary btn-xs">Chi tiết <i class="fa fa-angle-double-right"></i></a>
+                                    <a href="<?php echo route('fe.news.show', $news->toParam()) ?>"><?php echo $news->title ?></a>
                                 </blockquote>
                             </div>
                         <?php endforeach; ?>

@@ -1,7 +1,7 @@
 @section('header_content')
 <h1>
     Quản lý thành viên
-    <small>Thêm mới thành viên</small>
+    <small>Chỉnh sửa thành viên</small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
@@ -21,19 +21,20 @@
                         <i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
                 </div>
             </div>
-            <?php echo Former::open(route('admin.members.store'))->method('post') ?>
+            <?php echo Former::open(route('admin.members.update',$member->id))->method('put') ?>
             <div class="box-body col-lg-10">
                 <?php
+                Former::populate($member);
                 echo Former::select('introduced_by')
                     ->label('Người giới thiệu')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
-                    ->options($members);
+                    ->options($members, $member->introduced_by);
                 echo Former::select('parent_id')
                     ->label('Người quản lý')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
-                    ->fromQuery($members, 'full_name', 'id');
+                    ->options($members, $member->parent_id);
                 echo Former::text('full_name')
                     ->label('Họ tên')
                     ->class('form-control');
