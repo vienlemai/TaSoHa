@@ -51,8 +51,7 @@
 //                    ->class('form-control');
                 echo Former::text('day_of_birth')
                     ->label('Ngày tháng năm sinh')
-                    ->readonly()
-                    ->class('form-control datepicker');
+                    ->class('form-control date_mask');
                 echo Former::radios('sex')
                     ->label('Giới tính')
                     ->radios(array(
@@ -71,7 +70,7 @@
                     ->class('form-control');
                 echo Former::text('identify_date')
                     ->label('Ngày cấp CMND')
-                    ->class('form-control datepicker');
+                    ->class('form-control date_mask');
                 echo Former::text('location')
                     ->label('Chỗ ở hiện tại')
                     ->class('form-control');
@@ -91,18 +90,11 @@
     </div>
 </div>
 @stop
-@section('addon_css')
-<link href="{{asset('assets/css/bsdatepicker/datepicker3.css')}}" rel="stylesheet" type="text/css" />
-@stop
 @section('addon_js')
-<script src="{{asset('assets/js/plugins/bsdatepicker/bootstrap-datepicker.js')}}"></script>
-<script src="{{asset('assets/js/plugins/bsdatepicker/locales/bootstrap-datepicker.vi.js')}}"></script>
+<script src="{{asset('assets/js/plugins/jquery.mask.min.js')}}"></script>
 @stop
 @section('inline_js')
 <script>
-$('.datepicker').datepicker({
-    language: 'vi',
-    format: 'dd/mm/yyyy'
-});
+$('.date_mask').mask('00/00/0000');
 </script>
 @stop

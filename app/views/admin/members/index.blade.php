@@ -17,14 +17,13 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th style="width: 5%">#</th>
+                        <th style="width: 3%">#</th>
                         <th>Mã số</th>
                         <th>Họ tên</th>
-                        <th>Email</th>
                         <th>Người giới thiệu</th>
                         <th>Người quản lý</th>
                         <th>Ngày tạo</th>
-                        <th style="width: 15%"><?php echo trans('messages.actions'); ?></th>
+                        <th style="width: 25%"><?php echo trans('messages.actions'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -34,13 +33,24 @@
                             <td><?php echo $index++ ?></td>
                             <td><?php echo $member->uid ?></td>
                             <td><?php echo $member->full_name ?></td>
-                            <td><?php echo $member->email ?></td>
                             <td>{{$member->introducer->full_name or ''}}</td>
                             <td>{{$member->parent->full_name or ''}}</td>
-                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y, H:i') ?></td>
+                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary btn-view-member-detail">
-                                    <i class="fa fa-search">Xem chi tiết</i>
+                                <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary">
+                                    <i class="fa fa-search"> Chi tiết</i>
+                                </a>
+                                <a href="<?php echo route('admin.members.edit', $member->id) ?>" class="text-info">
+                                    <i class="fa fa-edit"> Sửa</i>
+                                </a>
+                                <a href="<?php echo route('admin.bonus.create', $member->id) ?>" class="text-warning">
+                                    <i class="fa fa-adjust"> Nhập hoa hồng</i>
+                                </a>
+                                <a href="<?php echo route('admin.members.destroy', $member->id) ?>"
+                                   class="text-danger" 
+                                   data-confirm="Bạn có chắc chắn muốn xóa thành viên <?php echo $member->full_name ?>"
+                                   data-method="delete">
+                                    <i class="fa fa-ban"> Xóa</i>
                                 </a>
                             </td>
 

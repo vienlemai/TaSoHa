@@ -93,7 +93,7 @@ class AdminUserController extends AdminBaseController {
     public function update($id) {
         $user = AdminUser::findOrFail($id);
         $user->fill(Input::all());
-        if ($user->updateUniques()) {
+        if ($user->updateUniques(AdminUser::$updateRules)) {
             $user->attachGroup(Input::get('groups', ''));
             Session::flash('success', Lang::get('messages.user_saved_successfully', array('name' => $user->getFullName())));
             return Redirect::route('admin.users.index');

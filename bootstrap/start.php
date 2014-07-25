@@ -24,7 +24,7 @@ $app = new Illuminate\Foundation\Application;
 |
 */
 
-require '/environment.php';
+require 'environment.php';
 
 /*
 |--------------------------------------------------------------------------

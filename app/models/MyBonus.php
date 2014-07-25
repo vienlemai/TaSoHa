@@ -1,6 +1,12 @@
 <?php
 
 class MyBonus extends Eloquent {
+    const HH_THUONG_NHANH = 1;
+    const HH_DONG_DOI = 2;
+    const HH_TRUC_HE = 3;
+    const HH_COI_NGUON = 4;
+    const HH_LANH_DAO = 5;
+
     protected $table = 'bonus';
     public $fillable = array(
         'name',
@@ -12,7 +18,7 @@ class MyBonus extends Eloquent {
             'amount' => 'required|numeric',
         );
         $messages = array(
-            'amount.required' => 'Phải nhập số tiền cho hoa hồng',
+            'amount.required' => 'Phải nhập số điểm cho hoa hồng',
             'amount.numeric' => 'Số tiền phải là chữ số',
         );
         return Validator::make($input, $rules, $messages);

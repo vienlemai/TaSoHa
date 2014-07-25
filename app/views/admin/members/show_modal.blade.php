@@ -56,7 +56,7 @@
                 <thead>
                     <tr>
                         <td>Tên hoa hồng</td>
-                        <td>Tổng tiền</td>
+                        <td>Tổng điểm</td>
                     </tr>
                 </thead>
                 <tbody>

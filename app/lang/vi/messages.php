@@ -91,5 +91,26 @@ return array(
     'set_group_permission' => 'Phân quyền cho nhóm :name',
     'group_permission_saved' => 'Phân quyền thành công cho nhóm :name',
     'profile_saved' => 'Lưu thành công thông tin tài khoản',
-    'slider_saved' => 'Lưu thành công ảnh cho slider'
+    'slider_saved' => 'Lưu thành công ảnh cho slider',
+    //manage member
+    'manage_member' => 'Quản lý thành viên',
+    'list_member' => 'Danh sách thành viên',
+    'create_member' => 'Thêm thành viên',
+    'edit_member' => 'Chỉnh sủa thành viên',
+    'delete_member' => 'Xóa thành viên',
+    'list_bill' => 'Xem hóa đơn',
+    'create_bill' => 'Nhập hóa đơn',
+    'create_bonus' => 'Nhập hoa hồng',
+    //manage news
+    'manage_news' => 'Quản lý tin tức/thông báo',
+    'list_news' => 'Xem danh sách tin tức',
+    'create_news' => 'Đăng tin',
+    'edit_news' => 'Chỉnh sửa tin tức/thông báo',
+    'delete_news' => 'Xóa tin tức/thông báo',
+    //manage article category
+    'manage_article_category' => 'Quản lý danh mục bài viết',
+    'list_category' => 'Xem danh sách danh mục',
+    'create_category' => 'Tạo mới danh mục',
+    'edit_category' => 'Sửa danh mục',
+    'detele_category' => 'Xóa danh mục'
 );

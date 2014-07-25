@@ -8,4 +8,8 @@ class BaseController extends Controller {
         }
     }
 
+    protected function setPrintLayout() {
+        $this->layout = View::make('layouts.print');
+    }
+
 }
