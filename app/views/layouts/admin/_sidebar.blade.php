@@ -86,6 +86,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="{{route('admin.slide.index')}}"><?php echo trans('menu.manage_slides'); ?></a></li>
+                <li><a href="">&nbsp</a></li>
             </ul>
         </li>
     </ul>
