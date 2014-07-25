@@ -40,6 +40,8 @@
         </div>
         <script type="text/javascript" src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/plugins/jquery.marquee.min.js')}}"></script>
+        
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>        
