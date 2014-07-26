@@ -20,4 +20,6 @@ $(document).ready(function() {
         Helper.scoll_to_top();
         return false;
     });
+    $("ul.marquee").liScroll();
+   
 });

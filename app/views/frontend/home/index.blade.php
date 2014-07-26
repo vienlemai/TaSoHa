@@ -12,21 +12,21 @@
         <div class="carousel-inner">
             <div class="item active">
                 <img src="<?php echo asset('/assets/img/slide-sample/slide1.jpg') ?>" alt="...">
-<!--                <div class="carousel-caption">
-                    The caption slide one
-                </div>-->
+                <!--                <div class="carousel-caption">
+                                    The caption slide one
+                                </div>-->
             </div>
             <div class="item">
                 <img src="<?php echo asset('/assets/img/slide-sample/slide2.jpg') ?>" alt="...">
-<!--                <div class="carousel-caption">
-                    The caption slide two
-                </div>-->
+                <!--                <div class="carousel-caption">
+                                    The caption slide two
+                                </div>-->
             </div>
             <div class="item">
                 <img src="<?php echo asset('/assets/img/slide-sample/slide3.jpg') ?>" alt="...">
-<!--                <div class="carousel-caption">
-                    The caption slide three
-                </div>-->
+                <!--                <div class="carousel-caption">
+                                    The caption slide three
+                                </div>-->
             </div>
         </div>
 
@@ -40,12 +40,15 @@
     </div>
 </div>
 <!-- News -->
+
 <?php if (count($recentNews) > 0) : ?>
     <div class="row">
         <div class="col-lg-12">
-            <div class="marquee">
-                <p><a href="<?php echo route('fe.news.show', $news->toParam()) ?>"><?php echo $news->title ?></a></p>
-            </div>
+            <ul class="marquee">
+                <?php foreach ($recentNews as $new) : ?>
+                    <li><a href="<?php echo route('fe.news.show', $new->toParam()) ?>"><?php echo $new->title ?></a></li>
+                <?php endforeach; ?>
+            </ul>
         </div>
     </div>
 <?php endif; ?>
