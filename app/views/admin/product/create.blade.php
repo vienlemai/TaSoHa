@@ -1,46 +1,49 @@
 @section('header_content')
 <h1>
     <?php echo trans('menu.manage_product'); ?>
-    <small><?php echo trans('menu.new_product_category'); ?></small>
+    <small><?php echo trans('menu.add_product'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('menu.manage_product'); ?></li>
+    <li><?php echo trans('menu.manage_product'); ?></li>
+    <li class="active"><?php echo trans('menu.add_product'); ?></li>
 </ol>
 @stop
-
-
 @section('content')
 <div class="row">
-    <div class="col-lg-12">
+    <div class="col-md-12">
+        <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title"><?php echo trans('messages.input_category'); ?></h3>
-            </div>
-            <?php echo Former::open(route('admin.product_category.store'))->method('Post') ?>
-            <div class="box-body col-md-8">
-                <?php echo View::make('admin.product_category._form')->render() ?>
-            </div>
+                <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <?php echo Former::horizontal_open(route('admin.product.store'))->method('POST') ?>
+            <div class="box-body col-md-10">
+                <?php echo View::make('admin.product._form')->with('categories',$categories)->render() ?>
+            </div><!-- /.box-body -->
 
             <div class="box-footer">
-                <div class="form-group">
-                    <div class="col-lg-offset-3 col-sm-offset-3 col-lg-9 col-sm-9">
-                        <input class="btn-primary btn" type="submit" value="Lưu"> 
-                        <a class="btn btn-default" href="<?php echo route('admin.product_category.index') ?>">Hủy</a>
-                    </div>
-                </div>
+                <?php
+                echo Former::actions()
+                    ->primary_submit(Lang::get('messages.save'))
+                    ->inverse_reset(Lang::get('messages.reset'))
+                ?>
             </div>
             <?php echo Former::close(); ?>
-        </div>
+        </div><!-- /.box -->
     </div>
 </div>
-
 @stop
-
 @section('addon_css')
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
 <link href="{{asset('packages/barryvdh/laravel-elfinder/css/elfinder.min.css')}}" rel="stylesheet" type="text/css" />
 <link href="{{asset('packages/barryvdh/laravel-elfinder/css/theme.css')}}" rel="stylesheet" type="text/css" />
+@stop
+@section('addon_js')
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('packages/barryvdh/laravel-elfinder/js/elfinder.min.js')}}"></script>
 @stop
 @section('inline_js')
 <script type="text/javascript">

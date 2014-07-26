@@ -10,24 +10,23 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
-                <li class="active">
-                    <a href="#" class="text-info">Thực phẩm chức năng</a>
-                </li>
-                <li>
-                    <a href="#">Mỹ phẩm</a>
-                </li>
-                <li>
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hàng tiêu dùng</a>
-                </li>
-                <li class="dropdown">
+                <?php foreach ($product_categories as $cat) : ?>
+                    <li class="active">
+                        <a href="<?php echo route('fe.product_category.show', $cat->toParam()) ?>" class="text-info"><?php echo $cat->name ?></a>
+                    </li>
+                <?php endforeach; ?>
+
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Mặt hàng khác <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Action</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
+                        <?php foreach ($other_product_categories as $cat) : ?>
+                            <li>
+                                <a href="#" class="text-info"><?php echo $cat->name ?></a>
+                            </li>
+                        <?php endforeach; ?>
                     </ul>
                 </li>
-                <li class="dropdown">
+                <li class="dropdown active">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">TASOHA Group <b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <?php foreach (Page::$NAME_TO_TEXT as $name => $text) : ?>

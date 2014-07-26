@@ -21,6 +21,7 @@ return array(
     'manage_slides' => 'Quản lý slide',
     'list_slides' => 'Danh sách slide',
     'new_slide' => 'Slide mới',
-    'manage_product_categories' => 'Quản lý danh mục sản phẩm'
+    'manage_product_categories' => 'Quản lý danh mục sản phẩm',
+    'all_products' => 'Danh sách sản phẩm'
 );
 ?>

@@ -4,11 +4,13 @@ class ProductCategory extends LaravelBook\Ardent\Ardent {
     protected $table = 'product_categories';
     public $fillable = array(
         'name',
-        'description'
+        'description',
+        'thumbnail'
     );
     public static $rules = array(
         'name' => 'required',
-        'description' => 'required'
+        'description' => 'required',
+        'thumbnail' => 'required'
     );
 
     static function boot() {
@@ -20,6 +22,10 @@ class ProductCategory extends LaravelBook\Ardent\Ardent {
 
     public function products() {
         return $this->hasMany('Product', 'product_category_id');
+    }
+
+    public function toParam() {
+        return $this->id . '-' . $this->slug;
     }
 
     public function scopeShowOnMenu($query) {

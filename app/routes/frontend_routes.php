@@ -16,6 +16,12 @@ Route::group(array('namespace' => 'Frontend'), function() {
     Route::get('/news/{news}', array(
         'as' => 'fe.news.show', 'uses' => 'NewsController@show')
     );
+    Route::get('/products/{category}', array(
+        'as' => 'fe.product_category.show', 'uses' => 'ProductController@category')
+    );
+    Route::get('/product-detail/{product}', array(
+        'as' => 'fe.product.show', 'uses' => 'ProductController@show')
+    );
     Route::get('/tasoha/{page}', array(
         'as' => 'fe.page.show', 'uses' => 'HomeController@page')
     );

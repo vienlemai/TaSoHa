@@ -1,11 +1,11 @@
 <?php
-
+echo Former::select('product_category_id')
+    ->fromQuery($categories, 'name', 'id')
+    ->class('form-control');
 echo Former::text('name')
-        ->label(Lang::get('messages.category_name'))
-        ->class('form-control');
-echo Former::textarea('description')->rows(5)
-        ->label(trans('model.ArticleCategory.description'))
-        ->class('form-control');
+    ->class('form-control');
+echo Former::text('code')
+    ->class('form-control');
 ?>
 <div class="form-group">
     <label for="title" class="control-label col-lg-3 col-sm-3">Hình đại diện</label>
@@ -14,3 +14,7 @@ echo Former::textarea('description')->rows(5)
         <input name="thumbnail" id="thumbnail" type="hidden">
     </div>
 </div>
+<?php
+echo Former::textarea('desciption')
+    ->id('ck-editor')
+?>

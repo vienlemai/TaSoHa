@@ -1,18 +1,32 @@
 <?php
 
 class Product extends LaravelBook\Ardent\Ardent {
-
     protected $table = 'products';
     public $fillable = array(
         'name',
-        'description'
+        'code',
+        'description',
+        'thumbnail'
+    );
+    public static $rules = array(
+        'name' => 'required',
+        'code' => 'required',
+        'description' => 'required'
     );
 
     static function boot() {
         parent::boot();
         static::saving(function($product) {
-                    $product->slug = strtolower(StringHelper::slug($product->name));
-                });
+            $product->slug = strtolower(StringHelper::slug($product->name));
+        });
+    }
+
+    public function toParam() {
+        return $this->id . '-' . $this->slug;
+    }
+
+    public function category() {
+        return $this->belongsTo('ProductCategory', 'product_category_id');
     }
 
     public function scopeVisible($query) {
@@ -41,6 +55,18 @@ class Product extends LaravelBook\Ardent\Ardent {
         if ($this->visible) {
             $this->update(array('visible' => false));
         }
+    }
+
+    public static function paging($params) {
+        $query = self::with('category');
+        if (isset($params['keyword'])) {
+            $query->where('title', 'like', '%' . $params['keyword'] . '%');
+        }
+        if (isset($params['product_category_id'])) {
+            $query->where('product_category_id', $params['product_category_id']);
+        }
+        $result = $query->paginate();
+        return $result;
     }
 
 }

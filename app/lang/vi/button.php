@@ -11,5 +11,6 @@ return array(
     'new_news' => 'Thêm tin mới',
     'new_article' => 'Bài viết mới',
     'new_slide' => 'Slide mới',
+    'new_product' => 'Sản phẩm mới'
 );
 ?>

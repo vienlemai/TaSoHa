@@ -36,6 +36,7 @@ return array(
     'categories' => 'Danh mục bài viết',
     'category_name' => 'Tên danh mục',
     'category_parent' => 'Danh mục cha',
+    'product_name' => 'Tên sản phẩm',
     'its_parent_category' => '-- Là danh mục cha',
     'input_category' => 'Nhập thông tin danh mục',
     'input_news' => 'Nhập thông tin tin tức',

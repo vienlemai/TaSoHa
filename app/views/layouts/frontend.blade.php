@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <title>Trang chủ - TASOHA Group</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+        <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-lumen.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-override.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/font-awesome.min.css')}}">
@@ -20,10 +20,10 @@
     <body>
         <div class="container" id="wrapper">
             <div class="row">
-                <?php echo View::make('layouts.frontend._header') ?>     
+                <?php echo View::make('layouts.frontend._header')->render() ?>     
             </div>
             <div class="row clearfix">
-                <?php echo View::make('layouts.frontend._menu') ?>   
+                <?php echo View::make('layouts.frontend._menu')->render() ?>   
             </div>
 
             <div id="content-wrapper">

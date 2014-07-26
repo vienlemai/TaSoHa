@@ -1,14 +1,13 @@
-@section('breadcrumb')
-<ul class="breadcrumb" style="margin-bottom: 5px;">
-    <li><a href="<?php echo route('fe.root') ?>">Trang chủ</a></li>
-    <li>TASOHA GROUP</li>
-    <li class='active'><?php echo $page->title ?></li>
-</ul>
-@stop
-
 @section('content')
-<h1><?php echo $page->title ?></h1>
-<p>
-    <?php echo $page->content ?>
-</p>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="page-header">
+                <h2><?php echo $page->title ?></h2>
+            </div>  	
+            <p>
+                <?php echo $page->content ?>
+            </p>
+        </div>
+    </div>
+
 @stop

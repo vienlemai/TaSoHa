@@ -110,6 +110,9 @@ return array(
         'identify_date' => 'Ngày cấp CMND',
         'product_name' => 'Tên sản phẩm',
         'price' => 'Giá',
-        'score' => 'Điểm'
+        'score' => 'Điểm',
+        'category_id' => 'Danh mục',
+        'product_category_id' => 'Danh mục',
+        'code' => 'Mã'
     ),
 );
