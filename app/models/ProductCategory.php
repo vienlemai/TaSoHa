@@ -38,14 +38,16 @@ class ProductCategory extends LaravelBook\Ardent\Ardent {
 
     public static function seed() {
         $cats = array('Thực phẩm chức năng', 'Mỹ phẩm', 'Hàng tiêu dùng');
-        foreach ($cats as $cat) {
-            self::create(
+        foreach ($cats as $catName) {
+            $cat = new ProductCategory(
                 array(
-                    'name' => $cat,
-                    'description' => 'Danh mục ' . $cat,
-                    'show_on_menu' => true
+                'name' => $catName,
+                'description' => 'Danh mục ' . $catName
                 )
             );
+            $cat->thumbnail = "http://tasoha.com/assets/img/category.png";
+            $cat->show_on_menu = true;
+            $cat->save();
         }
     }
 
