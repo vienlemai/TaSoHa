@@ -40,7 +40,7 @@
                     <?php foreach ($bills as $bill): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
-                            <td><?php echo $bill->buyer->full_name ?></td>
+                            <td>{{$bill->buyer->full_name or ''}}</td>
                             <td><?php echo $bill->product_name ?></td>
                             <td><?php echo $bill->price ?></td>
                             <td>{{$bill->score}}</td>

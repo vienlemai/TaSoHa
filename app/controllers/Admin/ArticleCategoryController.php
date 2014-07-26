@@ -81,9 +81,12 @@ class ArticleCategoryController extends AdminBaseController {
      */
     public function update($id) {
         $category = ArticleCategory::findOrFail($id);
-        $category->update(Input::all());
-        Session::flash('success', trans('messages.category_save_success', array('name' => $category->name)));
-        return Redirect::route('admin.article_categories.index');
+        if ($category->update(Input::all())) {
+            Session::flash('success', trans('messages.category_save_success', array('name' => $category->name)));
+            return Redirect::route('admin.article_categories.index');
+        } else {
+            return Redirect::back()->withInput()->withErrors($category->errors());
+        }
     }
 
     /**
@@ -94,7 +97,6 @@ class ArticleCategoryController extends AdminBaseController {
      */
     public function destroy($id) {
         $category = ArticleCategory::findOrFail($id);
-
         if ($category->articles->count() > 0) {
             Session::flash('error', trans('messages.article_category_delete_failed_cause_inused'));
         } elseif (!$category->removalable) {

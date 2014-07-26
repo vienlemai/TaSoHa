@@ -39,13 +39,18 @@ class Member extends Node implements UserInterface, RemindableInterface {
     public static function boot() {
         parent::boot();
         static::creating(function($member) {
-            $member->password = Hash::make($member->password);
+            $member->regency = self::CAP_BAN_HANG;
             $member->uid = time();
             if (!$member->parent_id) {
                 $member->parent_id = null;
             }
             if (!$member->introduced_by) {
                 $member->introduced_by = null;
+            }
+        });
+        static::saving(function($member) {
+            if (Hash::needsRehash($member->password)) {
+                $member->password = Hash::make($this->password);
             }
         });
     }
@@ -62,9 +67,9 @@ class Member extends Node implements UserInterface, RemindableInterface {
         $rules = array(
             'email' => 'required|email|unique:members,email,' . $id,
             'full_name' => 'required',
-            //'username' => 'required',
-            //'password' => 'required|min:6',
-            //'password_confirmation' => 'required|same:password',
+            'username' => 'required',
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
             'day_of_birth' => 'required',
             'identify_number' => 'required|numeric',
             'identify_location' => 'required|required',
@@ -76,9 +81,24 @@ class Member extends Node implements UserInterface, RemindableInterface {
         return Validator::make($input, $rules);
     }
 
-    public static function validateChangePassword($input) {
+    public static function validateEdit($input, $id) {
         $rules = array(
-            'old_password' => 'required|passmembercheck',
+            'email' => 'required|email|unique:members,email,' . $id,
+            'full_name' => 'required',
+            'day_of_birth' => 'required',
+            'identify_number' => 'required|numeric',
+            'identify_location' => 'required|required',
+            'identify_date' => 'required',
+            'location' => 'required',
+            'phone' => 'required|numeric'
+        );
+
+        return Validator::make($input, $rules);
+    }
+
+    public static function validateChangePassword($input, $id = null) {
+        $rules = array(
+            'old_password' => 'required|passmembercheck:' . $id,
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
         );
@@ -119,7 +139,6 @@ class Member extends Node implements UserInterface, RemindableInterface {
     public static function paging($params) {
         $instance = new static;
         $query = $instance->newQuery();
-
         if (isset($params['keyword'])) {
             $query->where(function($query) use ($params) {
                 $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
@@ -276,8 +295,15 @@ class Member extends Node implements UserInterface, RemindableInterface {
     }
 
     public static function getBinaryChildren($parenId = null) {
-        $nodes = self::with('children')->where('parent_id', $parenId)
-            ->get();
+        if (!$parenId) {
+            $nodes = self::with('children')
+                ->where('parent_id', null)
+                ->orWhere('parent_id', 0)
+                ->get();
+        } else {
+            $nodes = self::with('children')->where('parent_id', $parenId)
+                ->get();
+        }
         $data = array();
         foreach ($nodes as $node) {
             $nodeItem = array(
@@ -291,8 +317,15 @@ class Member extends Node implements UserInterface, RemindableInterface {
     }
 
     public static function getSunChildren($introducerId = null) {
-        $nodes = self::with('sunlight')->where('introduced_by', $introducerId)
-            ->get();
+        if (!$introducerId) {
+            $nodes = self::with('sunlight')
+                ->where('introduced_by', null)
+                ->orWhere('introduced_by', 0)
+                ->get();
+        } else {
+            $nodes = self::with('sunlight')->where('introduced_by', $introducerId)
+                ->get();
+        }
         $data = array();
         foreach ($nodes as $node) {
             $nodeItem = array(

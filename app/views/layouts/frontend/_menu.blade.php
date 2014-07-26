@@ -33,6 +33,7 @@
                         <?php foreach (Page::$NAME_TO_TEXT as $name => $text) : ?>
                             <li><a href="<?php echo route('fe.page.show', $name) ?>"><?php echo $text ?></a></li>
                         <?php endforeach; ?>
+                        <li><a href="http://batdongsan.log.vn/" target="_blank">Tasoha land</a></li>
                     </ul>
                 </li>
             </ul>

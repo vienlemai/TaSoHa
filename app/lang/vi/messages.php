@@ -45,6 +45,8 @@ return array(
     'news_save_successfully' => 'Lưu thành công tin tức <b>:title</b>',
     'news_delete_successfully' => 'Xóa thành công tin tức <b>:title</b>',
     'article_category_delete_failed_cause_inused' => 'Không thể xóa danh mục đang có bài viết!',
+    'product_category_delete_failed_cause_inused' => 'Không thể xóa danh mục đang có sản phẩm!',
+    'product_category_delete_success' => 'Xóa thành công danh mục <b>:name</b>',
     'article_category_delete_failed_cause_not_removalable' => 'Không được phép xóa danh mục này!',
     'article_category_delete_success' => 'Xóa thành công danh mục <b>:name</b>',
     'page_save_successfully' => 'Lưu thành công trang <b>:title</b>',

@@ -19,6 +19,27 @@ class Bill extends BaseModel {
         $this->created_by = Auth::admin()->get()->id;
     }
 
+    public function afterCreate() {
+        $bills = self::where('member_id', $this->member_id)
+            ->first(array('id'));
+        $member = $this->buyer;
+        $member->score = $member->score + $this->score;
+        $member->save();
+        if ($bills->count() == 1) {
+            //first buying
+            if (!empty($member->introduced_by)) {
+                DB::table('bonus_status')
+                    ->insert(array(
+                        'member_id' => $member->introduced_by,
+                        'bonus_type' => MyBonus::HH_THUONG_NHANH,
+                        'added_for' => $this->member_id
+                ));
+            }
+        } else {
+            //secondhand
+        }
+    }
+
     public function creator() {
         return $this->belongsTo('AdminUser', 'created_by');
     }

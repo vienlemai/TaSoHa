@@ -20,9 +20,6 @@
             <div class="article-header">
                 <h3><a href="<?php echo $url ?>"><?php echo $article->title ?></a></h3>
             </div>
-            <div class="article-body">
-                <p><?php echo truncate($article->content, 100) ?></p>
-            </div>
             <div class="article-footer">
                 <div class="pull-right">
                     <a href="<?php echo $url ?>" class='btn btn-xs btn-primary'>Xem thêm <i class="fa fa-angle-double-right"></i></a>

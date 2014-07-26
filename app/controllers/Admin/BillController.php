@@ -22,6 +22,7 @@ class BillController extends AdminBaseController {
     public function index() {
         $bills = \Bill::with('creator', 'buyer')
             ->condition(Input::all())
+            ->orderBy('created_at','desc')
             ->paginate();
         $this->layout->content = View::make('admin.bills.index', array(
                 'bills' => $bills,

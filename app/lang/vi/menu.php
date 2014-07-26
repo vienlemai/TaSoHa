@@ -6,6 +6,8 @@ return array(
     'add_product' => 'Thêm sản phẩm',
     'all_products' => 'Tất cả sản phẩm',
     'all_product_categories' => 'Danh mục sản phẩm',
+    'new_product_category' => 'Danh mục mới',
+    'manage_product' => 'Quản lý sản phẩm',
     'add_product_category' => 'Thêm danh mục',
     'manage_articles' => 'Quản lý bài viết',
     'list_article_categories' => 'Danh mục',
@@ -19,5 +21,6 @@ return array(
     'manage_slides' => 'Quản lý slide',
     'list_slides' => 'Danh sách slide',
     'new_slide' => 'Slide mới',
+    'manage_product_categories' => 'Quản lý danh mục sản phẩm'
 );
 ?>

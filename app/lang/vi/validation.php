@@ -95,6 +95,9 @@ return array(
       |
      */
     'attributes' => array(
+        'name' => 'Tên',
+        'description' => 'Mô tả',
+        'title' => 'Tiêu đề',
         'full_name' => 'Họ tên',
         'password' => 'Mật khẩu',
         'email' => 'Email',

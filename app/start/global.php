@@ -79,5 +79,10 @@ App::down(function() {
 require app_path() . '/filters.php';
 require app_path() . '/helpers/global.php';
 Validator::extend('passmembercheck', function ($attribute, $value, $parameters) {
+    if (!empty($parameters[0])) {
+        $member = Member::where('id', $parameters[0])
+            ->first(array('password'));
+        return Hash::check($value, $member->password);
+    }
     return Hash::check($value, Auth::member()->get()->password);
 });

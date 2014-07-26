@@ -54,6 +54,14 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::resource('page', 'PageController', array('only' => array('index', 'edit', 'update')));
 
         Route::resource('members', 'MemberController');
+        Route::get('/members/{id}/change-password', array(
+            'as' => 'admin.members.change_password',
+            'uses' => 'MemberController@getChangePassword'
+        ));
+        Route::post('/members/{id}/change-password', array(
+            'as' => 'admin.members.change_password',
+            'uses' => 'MemberController@postChangePassword'
+        ));
         Route::resource('users', 'AdminUserController');
         Route::resource('groups', 'AdminGroupController');
         Route::resource('slide', 'SlideController');

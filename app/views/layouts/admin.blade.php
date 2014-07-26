@@ -38,7 +38,7 @@
             var dataToken = '<?php echo Session::token(); ?>';
             var baseUrl = '<?php echo route('admin.root'); ?>';
         </script>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+        <script type="text/javascript" src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script src="{{asset('assets/js/jquery-ui-1.10.3.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/bootstrap.min.js')}}" type="text/javascript"></script>
         <script src="{{asset('assets/js/plugins/select2/select2.js')}}" type="text/javascript"></script>

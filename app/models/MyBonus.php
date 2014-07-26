@@ -34,4 +34,10 @@ class MyBonus extends Eloquent {
         return $bonusAmoun;
     }
 
+    public static function calculate($member, $bonusType) {
+        if ($bonusType == self::HH_THUONG_NHANH) {
+            
+        }
+    }
+
 }

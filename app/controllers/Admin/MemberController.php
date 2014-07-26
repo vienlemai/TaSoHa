@@ -9,6 +9,7 @@ use \Redirect;
 use \Member;
 use \MyBonus;
 use \DB;
+use \Hash;
 
 class MemberController extends AdminBaseController {
 
@@ -53,17 +54,15 @@ class MemberController extends AdminBaseController {
         $v = Member::validate(Input::all());
         if ($v->passes()) {
             $member = new Member(Input::all());
-            $password = \Common::randomPassword(6);
-            $member->password = $password;
             $member->save();
-            $viewData = array(
-                'member' => $member,
-                'password' => $password,
-            );
-            \Mail::send('admin.members.mail', $viewData, function($message)use($member) {
-                $message->to($member->email, 'TASOHA GROUP')->subject('Thông báo về tài khoản tại tasoha.com');
-            });
-            Session::flash('success', 'Lưu thành công thành viên' . $member->full_name . '. Đã gửi mail thông báo đến địa chỉ ' . $member->email);
+//            $viewData = array(
+//                'member' => $member,
+//                'password' => $password,
+//            );
+//            \Mail::send('admin.members.mail', $viewData, function($message)use($member) {
+//                $message->to($member->email, 'TASOHA GROUP')->subject('Thông báo về tài khoản tại tasoha.com');
+//            });
+            Session::flash('success', 'Lưu thành công thành viên' . $member->full_name);
             return Redirect::route('admin.members.index');
         } else {
             return Redirect::back()->withInput()->withErrors($v->messages());
@@ -83,10 +82,17 @@ class MemberController extends AdminBaseController {
         $bonusAmoun = array();
         foreach ($bonus as $k => $v) {
             $bonusAmoun[$k]['name'] = $v;
-            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
+            $bonusStatus = DB::table('bonus_status')
                 ->where('member_id', $member->id)
-                ->where('bonus_id', $k)
-                ->sum('amount');
+                ->where('bonus_type', $k)
+                ->first();
+            if ($bonusStatus !== null) {
+                
+            }
+//            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
+//                ->where('member_id', $member->id)
+//                ->where('bonus_id', $k)
+//                ->sum('amount');
         }
         if (\Request::ajax()) {
             return View::make('admin.members.show_modal', array(
@@ -127,7 +133,7 @@ class MemberController extends AdminBaseController {
         if ($v->passes()) {
             $member->fill(Input::all());
             $member->save();
-            Session::flash('success', 'Chỉnh sửa thành công thành viên <b>' . $member->full_name.'</b>');
+            Session::flash('success', 'Chỉnh sửa thành công thành viên <b>' . $member->full_name . '</b>');
             return Redirect::route('admin.members.index');
         } else {
             return Redirect::back()->withInput()->withErrors($v->messages());
@@ -145,6 +151,26 @@ class MemberController extends AdminBaseController {
         $member->delete();
         Session::flash('success', 'Xóa thành công thành viên <b>' . $member->full_name . '</b>');
         return Redirect::route('admin.members.index');
+    }
+
+    public function getChangePassword($id) {
+        $member = Member::findOrFail($id);
+        $this->layout->content = View::make('admin.members.change_password', array(
+                'member' => $member,
+        ));
+    }
+
+    public function postChangePassword($id) {
+        $member = Member::findOrFail($id);
+        $v = Member::validateChangePassword(Input::all(), $id);
+        if ($v->passes()) {
+            $member->password = Hash::make(Input::get('password'));
+            $member->save();
+            Session::flash('success', 'Đổi mật khẩu thành công cho thành viên <b>' . $member->full_name . '</b>');
+            return Redirect::route('admin.members.show', $member->id);
+        } else {
+            return Redirect::back()->withErrors($v->messages());
+        }
     }
 
 }

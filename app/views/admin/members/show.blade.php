@@ -98,6 +98,9 @@
                     </tbody>
                 </table>
             </div>
+            <div class="box-footer">
+                <a class="btn btn-warning" href="<?php echo route('admin.members.change_password',$member->id) ?>">Đổi mật khẩu</a>
+            </div>
         </div>
     </div>
 </div>
