@@ -39,7 +39,7 @@
                             <td><?php echo $index++ ?></td>
                             <td>
                                 <a href="<?php echo route('admin.product.edit', $product->id) ?>">
-                                    <?php echo $article->name ?>
+                                    <?php echo $product->name ?>
                                 </a>
                             </td>
                             <td>{{$product->category->name or ''}}</td>

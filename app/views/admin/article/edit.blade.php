@@ -19,7 +19,13 @@
             <?php echo Former::open(route('admin.articles.update', $article->id))->method('put') ?>
             <?php Former::populate($article) ?>
             <div class="box-body col-md-10">
-                <?php echo View::make('admin.article._form')->with('categories',$categories)->render() ?>
+                <?php
+                echo View::make('admin.article._form', array(
+                    'categories' => $categories,
+                    'article' => $article
+                ))->render()
+
+                ?>
             </div>
 
             <div class="box-footer">
@@ -27,6 +33,7 @@
                 echo Former::actions()
                     ->primary_submit(Lang::get('messages.save'))
                     ->inverse_reset(Lang::get('messages.reset'))
+
                 ?>
             </div>
             <?php echo Former::close(); ?>
@@ -50,11 +57,11 @@
 $().ready(function() {
     $('#elfinder_button').on('click', function() {
         $('<div id="editor" />').dialogelfinder({
-            url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
+            url: '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
             getFileCallback: function(file) {
                 $('#editor').dialogelfinder('close');
                 $('#editor').closest('.elfinder').val(file.path);
-                var imageHtml = '<img src="'+file.url+'"/>';
+                var imageHtml = '<img src="' + file.url + '"/>';
                 $('#elfinder_button').html(imageHtml);
                 $($('#elfinder_button').attr('for')).val(file.path);
                 console.log(file.url);

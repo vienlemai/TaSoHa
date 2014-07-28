@@ -19,7 +19,7 @@ class ArticleController extends FrontendBaseController {
      */
     public function category($categoryId) {
         $category = ArticleCategory::findOrFail($categoryId);
-        $articles = Article::where('category_id', $category->id)->paginate(10);
+        $articles = Article::where('category_id', $category->id)->paginate(1);
         $this->layout->content = View::make('frontend.article.index')
                 ->with(compact('category', 'articles'));
     }

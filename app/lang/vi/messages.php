@@ -115,5 +115,8 @@ return array(
     'list_category' => 'Xem danh sách danh mục',
     'create_category' => 'Tạo mới danh mục',
     'edit_category' => 'Sửa danh mục',
-    'detele_category' => 'Xóa danh mục'
+    'detele_category' => 'Xóa danh mục',
+    //product 
+    'input_product' => 'Nhập nội dung sản phẩm',
+    'product_save_success'=>'Nhập thành công sản phẩm <b>:name</b>',
 );

@@ -16,12 +16,12 @@
 
             ?>
             <div class="article">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <div class="article-thumbnail-wrap">
                         <img class="article-thumbnail" src="<?php echo $article->getThumbnailUrl() ?>">
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10 article-right">
                     <div class="article-header">
                         <h3><a href="<?php echo $url ?>"><?php echo $article->title ?></a></h3>
                     </div>
@@ -34,5 +34,9 @@
             </div>
         <?php endforeach; ?>
     </div>
+    <div class="pagination-wrap">
+        <?php echo $articles->links(); ?>
+    </div>
+    
 </div>
 @stop

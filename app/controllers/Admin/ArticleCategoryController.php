@@ -42,6 +42,7 @@ class ArticleCategoryController extends AdminBaseController {
      */
     public function store() {
         $category = new ArticleCategory(Input::all());
+        $category->photo = Input::get('thumbnail');
         if ($category->save()) {
             Session::flash('success', trans('messages.category_save_success', array('name' => $category->name)));
             return Redirect::route('admin.article_categories.index');
@@ -80,7 +81,9 @@ class ArticleCategoryController extends AdminBaseController {
      * @return Response
      */
     public function update($id) {
+        //dd(Input::all());
         $category = ArticleCategory::findOrFail($id);
+        $category->photo = Input::get('thumbnail');
         if ($category->update(Input::all())) {
             Session::flash('success', trans('messages.category_save_success', array('name' => $category->name)));
             return Redirect::route('admin.article_categories.index');

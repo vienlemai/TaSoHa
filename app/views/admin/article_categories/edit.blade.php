@@ -21,7 +21,12 @@
             <?php echo Former::horizontal_open(route('admin.article_categories.update', $category->id))->method('put') ?>
             <?php Former::populate($category) ?>
             <div class="box-body col-md-8">
-                <?php echo View::make('admin.article_categories._form')->render() ?>
+                <?php
+                echo View::make('admin.article_categories._form', array(
+                    'category' => $category
+                ))->render()
+
+                ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">
@@ -32,9 +37,37 @@
                     </div>
                 </div>
             </div>
-            <?php echo Former::close(); ?>
+<?php echo Former::close(); ?>
         </div><!-- /.box -->
     </div>
 </div>
-
+@stop
+@section('addon_css')
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
+<link href="{{asset('packages/barryvdh/laravel-elfinder/css/elfinder.min.css')}}" rel="stylesheet" type="text/css" />
+<link href="{{asset('packages/barryvdh/laravel-elfinder/css/theme.css')}}" rel="stylesheet" type="text/css" />
+@stop
+@section('addon_js')
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
+<script src="{{asset('assets/js/plugins/ckeditor/ckeditor.js')}}"></script>
+<script src="{{asset('packages/barryvdh/laravel-elfinder/js/elfinder.min.js')}}"></script>
+@stop
+@section('inline_js')
+<script type="text/javascript">
+$().ready(function() {
+    $('#elfinder_button').on('click', function() {
+        $('<div id="editor" />').dialogelfinder({
+            url: '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
+            getFileCallback: function(file) {
+                $('#editor').dialogelfinder('close');
+                $('#editor').closest('.elfinder').val(file.path);
+                var imageHtml = '<img src="' + file.url + '"/>';
+                $('#elfinder_button').html(imageHtml);
+                $($('#elfinder_button').attr('for')).val(file.path);
+                console.log(file.url);
+            }
+        });
+    });
+});
+</script>
 @stop

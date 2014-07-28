@@ -1,39 +1,46 @@
 @section('header_content')
 <h1>
-    <?php echo trans('menu.manage_articles'); ?>
-    <small><?php echo trans('messages.categories'); ?></small>
+    <?php echo trans('menu.manage_product'); ?>
+    <small><?php echo trans('menu.edit_product'); ?></small>
 </h1>
 <ol class="breadcrumb">
     <li><a href="<?php echo route('admin.root') ?>"><i class="fa fa-dashboard"></i> <?php echo trans('messages.dashboard'); ?></a></li>
-    <li class="active"><?php echo trans('messages.categories'); ?></li>
+    <li><?php echo trans('menu.manage_product'); ?></li>
+    <li class="active"><?php echo trans('menu.edit_product'); ?></li>
 </ol>
 @stop
-
 @section('content')
 <div class="row">
-    <div class="col-md-12 center">
+    <div class="col-md-12">
+        <!-- general form elements -->
         <div class="box box-primary">
             <div class="box-header">
-                <h3 class="box-title"><?php echo trans('messages.input_article'); ?></h3>
-            </div>
-            <?php echo Former::open(route('admin.articles.update', $article->id))->method('put') ?>
-            <?php Former::populate($article) ?>
+                <h3 class="box-title"><?php echo trans('messages.input_product'); ?></h3>
+            </div><!-- /.box-header -->
+            <!-- form start -->
+            <?php echo Former::horizontal_open(route('admin.product.update', $product->id))->method('put') ?>
             <div class="box-body col-md-10">
-                <?php echo View::make('admin.article._form')->with('categories',$categories)->render() ?>
-            </div>
+                <?php Former::populate($product); ?>
+                <?php
+                echo View::make('admin.product._form', array(
+                    'categories' => $categories, 'product' => $product
+                ))->render()
+
+                ?>
+            </div><!-- /.box-body -->
 
             <div class="box-footer">
                 <?php
                 echo Former::actions()
                     ->primary_submit(Lang::get('messages.save'))
                     ->inverse_reset(Lang::get('messages.reset'))
+
                 ?>
             </div>
-            <?php echo Former::close(); ?>
-        </div>
+<?php echo Former::close(); ?>
+        </div><!-- /.box -->
     </div>
 </div>
-
 @stop
 @section('addon_css')
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/themes/smoothness/jquery-ui.css" />
@@ -50,11 +57,11 @@
 $().ready(function() {
     $('#elfinder_button').on('click', function() {
         $('<div id="editor" />').dialogelfinder({
-            url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
+            url: '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
             getFileCallback: function(file) {
                 $('#editor').dialogelfinder('close');
                 $('#editor').closest('.elfinder').val(file.path);
-                var imageHtml = '<img src="'+file.url+'"/>';
+                var imageHtml = '<img src="' + file.url + '"/>';
                 $('#elfinder_button').html(imageHtml);
                 $($('#elfinder_button').attr('for')).val(file.path);
                 console.log(file.url);

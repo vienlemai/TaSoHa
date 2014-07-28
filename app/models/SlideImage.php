@@ -1,8 +1,8 @@
 <?php
 
 class SlideImage extends \LaravelBook\Ardent\Ardent {
-
     const SLIDE_DIR = 'assets/slides';
+    const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
 
     protected $table = 'slide_images';
     protected $fillable = array(
@@ -13,11 +13,8 @@ class SlideImage extends \LaravelBook\Ardent\Ardent {
      * VALIDATIONS
      */
     public static $rules = array(
-        'image' => 'required|image',
+        //'image' => 'required|image',
         'description' => 'required'
-    );
-    public static $customMessages = array(
-        'required' => 'The :attribute field is required.'
     );
 
     public function scopeActive($query) {
@@ -30,6 +27,14 @@ class SlideImage extends \LaravelBook\Ardent\Ardent {
 
     public function beforeCreate() {
         $this->created_at = date('Y-m-d H:i:s');
+    }
+
+    public function getThumbnailUrl() {
+        if ($this->url && file_exists(public_path($this->url))) {
+            return asset($this->url);
+        } else {
+            return asset(self::DEFAULT_THUMBNAIL);
+        }
     }
 
 }

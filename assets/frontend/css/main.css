@@ -147,9 +147,22 @@ body {
     padding: 25px 10px;
 }
 .article-thumbnail {
-    max-width: 200px;
+    width:  120px;
+	height: 120px;
     border: 1px solid #eee;
 }
+.article-right{ margin-top: 50px; }
 .page-header a, .page-header a:hover, .page-header a:focus, .page-header a:active {
     text-decoration: none;
+}
+.pagination-wrap{ float: right; margin-right: 30px }
+.article-category-thumbnail {
+	width: 100px;
+	height: 100px;
+}
+.home-article-category .pull-right{
+	max-width: 150px;
+}
+.home-article-category .well {
+	min-height: 250px;
 }

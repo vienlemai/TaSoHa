@@ -14,14 +14,15 @@ use \ProductCategory;
 class ProductController extends FrontendBaseController {
 
     public function category($categoryID) {
-        $category = ProductCategory::with('products')->findOrFail($categoryID);
+        $category = ProductCategory::findOrFail($categoryID);
+        $products = Product::where('product_category_id', $categoryID)->paginate(10);
         $this->layout->content = View::make('frontend.product.index')
             ->with(compact('category'))
-                ->with('products', $category->products);
+            ->with('products', $products);
     }
 
     public function show($id) {
-        $product = Product::findOrFail($id);
+        $product = Product::with('category')->findOrFail($id);
         $other_products = Product::where('id', '<>', $id)
             ->where('product_category_id', $product->product_category_id)
             ->orderBy('created_at', 'DESC')

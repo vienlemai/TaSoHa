@@ -4,12 +4,13 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
     /*
      * PROPERTIES
      */
-
     protected $table = 'article_categories';
     public $fillable = array(
         'name',
         'description'
     );
+
+    const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
 
     /*
      * VALIDATIONS
@@ -41,8 +42,8 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
     static function boot() {
         parent::boot();
         static::saving(function($object) {
-                    $object->slug = strtolower(StringHelper::slug($object->name));
-                });
+            $object->slug = strtolower(StringHelper::slug($object->name));
+        });
     }
 
     public static function paging($params) {
@@ -52,6 +53,14 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
         }
         $result = $query->paginate();
         return $result;
+    }
+
+    public function getThumbnailUrl() {
+        if ($this->photo && file_exists(public_path($this->photo))) {
+            return asset($this->photo);
+        } else {
+            return asset(self::DEFAULT_THUMBNAIL);
+        }
     }
 
 }

@@ -15,7 +15,7 @@ class Page extends \LaravelBook\Ardent\Ardent {
      */
     public static $NAME_TO_TEXT = array(
         self::TASOHA_MISSION => 'Sứ mệnh',
-        self::TASOHA_LAND => 'TASOHA LAND',
+        //self::TASOHA_LAND => 'TASOHA LAND',
         self::TASOHA_ECOM => 'TASOHA ECOM',
         self::TASOHA_EDU => 'TASOHA EDU',
         self::TASOHA_INVEST => 'TASOHA INVEST',

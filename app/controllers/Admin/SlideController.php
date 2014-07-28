@@ -36,21 +36,17 @@ class SlideController extends AdminBaseController {
      * @return Response
      */
     public function store() {
-        $input = Input::all();
-        $input['image'] = Input::file('image');
-        $slider = new SlideImage($input);
+        $url = Input::get('url');
+        if (empty($url)) {
+            Session::flash('error', 'Bạn chưa chọn ảnh cho slide');
+            return Redirect::back();
+        }
+        $slider = new SlideImage(Input::all());
         if ($slider->validate()) {
-            if ($url = $this->uploadImage(Input::file('image'))) {
-                $slider = new SlideImage(Input::except('image'));
-                $slider->url = $url;
-                $slider->created_by = Auth::admin()->get()->id;
-                $slider->forceSave();
-                Session::flash('success', 'slider_saved');
-                return Redirect::route('admin.slide.index');
-            } else {
-                Session::flash('success', 'upload_failed');
-                return Redirect::back();
-            }
+            $slider->created_by = Auth::admin()->get()->id;
+            $slider->forceSave();
+            Session::flash('success', 'slider_saved');
+            return Redirect::route('admin.slide.index');
         } else {
             return Redirect::back()->withErrors($slider->errors());
         }
@@ -73,7 +69,10 @@ class SlideController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        //
+        $slide = SlideImage::findOrFail($id);
+        return View::make('admin.slide.edit', array(
+                'slide' => $slide
+        ));
     }
 
     /**
@@ -83,7 +82,20 @@ class SlideController extends AdminBaseController {
      * @return Response
      */
     public function update($id) {
-        //
+        $slide = SlideImage::findOrFail($id);
+        $url = Input::get('url');
+        if (empty($url)) {
+            Session::flash('error', 'Bạn chưa chọn ảnh cho slide');
+            return Redirect::back();
+        }
+        $slide->fill(Input::all());
+        if ($slide->validate()) {
+            $slide->forceSave();
+            Session::flash('success', 'slider_saved');
+            return Redirect::route('admin.slide.index');
+        } else {
+            return Redirect::back()->withErrors($slider->errors());
+        }
     }
 
     /**
@@ -93,7 +105,10 @@ class SlideController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
-        //
+        $slide = SlideImage::findOrFail($id);
+        $slide->delete();
+        Session::flash('success', 'Xóa thành công 1 ảnh của slides');
+        return Redirect::route('admin.slide.index');
     }
 
     private function uploadImage($file) {

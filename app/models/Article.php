@@ -24,7 +24,7 @@ class Article extends LaravelBook\Ardent\Ardent {
     );
 
     public function category() {
-        return $this->belongsTo('ArticleCategory', 'categor_id', 'id');
+        return $this->belongsTo('ArticleCategory', 'category_id', 'id');
     }
 
     public static function boot() {

@@ -47,7 +47,7 @@ class ArticleController extends AdminBaseController {
         $article = new Article(Input::all());
         $article->created_by = Auth::admin()->get()->id;
         if ($article->save()) {
-            Session::flash('success', trans('messages.article_save_success', array('name' => $article->title)));
+            Session::flash('success', trans('messages.article_save_success', array('title' => $article->title)));
             return Redirect::route('admin.articles.index');
         } else {
             return Redirect::back()->withInput()->withErrors($article->errors());

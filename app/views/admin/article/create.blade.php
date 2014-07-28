@@ -20,16 +20,16 @@
             <!-- form start -->
             <?php echo Former::horizontal_open(route('admin.articles.store'))->method('POST') ?>
             <div class="box-body col-md-10">
-                <?php echo View::make('admin.article._form')->with('categories',$categories)->render() ?>
+                <?php echo View::make('admin.article._form')->with('categories', $categories)->render() ?>
             </div><!-- /.box-body -->
 
             <div class="box-footer">
-                <?php
-                echo Former::actions()
-                    ->primary_submit(Lang::get('messages.save'))
-                    ->inverse_reset(Lang::get('messages.reset'))
-
-                ?>
+                <div class="form-group">
+                    <div class="col-lg-offset-3 col-sm-offset-3 col-lg-9 col-sm-9">
+                        <input class="btn-primary btn" type="submit" value="Lưu"> 
+                        <a href="<?php echo route('admin.articles.index') ?>" class="btn btn-default">Hủy</a>
+                    </div>
+                </div>
             </div>
             <?php echo Former::close(); ?>
         </div><!-- /.box -->
@@ -51,11 +51,11 @@
 $().ready(function() {
     $('#elfinder_button').on('click', function() {
         $('<div id="editor" />').dialogelfinder({
-            url : '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
+            url: '<?= URL::action('Barryvdh\Elfinder\ElfinderController@showConnector') ?>',
             getFileCallback: function(file) {
                 $('#editor').dialogelfinder('close');
                 $('#editor').closest('.elfinder').val(file.path);
-                var imageHtml = '<img src="'+file.url+'"/>';
+                var imageHtml = '<img src="' + file.url + '"/>';
                 $('#elfinder_button').html(imageHtml);
                 $($('#elfinder_button').attr('for')).val(file.path);
                 console.log(file.url);

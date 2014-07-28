@@ -2,11 +2,15 @@
 
 class Product extends LaravelBook\Ardent\Ardent {
     protected $table = 'products';
+
+    const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
+
     public $fillable = array(
         'name',
         'code',
         'description',
-        'thumbnail'
+        'thumbnail',
+        'product_category_id'
     );
     public static $rules = array(
         'name' => 'required',
@@ -67,6 +71,14 @@ class Product extends LaravelBook\Ardent\Ardent {
         }
         $result = $query->paginate();
         return $result;
+    }
+
+    public function getThumbnailUrl() {
+        if ($this->thumbnail && file_exists(public_path($this->thumbnail))) {
+            return asset($this->thumbnail);
+        } else {
+            return asset(self::DEFAULT_THUMBNAIL);
+        }
     }
 
 }

@@ -9,26 +9,25 @@
         </ol>
 
         <!-- Wrapper for slides -->
-        <div class="carousel-inner">
-            <div class="item active">
-                <img src="<?php echo asset('/assets/img/slide-sample/slide1.jpg') ?>" alt="...">
-                <!--                <div class="carousel-caption">
-                                    The caption slide one
-                                </div>-->
+        <?php if (!$slides->isEmpty()): ?>
+            <div class="carousel-inner">
+                <?php $first = $slides->shift() ?>
+                <div class="item active">
+                    <img src="<?php echo $first->getThumbnailUrl(); ?>" alt="...">
+                    <div class="carousel-caption">
+                        <?php echo $first->description ?>
+                    </div>
+                </div>
+                <?php foreach ($slides as $slide): ?>
+                    <div class="item">
+                        <img src="<?php echo $slide->getThumbnailUrl() ?>" alt="...">
+                        <div class="carousel-caption">
+                            <?php echo $slide->description ?>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-            <div class="item">
-                <img src="<?php echo asset('/assets/img/slide-sample/slide2.jpg') ?>" alt="...">
-                <!--                <div class="carousel-caption">
-                                    The caption slide two
-                                </div>-->
-            </div>
-            <div class="item">
-                <img src="<?php echo asset('/assets/img/slide-sample/slide3.jpg') ?>" alt="...">
-                <!--                <div class="carousel-caption">
-                                    The caption slide three
-                                </div>-->
-            </div>
-        </div>
+        <?php endif; ?>
 
         <!-- Controls -->
         <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
@@ -57,12 +56,20 @@
         <div class="page-header">
         </div>  	
         <?php foreach ($articleCategories as $ac) : ?>
-            <div class="col-lg-4">
+            <div class="col-lg-4 home-article-category">
                 <div class="well">
-                    <h4><?php echo $ac->name ?></h4>
+                    <h4><a href="<?php echo route('fe.category', $ac->toParam()) ?>"><?php echo $ac->name ?></a></h4>
                     <hr>
-                    <p><?php echo $ac->description ?></p>
-                    <p><a href="<?php echo route('fe.category', $ac->toParam()) ?>" class="btn btn-primary btn-xs">Xem thêm</a></p>
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <a href="<?php echo route('fe.category', $ac->toParam()) ?>"><img class="article-category-thumbnail" src="<?php echo $ac->getThumbnailUrl() ?>"/></a>
+                        </div>
+                        <div class="pull-right">
+                            <?php echo $ac->description ?>
+                            <br>
+                            <a href="<?php echo route('fe.category', $ac->toParam()) ?>">Xem thêm . . .</a>
+                        </div>
+                    </div>
                 </div>	
             </div>	
         <?php endforeach; ?>
