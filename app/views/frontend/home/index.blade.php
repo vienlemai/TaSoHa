@@ -1,15 +1,16 @@
 @section('content')
-<div id="slide">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-        </ol>
+<?php if (!$slides->isEmpty()): ?>
+    <div id="slide">
+        <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
 
-        <!-- Wrapper for slides -->
-        <?php if (!$slides->isEmpty()): ?>
+            <!-- Wrapper for slides -->
+
             <div class="carousel-inner">
                 <?php $first = $slides->shift() ?>
                 <div class="item active">
@@ -27,17 +28,18 @@
                     </div>
                 <?php endforeach; ?>
             </div>
-        <?php endif; ?>
 
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-            <span class="glyphicon glyphicon-circle-arrow-left"></span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-            <span class="glyphicon glyphicon-circle-arrow-right"></span>
-        </a>
+
+            <!-- Controls -->
+            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-circle-arrow-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-circle-arrow-right"></span>
+            </a>
+        </div>
     </div>
-</div>
+<?php endif; ?>
 <!-- News -->
 
 <?php if (count($recentNews) > 0) : ?>

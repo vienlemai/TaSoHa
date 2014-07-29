@@ -45,7 +45,7 @@ class SlideController extends AdminBaseController {
         if ($slider->validate()) {
             $slider->created_by = Auth::admin()->get()->id;
             $slider->forceSave();
-            Session::flash('success', 'slider_saved');
+            Session::flash('success', trans('messages.slider_saved'));
             return Redirect::route('admin.slide.index');
         } else {
             return Redirect::back()->withErrors($slider->errors());

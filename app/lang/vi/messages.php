@@ -94,7 +94,7 @@ return array(
     'set_group_permission' => 'Phân quyền cho nhóm :name',
     'group_permission_saved' => 'Phân quyền thành công cho nhóm :name',
     'profile_saved' => 'Lưu thành công thông tin tài khoản',
-    'slider_saved' => 'Lưu thành công ảnh cho slider',
+    'slider_saved' => 'Lưu thành công slide',
     //manage member
     'manage_member' => 'Quản lý thành viên',
     'list_member' => 'Danh sách thành viên',
