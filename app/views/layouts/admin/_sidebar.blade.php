@@ -7,7 +7,7 @@
             </a>
         </li>
         <?php if (in_array('admin.users.index', $allowed_routes) || in_array('admin.groups.index', $allowed_routes)): ?>
-            <li class="treeview">
+            <li class="treeview active">
                 <a href="#">
                     <i class="fa fa-bar-chart-o"></i>
                     <span><?php echo trans('messages.manage_users'); ?></span>
@@ -28,7 +28,7 @@
             </li>
         <?php endif; ?>
         <?php if (in_array('admin.members.index', $allowed_routes) || in_array('admin.bills.index', $allowed_routes) || in_array('admin.bills.create', $allowed_routes)): ?>
-            <li class="treeview">
+            <li class="treeview active">
                 <a href="#">
                     <i class="fa fa-group"></i>
                     <span>Quản lý thành viên</span>
@@ -48,7 +48,7 @@
             </li>
         <?php endif; ?>
         <?php if (in_array('admin.members.index', $allowed_routes) || in_array('admin.bills.index', $allowed_routes) || in_array('admin.bills.create', $allowed_routes)): ?>
-            <li class="treeview">
+            <li class="treeview active">
                 <a href="#">
                     <i class="fa fa-bullhorn"></i>
                     <span><?php echo trans('menu.manage_news'); ?></span>
@@ -64,7 +64,7 @@
                 </ul>
             </li>
         <?php endif; ?>
-        <li class="treeview">
+        <li class="treeview active">
             <a href="#">
                 <i class="fa fa-file"></i>
                 <span><?php echo trans('menu.manage_articles'); ?></span>
