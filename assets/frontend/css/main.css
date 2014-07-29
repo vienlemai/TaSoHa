@@ -166,3 +166,6 @@ body {
 .home-article-category .well {
 	min-height: 250px;
 }
+#content-wrapper {
+    padding: 0 30px;
+}
