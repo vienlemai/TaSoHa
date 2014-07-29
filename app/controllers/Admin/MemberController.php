@@ -53,8 +53,11 @@ class MemberController extends AdminBaseController {
     public function store() {
         $v = Member::validate(Input::all());
         if ($v->passes()) {
-            $member = new Member(Input::all());
-            $member->save();
+            //$member = new Member(Input::all());
+            $member = \Member::create(Input::all());
+
+            //$member->save();
+            //$member->//
 //            $viewData = array(
 //                'member' => $member,
 //                'password' => $password,
@@ -89,10 +92,10 @@ class MemberController extends AdminBaseController {
             if ($bonusStatus !== null) {
                 
             }
-//            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
-//                ->where('member_id', $member->id)
-//                ->where('bonus_id', $k)
-//                ->sum('amount');
+            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
+                ->where('member_id', $member->id)
+                ->where('bonus_id', $k)
+                ->sum('amount');
         }
         if (\Request::ajax()) {
             return View::make('admin.members.show_modal', array(

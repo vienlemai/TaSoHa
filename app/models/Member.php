@@ -16,9 +16,14 @@ class Member extends Node implements UserInterface, RemindableInterface {
     protected $table = 'members';
 
     const CAP_BAN_HANG = 'ban_hang';
+    const CAP_GIAM_SAT = 'giam_sat';
     const CAP_CHUYEN_VIEN = 'chuyen_vien';
-    const CAP_QUAN_LY = 'quan_ly';
 
+    public static $scoreForPromotion = array(
+        self::CAP_BAN_HANG => 140,
+        self::CAP_GIAM_SAT => 490,
+        self::CAP_CHUYEN_VIEN => 1000,
+    );
     public $fillable = array(
         'username',
         'password',
@@ -41,16 +46,40 @@ class Member extends Node implements UserInterface, RemindableInterface {
         static::creating(function($member) {
             $member->regency = self::CAP_BAN_HANG;
             $member->uid = time();
-            if (!$member->parent_id) {
-                $member->parent_id = null;
-            }
-            if (!$member->introduced_by) {
-                $member->introduced_by = null;
+//            if (!$member->parent_id) {
+//                $member->parent_id = null;
+//            }
+//            if (!$member->introduced_by) {
+//                $member->introduced_by = null;
+//            }
+        });
+        static::created(function($member) {
+            //create bonuse row for member
+            $bonus = MyBonus::get(array('id'));
+            foreach ($bonus as $b) {
+                DB::table('member_bonus')
+                    ->insert(array(
+                        'member_id' => $member->id,
+                        'bonus_id' => $b->id,
+                        'created_at' => Carbon\Carbon::now(),
+                        'updated_at' => Carbon\Carbon::now(),
+                        'amount' => 0,
+                        'auto_amount' => 0
+                ));
             }
         });
         static::saving(function($member) {
             if (Hash::needsRehash($member->password)) {
-                $member->password = Hash::make($this->password);
+                $member->password = Hash::make($member->password);
+            }
+            //check score for promotion
+            $score = $member->score;
+            if ($score <= self::$scoreForPromotion[self::CAP_BAN_HANG]) {
+                $member->regency = self::CAP_BAN_HANG;
+            } elseif ($member->score > self::$scoreForPromotion[self::CAP_BAN_HANG] && $member->score <= self::$scoreForPromotion[self::CAP_QUAN_LY]) {
+                $member->regency = self::CAP_CHUYEN_VIEN;
+            } else {
+                $member->regency = self::CAP_QUAN_LY;
             }
         });
     }
@@ -79,6 +108,21 @@ class Member extends Node implements UserInterface, RemindableInterface {
         );
 
         return Validator::make($input, $rules);
+    }
+
+    public function needUpdateTeamBonus() {
+        $ancestors = Member::with(array('children' => function($query) {
+                $query->select(array('id', 'parent_id'));
+            }))->where('lft', '<=', $this->lft)
+            ->where('rgt', '>=', $this->rgt)
+            ->where('id', '!=', $this->id)
+            ->get(array('id', 'parent_id'));
+        foreach ($ancestors as $ancestor) {
+            if ($ancestor->children->count() == 2) {
+                DB::table('team_bonus')
+                    ->update(array('need_to_up' => true));
+            }
+        }
     }
 
     public static function validateEdit($input, $id) {

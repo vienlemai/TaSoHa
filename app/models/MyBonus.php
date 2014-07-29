@@ -12,6 +12,11 @@ class MyBonus extends Eloquent {
         'name',
         'description'
     );
+    public static $THUONG_NHANH_AMOUNT = array(
+        Member::CAP_BAN_HANG => 10,
+        Member::CAP_GIAM_SAT => 12,
+        Member::CAP_CHUYEN_VIEN => 25,
+    );
 
     public static function validate($input) {
         $rules = array(

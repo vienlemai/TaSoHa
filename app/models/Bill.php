@@ -21,23 +21,32 @@ class Bill extends BaseModel {
 
     public function afterCreate() {
         $bills = self::where('member_id', $this->member_id)
-            ->first(array('id'));
+            ->get(array('id'));
+        //update score for member
         $member = $this->buyer;
         $member->score = $member->score + $this->score;
         $member->save();
         if ($bills->count() == 1) {
-            //first buying
-            if (!empty($member->introduced_by)) {
-                DB::table('bonus_status')
-                    ->insert(array(
-                        'member_id' => $member->introduced_by,
-                        'bonus_type' => MyBonus::HH_THUONG_NHANH,
-                        'added_for' => $this->member_id
-                ));
-            }
+            $this->updateThuongNhanh($member, $this->score);
+            $member->needUpdateTeamBonus();
         } else {
-            //secondhand
+            
         }
+    }
+
+    public function updateThuongNhanh($member, $score) {
+        $tyle = MyBonus::$THUONG_NHANH_AMOUNT[$member->regency];
+        $amount = (int) $score * $tyle / 100;
+        $memberBonus = DB::table('member_bonus')
+            ->where('member_id', $member->introduced_by)
+            ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
+            ->first(array('auto_amount'));
+        DB::table('member_bonus')
+            ->where('member_id', $member->introduced_by)
+            ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
+            ->update(array(
+                'auto_amount' => $memberBonus->auto_amount + $amount,
+        ));
     }
 
     public function creator() {

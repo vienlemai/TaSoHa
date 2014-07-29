@@ -8,7 +8,7 @@ class DatabaseSeeder extends Seeder {
 
 //        $this->call('AdminUserSeeder');
 //        $this->call('MemberSeeder');
-        $this->call('BonusSeeder');
+        $this->call('TeamBonusSeed');
 //        $this->call('ArticleCategorySeeder');
         //$this->call('ConfigSeeder');
     }
@@ -75,6 +75,34 @@ class MemberSeeder extends Seeder {
         ));
         $node->save();
         $node->makeChildOf($root);
+    }
+
+}
+
+class TeamBonusSeed extends Seeder {
+
+    public function run() {
+        DB::table('team_bonus')->truncate();
+        DB::table('member_bonus')->truncate();
+        $members = Member::all();
+        $bonus = MyBonus::get(array('id'));
+        foreach ($members as $member) {
+            DB::table('team_bonus')
+                ->insert(array(
+                    'member_id' => $member->id,
+            ));
+            foreach ($bonus as $b) {
+                DB::table('member_bonus')
+                    ->insert(array(
+                        'member_id' => $member->id,
+                        'bonus_id' => $b->id,
+                        'created_at' => Carbon\Carbon::now(),
+                        'updated_at' => Carbon\Carbon::now(),
+                        'amount' => 0,
+                        'auto_amount' => 0
+                ));
+            }
+        }
     }
 
 }
