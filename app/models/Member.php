@@ -8,6 +8,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
  * Member
  */
 class Member extends Node implements UserInterface, RemindableInterface {
+
     /**
      * Table name.
      *
@@ -52,6 +53,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
 //            if (!$member->introduced_by) {
 //                $member->introduced_by = null;
 //            }
+            return true;
         });
         static::created(function($member) {
             //create bonuse row for member
@@ -67,6 +69,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
                         'auto_amount' => 0
                 ));
             }
+            return true;
         });
         static::saving(function($member) {
             if (Hash::needsRehash($member->password)) {
@@ -81,6 +84,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
             } else {
                 $member->regency = self::CAP_QUAN_LY;
             }
+            return true;
         });
     }
 
@@ -99,6 +103,21 @@ class Member extends Node implements UserInterface, RemindableInterface {
             'username' => 'required',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
+            'day_of_birth' => 'required',
+            'identify_number' => 'required|numeric',
+            'identify_location' => 'required|required',
+            'identify_date' => 'required',
+            'location' => 'required',
+            'phone' => 'required|numeric'
+        );
+
+        return Validator::make($input, $rules);
+    }
+
+    public static function validateUpdateSelfProfile($input, $id = null) {
+        $rules = array(
+            'email' => 'required|email|unique:members,email,' . $id,
+            'full_name' => 'required',
             'day_of_birth' => 'required',
             'identify_number' => 'required|numeric',
             'identify_location' => 'required|required',
@@ -150,6 +169,17 @@ class Member extends Node implements UserInterface, RemindableInterface {
             'required' => 'Không được để trống',
             'passmembercheck' => 'Mật khẩu không đúng',
             'same' => 'Mật khẩu phải giống nhau',
+        );
+        return Validator::make($input, $rules, $messages);
+    }
+
+    public static function validateUpdateProfile($input) {
+        $rules = array(
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        );
+        $messages = array(
+            'required' => 'Không được để trống',
         );
         return Validator::make($input, $rules, $messages);
     }

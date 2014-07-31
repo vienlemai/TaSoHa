@@ -2,7 +2,7 @@
 
 .tickercontainer { /* the outer div with the black border */
     background: #fff; 
-    width: 990px; 
+    /*width: 990px;*/ 
     height: 27px; 
     margin-top: 10px; 
     padding: 0;

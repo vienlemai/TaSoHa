@@ -12,6 +12,7 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'uses' => 'HomeController@profile'
         ));
         Route::post('change-password', array('as' => 'member.change_password', 'uses' => 'HomeController@changePassword'));
+        Route::post('update-profile', array('as' => 'member.update_profile', 'uses' => 'HomeController@updateProfile'));
 
 
         Route::post('member/store', array(

@@ -75,6 +75,23 @@ class HomeController extends MemberBaseController {
         return Response::json($result);
     }
 
+    public function updateProfile() {
+        $member = Auth::member()->get();
+        $v = Member::validateUpdateSelfProfile(Input::all(), $member->id);
+        $result = array();
+        if ($v->passes()) {
+            $member->fill(Input::all());
+            $member->save();
+            $result['success'] = true;
+            $result['message'] = 'Cập nhật thông tin cá nhân thành công.';
+        } else {
+            \Former::withErrors($v->messages());
+            $result['success'] = false;
+            $result['html'] = View::make('member.home._form_personal_info')->render();
+        }
+        return Response::json($result);
+    }
+
     public function profile() {
         $this->layout->content = View::make('member.home.profile');
     }

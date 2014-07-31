@@ -20,16 +20,16 @@
     <body>
         <div class="container" id="wrapper">
             <div class="row">
-                <?php echo View::make('layouts.frontend._header') ?>     
+                <?php echo View::make('layouts.frontend._header')->render() ?>     
             </div>
             <div class="row clearfix">
-                <?php echo View::make('layouts.frontend._menu') ?>   
+                <?php echo View::make('layouts.frontend._menu')->render() ?>   
             </div>
 
             <div id="content-wrapper">
                 @yield('content')
             </div>
-            <?php echo View::make('layouts.frontend._footer') ?>  
+            <?php echo View::make('layouts.frontend._footer')->render() ?>  
         </div>
          <input class="" type="hidden" name="" id="current-member-id" value="{{Auth::member()->get()->id}}"/>
         <script type="text/javascript">
@@ -38,6 +38,7 @@
         </script>
         <script src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+        <script type="text/javascript" src="{{asset('assets/js/plugins/jquery.li-scroller.1.0.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/plugins/jorgchar/prettify.js')}}"></script>
         <script src="{{asset('assets/js/plugins/jstree/jstree.min.js')}}" type="text/javascript"></script>
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>

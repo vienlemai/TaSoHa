@@ -103,8 +103,10 @@ return array(
         'email' => 'Email',
         'location' => 'Chỗ ở hiện tại',
         'username' => 'Tên đăng nhập',
+        'introduced_by' => 'Người giới thiệu',
+        'parent_id' => 'Người quản lý',
         'password_confirmation' => 'Xác nhận mật khẩu',
-        'day_of_birth' => 'Ngày tháng năm sinh',
+        'day_of_birth' => 'Ngày sinh',
         'identify_number' => 'Số CMND',
         'identify_location' => 'Nơi cấp CMND',
         'identify_date' => 'Ngày cấp CMND',
@@ -113,6 +115,8 @@ return array(
         'score' => 'Điểm',
         'category_id' => 'Danh mục',
         'product_category_id' => 'Danh mục',
-        'code' => 'Mã'
+        'code' => 'Mã',
+        'sex' => 'Giới tính',
+        'phone' => 'Số điện thoại'
     ),
 );
