@@ -37,7 +37,7 @@
                 </div>
                 @yield('content')
             </div>
-            <?php echo View::make('layouts.frontend._footer') ?>  
+            <?php echo View::make('layouts.frontend._footer')->render() ?>  
         </div>
         <script type="text/javascript" src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>

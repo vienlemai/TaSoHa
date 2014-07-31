@@ -26,17 +26,14 @@
                 <?php
                 Former::populate($member);
                 echo Former::select('introduced_by')
-                    ->label('Người giới thiệu')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
                     ->options($members, $member->introduced_by);
                 echo Former::select('parent_id')
-                    ->label('Người quản lý')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
                     ->options($members, $member->parent_id);
                 echo Former::text('full_name')
-                    ->label('Họ tên')
                     ->class('form-control');
                 echo Former::text('email')
                     ->label('email')
@@ -51,29 +48,22 @@
 //                    ->label('Nhập lại mật khẩu')
 //                    ->class('form-control');
                 echo Former::text('day_of_birth')
-                    ->label('Ngày tháng năm sinh')
                     ->class('form-control date_mask');
                 echo Former::radios('sex')
-                    ->label('Giới tính')
                     ->radios(array(
                         'Nam' => array('name' => 'sex', 'value' => 0),
                         'Nữ' => array('name' => 'sex', 'value' => 1),
                     ))->check(0)
                     ->inline();
                 echo Former::text('phone')
-                    ->label('Số điện thoại')
                     ->class('form-control');
                 echo Former::text('identify_number')
-                    ->label('Số chứng minh nhân dân')
                     ->class('form-control');
                 echo Former::text('identify_location')
-                    ->label('Nơi cấp CMND')
                     ->class('form-control');
                 echo Former::text('identify_date')
-                    ->label('Ngày cấp CMND')
                     ->class('form-control date_mask');
                 echo Former::text('location')
-                    ->label('Chỗ ở hiện tại')
                     ->class('form-control');
 
                 ?>
