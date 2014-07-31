@@ -13,9 +13,14 @@ class MyBonus extends Eloquent {
         'description'
     );
     public static $THUONG_NHANH_AMOUNT = array(
+        Member::CAP_BAN_HANG => 12,
+        Member::CAP_GIAM_SAT => 14,
+        Member::CAP_CHUYEN_VIEN => 16,
+    );
+    public static $DONG_DOI_AMOUNT = array(
         Member::CAP_BAN_HANG => 10,
-        Member::CAP_GIAM_SAT => 12,
-        Member::CAP_CHUYEN_VIEN => 25,
+        Member::CAP_GIAM_SAT => 10,
+        Member::CAP_CHUYEN_VIEN => 15,
     );
 
     public static function validate($input) {
@@ -34,7 +39,11 @@ class MyBonus extends Eloquent {
         $bonusAmoun = array();
         foreach ($bonus as $k => $v) {
             $bonusAmoun[$k]['name'] = $v;
-            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')->where('member_id', $memberId)->where('bonus_id', $k)->sum('amount');
+            $amount = DB::table('member_bonus')
+                ->where('member_id', $memberId)
+                ->where('bonus_id', $k)
+                ->first(array('auto_amount'));
+            $bonusAmoun[$k]['amount'] = $amount->auto_amount;
         }
         return $bonusAmoun;
     }

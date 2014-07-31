@@ -34,7 +34,7 @@
                     ->class('form-control');
                 echo Former::text('price')
                     ->label('Giá tiền')
-                    ->class('form-control');
+                    ->class('form-control money_mask');
                 echo Former::text('score')
                     ->label('Điểm tương ứng')
                     ->class('form-control datepicker');
@@ -53,4 +53,12 @@
         </div>
     </div>
 </div>
+@stop
+@section('addon_js')
+<script src="{{asset('assets/js/plugins/jquery.mask.min.js')}}"></script>
+@stop
+@section('inline_js')
+<script>
+$('.money_mask').mask('000 000 000 000 000 000',{reverse: true});
+</script>
 @stop

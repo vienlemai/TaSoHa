@@ -96,5 +96,6 @@
 @section('inline_js')
 <script>
 $('.date_mask').mask('00/00/0000');
+$('.money_mask').mask('000 000 000 000 000 000');
 </script>
 @stop

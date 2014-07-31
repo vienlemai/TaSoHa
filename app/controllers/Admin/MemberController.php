@@ -51,20 +51,20 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function store() {
+        //dd(Input::all());
         $v = Member::validate(Input::all());
         if ($v->passes()) {
-            //$member = new Member(Input::all());
-            $member = \Member::create(Input::all());
-
-            //$member->save();
-            //$member->//
-//            $viewData = array(
-//                'member' => $member,
-//                'password' => $password,
-//            );
-//            \Mail::send('admin.members.mail', $viewData, function($message)use($member) {
-//                $message->to($member->email, 'TASOHA GROUP')->subject('Thông báo về tài khoản tại tasoha.com');
-//            });
+            $input = Input::all();
+            $parentId = $input['parent_id'];
+            $introduced_by = $input['introduced_by'];
+            if (empty($parentId)) {
+                unset($input['parent_id']);
+            }
+            if (empty($introduced_by)) {
+                unset($input['introduced_by']);
+            }
+            $member = new \Member($input);
+            $member->save();
             Session::flash('success', 'Lưu thành công thành viên' . $member->full_name);
             return Redirect::route('admin.members.index');
         } else {
@@ -81,22 +81,8 @@ class MemberController extends AdminBaseController {
     public function show($id) {
         $member = Member::with('creator', 'parent')
             ->findOrFail($id);
-        $bonus = MyBonus::lists('name', 'id');
-        $bonusAmoun = array();
-        foreach ($bonus as $k => $v) {
-            $bonusAmoun[$k]['name'] = $v;
-            $bonusStatus = DB::table('bonus_status')
-                ->where('member_id', $member->id)
-                ->where('bonus_type', $k)
-                ->first();
-            if ($bonusStatus !== null) {
-                
-            }
-            $bonusAmoun[$k]['amount'] = DB::table('member_bonus')
-                ->where('member_id', $member->id)
-                ->where('bonus_id', $k)
-                ->sum('amount');
-        }
+        $member->updateTeamBonus();
+        $bonusAmoun = \MyBonus::getBonus($id);
         if (\Request::ajax()) {
             return View::make('admin.members.show_modal', array(
                     'member' => $member,

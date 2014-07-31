@@ -44,7 +44,7 @@ class Member extends Node implements UserInterface, RemindableInterface {
     public static function boot() {
         parent::boot();
         static::creating(function($member) {
-            $member->regency = self::CAP_BAN_HANG;
+            $member->regency = '';
             $member->uid = time();
 //            if (!$member->parent_id) {
 //                $member->parent_id = null;
@@ -57,15 +57,28 @@ class Member extends Node implements UserInterface, RemindableInterface {
             //create bonuse row for member
             $bonus = MyBonus::get(array('id'));
             foreach ($bonus as $b) {
-                DB::table('member_bonus')
-                    ->insert(array(
-                        'member_id' => $member->id,
-                        'bonus_id' => $b->id,
-                        'created_at' => Carbon\Carbon::now(),
-                        'updated_at' => Carbon\Carbon::now(),
-                        'amount' => 0,
-                        'auto_amount' => 0
-                ));
+                $mb = DB::table('member_bonus')
+                    ->where('member_id', $member->id)
+                    ->where('bonus_id', $b->id)
+                    ->first(array('id'));
+                if ($mb === null) {
+                    DB::table('member_bonus')
+                        ->insert(array(
+                            'member_id' => $member->id,
+                            'bonus_id' => $b->id,
+                            'created_at' => Carbon\Carbon::now(),
+                            'updated_at' => Carbon\Carbon::now(),
+                            'amount' => 0,
+                            'auto_amount' => 0
+                    ));
+                }
+            }
+            $tb = DB::table('team_bonus')
+                ->where('member_id', $member->id)
+                ->first(array('id'));
+            if ($tb === null) {
+                DB::table('team_bonus')
+                    ->insert(array('member_id' => $member->id));
             }
         });
         static::saving(function($member) {
@@ -74,14 +87,31 @@ class Member extends Node implements UserInterface, RemindableInterface {
             }
             //check score for promotion
             $score = $member->score;
-            if ($score <= self::$scoreForPromotion[self::CAP_BAN_HANG]) {
+            if ($score >= self::$scoreForPromotion[self::CAP_BAN_HANG] && $score < self::$scoreForPromotion[self::CAP_GIAM_SAT]) {
                 $member->regency = self::CAP_BAN_HANG;
-            } elseif ($member->score > self::$scoreForPromotion[self::CAP_BAN_HANG] && $member->score <= self::$scoreForPromotion[self::CAP_QUAN_LY]) {
-                $member->regency = self::CAP_CHUYEN_VIEN;
+            } elseif ($member->score >= self::$scoreForPromotion[self::CAP_GIAM_SAT] && $member->score <= self::$scoreForPromotion[self::CAP_CHUYEN_VIEN]) {
+                $member->regency = self::CAP_GIAM_SAT;
             } else {
-                $member->regency = self::CAP_QUAN_LY;
+                $member->regency = self::CAP_CHUYEN_VIEN;
             }
         });
+    }
+
+    public function initBonus() {
+        $bonus = MyBonus::get(array('id'));
+        foreach ($bonus as $b) {
+            DB::table('member_bonus')
+                ->insert(array(
+                    'member_id' => $this->id,
+                    'bonus_id' => $b->id,
+                    'created_at' => Carbon\Carbon::now(),
+                    'updated_at' => Carbon\Carbon::now(),
+                    'amount' => 0,
+                    'auto_amount' => 0
+            ));
+        }
+        DB::table('team_bonus')
+            ->insert(array('member_id' => $this->id));
     }
 
     public function sunlight() {
@@ -120,8 +150,72 @@ class Member extends Node implements UserInterface, RemindableInterface {
         foreach ($ancestors as $ancestor) {
             if ($ancestor->children->count() == 2) {
                 DB::table('team_bonus')
+                    ->where('member_id', $ancestor->id)
                     ->update(array('need_to_up' => true));
             }
+        }
+    }
+
+    public function updateTeamBonus() {
+        $teamBonus = DB::table('team_bonus')
+            ->where('member_id', $this->id)
+            ->where('need_to_up', true)
+            ->first();
+        if ($teamBonus !== null) {
+            //can cap nhat hoa hong dong doi
+            $children = self::where('parent_id', $this->id)
+                ->get(array('id', 'parent_id', 'lft', 'rgt'));
+            //tim con trai va con phai
+            $left = $children->first();
+            $right = $children->last();
+            //tinh tong diem cua con trai
+            $leftScore = Member::where('lft', '>=', $left->lft)
+                ->where('lft', '<', $left->rgt)
+                ->sum('score');
+            //tong diem cua coon phai
+            $rightScore = Member::where('lft', '>=', $right->lft)
+                ->where('lft', '<', $right->rgt)
+                ->sum('score');
+            //cong voi diem du cua lan truoc
+            $leftTotal = $leftScore + $teamBonus->left_left;
+            $rightTotal = $rightScore + $teamBonus->right_left;
+            $valueLeft = abs($leftTotal - $rightTotal);
+            //cap nhat lai bang team_bonus
+            if ($leftTotal < $rightTotal) {
+                $total = $leftTotal;
+                DB::table('team_bonus')
+                    ->where('member_id', $this->id)
+                    ->where('need_to_up', true)
+                    ->update(array(
+                        'need_to_up' => false,
+                        'right_left' => $valueLeft,
+                        'left_left' => 0,
+                ));
+            } else {
+                $total = $rightTotal;
+                DB::table('team_bonus')
+                    ->where('member_id', $this->id)
+                    ->where('need_to_up', true)
+                    ->update(array(
+                        'need_to_up' => false,
+                        'left_left' => $valueLeft,
+                        'right_left' => 0,
+                ));
+            }
+            //tinh hoa hong dong doi
+            $tyle = MyBonus::$DONG_DOI_AMOUNT[$this->regency];
+            $amount = (int) ($total * $tyle) / 100;
+            //cap nhat hoa hong dong doi
+            $teamBonus = DB::table('member_bonus')
+                ->where('member_id', $this->id)
+                ->where('bonus_id', MyBonus::HH_DONG_DOI)
+                ->first(array('auto_amount'));
+            DB::table('member_bonus')
+                ->where('member_id', $this->id)
+                ->where('bonus_id', MyBonus::HH_DONG_DOI)
+                ->update(array(
+                    'auto_amount' => $teamBonus->auto_amount + $amount,
+            ));
         }
     }
 
