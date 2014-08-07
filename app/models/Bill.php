@@ -35,18 +35,26 @@ class Bill extends BaseModel {
     }
 
     public function updateThuongNhanh($member, $score) {
-        $tyle = MyBonus::$THUONG_NHANH_AMOUNT[$member->regency];
-        $amount = (int) $score * $tyle / 100;
-        $memberBonus = DB::table('member_bonus')
-            ->where('member_id', $member->introduced_by)
-            ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
-            ->first(array('auto_amount'));
-        DB::table('member_bonus')
-            ->where('member_id', $member->introduced_by)
-            ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
-            ->update(array(
-                'auto_amount' => $memberBonus->auto_amount + $amount,
-        ));
+        //kiem tra xem thanh vien co phai la root theo cay mat troi hay ko
+        if (!empty($member->introduced_by)) {
+            $introducer = Member::where('id', $member->introduced_by)
+                ->first(array('regency'));
+            //Kiem tra cap bac cua cha
+            if (!empty($introducer->regency)) {
+                $tyle = MyBonus::$THUONG_NHANH_AMOUNT[$introducer->regency];
+                $amount = (int) $score * $tyle / 100;
+                $memberBonus = DB::table('member_bonus')
+                    ->where('member_id', $member->introduced_by)
+                    ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
+                    ->first(array('auto_amount'));
+                DB::table('member_bonus')
+                    ->where('member_id', $member->introduced_by)
+                    ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
+                    ->update(array(
+                        'auto_amount' => $memberBonus->auto_amount + $amount,
+                ));
+            }
+        }
     }
 
     public function creator() {

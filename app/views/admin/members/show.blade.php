@@ -67,10 +67,7 @@
                             <td>Email</td>
                             <td><?php echo $member->email ?></td>
                         </tr>
-                        <tr>
-                            <td>Ngày tham gia</td>
-                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y') ?></td>
-                        </tr>
+                       
                         <tr>
                             <td>Ngày sinh</td>
                             <td><?php echo $member->day_of_birth ?></td>

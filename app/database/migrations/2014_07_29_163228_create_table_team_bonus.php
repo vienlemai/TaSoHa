@@ -15,7 +15,7 @@ class CreateTableTeamBonus extends Migration {
             $t->increments('id');
             $t->integer('member_id');
             $t->float('left_left')->default(0);
-            $t->float('right_leaf')->default(0);
+            $t->float('right_left')->default(0);
             $t->boolean('need_to_up')->default(false);
         });
     }
