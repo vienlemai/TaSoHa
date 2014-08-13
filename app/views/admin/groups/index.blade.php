@@ -34,24 +34,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = $groups->getFrom(); ?>
+                    <?php
+                    $index = $groups->getFrom();
+                    $allowEdit = in_array('admin.groups.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.groups.destroy', $allowed_routes);
+                    $allowPermission = in_array('admin.groups.permission', $allowed_routes);
+
+                    ?>
                     <?php foreach ($groups as $group): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
                             <td><?php echo $group->name ?></td>
                             <td><?php echo $group->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <?php if (in_array('admin.groups.edit', $allowed_routes)): ?>
+                                <?php if ($allowEdit): ?>
                                     <a href="<?php echo route('admin.groups.edit', $group->id) ?>" class="text-blue" title="<?php echo trans('messages.edit'); ?>">
                                         <i class="fa fa-fw fa-edit"></i><?php echo trans('messages.edit'); ?>
                                     </a>
                                 <?php endif; ?>
-                                <?php if (in_array('admin.groups.destroy', $allowed_routes)): ?>
+                                <?php if ($allowDestroy): ?>
                                     <a href="<?php echo route('admin.groups.destroy', $group->id) ?>" class="text-danger" data-method="delete" title="<?php echo trans('messages.delete'); ?>">
                                         <i class="fa fa-fw fa-ban"></i><?php echo trans('messages.delete'); ?>
                                     </a>
                                 <?php endif; ?>
-                                <?php if (in_array('admin.groups.permission', $allowed_routes)): ?>
+                                <?php if ($allowPermission): ?>
                                     <a href="<?php echo route('admin.groups.permission', $group->id) ?>" class="text-warning" title="<?php echo trans('messages.permission'); ?>">
                                         <i class="fa fa-share"></i><?php echo trans('messages.permission'); ?>
                                     </a>

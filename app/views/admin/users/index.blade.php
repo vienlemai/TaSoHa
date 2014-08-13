@@ -23,6 +23,7 @@
                 <div class="col-md-4 pull-right no-padding">
                     <?php echo View::make('admin.partials.search_tool', array('input' => $input))->render(); ?>
                 </div>
+                <div class="clearfix"></div>
             </div>
             <table class="table table-bordered">
                 <thead>
@@ -36,7 +37,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = $users->getFrom(); ?>
+                    <?php
+                    $index = $users->getFrom();
+                    $allowEdit = in_array('admin.users.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.users.destroy', $allowed_routes);
+
+                    ?>
                     <?php foreach ($users as $user): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
@@ -45,12 +51,12 @@
                             <td><?php echo $user->getGroup() ?></td>
                             <td><?php echo $user->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <?php if (in_array('admin.users.edit', $allowed_routes)): ?>
+                                <?php if ($allowEdit): ?>
                                     <a href="<?php echo route('admin.users.edit', $user->id) ?>" class="text-blue" title="<?php echo trans('messages.edit'); ?>">
                                         <i class="fa fa-fw fa-edit"></i><?php echo trans('messages.edit'); ?>
                                     </a>
                                 <?php endif; ?>
-                                <?php if (in_array('admin.users.destroy', $allowed_routes)): ?>
+                                <?php if ($allowDestroy): ?>
                                     <a href="<?php echo route('admin.users.destroy', $user->id) ?>" class="text-danger" title="<?php echo trans('messages.delete'); ?>" data-method="delete">
                                         <i class="fa fa-fw fa-ban"></i><?php echo trans('messages.delete'); ?>
                                     </a>

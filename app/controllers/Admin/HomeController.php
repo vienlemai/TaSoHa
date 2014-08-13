@@ -22,9 +22,10 @@ class HomeController extends AdminBaseController {
                 'members' => \Member::count(),
                 'articles' => \Article::count(),
                 'products' => \Product::count(),
-                'users' => \AdminUser::count(),
+                'users' => \AdminUser::where('is_supper', false)->count(),
+                'news' => \News::count(),
             );
-            $this->layout->content = View::make('admin/home/index')->with('count',$count);
+            $this->layout->content = View::make('admin/home/index')->with('count', $count);
         }
     }
 

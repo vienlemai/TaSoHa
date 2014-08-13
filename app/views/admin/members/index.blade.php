@@ -27,33 +27,41 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = $members->getFrom(); ?>
+                    <?php
+                    $index = $members->getFrom();
+                    $allowShow = in_array('admin.members.show', $allowed_routes);
+                    $allowEdit = in_array('admin.members.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.members.destroy', $allowed_routes);
+
+                    ?>
                     <?php foreach ($members as $member): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
                             <td><?php echo $member->uid ?></td>
                             <td><?php echo $member->full_name ?></td>
-                            <td>{{$member->introducer->full_name or ''}}</td>
-                            <td>{{$member->parent->full_name or ''}}</td>
+                            <td>{{$member->sunMember->parent->member->full_name or ''}}</td>
+                            <td>{{$member->binaryMember->parent->member->full_name or ''}}</td>
                             <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary">
-                                    <i class="fa fa-search"> Chi tiết</i>
-                                </a>
-                                <a href="<?php echo route('admin.members.edit', $member->id) ?>" class="text-info">
-                                    <i class="fa fa-edit"> Sửa</i>
-                                </a>
-                                <a href="<?php echo route('admin.bonus.create', $member->id) ?>" class="text-warning">
-                                    <i class="fa fa-adjust"> Nhập hoa hồng</i>
-                                </a>
-                                <a href="<?php echo route('admin.members.destroy', $member->id) ?>"
-                                   class="text-danger" 
-                                   data-confirm="Bạn có chắc chắn muốn xóa thành viên <?php echo $member->full_name ?>"
-                                   data-method="delete">
-                                    <i class="fa fa-ban"> Xóa</i>
-                                </a>
+                                <?php if ($allowShow): ?>
+                                    <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary">
+                                        <i class="fa fa-search"> Chi tiết</i>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($allowEdit): ?>
+                                    <a href="<?php echo route('admin.members.edit', $member->id) ?>" class="text-info">
+                                        <i class="fa fa-edit"> Sửa</i>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($allowDestroy): ?>
+                                    <a href="<?php echo route('admin.members.destroy', $member->id) ?>"
+                                       class="text-danger" 
+                                       data-confirm="Bạn có chắc chắn muốn xóa thành viên <?php echo $member->full_name ?>"
+                                       data-method="delete">
+                                        <i class="fa fa-ban"> Xóa</i>
+                                    </a>
+                                <?php endif; ?>
                             </td>
-
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

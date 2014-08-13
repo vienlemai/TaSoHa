@@ -60,6 +60,9 @@ return array(
     'article_delete_success' => 'Xóa thành công bài viết <b>:title</b>',
     'add_category' => 'Thêm danh mục',
     'add_article' => 'Đăng bài viết',
+    'edit_article'=>'Sửa bài viết',
+    'delete_article'=>'Xóa bài viết',
+    'manage_article' => 'Quản lý bài viết',
     //manage user, group
     'manage_users' => 'Quản lý người dùng',
     'manage_groups' => 'Quản lý nhóm người dùng',
@@ -112,11 +115,27 @@ return array(
     'delete_news' => 'Xóa tin tức/thông báo',
     //manage article category
     'manage_article_category' => 'Quản lý danh mục bài viết',
-    'list_category' => 'Xem danh sách danh mục',
+    'list_category' => 'Xem danh mục bài viết',
     'create_category' => 'Tạo mới danh mục',
     'edit_category' => 'Sửa danh mục',
     'detele_category' => 'Xóa danh mục',
     //product 
     'input_product' => 'Nhập nội dung sản phẩm',
-    'product_save_success'=>'Nhập thành công sản phẩm <b>:name</b>',
+    'product_save_success' => 'Nhập thành công sản phẩm <b>:name</b>',
+    'manage_product'=>'Quản lý sản phẩm',
+    'add_product'=>'Thêm sản phẩm',
+    'edit_product'=>'Sủa sản phẩm',
+    'list_product'=>'Danh sách sản phẩm',
+    'delete_product'=>'Xóa sản phẩm',
+    'create_category_product'=>'Thêm danh mục sản phẩm',
+    'list_category_product'=>'Danh sách danh mục sản phẩm',
+    'edit_category_product'=>'Sửa danh mục sản phẩm',
+    'delete_category_product'=>'Xóa danh mục sản phẩm',
+    //page
+    'manage_page' => 'Quản lý các trang tĩnh',
+    'list_page' => 'Danh sách các trang tĩnh',
+    'edit_page' => 'Chỉnh sửa trang tĩnh',
+    //configs
+    'slide' => 'Slide ảnh',
+    'site_setting' => 'Cấu hình',
 );

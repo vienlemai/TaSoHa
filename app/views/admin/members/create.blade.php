@@ -24,12 +24,12 @@
             <?php echo Former::open(route('admin.members.store'))->method('post') ?>
             <div class="box-body col-lg-10">
                 <?php
-                echo Former::select('introduced_by')
+                echo Former::select('sun_parent_id')
                     ->label('Người giới thiệu')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')
                     ->options($members);
-                echo Former::select('parent_id')
+                echo Former::select('binary_parent_id')
                     ->label('Người quản lý')
                     ->addOption('-- Là thành viên cấp 1', null)
                     ->class('custom-select2 select2')

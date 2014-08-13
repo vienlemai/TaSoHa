@@ -14,9 +14,11 @@
     <div class="col-md-12">
         <div class="table-wrap">
             <div class="table-header">
-                <a href="{{route('admin.articles.create')}}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-plus"></i> <?php echo trans('messages.add_article'); ?>
-                </a>
+                <?php if (in_array('admin.articles.create', $allowed_routes)): ?>
+                    <a href="{{route('admin.articles.create')}}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-plus"></i> <?php echo trans('messages.add_article'); ?>
+                    </a>
+                <?php endif; ?>
                 <div class="col-md-4 pull-right no-padding">
                     <?php echo View::make('admin.partials.search_tool')->render(); ?>
                 </div>
@@ -32,7 +34,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = $articles->getFrom(); ?>
+                    <?php
+                    $index = $articles->getFrom();
+                    $allowEdit = in_array('admin.articles.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.articles.destroy', $allowed_routes);
+
+                    ?>
                     <?php foreach ($articles as $article): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
@@ -45,18 +52,22 @@
                             <td>{{$article->category->name or ''}}</td>
                             <td><?php echo $article->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.articles.edit', $article->id) ?>">
-                                    <i class="fa fa-edit"> <?php echo trans('button.edit'); ?></i>
-                                </a>
+                                <?php if ($allowEdit): ?>
+                                    <a href="<?php echo route('admin.articles.edit', $article->id) ?>">
+                                        <i class="fa fa-edit"> <?php echo trans('button.edit'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                                 <?php
-                                $deleteUrl = route('admin.articles.destroy', $article->id);
-                                $confirmMsg = trans('confirmation.delete_article', array('title' => $article->title));
-                                ?>
-                                <a href="<?php echo $deleteUrl ?>" class="text-danger" data-method="delete" data-confirm="<?php echo $confirmMsg ?>">
-                                    <i class="fa fa-times"> <?php echo trans('button.delete'); ?></i>
-                                </a>
-                            </td>
+                                if ($allowDestroy):
+                                    $deleteUrl = route('admin.articles.destroy', $article->id);
+                                    $confirmMsg = trans('confirmation.delete_article', array('title' => $article->title));
 
+                                    ?>
+                                    <a href="<?php echo $deleteUrl ?>" class="text-danger" data-method="delete" data-confirm="<?php echo $confirmMsg ?>">
+                                        <i class="fa fa-times"> <?php echo trans('button.delete'); ?></i>
+                                    </a>
+                                <?php endif; ?>
+                            </td>
                         </tr>
                     <?php endforeach; ?>
                 </tbody>
@@ -69,6 +80,7 @@
                         'to' => $articles->getTo(),
                         'total' => $articles->getTotal(),
                     ));
+
                     ?>
                 </div>
                 <div class="info-right">

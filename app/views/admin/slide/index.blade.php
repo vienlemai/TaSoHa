@@ -15,9 +15,11 @@
     <div class="col-md-12">
         <div class="table-wrap">
             <div class="table-header">
-                <a href="{{route('admin.slide.create')}}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-plus"></i> <?php echo trans('button.new_slide'); ?>
-                </a>
+                <?php if (in_array('admin.slide.create', $allowed_routes)): ?>
+                    <a href="{{route('admin.slide.create')}}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-plus"></i> <?php echo trans('button.new_slide'); ?>
+                    </a>
+                <?php endif; ?>
             </div>
             <table class="table table-bordered">
                 <thead>
@@ -30,6 +32,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    $allowEdit = in_array('admin.slide.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.slide.destroy', $allowed_routes);
+
+                    ?>
                     <?php foreach ($slides as $slide): ?>
                         <tr>
                             <td><?php echo $slide->id ?></td>
@@ -41,16 +48,21 @@
                             <td><?php echo $slide->description ?></td>
                             <td><?php echo $slide->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.slide.edit', $slide->id) ?>">
-                                    <i class="fa fa-edit"> <?php echo trans('messages.edit'); ?></i>
-                                </a>
+                                <?php if ($allowEdit): ?>
+                                    <a href="<?php echo route('admin.slide.edit', $slide->id) ?>">
+                                        <i class="fa fa-edit"> <?php echo trans('messages.edit'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                                 <?php
-                                $deleteUrl = route('admin.slide.destroy', $slide->id);
-                                $confirmMsg = trans('confirmation.delete_slide', array('title' => $slide->title));
-                                ?>
-                                <a href="<?php echo $deleteUrl ?>" class="text-danger" data-method='delete' data-confirm='<?php echo $confirmMsg ?>'>
-                                    <i class="fa fa-ban"> <?php echo trans('messages.delete'); ?></i>
-                                </a>
+                                if ($allowDestroy):
+                                    $deleteUrl = route('admin.slide.destroy', $slide->id);
+                                    $confirmMsg = trans('confirmation.delete_slide', array('title' => $slide->title));
+
+                                    ?>
+                                    <a href="<?php echo $deleteUrl ?>" class="text-danger" data-method='delete' data-confirm='<?php echo $confirmMsg ?>'>
+                                        <i class="fa fa-ban"> <?php echo trans('messages.delete'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                             </td>
 
                         </tr>
@@ -65,6 +77,7 @@
                         'to' => $slides->getTo(),
                         'total' => $slides->getTotal(),
                     ));
+
                     ?>
                 </div>
                 <div class="info-right">

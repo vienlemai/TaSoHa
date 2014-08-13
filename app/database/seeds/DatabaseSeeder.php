@@ -8,9 +8,10 @@ class DatabaseSeeder extends Seeder {
 
 //        $this->call('AdminUserSeeder');
 //        $this->call('MemberSeeder');
-        $this->call('TeamBonusSeed');
+        //$this->call('TeamBonusSeed');
 //        $this->call('ArticleCategorySeeder');
         //$this->call('ConfigSeeder');
+        $this->call('DirectConfigSeed');
     }
 
 }
@@ -182,6 +183,35 @@ class ConfigSeeder extends Seeder {
                 'key' => 'need_to_update_bonus',
                 'value' => json_encode([]),
         ));
+    }
+
+}
+
+class DirectConfigSeed extends Seeder {
+
+    public function run() {
+        $regencies = array(
+            'ban_hang',
+            'giam_sat',
+            'chuyen_vien',
+            'pho_ban',
+            'truong_ban',
+            'pho_giam_doc',
+            'giam_doc',
+            'tong_giam_doc',
+            'pho_co_tuc',
+            'co_tuc',
+        );
+        foreach ($regencies as $value) {
+            for ($i = 1; $i <= 9; $i++) {
+                DB::table('direct_configs')
+                    ->insert(array(
+                        'regency' => $value,
+                        'depth' => $i,
+                        'value' => 0,
+                ));
+            }
+        }
     }
 
 }

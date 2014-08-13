@@ -22,7 +22,7 @@ class BillController extends AdminBaseController {
     public function index() {
         $bills = \Bill::with('creator', 'buyer')
             ->condition(Input::all())
-            ->orderBy('created_at','desc')
+            ->orderBy('created_at', 'desc')
             ->paginate();
         $this->layout->content = View::make('admin.bills.index', array(
                 'bills' => $bills,
@@ -48,6 +48,8 @@ class BillController extends AdminBaseController {
      */
     public function store() {
         $bill = new Bill(Input::all());
+        $bill->price = \Common::stringToInt($bill->price);
+        $bill->score = \Common::stringToInt($bill->score);
         if ($bill->save()) {
             Session::flash('success', 'Nhập thành công hóa đơn');
             return Redirect::route('admin.bills.index');

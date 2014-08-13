@@ -2,7 +2,7 @@
 <h1>
     <?php echo trans('menu.manage_articles'); ?>
     <small>
-    <?php echo trans('menu.manage_tasoha_pages')?>    
+        <?php echo trans('menu.manage_tasoha_pages') ?>    
     </small>
 </h1>
 <ol class="breadcrumb">
@@ -24,6 +24,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php $allowEdit = in_array('admin.page.edit', $allowed_routes) ?>
                     <?php foreach ($pages as $page): ?>
                         <tr>
                             <td><?php echo $page->id ?></td>
@@ -31,9 +32,11 @@
                                 <a href="<?php echo route('admin.page.edit', $page->name) ?>"><?php echo $page->title ?></a>
                             </td>
                             <td>
-                                <a href="<?php echo route('admin.page.edit', $page->name) ?>" class="btn btn-xs btn-primary">
-                                    <i class="fa fa-pencil"> <?php echo trans('messages.edit'); ?></i>
-                                </a>
+                                <?php if ($allowEdit): ?>
+                                    <a href="<?php echo route('admin.page.edit', $page->name) ?>" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-pencil"> <?php echo trans('messages.edit'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?>

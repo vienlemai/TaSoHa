@@ -15,9 +15,11 @@
     <div class="col-md-12">
         <div class="table-wrap">
             <div class="table-header">
-                <a href="{{route('admin.news.create')}}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-plus"></i> <?php echo trans('button.new_news'); ?>
-                </a>
+                <?php if (in_array('admin.news.create', $allowed_routes)): ?>
+                    <a href="{{route('admin.news.create')}}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-plus"></i> <?php echo trans('button.new_news'); ?>
+                    </a>
+                <?php endif; ?>
                 <div class="col-md-4 pull-right no-padding">
                     <?php echo View::make('admin.partials.search_tool')->render(); ?>
                 </div>
@@ -33,6 +35,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    $allowEdit = in_array('admin.news.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.news.destroy', $allowed_routes);
+
+                    ?>
                     <?php foreach ($news as $n): ?>
                         <tr>
                             <td><?php echo $n->id ?></td>
@@ -44,16 +51,21 @@
                             <td><?php echo truncate($n->content, 10) ?></td>
                             <td><?php echo $n->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.news.edit', $n->id) ?>">
-                                    <i class="fa fa-edit"> <?php echo trans('messages.edit'); ?></i>
-                                </a>
+                                <?php if ($allowEdit): ?>
+                                    <a href="<?php echo route('admin.news.edit', $n->id) ?>">
+                                        <i class="fa fa-edit"> <?php echo trans('messages.edit'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                                 <?php
-                                $deleteUrl = route('admin.news.destroy', $n->id);
-                                $confirmMsg = trans('confirmation.delete_news', array('title' => $n->title));
-                                ?>
-                                <a href="<?php echo $deleteUrl ?>" class="text-danger" data-method='delete' data-confirm='<?php echo $confirmMsg ?>'>
-                                    <i class="fa fa-ban"> <?php echo trans('messages.delete'); ?></i>
-                                </a>
+                                if ($allowDestroy):
+                                    $deleteUrl = route('admin.news.destroy', $n->id);
+                                    $confirmMsg = trans('confirmation.delete_news', array('title' => $n->title));
+
+                                    ?>
+                                    <a href="<?php echo $deleteUrl ?>" class="text-danger" data-method='delete' data-confirm='<?php echo $confirmMsg ?>'>
+                                        <i class="fa fa-ban"> <?php echo trans('messages.delete'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                             </td>
 
                         </tr>
@@ -68,6 +80,7 @@
                         'to' => $news->getTo(),
                         'total' => $news->getTotal(),
                     ));
+
                     ?>
                 </div>
                 <div class="info-right">

@@ -19,6 +19,9 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
         'as' => 'admin.error',
         'uses' => 'HomeController@error'
     ));
+    Route::get('direct-bonus', function() {
+        Member::updateDirectBonus();
+    });
 });
 
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'admin.auth'), function() {
@@ -43,6 +46,44 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         'as' => 'admin.users.password',
         'uses' => 'AdminUserController@postPassword'
     ));
+    Route::get('tinh-hoa-hong', function() {
+        return View::make('admin.tmp.tinh_hoa_hong');
+    });
+    Route::post('tinh-hoa-hong', function() {
+        $month = Carbon\Carbon::now()->format('m/Y');
+        $result = Member::getMonthlyBonus($month);
+        //$result = false;
+        if ($result) {
+            $message = 'Đã tính thành công hoa hồng cho tháng ' . $month;
+        } else {
+            $message = 'Hoa hồng cho tháng ' . $month . ' đã được tính trước đó, bạn không thể tính lại';
+        }
+        $response = array(
+            'status' => $result,
+            'message' => $message
+        );
+        return Response::json($response);
+    });
+    Route::get('xoa-du-lieu', function() {
+        return View::make('admin.tmp.xoa_du_lieu');
+    });
+    Route::post('xoa-du-lieu', function() {
+        Bill::resetBill();
+        $response = array(
+            'status' => true,
+            'message' => 'Đã xóa hết dữ liệu của hóa đơn, xóa hết điểm của thành viên.'
+        );
+        return Response::json($response);
+    });
+
+    Route::get('member/tree-binary/children/{parentId?}', function($parentId = null) {
+        $data = BinaryMember::getChildren($parentId);
+        return Response::json($data);
+    });
+    Route::get('member/tree-sun/children/{parentId?}', function($introducerId = null) {
+        $data = SunMember::getChildren($introducerId);
+        return Response::json($data);
+    });
     Route::group(array('before' => 'admin.permission'), function() {
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');
@@ -82,14 +123,6 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
             'as' => 'admin.members.tree',
             'uses' => 'MemberController@tree'
         ));
-        Route::get('member/tree-binary/children/{parentId?}', function($parentId = null) {
-            $data = Member::getBinaryChildren($parentId);
-            return Response::json($data);
-        });
-        Route::get('member/tree-sun/children/{parentId?}', function($introducerId = null) {
-            $data = Member::getSunChildren($introducerId);
-            return Response::json($data);
-        });
         Route::get('bonus/{memberId}/create', array(
             'as' => 'admin.bonus.create',
             'uses' => 'BonusController@create',

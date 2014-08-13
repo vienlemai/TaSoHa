@@ -15,9 +15,10 @@
         <div class="box box-info">
             <div class="box-header">
                 <i class="fa fa-user"></i>
-                <h3 class="box-title">Nhập Thông tin hóa đơn</h3>
+                <h3 class="box-title">Thông tin hóa đơn</h3>
             </div>
-            <div class="box-body col-lg-10">
+            <div class="clearfix"></div>
+            <div class="box-body">
                 <table class="table table-bordered">
                     <tbody>
                         <tr>
@@ -30,11 +31,11 @@
                         </tr>
                         <tr>
                             <td>Giá tiền</td>
-                            <td><?php echo $bill->price ?></td>
+                            <td><?php echo Common::IntToString($bill->price) ?></td>
                         </tr>
                         <tr>
                             <td>Điểm</td>
-                            <td><?php echo $bill->score ?></td>
+                            <td><?php echo Common::IntToString($bill->score) ?></td>
                         </tr>
                     </tbody>
                 </table>

@@ -36,25 +36,34 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <?php $index = $bills->getFrom(); ?>
+                    <?php
+                    $index = $bills->getFrom();
+                    $allowShow = in_array('admin.bills.show', $allowed_routes);
+                    $allowDestroy = in_array('admin.bills.destroy', $allowed_routes);
+
+                    ?>
                     <?php foreach ($bills as $bill): ?>
                         <tr>
                             <td><?php echo $index++ ?></td>
                             <td>{{$bill->buyer->full_name or ''}}</td>
                             <td><?php echo $bill->product_name ?></td>
-                            <td><?php echo $bill->price ?></td>
-                            <td>{{$bill->score}}</td>
+                            <td><?php echo Common::IntToString($bill->price) ?></td>
+                            <td><?php echo Common::IntToString($bill->score) ?></td>
                             <td><?php echo $bill->created_at->format('d \t\h\á\n\g m, Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.bills.show', $bill->id) ?>" class="text-primary">
-                                    <i class="fa fa-search"> Xem chi tiết</i>
-                                </a>
-                                <a href="<?php echo route('admin.bills.destroy', $bill->id) ?>"
-                                   class="text-danger" 
-                                   data-confirm="Bạn có chắc chắn muốn xóa hóa đơn ?"
-                                   data-method="delete">
-                                    <i class="fa fa-ban"> Xóa</i>
-                                </a>
+                                <?php if ($allowShow): ?>
+                                    <a href="<?php echo route('admin.bills.show', $bill->id) ?>" class="text-primary">
+                                        <i class="fa fa-search"> Xem chi tiết</i>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($allowDestroy): ?>
+                                    <a href="<?php echo route('admin.bills.destroy', $bill->id) ?>"
+                                       class="text-danger" 
+                                       data-confirm="Bạn có chắc chắn muốn xóa hóa đơn ?"
+                                       data-method="delete">
+                                        <i class="fa fa-ban"> Xóa</i>
+                                    </a>
+                                <?php endif; ?>
                             </td>
 
                         </tr>
@@ -67,21 +76,6 @@
             ))->render();
 
             ?>
-        </div>
-    </div>
-</div>
-<div id="modal-member-detail" class="modal fade" tabindex="-1" role="dialog" aria-hidden="false">
-    <div class="modal-dialog modal-md">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <h3>Thông tin chi tiết thành viên</h3>
-            </div>
-            <div class="modal-body" id='form-add-node-wrap'>
-            </div>
-            <div class="modal-footer">
-                <button class="btn" data-dismiss="modal" aria-hidden="true">Đóng</button>            
-            </div>
         </div>
     </div>
 </div>

@@ -64,10 +64,18 @@
                             <td><?php echo $member->full_name ?></td>
                         </tr>
                         <tr>
+                            <td>Cấp bậc</td>
+                            <td><strong><?php echo Member::$regencyLabel[$member->regency] ?></strong></td>
+                        </tr>
+                        <tr>
+                            <td>Điểm tích lũy</td>
+                            <td><?php echo Common::IntToString($member->score) ?></td>
+                        </tr>
+                        <tr>
                             <td>Email</td>
                             <td><?php echo $member->email ?></td>
                         </tr>
-                       
+
                         <tr>
                             <td>Ngày sinh</td>
                             <td><?php echo $member->day_of_birth ?></td>
@@ -96,7 +104,7 @@
                 </table>
             </div>
             <div class="box-footer">
-                <a class="btn btn-warning" href="<?php echo route('admin.members.change_password',$member->id) ?>">Đổi mật khẩu</a>
+                <a class="btn btn-warning" href="<?php echo route('admin.members.change_password', $member->id) ?>">Đổi mật khẩu</a>
             </div>
         </div>
     </div>

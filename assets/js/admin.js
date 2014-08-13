@@ -129,3 +129,35 @@ $(document).on('click', '.btn-view-member-detail', function() {
 	});
 	return false;
 });
+
+$('#get-monthly-bonus').on('click', function() {
+	$.ajax({
+		url: baseUrl + '/tinh-hoa-hong',
+		type: 'post',
+		dataType: 'json',
+		data: null,
+		success: function() {
+			$('.calculate-bonus-wrap').hide();
+			$('.bounus-result-wrap').show();
+		},
+		error: function() {
+			alert('Đã có lỗi xảy ra, vui lòng thử lại');
+		}
+	});
+});
+$('#btn-reset-bill').on('click', function() {
+	$.ajax({
+		url: baseUrl + '/xoa-du-lieu',
+		type: 'post',
+		dataType: 'json',
+		data: null,
+		success: function(data) {
+			$('.clear-result-wrap .alert').html(data.message);
+			$('.calculate-bonus-wrap').hide();
+			$('.clear-result-wrap').show();
+		},
+		error: function() {
+			alert('Đã có lỗi xảy ra, vui lòng thử lại');
+		}
+	});
+});

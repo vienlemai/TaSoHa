@@ -11,6 +11,10 @@ use \Page;
 
 class HomeController extends FrontendBaseController {
 
+    public function landing() {
+        return View::make('frontend.home.landing');
+    }
+
     /**
      * GET /
      */

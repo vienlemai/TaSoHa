@@ -10,4 +10,8 @@
 | the console gets access to each of the command object instances.
 |
 */
+Artisan::add(new UpdateBonusMonthly);
+Artisan::add(new resetBill);
+Artisan::resolve('UpdateBonusMonthly');
+Artisan::resolve('resetBill');
 

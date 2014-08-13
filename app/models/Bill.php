@@ -24,37 +24,48 @@ class Bill extends BaseModel {
             ->get(array('id'));
         //update score for member
         $member = $this->buyer;
-        $member->score = $member->score + $this->score;
-        $member->save();
+        Event::fire('member.update.score', array($member, $this->score));
+        //Member::updateScore($member, $this->score);
         if ($bills->count() == 1) {
-            $this->updateThuongNhanh($member, $this->score);
+            $member->updateDevelopBonus($this->score);
             $member->needUpdateTeamBonus();
         } else {
-            
+            $member->updateSecondScore($this->score);
         }
     }
 
-    public function updateThuongNhanh($member, $score) {
-        //kiem tra xem thanh vien co phai la root theo cay mat troi hay ko
-        if (!empty($member->introduced_by)) {
-            $introducer = Member::where('id', $member->introduced_by)
-                ->first(array('regency'));
-            //Kiem tra cap bac cua cha
-            if (!empty($introducer->regency)) {
-                $tyle = MyBonus::$THUONG_NHANH_AMOUNT[$introducer->regency];
-                $amount = (int) $score * $tyle / 100;
-                $memberBonus = DB::table('member_bonus')
-                    ->where('member_id', $member->introduced_by)
-                    ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
-                    ->first(array('auto_amount'));
-                DB::table('member_bonus')
-                    ->where('member_id', $member->introduced_by)
-                    ->where('bonus_id', MyBonus::HH_THUONG_NHANH)
-                    ->update(array(
-                        'auto_amount' => $memberBonus->auto_amount + $amount,
-                ));
-            }
-        }
+    public static function resetBill() {
+        DB::table('configs')
+            ->truncate();
+        DB::table('member_bonus')
+            ->update(array('auto_amount' => 0));
+        DB::table('team_bonus')
+            ->update(array(
+                'left_left' => 0,
+                'right_left' => 0,
+                'need_to_up' => false
+        ));
+        DB::table('members')
+            ->update(array(
+                'score' => 0,
+                'children_score' => 0,
+                'regency' => ''
+        ));
+        DB::table('second_scores')
+            ->truncate();
+        DB::table('bills')
+            ->truncate();
+//        $members = Member::get();
+//        foreach ($members as $member) {
+//            $random = rand(150, 500);
+//            $bill = new Bill(array(
+//                'product_name' => 'mua ' . str_random(10),
+//                'price' => $random * 20,
+//                'score' => $random,
+//                'member_id' => $member->id
+//            ));
+//            $bill->forceSave();
+//        }
     }
 
     public function creator() {

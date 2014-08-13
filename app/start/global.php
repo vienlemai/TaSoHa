@@ -86,3 +86,43 @@ Validator::extend('passmembercheck', function ($attribute, $value, $parameters) 
     }
     return Hash::check($value, Auth::member()->get()->password);
 });
+Event::listen('member.update.score', function($member, $score) {
+    Log::info('Fire event update member score: ' . $score);
+    //update score for member
+    $member->score = $member->score + $score;
+    //check score for promotion
+    $sunMember = SunMember::with('children')->where('member_id', $member->id)
+        ->remember(60)
+        ->first();
+    if ($sunMember->children->count() >= 4 && $member->score >= Member::$scoreForPromotion[Member::CAP_CHUYEN_VIEN]) {
+        $scoreToCheckMember = $member->score + ($member->children_score * 40 / 100);
+        $memberRegency = Member::getRegencyByScore($scoreToCheckMember);
+    } else {
+        $scoreToCheckMember = $member->score;
+        $memberRegency = Member::getRegencyByScore($scoreToCheckMember);
+        if ($scoreToCheckMember >= Member::$scoreForPromotion[Member::CAP_CHUYEN_VIEN]) {
+            $memberRegency = Member::CAP_CHUYEN_VIEN;
+        }
+    }
+    $member->regency = $memberRegency;
+    Log::info('Update for member: ' . $member->full_name . ' children: ' . $sunMember->children->count() . 'score to check ' . $scoreToCheckMember . ' new regency : ' . $memberRegency);
+    $member->save();
+    if (!empty($sunMember->parent_id)) {
+        $siblings = SunMember::where('parent_id', $member->parent_id)
+            ->get();
+        $sunParent = SunMember::where('id', $sunMember->parent_id)
+            ->remember(60)
+            ->first();
+        $parentMember = Member::where('id', $sunParent->member_id)
+            ->remember(60)
+            ->first();
+        $parentMember->children_score = $parentMember->children_score + $score;
+        if ($siblings->count() >= 4 && $parentMember->score >= Member::$scoreForPromotion[Member::CAP_CHUYEN_VIEN]) {
+            $scoreToCheckParent = $parentMember->score + $parentMember->children_score;
+            $parentRegency = Member::getRegencyByScore($scoreToCheckParent);
+            $parentMember->regency = $parentRegency;
+            Log::info('Update for parent member: ' . $parentMember->full_name . $score . 'new regency : ' . $parentRegency);
+        }
+        $parentMember->save();
+    }
+});

@@ -15,10 +15,11 @@
 
         <div class="table-wrap">
             <div class="table-header">
-                <a href="{{route('admin.product_category.create')}}" class="btn btn-sm btn-primary">
-                    <i class="fa fa-plus"></i> <?php echo trans('messages.add_category'); ?>
-                </a>
-
+                <?php if (in_array('admin.product_category.create', $allowed_routes)): ?>
+                    <a href="{{route('admin.product_category.create')}}" class="btn btn-sm btn-primary">
+                        <i class="fa fa-plus"></i> <?php echo trans('messages.add_category'); ?>
+                    </a>
+                <?php endif; ?>
             </div>
             <table class="table table-bordered">
                 <thead>
@@ -31,6 +32,12 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php
+                    $allowEdit = in_array('admin.product_category.edit', $allowed_routes);
+                    $allowDestroy = in_array('admin.product_category.destroy', $allowed_routes);
+                    $allowCreate = in_array('admin.product.create', $allowed_routes);
+
+                    ?>
                     <?php foreach ($categories as $category): ?>
                         <tr>
                             <td><?php echo $category->id ?></td>
@@ -40,20 +47,26 @@
                             <td><?php echo $category->description ?></td>
                             <td><?php echo $category->created_at->format('d/m/Y, H:i') ?></td>
                             <td>
-                                <a href="<?php echo route('admin.product_category.edit', $category->id) ?>" class="btn btn-xs btn-primary">
-                                    <i class="fa fa-pencil"> <?php echo trans('messages.edit'); ?></i>
-                                </a>
+                                <?php if ($allowEdit): ?>
+                                    <a href="<?php echo route('admin.product_category.edit', $category->id) ?>" class="btn btn-xs btn-primary">
+                                        <i class="fa fa-pencil"> <?php echo trans('messages.edit'); ?></i>
+                                    </a>
+                                <?php endif; ?>
                                 <?php
-                                $deleteUrl = route('admin.product_category.destroy', $category->id);
-                                $confirmMsg = trans('confirmation.product_category', array('name' => $category->name));
+                                if ($allowDestroy):
+                                    $deleteUrl = route('admin.product_category.destroy', $category->id);
+                                    $confirmMsg = trans('confirmation.product_category', array('name' => $category->name));
 
-                                ?>
-                                <a href="<?php echo $deleteUrl ?>" class="btn btn-xs btn-danger" data-method="delete" data-confirm="<?php echo $confirmMsg ?>">
-                                    <i class="fa fa-times"> <?php echo trans('messages.delete'); ?></i>
-                                </a>
-                                <a href="{{route('admin.product.create', array('product_category_id' => $category->id))}}" class="btn btn-xs btn-success">
-                                    <i class="fa fa-plus"></i> <?php echo trans('button.new_product'); ?>
-                                </a>
+                                    ?>
+                                    <a href="<?php echo $deleteUrl ?>" class="btn btn-xs btn-danger" data-method="delete" data-confirm="<?php echo $confirmMsg ?>">
+                                        <i class="fa fa-times"> <?php echo trans('messages.delete'); ?></i>
+                                    </a>
+                                <?php endif; ?>
+                                <?php if ($allowCreate): ?>
+                                    <a href="{{route('admin.product.create', array('product_category_id' => $category->id))}}" class="btn btn-xs btn-success">
+                                        <i class="fa fa-plus"></i> <?php echo trans('button.new_product'); ?>
+                                    </a>
+                                <?php endif; ?>
                             </td>
                         </tr>
                     <?php endforeach; ?> 

@@ -20,7 +20,10 @@ class MemberController extends AdminBaseController {
      */
     public function index() {
         $query = \Member::buildQuery(Input::all());
-        $members = $query->with('parent', 'introducer')->paginate();
+        $members = $query->with(array(
+                'sunMember.parent.member',
+                'binaryMember.parent.member'
+            ))->paginate();
         $this->layout->content = View::make('admin.members.index', array(
                 'members' => $members,
                 'input' => Input::all(),
@@ -51,21 +54,36 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function store() {
-        //dd(Input::all());
         $v = Member::validate(Input::all());
         if ($v->passes()) {
-            $input = Input::all();
-            $parentId = $input['parent_id'];
-            $introduced_by = $input['introduced_by'];
-            if (empty($parentId)) {
-                unset($input['parent_id']);
+            $sunParentId = Input::get('sun_parent_id');
+            $binayParentId = Input::get('binary_parent_id');
+            //var_dump($sunParentId);
+            //dd($binayParentId);
+            if (!\BinaryMember::validateNumberOfChildren($binayParentId)) {
+                Session::flash('error', '<b>Lỗi: </b> Người quản lý này đã có 2 con, vui lòng chọn người khác');
+                return Redirect::back()->withInput();
             }
-            if (empty($introduced_by)) {
-                unset($input['introduced_by']);
+            $member = \Member::create(Input::all());
+            $binaryMember = new \BinaryMember(array(
+                'member_id' => $member->id,
+            ));
+            $binaryMember->save();
+            $sunMember = new \SunMember(array(
+                'member_id' => $member->id,
+            ));
+            $sunMember->save();
+            if (!empty($binayParentId)) {
+                $binaryParent = \BinaryMember::find($binayParentId);
+                $binaryMember->makeChildOf($binaryParent);
             }
-            $member = new \Member($input);
-            $member->save();
-            Session::flash('success', 'Lưu thành công thành viên' . $member->full_name);
+
+            if (!empty($sunParentId)) {
+                $sunParent = \SunMember::find($sunParentId);
+                $sunMember->makeChildOf($sunParent);
+            }
+
+            Session::flash('success', 'Lưu thành công thành viên ' . $member->full_name);
             return Redirect::route('admin.members.index');
         } else {
             return Redirect::back()->withInput()->withErrors($v->messages());
@@ -79,8 +97,9 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function show($id) {
-        $member = Member::with('creator', 'parent')
+        $member = Member::with('creator')
             ->findOrFail($id);
+        //dd($member->toArray);
         $member->updateTeamBonus();
         $bonusAmoun = \MyBonus::getBonus($id);
         if (\Request::ajax()) {
