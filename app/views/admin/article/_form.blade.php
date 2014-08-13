@@ -1,16 +1,12 @@
 <?php
 echo Former::select('category_id')
-    ->label(trans('model.Article.category_id'))
-    ->fromQuery($categories, 'name', 'id')
-    ->class('form-control');
-echo Former::text('title')
-    ->label(trans('model.Article.title'))
-    ->class('form-control');
+    ->fromQuery($categories, 'name', 'id');
+echo Former::text('title');
 
 ?>
 <div class="form-group">
-    <label for="title" class="control-label col-lg-3 col-sm-3">Hình đại diện</label>
-    <div class="col-lg-9 col-sm-9">
+    <label for="title" class="control-label col-lg-4 col-sm-4">Hình đại diện</label>
+    <div class="col-lg-8 col-sm-8">
         <div class="thumbnail-select" id="elfinder_button" for="#thumbnail">
             <?php if (isset($article)): ?>
                 <img src="<?php echo $article->getThumbnailUrl() ?>"/>
