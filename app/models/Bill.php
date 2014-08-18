@@ -55,17 +55,17 @@ class Bill extends BaseModel {
             ->truncate();
         DB::table('bills')
             ->truncate();
-//        $members = Member::get();
-//        foreach ($members as $member) {
-//            $random = rand(150, 500);
-//            $bill = new Bill(array(
-//                'product_name' => 'mua ' . str_random(10),
-//                'price' => $random * 20,
-//                'score' => $random,
-//                'member_id' => $member->id
-//            ));
-//            $bill->forceSave();
-//        }
+        $members = Member::get();
+        foreach ($members as $member) {
+            $random = rand(150, 500);
+            $bill = new Bill(array(
+                'product_name' => 'mua ' . str_random(10),
+                'price' => $random * 20,
+                'score' => $random,
+                'member_id' => $member->id
+            ));
+            $bill->forceSave();
+        }
     }
 
     public function creator() {

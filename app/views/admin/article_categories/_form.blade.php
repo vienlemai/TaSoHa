@@ -5,8 +5,8 @@ echo Former::text('name')
 
 ?>
 <div class="form-group">
-    <label for="title" class="control-label col-lg-3 col-sm-3">Hình đại diện</label>
-    <div class="col-lg-9 col-sm-9">
+    <label for="title" class="control-label col-lg-4 col-sm-4">Hình đại diện</label>
+    <div class="col-lg-8 col-sm-8">
         <div class="thumbnail-select" id="elfinder_button" for="#thumbnail">
             <?php if (isset($category)): ?>
                 <img src="<?php echo $category->getThumbnailUrl() ?>"/>

@@ -161,3 +161,57 @@ $('#btn-reset-bill').on('click', function() {
 		}
 	});
 });
+
+//Choose menu
+$("#select-menu-type").on("change", function() {
+	var type = $(this).val();
+	var menuItem = menus[type];
+	//console.log(menus[type]);return false;
+	if (menuItem['menu_action'] != '') {
+		var ajaxUrl = base_url + 'admin/menus/' + menuItem['menu_action'];
+		$.get(ajaxUrl, function(data) {
+			$("#menu-modal .modal-body").html(data);
+			$("#menu-modal .modal-header h3").html('Chọn danh mục cho menu');
+			loadDataTable();
+			$("#menu-modal").modal();
+			getMenuSelected();
+		});
+	} else {
+		menuSelectedTitle = menus[type]['title'];
+		meunuSelectedId = 0;
+		$("#MenuContent").val(menuSelectedTitle);
+		$("#MenuExt").val(0);
+	}
+
+//		} else if (type == 3) {
+//			$("#MenuContent").val('Album ảnh');
+//		} else if (type == 4) {
+//			$("#MenuContent").val('Video');
+//		}
+	//}
+});
+
+$('#menu-modal').on('hidden.bs.modal', function() {
+	var menuContent = '';
+	var menuType = $("#MenuMenuType").val();
+	menuContent += menus[menuType]['title'] + ' : ' + menuSelectedTitle;
+	$("#MenuContent").val(menuContent);
+	$("#MenuExt").val(meunuSelectedId);
+});
+
+function getMenuSelected() {
+	$(".menu-check-item").on('click', function() {
+		var id = $(this).val();
+		$(this).prop('checked', true);
+		$td = $(this).parent();
+		$tdTitle = $td.siblings('.select-name');
+		menuSelectedTitle = $tdTitle.html();
+		meunuSelectedId = id;
+		$(".menu-check-item").each(function() {
+			var iid = $(this).val();
+			if (iid != id) {
+				$(this).prop('checked', false);
+			}
+		});
+	});
+}

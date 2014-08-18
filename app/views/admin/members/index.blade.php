@@ -23,7 +23,7 @@
                         <th>Người giới thiệu</th>
                         <th>Người quản lý</th>
                         <th>Ngày tạo</th>
-                        <th style="width: 25%"><?php echo trans('messages.actions'); ?></th>
+                        <th style="width: 20%"><?php echo trans('messages.actions'); ?></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                     $index = $members->getFrom();
                     $allowShow = in_array('admin.members.show', $allowed_routes);
                     $allowEdit = in_array('admin.members.edit', $allowed_routes);
-                    $allowDestroy = in_array('admin.members.destroy', $allowed_routes);
+                    $allowShares = in_array('admin.members.shares', $allowed_routes);
 
                     ?>
                     <?php foreach ($members as $member): ?>
@@ -53,12 +53,9 @@
                                         <i class="fa fa-edit"> Sửa</i>
                                     </a>
                                 <?php endif; ?>
-                                <?php if ($allowDestroy): ?>
-                                    <a href="<?php echo route('admin.members.destroy', $member->id) ?>"
-                                       class="text-danger" 
-                                       data-confirm="Bạn có chắc chắn muốn xóa thành viên <?php echo $member->full_name ?>"
-                                       data-method="delete">
-                                        <i class="fa fa-ban"> Xóa</i>
+                                <?php if ($allowShares): ?>
+                                    <a href="<?php echo route('admin.members.shares', $member->id) ?>" class="text-warning">
+                                        <i class="fa fa-share"> Nhập cổ phần</i>
                                     </a>
                                 <?php endif; ?>
                             </td>

@@ -6,7 +6,6 @@
         <link rel="stylesheet" type="text/css" media="screen" href="{{asset('assets/frontend/css/landing.css')}}"/>
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,300,700&subset=latin,vietnamese,latin-ext' rel='stylesheet' type='text/css'>
     </head>
-
     <body>
         <div id="wrapper">
             <div id="header">
@@ -25,7 +24,7 @@
                             <img src="{{'assets/img/landing/pic1.jpg'}}" />
                         </a>
                         <h2>
-                            <a href="<?php echo route('fe.root') ?>">TASOHA ECOM</a>
+                            <a href="<?php echo route('fe.root') ?>">THƯƠNG MẠI</a>
                         </h2>
                     </div>
                     <div class="box">
@@ -33,7 +32,7 @@
                             <img src="{{'assets/img/landing/pic2.gif'}}" />
                         </a>
                         <h2>
-                            <a href="http://batdongsan.log.vn/">TASOHA LAND</a>
+                            <a href="http://batdongsan.log.vn/">BẤT ĐỘNG SẢN</a>
                         </h2>
                     </div>
                     <div class="box">
@@ -41,7 +40,7 @@
                             <img src="{{'assets/img/landing/pic3.png'}}" />
                         </a>
                         <h2>
-                            <a href="#">TASOHA IVEST</a>
+                            <a href="#">PHÁT TRIỂN</a>
                         </h2>
                     </div>
                     <div class="clear"></div>

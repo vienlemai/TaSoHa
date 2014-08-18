@@ -50,23 +50,6 @@
                 </ul>
             </li>
         <?php endif; ?>
-        <?php if (in_array('admin.news.index', $allowed_routes) || in_array('admin.news.create', $allowed_routes)): ?>
-            <li class="treeview <?php echo strpos($current, 'news') !== false ? 'active' : '' ?>">
-                <a href="#">
-                    <i class="fa fa-bullhorn"></i>
-                    <span><?php echo trans('menu.manage_news'); ?></span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <?php if (in_array('admin.news.index', $allowed_routes)): ?>
-                        <li><a href="{{route('admin.news.index')}}"><?php echo trans('menu.list_news'); ?></a></li>
-                    <?php endif; ?>
-                    <?php if (in_array('admin.news.create', $allowed_routes)): ?>
-                        <li><a href="{{route('admin.news.create')}}"><?php echo trans('menu.new_news'); ?></a></li>
-                    <?php endif; ?>
-                </ul>
-            </li>
-        <?php endif; ?>
         <?php if (in_array('admin.articles.index', $allowed_routes) || in_array('admin.articles.create', $allowed_routes) || in_array('admin.article_categories.index', $allowed_routes) || in_array('admin.page.index', $allowed_routes)): ?>
             <li class="treeview <?php echo (strpos($current, 'articles') !== false || strpos($current, 'article_categories') !== FALSE) ? 'active' : '' ?>">
                 <a href="#">
@@ -91,29 +74,7 @@
             </li>
         <?php endif; ?>
 
-        <?php if (in_array('admin.product_category.index', $allowed_routes) || in_array('admin.product_category.create', $allowed_routes) || in_array('admin.product.index', $allowed_routes) || in_array('admin.product.create', $allowed_routes)): ?>
-            <li class="treeview <?php echo (strpos($current, 'product') !== false || strpos($current, 'product_category') !== false) ? 'active' : '' ?>">
-                <a href="#">
-                    <i class="fa fa-list"></i>
-                    <span><?php echo trans('menu.product'); ?></span>
-                    <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                    <?php if (in_array('admin.produc_category.index', $allowed_routes)): ?>
-                        <li><a href="{{route('admin.product_category.index')}}"><?php echo trans('menu.all_product_categories'); ?></a></li>
-                    <?php endif; ?>
-                    <?php if (in_array('admin.product_category.create', $allowed_routes)): ?>
-                        <li><a href="{{route('admin.product_category.create')}}"><?php echo trans('menu.add_product_category'); ?></a></li>
-                    <?php endif; ?>
-                    <?php if (in_array('admin.product.index', $allowed_routes)): ?>
-                        <li><a href="{{route('admin.product.index')}}"><?php echo trans('menu.all_products'); ?></a></li>
-                    <?php endif; ?>
-                    <?php if (in_array('admin.product.create', $allowed_routes)): ?>
-                        <li><a href="{{route('admin.product.create')}}"><?php echo trans('menu.add_product'); ?></a></li>
-                    <?php endif; ?>
-                </ul>
-            </li>
-        <?php endif; ?>
+        
         <?php if (in_array('admin.slide.index', $allowed_routes)): ?>
             <li class="treeview <?php echo strpos($current, 'slide') !== false ? 'active' : '' ?>">
                 <a href="#">

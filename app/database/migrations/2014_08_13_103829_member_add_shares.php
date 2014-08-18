@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class BonusStatusAddAddedFor extends Migration {
+class MemberAddShares extends Migration {
 
     /**
      * Run the migrations.
@@ -11,8 +11,8 @@ class BonusStatusAddAddedFor extends Migration {
      * @return void
      */
     public function up() {
-        Schema::table('bonus_status', function($t) {
-            $t->integer('added_for');
+        Schema::table('members', function($t) {
+            $t->string('shares', 20)->default(0);
         });
     }
 
@@ -22,8 +22,8 @@ class BonusStatusAddAddedFor extends Migration {
      * @return void
      */
     public function down() {
-        Schema::table('bonus_status', function($t) {
-            $t->dropColumn('added_for');
+        Schema::table('members', function($t) {
+            $t->dropColumn('shares');
         });
     }
 

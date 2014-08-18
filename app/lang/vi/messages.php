@@ -29,6 +29,9 @@ return array(
     'reset' => 'Nhập lại',
     'back_to_list' => 'Trở lại danh sách :name',
 //article, categories
+    'article' => 'Bài viết',
+    'category' => 'Danh mục',
+    'link' => 'Liên kết ngoài',
     'manage_articles' => 'Quản lý tin tức',
     'list_article' => 'Danh sách bài viết',
     'article_categories' => 'Danh mục bài viết',
@@ -60,8 +63,8 @@ return array(
     'article_delete_success' => 'Xóa thành công bài viết <b>:title</b>',
     'add_category' => 'Thêm danh mục',
     'add_article' => 'Đăng bài viết',
-    'edit_article'=>'Sửa bài viết',
-    'delete_article'=>'Xóa bài viết',
+    'edit_article' => 'Sửa bài viết',
+    'delete_article' => 'Xóa bài viết',
     'manage_article' => 'Quản lý bài viết',
     //manage user, group
     'manage_users' => 'Quản lý người dùng',
@@ -122,15 +125,15 @@ return array(
     //product 
     'input_product' => 'Nhập nội dung sản phẩm',
     'product_save_success' => 'Nhập thành công sản phẩm <b>:name</b>',
-    'manage_product'=>'Quản lý sản phẩm',
-    'add_product'=>'Thêm sản phẩm',
-    'edit_product'=>'Sủa sản phẩm',
-    'list_product'=>'Danh sách sản phẩm',
-    'delete_product'=>'Xóa sản phẩm',
-    'create_category_product'=>'Thêm danh mục sản phẩm',
-    'list_category_product'=>'Danh sách danh mục sản phẩm',
-    'edit_category_product'=>'Sửa danh mục sản phẩm',
-    'delete_category_product'=>'Xóa danh mục sản phẩm',
+    'manage_product' => 'Quản lý sản phẩm',
+    'add_product' => 'Thêm sản phẩm',
+    'edit_product' => 'Sủa sản phẩm',
+    'list_product' => 'Danh sách sản phẩm',
+    'delete_product' => 'Xóa sản phẩm',
+    'create_category_product' => 'Thêm danh mục sản phẩm',
+    'list_category_product' => 'Danh sách danh mục sản phẩm',
+    'edit_category_product' => 'Sửa danh mục sản phẩm',
+    'delete_category_product' => 'Xóa danh mục sản phẩm',
     //page
     'manage_page' => 'Quản lý các trang tĩnh',
     'list_page' => 'Danh sách các trang tĩnh',
@@ -138,4 +141,12 @@ return array(
     //configs
     'slide' => 'Slide ảnh',
     'site_setting' => 'Cấu hình',
+    //menus
+    'input_menu' => 'Nhập thông tin menu',
+    'manage_menus' => 'Quản lý menu',
+    'list_menus' => 'Danh sách menu',
+    'add_menu' => 'Thêm mới menu',
+    'edit_menu' => 'Chỉnh sửa menu',
+    'delete_menu' => 'Xóa menu',
+    'menu_name'=>'Tên menu'
 );

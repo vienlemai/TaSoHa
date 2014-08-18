@@ -6,7 +6,7 @@ use Illuminate\Auth\Reminders\RemindableInterface;
 /**
  * Member
  */
-class Member extends Eloquent implements UserInterface, RemindableInterface {
+class Member extends Illuminate\Database\Eloquent\Model implements UserInterface, RemindableInterface {
     /**
      * Table name.
      *
@@ -394,10 +394,10 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
             }
         }
         Log::info('direct bonus calculated: ' . json_encode($directBonus));
-        self::getSourceBonus($directBonus);
+        self::updateSourceBonus($directBonus);
     }
 
-    public static function getSourceBonus($directBonus) {
+    public static function updateSourceBonus($directBonus) {
         $sourceBonusConfigs = MyBonus::$SOURCE_BONUS_CONFIGS;
         foreach ($directBonus as $k => $v) {
             $sunMember = SunMember::where('member_id', $k)
@@ -421,7 +421,7 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
                 if (!isset($sourceBonusConfigs[$node->member->regency][$depth])) {
                     break;
                 }
-                if (!empty($node->member->regency)) {
+                if (!empty($node->member->regency) && isset($directBonus[$node->member_id])) {
                     $tyle = $sourceBonusConfigs[$node->member->regency][$depth];
                     $amount = $v * $tyle / 100;
                     DB::table('member_bonus')
@@ -432,6 +432,19 @@ class Member extends Eloquent implements UserInterface, RemindableInterface {
                 }
             }
         }
+    }
+
+    public static function updateManagerBonus() {
+        $sunMembers = SunMember::with(array(
+                'member' => function($query) {
+                $query->whereNotIn('regency', array(
+                    '',
+                    Member::CAP_BAN_HANG,
+                    Member::CAP_GIAM_SAT,
+                    Member::CAP_CHUYEN_VIEN
+                ));
+            }
+        ));
     }
 
     public static function getMonthlyBonus($month) {

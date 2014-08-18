@@ -155,7 +155,51 @@ class MemberController extends AdminBaseController {
      * @return Response
      */
     public function destroy($id) {
+        echo 'KHÔNG ĐƯỢC PHÉP XÓA THÀNH VIÊN';
+        exit();
         $member = \Member::findOrFail($id);
+        $sunMember = \SunMember::with('children')
+            ->where('member_id', $id)
+            ->first();
+        if ($sunMember->isRoot()) {
+            foreach ($sunMember->children as $child) {
+                $child->makeRoot();
+            }
+        } else {
+            $parent = \SunMember::where('id', $sunMember->parent_id)
+                ->first();
+            foreach ($sunMember->children as $child) {
+                $child->makeChildOf($parent);
+            }
+        }
+
+        $sunMember->delete();
+        $binaryMember = \BinaryMember::with('children')
+            ->where('member_id', $id)
+            ->first();
+        if ($binaryMember->isRoot()) {
+            foreach ($binaryMember->children as $child) {
+                $child->makeRoot();
+            }
+        } else {
+            $parent = \BinaryMember::where('id', $binaryMember->parent_id)
+                ->first();
+            foreach ($binaryMember->children as $child) {
+                $child->makeChildOf($parent);
+            }
+        }
+
+        \Bill::where('member_id', $id)
+            ->delete();
+        DB::table('member_bonus')
+            ->where('member_id', $id)
+            ->delete();
+        DB::table('team_bonus')
+            ->where('member_id', $id)
+            ->delete();
+        DB::table('second_scores')
+            ->where('member_id', $id)
+            ->delete();
         $member->delete();
         Session::flash('success', 'Xóa thành công thành viên <b>' . $member->full_name . '</b>');
         return Redirect::route('admin.members.index');
@@ -179,6 +223,21 @@ class MemberController extends AdminBaseController {
         } else {
             return Redirect::back()->withErrors($v->messages());
         }
+    }
+
+    public function getShares($id) {
+        $member = Member::findOrFail($id);
+        $this->layout->content = View::make('admin.members.shares', array(
+                'member' => $member,
+        ));
+    }
+
+    public function postShares($id) {
+        $member = \Member::findOrFail($id);
+        $member->shares = Input::get('shares');
+        $member->save();
+        Session::flash('success', 'Cập nhật thành công cổ phần cho thành viên <b>' . $member->full_name . '</b>');
+        return Redirect::back();
     }
 
 }

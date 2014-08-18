@@ -95,6 +95,19 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::resource('page', 'PageController', array('only' => array('index', 'edit', 'update')));
 
         Route::resource('members', 'MemberController');
+        Route::resource('menu', 'MenuController');
+        Route::get('menu/select-article', array(
+            'as' => 'menu.select.article',
+            'uses' => 'MenuController@selectCategory',
+        ));
+        Route::get('/members/{id}/shares', array(
+            'as' => 'admin.members.shares',
+            'uses' => 'MemberController@getShares'
+        ));
+        Route::post('/members/{id}/shares', array(
+            'as' => 'admin.members.shares',
+            'uses' => 'MemberController@postShares'
+        ));
         Route::get('/members/{id}/change-password', array(
             'as' => 'admin.members.change_password',
             'uses' => 'MemberController@getChangePassword'

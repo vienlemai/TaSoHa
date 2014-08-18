@@ -1,28 +1,38 @@
 <?php
 
-class ArticleCategory extends LaravelBook\Ardent\Ardent {
+class Menu extends Baum\Node {
+    const TYPE_CATEGORY = 1;
+    const TYPE_ARTICLE = 2;
+    const TYPE_LINK = 3;
+
+    public static $TYPE_LABELS = array(
+        self::TYPE_CATEGORY => 'Danh mục',
+        self::TYPE_ARTICLE => 'Bài viết',
+        self::TYPE_LINK => 'link'
+    );
+    public static $MENU_DATA = array(
+        self::TYPE_CATEGORY => array(
+            'route' => 'fe.category',
+        ),
+        self::TYPE_ARTICLE => array(
+            'route' => 'fe.fe.article.show'
+        ),
+        self::TYPE_LINK=>  array()
+    );
+
     /*
      * PROPERTIES
      */
-    protected $table = 'article_categories';
+    protected $table = 'menus';
     public $fillable = array(
         'name',
-        'description'
     );
-
-    const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
-    
-    public static $CAT_INTRO = 1;
-    public static $CAT_NEWS = array(2,3);
-    public static $CAT_RECRUITMENTS = array(4,5);
-    
 
     /*
      * VALIDATIONS
      */
     public static $rules = array(
         'name' => 'required',
-        'description' => 'required'
     );
     public static $customMessages = array(
         'required' => 'The :attribute field is required.'
@@ -32,8 +42,12 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
      * ASSOCIATIONS
      */
 
-    public function articles() {
-        return $this->hasMany('Article', 'category_id');
+    public function parentMenu() {
+        return $this->belongsTo('Menu', 'parent_id');
+    }
+
+    public function chilren() {
+        return $this->hasMany('Menu', 'parent_id');
     }
 
     public function toParam() {

@@ -16,7 +16,7 @@ class AdminResource {
             'set_permission' => array('admin.groups.permission')
         ),
         'manage_member' => array(
-            'list_member' => array('admin.members.index', 'admin.members.show','admin.members.tree'),
+            'list_member' => array('admin.members.index', 'admin.members.show', 'admin.members.tree', 'admin.members.shares'),
             'create_member' => array('admin.members.create', 'admin.members.store'),
             'edit_member' => array('admin.members.edit', 'admin.members.update'),
             'delete_member' => array('admin.members.destroy'),
@@ -24,21 +24,27 @@ class AdminResource {
             'create_bill' => array('admin.bills.create', 'admin.bills.store'),
             'create_bonus' => array('admin.bonus.create', 'admin.bonus.store'),
         ),
-        'manage_news' => array(
-            'list_news' => array('admin.news.index'),
-            'create_news' => array('admin.news.create', 'admin.news.store'),
-            'edit_news' => array('admin.news.edit', 'admin.news.update'),
-            'delete_news' => array('admin.news.destroy'),
-        ),
+//        'manage_news' => array(
+//            'list_news' => array('admin.news.index'),
+//            'create_news' => array('admin.news.create', 'admin.news.store'),
+//            'edit_news' => array('admin.news.edit', 'admin.news.update'),
+//            'delete_news' => array('admin.news.destroy'),
+//        ),
         'manage_article' => array(
             'list_article' => array('admin.articles.index'),
             'add_article' => array('admin.articles.create', 'admin.articles.store'),
             'edit_article' => array('admin.articles.edit', 'admin.articles.update'),
             'delete_article' => array('admin.articles.destroy'),
-            'list_category' => array('admin.article_categories.index'),
-            'add_category' => array('admin.article_categories.create', 'admin.article_categories.store'),
-            'edit_category' => array('admin.article_categories.edit', 'admin.article_categories.update'),
-            'detele_category' => array('admin.article_categories.destroy')
+            //'list_category' => array('admin.article_categories.index'),
+            //'add_category' => array('admin.article_categories.create', 'admin.article_categories.store'),
+           // 'edit_category' => array('admin.article_categories.edit', 'admin.article_categories.update'),
+            //'detele_category' => array('admin.article_categories.destroy')
+        ),
+        'manage_menus' => array(
+            'list_menus' => array('admin.menu.index'),
+            'add_menu' => array('admin.menu.create', 'admin.menu.store'),
+            'edit_menu' => array('admin.menu.edit', 'admin.menu.update'),
+            'delete_menu' => array('admin.menu.destroy'),
         ),
         'manage_product' => array(
             'list_product' => array('admin.product.index'),
