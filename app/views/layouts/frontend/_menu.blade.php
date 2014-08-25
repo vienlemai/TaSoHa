@@ -10,30 +10,41 @@
         </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse">
             <ul class="nav navbar-nav">
-                <?php foreach ($product_categories as $cat) : ?>
-                    <li class="active">
-                        <a href="<?php echo route('fe.product_category.show', $cat->toParam()) ?>" class="text-info"><?php echo $cat->name ?></a>
-                    </li>
-                <?php endforeach; ?>
-
-                <li class="dropdown active">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Mặt hàng khác <b class="caret"></b></a>
+                <li class="">
+                    <a href="<?php echo route('fe.root') ?>" class="text-info">Trang chủ</a>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <?php echo $cat_intro->name ?> <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <?php foreach ($other_product_categories as $cat) : ?>
+                        <?php foreach ($article_intro as $article) : ?>
                             <li>
-                                <a href="#" class="text-info"><?php echo $cat->name ?></a>
+                                <a href="<?php echo route('fe.article.show', $article->toParam()) ?>" class="text-info"><?php echo $article->title ?></a>
                             </li>
                         <?php endforeach; ?>
                     </ul>
                 </li>
-                <li class="dropdown active">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">TASOHA Group <b class="caret"></b></a>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Tin tức <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <?php foreach (Page::$NAME_TO_TEXT as $name => $text) : ?>
-                            <li><a href="<?php echo route('fe.page.show', $name) ?>"><?php echo $text ?></a></li>
+                        <?php foreach ($cat_news as $cat) : ?>
+                            <li>
+                                <a href="<?php echo route('fe.category', $cat->toParam()) ?>" class="text-info"><?php echo $cat->name ?></a>
+                            </li>
                         <?php endforeach; ?>
-                        <li><a href="http://batdongsan.log.vn/" target="_blank">Tasoha land</a></li>
                     </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> Tuyển dụng <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <?php foreach ($cat_recruitments as $cat) : ?>
+                            <li>
+                                <a href="<?php echo route('fe.category', $cat->toParam()) ?>" class="text-info"><?php echo $cat->name ?></a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </li>
+                <li class="">
+                    <a href="#" class="text-info">Cảm nhận khách hàng</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -45,7 +56,6 @@
                         </span>
                     </div>
                 </form> 
-
             </ul>
         </div>
     </div>

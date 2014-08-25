@@ -64,7 +64,10 @@
             </table>
         </div>
         <div class="box-footer">
-            <a class="btn btn-warning" href="<?php echo route('admin.members.change_password', $member->id) ?>">Đổi mật khẩu</a>
+            <a class="btn btn-danger" href="<?php echo route('admin.members.change_password', $member->id) ?>">Đổi mật khẩu</a>
+            <a href="<?php echo route('admin.members.shares', $member->id) ?>" class="btn btn-warning">
+                <i class="fa fa-share"> Nhập cổ phần</i>
+            </a>
         </div>
     </div>
 </div>

@@ -9,7 +9,6 @@
         @elseif(Session::has('warning'))
             {{Session::get('error')}}
         @endif
-        You can put your notification in this bar. click on the x on right to close
     </div>
 </div>
 @endif

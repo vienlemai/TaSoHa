@@ -11,7 +11,7 @@ class Bill extends BaseModel {
     public static $rules = array(
         'product_name' => 'required',
         'price' => 'required',
-        'score' => 'required|numeric|integer',
+        'score' => 'required|numeric|integer|min:1',
         'member_id' => 'required',
     );
 
@@ -35,10 +35,10 @@ class Bill extends BaseModel {
     }
 
     public static function resetBill() {
-        DB::table('configs')
+        DB::table('statistics')
             ->truncate();
         DB::table('member_bonus')
-            ->update(array('auto_amount' => 0));
+            ->truncate();
         DB::table('team_bonus')
             ->update(array(
                 'left_left' => 0,
@@ -49,22 +49,25 @@ class Bill extends BaseModel {
             ->update(array(
                 'score' => 0,
                 'children_score' => 0,
-                'regency' => ''
+                'regency' => 0
         ));
         DB::table('second_scores')
             ->truncate();
         DB::table('bills')
             ->truncate();
-        $members = Member::get();
+        $members = Member::orderBy('id', 'asc')->get();
         foreach ($members as $member) {
-            $random = rand(150, 500);
-            $bill = new Bill(array(
-                'product_name' => 'mua ' . str_random(10),
-                'price' => $random * 20,
-                'score' => $random,
-                'member_id' => $member->id
-            ));
-            $bill->forceSave();
+            $loops = (int) rand(1, 5);
+            for ($i = 0; $i < $loops; $i++) {
+                $random = rand(150, 15000);
+                $bill = new Bill(array(
+                    'product_name' => 'mua ' . str_random(10),
+                    'price' => $random * 20,
+                    'score' => $random,
+                    'member_id' => $member->id
+                ));
+                $bill->forceSave();
+            }
         }
     }
 

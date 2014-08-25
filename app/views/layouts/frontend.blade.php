@@ -35,14 +35,13 @@
                         <?php echo View::make('layouts/frontend/_flash')->render() ?>
                     </div>
                 </div>
-                @yield('content')
+                <div class="main-content">@yield('content')</div>
             </div>
             <?php echo View::make('layouts.frontend._footer')->render() ?>  
         </div>
         <script type="text/javascript" src="{{asset('assets/js/jquery-1.10.2.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/plugins/jquery.li-scroller.1.0.js')}}"></script>
-        
         <script type="text/javascript" src="{{asset('assets/frontend/js/main.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>        

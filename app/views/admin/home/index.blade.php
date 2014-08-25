@@ -73,20 +73,20 @@
             </div>
         </div><!-- ./col -->
     <?php endif; ?>
-    <?php if (in_array('admin.product.index', $allowed_routes)): ?>
+    <?php if (in_array('admin.bills.index', $allowed_routes)): ?>
         <div class="col-lg-3 col-xs-6">
             <!-- small box -->
             <div class="small-box bg-yellow">
                 <div class="inner">
                     <h3>
-                        <?php echo $count['products'] ?>
+                        <?php echo $count['bills'] ?>
                     </h3>
-                    <p>Sản phẩm</p>
+                    <p>Hóa đơn</p>
                 </div>
                 <div class="icon">
                     <i class="ion ion-pricetag"></i>
                 </div>
-                <a href="<?php echo route('admin.product.index') ?>" class="small-box-footer">
+                <a href="<?php echo route('admin.bills.index') ?>" class="small-box-footer">
                     Xem danh sách <i class="fa fa-arrow-circle-right"></i>
                 </a>
             </div>

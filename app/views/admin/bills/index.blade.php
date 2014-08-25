@@ -15,14 +15,23 @@
         <div class="table-wrap">
             <div class="table-header">
                 <?php if (in_array('admin.bills.create', $allowed_routes)): ?>
-                    <a href="{{route('admin.bills.create')}}" class="btn btn-sm btn-primary">
-                        <i class="fa fa-plus"></i> Nhập hóa đơn
-                    </a>
+                    <div class="col-md-2">
+                        <a href="{{route('admin.bills.create')}}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-plus"></i> Nhập hóa đơn
+                        </a>
+                    </div>
                 <?php endif; ?>
+                <select id="bill-select-month" class=" col-md-2 form-control" style="width: 200px;" name="month">
+                    <?php foreach ($months as $m): ?>
+                        <option value="<?php echo $m ?>" <?php echo $month == $m ? 'selected' : '' ?>><?php echo $m ?></option>
+                    <?php endforeach; ?>
+                </select>
                 <div class="col-md-4 pull-right no-padding">
                     <?php echo View::make('admin.partials.search_tool', array('input' => Input::all()))->render(); ?>
                 </div>
+                <div class="clearfix"></div>
             </div>
+            <h3>Danh sách hóa đơn trong tháng <?php echo $month ?></h3>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -70,13 +79,31 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php
-            echo View::make('admin.partials.table_paging', array(
-                'collection' => $bills,
-            ))->render();
+            <div class="table-footer">
+                <div class="info-left">
+                    <?php
+                    echo trans('messages.paging_info', array(
+                        'from' => $bills->getFrom(),
+                        'to' => $bills->getTo(),
+                        'total' => $bills->getTotal(),
+                    ));
 
-            ?>
+                    ?>
+                </div>
+                <div class="info-right">
+                    <?php echo $bills->appends(array('month' => $month))->links(); ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+@stop
+@section('addon_js')
+<script type="text/javascript">
+    $('#bill-select-month').on('change', function() {
+        var month = $(this).val();
+        var dataUrl = baseUrl + '/bills?month=' + month;
+        location.href = dataUrl;
+    });
+</script>
 @stop

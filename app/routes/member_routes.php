@@ -3,23 +3,16 @@
 Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
     Route::group(array('before' => 'member.auth'), function() {
         Route::get('/', array('as' => 'member.root', 'uses' => 'HomeController@index'));
-        Route::get('member/create', array(
-            'as' => 'member.create',
-            'uses' => 'MemberController@create',
-        ));
         Route::get('profile', array(
             'as' => 'member.profile',
-            'uses' => 'HomeController@profile'
+            'uses' => 'MemberController@profile'
         ));
-        Route::post('change-password', array('as' => 'member.change_password', 'uses' => 'HomeController@changePassword'));
-        Route::post('update-profile', array('as' => 'member.update_profile', 'uses' => 'HomeController@updateProfile'));
-
-
-        Route::post('member/store', array(
-            'as' => 'member.store',
-            'uses' => 'MemberController@store',
+        Route::get('change-password', array(
+            'as' => 'member.change_password',
+            'uses' => 'MemberController@getChangePassword',
         ));
-
+        Route::post('change-password', array('as' => 'member.change_password', 'uses' => 'MemberController@changePassword'));
+        Route::post('update-profile', array('as' => 'member.update_profile', 'uses' => 'MemberController@updateProfile'));
 
         Route::get('{id}/show', array(
             'as' => 'member.show',
@@ -33,14 +26,6 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'as' => 'member.filter_bonus',
             'uses' => 'HomeController@filterBonus',
         ));
-        Route::get('member/tree-binary/children/{parentId?}', function($parentId = null) {
-            $data = Member::getBinaryChildren($parentId);
-            return Response::json($data);
-        });
-        Route::get('member/tree-sun/children/{parentId?}', function($introducerId = null) {
-            $data = Member::getSunChildren($introducerId);
-            return Response::json($data);
-        });
     });
     Route::post('login', array(
         'as' => 'member.login',

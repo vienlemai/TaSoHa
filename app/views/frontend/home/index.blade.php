@@ -57,7 +57,7 @@
     <div class="col-lg-12">
         <div class="page-header">
         </div>  	
-        <?php foreach ($articleCategories as $ac) : ?>
+        <?php foreach ($bottom_categories as $ac) : ?>
             <div class="col-lg-4 home-article-category">
                 <div class="well">
                     <h4><a href="<?php echo route('fe.category', $ac->toParam()) ?>"><?php echo $ac->name ?></a></h4>

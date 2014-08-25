@@ -13,7 +13,18 @@
 <div class="row">
     <div class="col-md-12">
         <div class="table-wrap">
-            <?php echo View::make('admin.members.partials._header')->render() ?>
+            <?php
+            echo View::make('admin.members.partials._header', array(
+                'months' => $months,
+                'month' => $month
+            ))->render()
+
+            ?>
+            <?php if ($month === 'all'): ?>
+                <h3>Danh sách tất cả thành viên (<?php echo $members->getTotal() ?> thành viên)</h3>
+            <?php else: ?>
+                <h3>Danh sách thành viên nhập mới trong tháng <?php echo $month . ' (' . $members->getTotal() . ' thành viên)' ?></h3>
+            <?php endif; ?>
             <table class="table table-bordered">
                 <thead>
                     <tr>
@@ -63,12 +74,25 @@
                     <?php endforeach; ?>
                 </tbody>
             </table>
-            <?php
-            echo View::make('admin.partials.table_paging', array(
-                'collection' => $members,
-            ))->render();
+            <div class="table-footer">
+                <div class="info-left">
+                    <?php
+                    echo trans('messages.paging_info', array(
+                        'from' => $members->getFrom(),
+                        'to' => $members->getTo(),
+                        'total' => $members->getTotal(),
+                    ));
 
-            ?>
+                    ?>
+                </div>
+                <div class="info-right">
+                    <?php if (Input::has('keyword')): ?>
+                        <?php echo $members->appends(array('keyword' => Input::get('keyword')))->links(); ?>
+                    <?php else: ?>
+                        <?php echo $members->appends(array('month' => $month))->links(); ?>
+                    <?php endif; ?>
+                </div>
+            </div>
         </div>
     </div>
 </div>
@@ -87,4 +111,13 @@
         </div>
     </div>
 </div>
+@stop
+@section('addon_js')
+<script type="text/javascript">
+    $('#member-select-month').on('change', function() {
+        var month = $(this).val();
+        var url = baseUrl + '/members?month=' + month;
+        location.href = url;
+    });
+</script>
 @stop

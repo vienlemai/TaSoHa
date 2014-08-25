@@ -1,7 +1,6 @@
 <?php
 
 class Article extends LaravelBook\Ardent\Ardent {
-
     const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
 
     protected $table = 'articles';
@@ -30,11 +29,11 @@ class Article extends LaravelBook\Ardent\Ardent {
     public static function boot() {
         parent::boot();
         static::creating(function($article) {
-                    $article->is_active = true;
-                });
+            $article->is_active = true;
+        });
         static::saving(function($article) {
-                    $article->slug = strtolower(StringHelper::slug($article->title));
-                });
+            $article->slug = strtolower(StringHelper::slug($article->title));
+        });
     }
 
     public function makeActive() {
@@ -69,6 +68,21 @@ class Article extends LaravelBook\Ardent\Ardent {
         }
         $result = $query->paginate();
         return $result;
+    }
+
+    public static function getByCategory($catId) {
+        $query = self::where('category_id', $catId)
+            ->orderBy('created_at');
+        $result = $query->get();
+        return $result;
+    }
+
+    public static function listsByCategory($catId, $column = 'slug', $cache = true) {
+        $result = self::where('category_id', $catId);
+        if ($cache) {
+            $result->remember(60);
+        }
+        return $result->lists($column, 'id');
     }
 
 }

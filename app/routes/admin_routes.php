@@ -50,6 +50,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         return View::make('admin.tmp.tinh_hoa_hong');
     });
     Route::post('tinh-hoa-hong', function() {
+        //$month = Carbon\Carbon::now()->subMonth()->format('m/Y');
         $month = Carbon\Carbon::now()->format('m/Y');
         $result = Member::getMonthlyBonus($month);
         //$result = false;
@@ -96,10 +97,6 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
 
         Route::resource('members', 'MemberController');
         Route::resource('menu', 'MenuController');
-        Route::get('menu/select-article', array(
-            'as' => 'menu.select.article',
-            'uses' => 'MenuController@selectCategory',
-        ));
         Route::get('/members/{id}/shares', array(
             'as' => 'admin.members.shares',
             'uses' => 'MemberController@getShares'
@@ -107,6 +104,22 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::post('/members/{id}/shares', array(
             'as' => 'admin.members.shares',
             'uses' => 'MemberController@postShares'
+        ));
+        Route::get('member/bonus/{id}', array(
+            'as' => 'admin.member.bonus',
+            'uses' => 'MemberController@bonus'
+        ));
+        Route::get('member/receipt/{id}', array(
+            'as' => 'admin.member.receipt',
+            'uses' => 'MemberController@getReceipt'
+        ));
+        Route::post('member/receipt/{id}', array(
+            'as' => 'admin.member.receipt',
+            'uses' => 'MemberController@postReceipt'
+        ));
+        Route::get('member/print/receipt/{id}', array(
+            'as' => 'admin.member.print.receipt',
+            'uses' => 'MemberController@printReceipt',
         ));
         Route::get('/members/{id}/change-password', array(
             'as' => 'admin.members.change_password',
@@ -143,6 +156,10 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::post('bonus/{memberId}/store', array(
             'uses' => 'BonusController@store',
             'as' => 'admin.bonus.store'
+        ));
+        Route::get('statistic', array(
+            'as' => 'admin.statistic.index',
+            'uses' => 'StatisticController@index'
         ));
     });
 });

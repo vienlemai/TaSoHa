@@ -91,9 +91,9 @@ $('#member-tree-binary').jstree({
 			}
 		}
 	}}).on('select_node.jstree', function(event, data) {
-	var memberId = data.node.id;
-	showMemberDetail(memberId);
-	return false;
+	//var memberId = data.node.id;
+	//showMemberDetail(memberId);
+	//return false;
 });
 $('#member-tree-sun').jstree({
 	'core': {
@@ -107,9 +107,9 @@ $('#member-tree-sun').jstree({
 			}
 		}
 	}}).on('select_node.jstree', function(event, data) {
-	var memberId = data.node.id;
-	showMemberDetail(memberId);
-	return false;
+	//var memberId = data.node.id;
+	//showMemberDetail(memberId);
+	//return false;
 });
 
 

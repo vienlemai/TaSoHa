@@ -41,6 +41,9 @@
                     <?php if (in_array('admin.members.index', $allowed_routes)): ?>
                         <li><a href="{{route('admin.members.index')}}">Danh sách thành viên</a></li>
                     <?php endif; ?>
+                    <?php if (in_array('admin.members.create', $allowed_routes)): ?>
+                        <li><a href="{{route('admin.members.create')}}">Thêm mới thành viên</a></li>
+                    <?php endif; ?>
                     <?php if (in_array('admin.bills.index', $allowed_routes)) : ?>
                         <li><a href="{{route('admin.bills.index')}}">Danh sách hóa đơn</a></li>
                     <?php endif; ?>
@@ -74,7 +77,11 @@
             </li>
         <?php endif; ?>
 
-        
+        <?php if (in_array('admin.statistic.index', $allowed_routes)): ?>
+            <li>
+                <a href="<?php echo route('admin.statistic.index') ?>"><i class="fa fa-list"></i><span>Thống kê</span></a>
+            </li>
+        <?php endif; ?>
         <?php if (in_array('admin.slide.index', $allowed_routes)): ?>
             <li class="treeview <?php echo strpos($current, 'slide') !== false ? 'active' : '' ?>">
                 <a href="#">

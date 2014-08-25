@@ -161,7 +161,7 @@ body {
 	height: 100px;
 }
 .home-article-category .pull-right{
-	max-width: 150px;
+	max-width: 130px;
 }
 .home-article-category .well {
 	min-height: 250px;
@@ -169,3 +169,4 @@ body {
 #content-wrapper {
     padding: 0 30px;
 }
+.main-content{ min-height: 300px; }

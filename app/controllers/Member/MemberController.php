@@ -12,6 +12,8 @@ use \Redirect;
 use \StringHelper;
 use \MyBonus;
 use \DB;
+use \Response;
+use \Auth;
 
 class MemberController extends MemberBaseController {
 
@@ -113,14 +115,46 @@ class MemberController extends MemberBaseController {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id) {
-        //
+    public function getChangePassword() {
+        $this->layout->content = View::make('member.member.change_password');
+    }
+
+    public function changePassword() {
+        $v = \Member::validateChangePassword(Input::all());
+        if ($v->passes()) {
+            $member = Auth::member()->get();
+            $member->update(Input::all());
+            $member->save();
+            Session::flash('success', 'Đổi mật khẩu thành công');
+            $result['success'] = true;
+            $result['message'] = 'Đổi mật khẩu thành công';
+        } else {
+            $result['success'] = false;
+            \Former::withErrors($v->messages());
+            $result['html'] = View::make('member.member._form_change_password')->render();
+        }
+        return Response::json($result);
+    }
+
+    public function updateProfile() {
+        $member = Auth::member()->get();
+        $v = Member::validateUpdateSelfProfile(Input::all(), $member->id);
+        $result = array();
+        if ($v->passes()) {
+            $member->fill(Input::all());
+            $member->save();
+            $result['success'] = true;
+            $result['message'] = 'Cập nhật thông tin cá nhân thành công.';
+        } else {
+            \Former::withErrors($v->messages());
+            $result['success'] = false;
+            $result['html'] = View::make('member.member._form_personal_info')->render();
+        }
+        return Response::json($result);
+    }
+
+    public function profile() {
+        $this->layout->content = View::make('member.member.profile');
     }
 
 }

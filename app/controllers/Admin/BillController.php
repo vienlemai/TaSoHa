@@ -20,12 +20,19 @@ class BillController extends AdminBaseController {
      * @return Response
      */
     public function index() {
+        $month = Input::get('month', \Carbon\Carbon::now()->format('m/Y'));
+        $start = \Carbon\Carbon::createFromFormat('m/Y', $month)->startOfMonth();
+        $end = \Carbon\Carbon::createFromFormat('m/Y', $month)->endOfMonth();
         $bills = \Bill::with('creator', 'buyer')
-            ->condition(Input::all())
+            ->whereBetween('created_at', array($start, $end))
+            //->condition(\Input::all())
             ->orderBy('created_at', 'desc')
             ->paginate();
+        $months = \Member::getMonthsLog();
         $this->layout->content = View::make('admin.bills.index', array(
                 'bills' => $bills,
+                'months' => $months,
+                'month' => $month,
         ));
     }
 

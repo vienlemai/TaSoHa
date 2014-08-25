@@ -13,7 +13,7 @@
 <div class="row">
     <div class="col-md-12">
         <div class="table-wrap">
-            <?php echo View::make('admin.members.partials._header')->render() ?>
+            <?php echo View::make('admin.members.partials._header_tree')->render() ?>
         </div>
     </div>
     <div class="col-md-12">

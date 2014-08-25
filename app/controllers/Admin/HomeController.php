@@ -21,7 +21,7 @@ class HomeController extends AdminBaseController {
             $count = array(
                 'members' => \Member::count(),
                 'articles' => \Article::count(),
-                'products' => \Product::count(),
+                'bills' => \Bill::count(),
                 'users' => \AdminUser::where('is_supper', false)->count(),
                 'news' => \News::count(),
             );

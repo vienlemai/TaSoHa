@@ -18,28 +18,21 @@
                 <i class="fa fa-money"></i>
                 <h3 class="box-title">Thông tin hoa hồng</h3>
                 <div class="box-tools pull-right">
-                    <a href="<?php echo route('admin.bonus.create', $member->id) ?>" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> Nhập hoa hồng</a>
+                    <select name="month" class="form-control" id="bonus-month-select">
+                        <?php foreach ($months as $month): ?>
+                            <option value="<?php echo $month ?>"><?php echo $month ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </div>
-            <div class="box-body">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <td>Tên hoa hồng</td>
-                            <td>Tổng điểm</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($bonus as $b): ?>
-                            <tr>
-                                <td><?php echo $b['name']; ?></td>
-                                <td><?php echo $b['amount'] ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    </tbody>
-                </table>
+            <input id="member-id" type="hidden" name="" value="<?php echo $member->id ?>"/>
+            <div id="member-bonus-content">
+
             </div>
+            <div class="box-footer">
+
+            </div>
+
         </div>
     </div>
     <?php
@@ -49,4 +42,60 @@
 
     ?>
 </div>
+@stop
+@section('addon_js')
+<script type="text/javascript">
+    var memberId = $('#member-id').val();
+    var bonusUrl = baseUrl + '/member/bonus/' + memberId;
+    $.ajax({
+        url: bonusUrl,
+        type: 'get',
+        success: function(data) {
+            $('#member-bonus-content').html(data);
+        },
+        error: function() {
+            alert('Đã có lỗi xảy ra, vui lòng thử lại');
+        }
+    });
+    $('#bonus-month-select').on('change', function() {
+        var month = $(this).val();
+        $.ajax({
+            url: bonusUrl,
+            type: 'get',
+            data: {month: month},
+            success: function(data) {
+                $('#member-bonus-content').html(data);
+            },
+            error: function() {
+                alert('Đã có lỗi xảy ra, vui lòng thử lại');
+            }
+        });
+    });
+    $('body').on('click', '#btn-pay-bonus', function() {
+        var dataUrl = $(this).attr('href');
+        var month = $(this).attr('data-month');
+        $.ajax({
+            url: dataUrl,
+            type: 'post',
+            dataType: 'json',
+            data: {month: month},
+            success: function(data) {
+                if (data.status == 1) {
+                    if (confirm('Đã thanh toán thành công hoa hồng, bạn có muốn in hóa đơn ?')) {
+                        location.href = data.url_print_receipt;
+                    }
+                } else {
+                    alert(data.message);
+                    location.reload();
+                }
+
+            },
+            error: function(error) {
+                alert('Đã có lỗi xảy ra, vui lòng thử lại');
+                return false;
+            }
+        });
+        return false;
+    });
+</script>
 @stop

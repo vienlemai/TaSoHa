@@ -117,6 +117,7 @@ return array(
         'product_category_id' => 'Danh mục',
         'code' => 'Mã',
         'sex' => 'Giới tính',
-        'phone' => 'Số điện thoại'
+        'phone' => 'Số điện thoại',
+        'shares'=>'Cổ phần',
     ),
 );

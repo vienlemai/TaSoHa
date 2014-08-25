@@ -20,10 +20,10 @@
             </div>
             <?php echo Former::open(route('admin.members.shares', $member->id))->method('post') ?>
             <div class="box-body">
+                <strong>Cổ phần hiện tại : <?php echo $member->shares ?></strong>
                 <?php
                 echo Former::text('shares')
-                    ->label('Cổ phần hiện tại')
-                    ->value($member->shares);
+                    ->label('Nhập thêm cổ phần');
 
                 ?>
             </div>

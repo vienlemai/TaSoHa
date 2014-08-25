@@ -148,5 +148,8 @@ return array(
     'add_menu' => 'Thêm mới menu',
     'edit_menu' => 'Chỉnh sửa menu',
     'delete_menu' => 'Xóa menu',
-    'menu_name'=>'Tên menu'
+    'menu_name' => 'Tên menu',
+    //statistic
+    'statistic' => 'Thống kê',
+    'common_statistic' => 'Thống kê chung'
 );

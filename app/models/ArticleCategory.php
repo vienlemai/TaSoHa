@@ -11,11 +11,13 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
     );
 
     const DEFAULT_THUMBNAIL = 'assets/img/no-image.jpg';
-    
+
     public static $CAT_INTRO = 1;
-    public static $CAT_NEWS = array(2,3);
-    public static $CAT_RECRUITMENTS = array(4,5);
-    
+    public static $CAT_NEWS = array(2, 3);
+    public static $CAT_RECRUITMENTS = array(4, 5);
+    public static $CAT_PRODUCT = 6;
+    public static $CAT_TRANING = 7;
+    public static $CAT_EVENT = 8;
 
     /*
      * VALIDATIONS
@@ -67,5 +69,7 @@ class ArticleCategory extends LaravelBook\Ardent\Ardent {
             return asset(self::DEFAULT_THUMBNAIL);
         }
     }
+
+  
 
 }

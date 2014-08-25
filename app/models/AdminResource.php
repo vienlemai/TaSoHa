@@ -16,13 +16,12 @@ class AdminResource {
             'set_permission' => array('admin.groups.permission')
         ),
         'manage_member' => array(
-            'list_member' => array('admin.members.index', 'admin.members.show', 'admin.members.tree', 'admin.members.shares'),
+            'list_member' => array('admin.members.index', 'admin.members.show', 'admin.members.tree', 'admin.members.shares', 'admin.member.receipt', 'admin.member.bonus','admin.members.change_password'),
             'create_member' => array('admin.members.create', 'admin.members.store'),
             'edit_member' => array('admin.members.edit', 'admin.members.update'),
             'delete_member' => array('admin.members.destroy'),
             'list_bill' => array('admin.bills.index', 'admin.bills.show', 'admin.bills.print'),
             'create_bill' => array('admin.bills.create', 'admin.bills.store'),
-            'create_bonus' => array('admin.bonus.create', 'admin.bonus.store'),
         ),
 //        'manage_news' => array(
 //            'list_news' => array('admin.news.index'),
@@ -35,10 +34,10 @@ class AdminResource {
             'add_article' => array('admin.articles.create', 'admin.articles.store'),
             'edit_article' => array('admin.articles.edit', 'admin.articles.update'),
             'delete_article' => array('admin.articles.destroy'),
-            //'list_category' => array('admin.article_categories.index'),
+            'list_category' => array('admin.article_categories.index'),
             //'add_category' => array('admin.article_categories.create', 'admin.article_categories.store'),
-           // 'edit_category' => array('admin.article_categories.edit', 'admin.article_categories.update'),
-            //'detele_category' => array('admin.article_categories.destroy')
+            'edit_category' => array('admin.article_categories.edit', 'admin.article_categories.update'),
+        //'detele_category' => array('admin.article_categories.destroy')
         ),
         'manage_menus' => array(
             'list_menus' => array('admin.menu.index'),
@@ -59,6 +58,9 @@ class AdminResource {
         'manage_page' => array(
             'list_page' => array('admin.page.index'),
             'edit_page' => array('admin.page.edit', 'admin.page.update')
+        ),
+        'statistic' => array(
+            'common_statistic' => array('admin.statistic.index'),
         ),
         'site_setting' => array(
             'slide' => array('admin.slide.index', 'admin.slide.create', 'admin.slide.store', 'admin.slide.edit', 'admin.slide.update', 'admin.slide.destroy')

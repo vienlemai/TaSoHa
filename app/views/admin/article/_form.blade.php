@@ -13,6 +13,9 @@
                     <option value="<?php echo $value ?>"><?php echo $categories[$value] ?></option>
                 <?php endforeach; ?>
             </optgroup>
+            <option value="<?php echo ArticleCategory::$CAT_PRODUCT ?>"><?php echo $categories[ArticleCategory::$CAT_PRODUCT] ?></option>
+            <option value="<?php echo ArticleCategory::$CAT_TRANING ?>"><?php echo $categories[ArticleCategory::$CAT_TRANING] ?></option>
+            <option value="<?php echo ArticleCategory::$CAT_EVENT ?>"><?php echo $categories[ArticleCategory::$CAT_EVENT] ?></option>
         </select>
     </div>
 </div>

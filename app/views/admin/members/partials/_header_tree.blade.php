@@ -18,12 +18,6 @@
     <?php endif; ?>
 
     <div class="row">
-        <select id="member-select-month" class="col-md-2 form-control col-md-offset-6" style="width: 150px;" name="month">
-            <option value="all">Tất cả</option>
-            <?php foreach ($months as $m): ?>
-                <option value="<?php echo $m ?>" <?php echo $month == $m ? 'selected' : '' ?>><?php echo $m ?></option>
-            <?php endforeach; ?>
-        </select>
         <div class="col-md-4 pull-right no-padding">
             <?php
             echo View::make('admin.partials.search_tool', array(

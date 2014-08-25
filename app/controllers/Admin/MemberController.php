@@ -23,10 +23,17 @@ class MemberController extends AdminBaseController {
         $members = $query->with(array(
                 'sunMember.parent.member',
                 'binaryMember.parent.member'
-            ))->paginate();
+            ))
+            ->orderBy('created_at', 'desc')
+            ->select(array('id', 'full_name', 'created_at'))
+            ->paginate();
+        $months = \Member::getMonthsLog();
+        $month = Input::get('month', \Carbon\Carbon::now()->format('m/Y'));
         $this->layout->content = View::make('admin.members.index', array(
                 'members' => $members,
                 'input' => Input::all(),
+                'month' => $month,
+                'months' => $months
         ));
     }
 
@@ -99,18 +106,119 @@ class MemberController extends AdminBaseController {
     public function show($id) {
         $member = Member::with('creator')
             ->findOrFail($id);
-        //dd($member->toArray);
         $member->updateTeamBonus();
-        $bonusAmoun = \MyBonus::getBonus($id);
+        $months = \Member::getMonthLogByMember($id);
+        $month = \Carbon\Carbon::now()->format('m/Y');
+        $bonusAmoun = \MyBonus::getBonus($id, $month);
         if (\Request::ajax()) {
             return View::make('admin.members.show_modal', array(
                     'member' => $member,
                     'bonus' => $bonusAmoun,
+                    'months' => $months
             ));
         }
         $this->layout->content = View::make('admin.members.show', array(
                 'member' => $member,
                 'bonus' => $bonusAmoun,
+                'months' => $months
+        ));
+    }
+
+    public function bonus($id) {
+        $month = Input::get('month', \Carbon\Carbon::now()->format('m/Y'));
+        $member = \Member::find($id);
+        $bonusAmount = \MyBonus::getBonus($id, $month);
+        $statistic = DB::table('statistics')
+            ->where('month', $month)
+            ->first();
+        $receipt = DB::table('receipts')
+            ->where('month', $month)
+            ->where('member_id', $id)
+            ->first();
+        $isPaid = false;
+        $isCalculated = false;
+        if ($statistic !== null) {
+            $isCalculated = true;
+        }
+        if ($receipt !== null) {
+            $isPaid = true;
+        }
+        $total = DB::table('member_bonus')
+            ->where('member_id', $id)
+            ->where('month', $month)
+            ->sum('amount');
+        return View::make('admin.members.partials._bonus', array(
+                'member' => $member,
+                'bonus' => $bonusAmount,
+                'isPaid' => $isPaid,
+                'isCalculated' => $isCalculated,
+                'month' => $month,
+                'receipt' => $receipt,
+                'total' => round($total, 1)
+        ));
+    }
+
+    public function getReceipt($id) {
+        $month = Input::get('month');
+        $member = \Member::find($id);
+        $bonusAmount = \MyBonus::getBonus($id, $month);
+        $total = DB::table('member_bonus')
+            ->where('member_id', $id)
+            ->where('month', $month)
+            ->sum('amount');
+        $this->layout->content = View::make('admin.members.receipt', array(
+                'bonus' => $bonusAmount,
+                'total' => $total,
+                'month' => $month,
+                'member' => $member
+        ));
+    }
+
+    public function postReceipt($id) {
+        $month = Input::get('month');
+        $receipt = DB::table('receipts')
+            ->where('member_id', $id)
+            ->where('month', $month)
+            ->first();
+        if ($receipt == null) {
+            $bonusAmount = \MyBonus::getBonus($id, $month);
+            $total = DB::table('member_bonus')
+                ->where('member_id', $id)
+                ->where('month', $month)
+                ->sum('amount');
+            $receipt_id = DB::table('receipts')
+                ->insertGetId(array(
+                'member_id' => $id,
+                'month' => $month,
+                'content' => json_encode($bonusAmount),
+                'total' => $total
+            ));
+            $result = array(
+                'status' => true,
+                'receipt_id' => $receipt_id,
+                'url_print_receipt' => route('admin.member.print.receipt', array($receipt_id, 'month' => $month)),
+                'month' => $month,
+                'member_id' => $id
+            );
+        } else {
+            $member = \Member::find($id, array('full_name'));
+            $result = array(
+                'status' => false,
+                'message' => 'Hoa hồng của thành viên ' . $member->full_name . ' trong tháng ' . $month . ' đã được tính',
+            );
+        }
+        return \Response::json($result);
+    }
+
+    public function printReceipt($id) {
+        $receipt = DB::table('receipts')
+            ->where('id', $id)
+            ->first();
+        $member = \Member::find($receipt->member_id);
+        $this->setPrintLayout();
+        $this->layout->content = View::make('admin.members.print_receipt', array(
+                'member' => $member,
+                'receipt' => $receipt
         ));
     }
 
@@ -233,11 +341,16 @@ class MemberController extends AdminBaseController {
     }
 
     public function postShares($id) {
-        $member = \Member::findOrFail($id);
-        $member->shares = Input::get('shares');
-        $member->save();
-        Session::flash('success', 'Cập nhật thành công cổ phần cho thành viên <b>' . $member->full_name . '</b>');
-        return Redirect::back();
+        $v = \Member::validateShare(Input::all());
+        if ($v->passes()) {
+            $member = \Member::findOrFail($id);
+            $member->shares += Input::get('shares');
+            $member->save();
+            Session::flash('success', 'Cập nhật thành công cổ phần cho thành viên <b>' . $member->full_name . '</b>');
+            return Redirect::back();
+        } else {
+            return Redirect::back()->withInput()->withErrors($v->messages());
+        }
     }
 
 }

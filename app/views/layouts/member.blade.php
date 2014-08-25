@@ -27,11 +27,21 @@
             </div>
 
             <div id="content-wrapper">
-                @yield('content')
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="col-lg-3">
+                            <?php echo View::make('layouts.member._left_menu')->render() ?>   
+                        </div>
+                        <div class="col-lg-9">
+                            @include('layouts.frontend._flash')
+                            @yield('content')
+                        </div>
+                    </div>
+                </div>
             </div>
             <?php echo View::make('layouts.frontend._footer')->render() ?>  
         </div>
-         <input class="" type="hidden" name="" id="current-member-id" value="{{Auth::member()->get()->id}}"/>
+        <input class="" type="hidden" name="" id="current-member-id" value="{{Auth::member()->get()->id}}"/>
         <script type="text/javascript">
             var dataToken = '<?php echo Session::token(); ?>';
             var baseUrl = '<?php echo route('member.root'); ?>';
