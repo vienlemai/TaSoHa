@@ -28,21 +28,78 @@
 </div>
 </div>
 <div class="row">
-    <div class="col-md-12">
-        <h3>Thông tin thống kê tháng <?php echo $month ?></h3>
-        <ul>
-            <li>Tổng số thành viên đăng ký mới : <?php echo $count['members'] ?></li>
-            <li>Tổng số hóa đơn nhập mới: <?php echo $count['bills'] ?></li>
-
-            <?php if ($statistic !== null): ?>
-                <li>Tổng tiền : <?php echo $statistic->score ?></li>
-                <li>Tổng điểm : <?php echo $statistic->score ?></li>
-                <li>Tổng hoa hồng: <?php echo round($statistic->bonus, 1) ?></li>
-                <li>Lợi nhuận : <?php echo round($statistic->score - $statistic->bonus, 1) ?></li>
-            <?php endif; ?>
-
-        </ul>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header">
+                <h3 class="box-title">Thông tin thống kê tháng <?php echo $month ?></h3>
+            </div>
+            <div class="box-body">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <td>Số thành viên đăng ký mới</td>
+                            <td><?php echo $count['members'] ?></td>
+                        </tr>
+                        <tr>
+                            <td>Số hóa đơn nhập mới</td>
+                            <td><?php echo $count['bills'] ?></td>
+                        </tr>
+                        <?php if ($statistic !== null): ?>
+                            <tr>
+                                <td>Tổng tiền</td>
+                                <td><?php echo Common::IntToString($count['bills_money']) ?></td>
+                            </tr>
+                            <tr>
+                                <td>Tổng điểm </td>
+                                <td><?php echo $statistic->score ?></td>
+                            </tr>
+                            <tr>
+                                <td>Tổng hoa hồng</td>
+                                <td><?php echo round($statistic->bonus, 1) ?></td>
+                            </tr>
+                            <tr>
+                                <td>Lợi nhuận</td>
+                                <td><?php echo round($statistic->score - $statistic->bonus, 1) ?></td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+    <?php if ($statistic !== null): ?>
+        <div class="col-md-6">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">Chi tiết hoa hồng</h3>
+                </div>
+                <div class="box-body">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <td>Tên hoa hồng</td>
+                                <td>Tổng điểm</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php $total = 0; ?>
+                            <?php foreach ($bonusDetails as $b): ?>
+                                <tr>
+                                    <td><?php echo $b['name']; ?></td>
+                                    <td><?php echo $b['amount'] ?></td>
+                                </tr>
+                                <?php $total+=$b['amount'] ?>
+                            <?php endforeach; ?>
+                            <tr>
+                                <td><b>Tổng cộng</b></td>
+                                <td><b><?php echo $total ?></b></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
 @stop
 @section('addon_js')

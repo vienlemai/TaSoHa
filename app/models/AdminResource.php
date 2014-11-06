@@ -16,12 +16,14 @@ class AdminResource {
             'set_permission' => array('admin.groups.permission')
         ),
         'manage_member' => array(
-            'list_member' => array('admin.members.index', 'admin.members.show', 'admin.members.tree', 'admin.members.shares', 'admin.member.receipt', 'admin.member.bonus','admin.members.change_password'),
+            'list_member' => array('admin.members.index', 'admin.members.show', 'admin.members.tree', 'admin.members.shares', 'admin.member.receipt', 'admin.member.bonus', 'admin.members.change_password', 'admin.member.print.receipt'),
             'create_member' => array('admin.members.create', 'admin.members.store'),
             'edit_member' => array('admin.members.edit', 'admin.members.update'),
             'delete_member' => array('admin.members.destroy'),
             'list_bill' => array('admin.bills.index', 'admin.bills.show', 'admin.bills.print'),
             'create_bill' => array('admin.bills.create', 'admin.bills.store'),
+            'list_share' => array('admin.share.index', 'admin.share.create', 'admin.share.store'),
+            'share_level' => array('admin.share.level'),
         ),
 //        'manage_news' => array(
 //            'list_news' => array('admin.news.index'),

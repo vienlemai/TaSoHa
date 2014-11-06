@@ -1,4 +1,4 @@
-<div class="col-lg-12">
+<div class="col-lg-12" id="menu-wraper">
     <div class="navbar navbar-default">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">

@@ -27,9 +27,7 @@
                 echo Former::open(route('member.change_password'))
                     ->class('form-ajax refresh-on-success')
                     ->method('post');
-                echo Former::password('old_password')
-                    ->label('Mật khẩu cũ')
-                    ->class('form-control');
+                
                 echo Former::password('password')
                     ->label('Mật khẩu mới')
                     ->class('form-control');

@@ -7,12 +7,49 @@ Route::group(array('namespace' => 'Member', 'prefix' => 'member'), function() {
             'as' => 'member.profile',
             'uses' => 'MemberController@profile'
         ));
+        Route::get('bonus', array(
+            'as' => 'member.bonus',
+            'uses' => 'MemberController@bonus'
+        ));
+        Route::get('tree', array(
+            'as' => 'member.tree',
+            'uses' => 'MemberController@tree',
+        ));
+        Route::get('bills', array(
+            'as' => 'member.bills',
+            'uses' => 'MemberController@bills',
+        ));
+        Route::get('tree-binary/children/{parentId?}', function($parentId = null) {
+            if ($parentId == null) {
+                $memberId = Auth::member()->get()->id;
+                $data = BinaryMember::getNode($memberId);
+            } else {
+                $data = BinaryMember::getChildren($parentId);
+            }
+            return Response::json($data);
+        });
+        Route::get('tree-sun/children/{parentId?}', function($introducerId = null) {
+            if ($introducerId == null) {
+                $memberId = Auth::member()->get()->id;
+                $data = SunMember::getNode($memberId);
+            } else {
+                $data = SunMember::getChildren($introducerId);
+            }
+            return Response::json($data);
+        });
         Route::get('change-password', array(
             'as' => 'member.change_password',
             'uses' => 'MemberController@getChangePassword',
         ));
         Route::post('change-password', array('as' => 'member.change_password', 'uses' => 'MemberController@changePassword'));
-        Route::post('update-profile', array('as' => 'member.update_profile', 'uses' => 'MemberController@updateProfile'));
+        Route::get('update-profile', array(
+            'as' => 'member.update_profile',
+            'uses' => 'MemberController@getUpdateProfile'
+        ));
+        Route::post('update-profile', array(
+            'as' => 'member.update_profile',
+            'uses' => 'MemberController@postUpdateProfile'
+        ));
 
         Route::get('{id}/show', array(
             'as' => 'member.show',

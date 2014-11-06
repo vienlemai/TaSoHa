@@ -30,8 +30,8 @@
                 </ul>
             </li>
         <?php endif; ?>
-        <?php if (in_array('admin.members.index', $allowed_routes) || in_array('admin.bills.index', $allowed_routes) || in_array('admin.bills.create', $allowed_routes)): ?>
-            <li class="treeview <?php echo strpos($current, 'members') !== false ? 'active' : '' ?>">
+        <?php if (in_array('admin.members.index', $allowed_routes) || in_array('admin.bills.index', $allowed_routes) || in_array('admin.bills.create', $allowed_routes) || in_array('admin.bills.index', $allowed_routes)): ?>
+            <li class="treeview <?php echo (strpos($current, 'members') !== false || strpos($current, 'bills') !== false || strpos($current, 'share')) ? 'active' : '' ?>">
                 <a href="#">
                     <i class="fa fa-group"></i>
                     <span>Quản lý thành viên</span>
@@ -49,6 +49,12 @@
                     <?php endif; ?>
                     <?php if (in_array('admin.bills.create', $allowed_routes)) : ?>
                         <li><a href="{{route('admin.bills.create')}}">Nhập hóa đơn</a></li>
+                    <?php endif; ?>
+                    <?php if (in_array('admin.share.index', $allowed_routes)): ?>
+                        <li><a href="{{route('admin.share.index')}}">Cổ phần đầu tư</a></li>
+                    <?php endif; ?>
+                    <?php if (in_array('admin.share.level', $allowed_routes)): ?>
+                        <li><a href="{{route('admin.share.level')}}">Cổ phần theo cấp bậc</a></li>
                     <?php endif; ?>
                 </ul>
             </li>

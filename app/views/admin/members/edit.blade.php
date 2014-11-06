@@ -21,32 +21,15 @@
                         <i class="fa fa-arrow-left"></i> Quay lại danh sách</a>
                 </div>
             </div>
-            <?php echo Former::open(route('admin.members.update',$member->id))->method('put') ?>
+            <?php echo Former::open(route('admin.members.update', $member->id))->method('put') ?>
             <div class="box-body col-lg-10">
                 <?php
                 Former::populate($member);
-                echo Former::select('introduced_by')
-                    ->addOption('-- Là thành viên cấp 1', null)
-                    ->class('custom-select2 select2')
-                    ->options($members, $member->introduced_by);
-                echo Former::select('parent_id')
-                    ->addOption('-- Là thành viên cấp 1', null)
-                    ->class('custom-select2 select2')
-                    ->options($members, $member->parent_id);
                 echo Former::text('full_name')
                     ->class('form-control');
                 echo Former::text('email')
                     ->label('email')
                     ->class('form-control');
-//                echo Former::text('username')
-//                    ->label('Tên đăng nhập')
-//                    ->class('form-control');
-//                echo Former::password('password')
-//                    ->label('Mật khẩu')
-//                    ->class('form-control');
-//                echo Former::password('password_confirmation')
-//                    ->label('Nhập lại mật khẩu')
-//                    ->class('form-control');
                 echo Former::text('day_of_birth')
                     ->class('form-control date_mask');
                 echo Former::radios('sex')

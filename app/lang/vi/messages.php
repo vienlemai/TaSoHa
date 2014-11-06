@@ -13,7 +13,7 @@ return array(
     'new_password' => 'Mật khẩu mới',
     'old_password_not_match' => 'Mật khẩu cũ không đúng',
     'password_updated' => 'Đổi mật khẩu thành công',
-    'login_fail' => 'Tên đăng nhập hoặc mật khẩu không đúng',
+    'login_fail' => 'Email hoặc mật khẩu không đúng',
     'profile' => 'Tài khoản',
     'account' => 'Tài khoản',
     'my_profile' => 'Hồ sơ của tôi',
@@ -151,5 +151,6 @@ return array(
     'menu_name' => 'Tên menu',
     //statistic
     'statistic' => 'Thống kê',
-    'common_statistic' => 'Thống kê chung'
+    'common_statistic' => 'Thống kê chung',
+    'list_share' => 'Cổ phần đầu tư'
 );

@@ -41,3 +41,49 @@
     </div>
 </div>
 @stop
+@section('addon_js')
+<script type="text/javascript">
+    $('body').on('change', '#bonus-month-select', function() {
+        var memberId = $(this).attr('data-member-id');
+        var bonusUrl = baseUrl + '/member/bonus/' + memberId;
+        var month = $(this).val();
+        $.ajax({
+            url: bonusUrl,
+            type: 'get',
+            data: {month: month},
+            success: function(data) {
+                $('#member-bonus-content').html(data);
+            },
+            error: function() {
+                alert('Đã có lỗi xảy ra, vui lòng thử lại');
+            }
+        });
+    });
+    $('body').on('click', '#btn-pay-bonus', function() {
+        var dataUrl = $(this).attr('href');
+        var month = $(this).attr('data-month');
+        $.ajax({
+            url: dataUrl,
+            type: 'post',
+            dataType: 'json',
+            data: {month: month},
+            success: function(data) {
+                if (data.status == 1) {
+                    if (confirm('Đã thanh toán thành công hoa hồng, bạn có muốn in hóa đơn ?')) {
+                        location.href = data.url_print_receipt;
+                    }
+                } else {
+                    alert(data.message);
+                    location.reload();
+                }
+
+            },
+            error: function(error) {
+                alert('Đã có lỗi xảy ra, vui lòng thử lại');
+                return false;
+            }
+        });
+        return false;
+    });
+</script>
+@stop

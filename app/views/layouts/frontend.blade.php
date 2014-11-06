@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <title>Trang chủ - TASOHA Group</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+
         <!--<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>-->
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-lumen.min.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/bootstrap-override.css')}}">
@@ -19,7 +20,7 @@
     </head>
     <body>
         <div class="container" id="wrapper">
-            <div class="row">
+            <div class="row header-wraper">
                 <?php echo View::make('layouts.frontend._header')->render() ?>     
             </div>
             <div class="row clearfix">

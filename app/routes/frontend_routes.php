@@ -26,4 +26,12 @@ Route::group(array('namespace' => 'Frontend'), function() {
     Route::get('/tasoha/{page}', array(
         'as' => 'fe.page.show', 'uses' => 'HomeController@page')
     );
+    Route::get('shares', array(
+        'as' => 'fe.shares',
+        'uses' => 'ShareController@index'
+    ));
+    Route::get('share/level', array(
+        'as' => 'fe.share.level',
+        'uses' => 'ShareController@level',
+    ));
 });

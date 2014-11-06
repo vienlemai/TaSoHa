@@ -2,7 +2,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-12">
-        <?php $now = Carbon\Carbon::now(); ?>
+        <?php $now = Carbon\Carbon::now()->subMonth(); ?>
         <div class="calculate-bonus-wrap">
             <h3>Bấm vào <a href="#" id="get-monthly-bonus">đây</a> để bắt đầu tính hoa hồng cho tháng <?php echo $now->month ?> năm <?php echo $now->year ?></h3>
         </div>

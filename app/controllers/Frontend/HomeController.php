@@ -20,7 +20,7 @@ class HomeController extends FrontendBaseController {
      */
     public function index() {
         $articleCategories = ArticleCategory::take(3)->get();
-        $recentNews = News::recent();
+        $recentNews = \Article::recentNews();
         $slides = \SlideImage::orderBy('created_at')->get();
         $this->layout->content = View::make('frontend.home.index')
             ->with(compact('articleCategories', 'recentNews', 'slides'));

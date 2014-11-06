@@ -5,6 +5,18 @@ Route::group(array('prefix' => 'admin', 'before' => 'admin.auth'), function() {
     Route::any('elfinder/connector', 'Barryvdh\Elfinder\ElfinderController@showConnector');
     Route::get('elfinder/ckeditor4', 'Barryvdh\Elfinder\ElfinderController@showCKeditor4');
 });
+Route::get('members/{id}/show', array(
+    'as' => 'members.show',
+    'uses' => 'Admin\MemberController@show'
+));
+Route::get('admin/member/bonus/{id}', array(
+    'as' => 'admin.member.bonus',
+    'uses' => 'Admin\MemberController@bonus'
+));
+Route::get('member/member/bonus/{id}', array(
+    'as' => 'member.member.bonus',
+    'uses' => 'Admin\MemberController@bonus'
+));
 
 Route::group(array('namespace' => 'Admin', 'prefix' => 'admin'), function() {
     Route::get('/login', array(
@@ -51,7 +63,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
     });
     Route::post('tinh-hoa-hong', function() {
         //$month = Carbon\Carbon::now()->subMonth()->format('m/Y');
-        $month = Carbon\Carbon::now()->format('m/Y');
+        $month = Carbon\Carbon::now()->subMonth()->format('m/Y');
         $result = Member::getMonthlyBonus($month);
         //$result = false;
         if ($result) {
@@ -86,6 +98,10 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         return Response::json($data);
     });
     Route::group(array('before' => 'admin.permission'), function() {
+        Route::get('members/{id}/show', array(
+            'as' => 'admin.members.show',
+            'uses' => 'MemberController@show'
+        ));
         Route::resource('articles', 'ArticleController');
         Route::resource('article_categories', 'ArticleCategoryController');
 
@@ -95,7 +111,16 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
         Route::resource('news', 'NewsController');
         Route::resource('page', 'PageController', array('only' => array('index', 'edit', 'update')));
 
-        Route::resource('members', 'MemberController');
+        Route::resource('members', 'MemberController', array('except' => array('show')));
+        Route::resource('share', 'ShareController', array('only' => array('index', 'create', 'store')));
+        Route::get('share/level', array(
+            'as'=>'admin.share.level',
+            'uses' => 'ShareController@getLevel',
+        ));
+        Route::post('share/level', array(
+            'as'=> 'admin.share.level',
+            'uses' => 'ShareController@postLevel'
+        ));
         Route::resource('menu', 'MenuController');
         Route::get('/members/{id}/shares', array(
             'as' => 'admin.members.shares',
@@ -105,10 +130,7 @@ Route::group(array('namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'adm
             'as' => 'admin.members.shares',
             'uses' => 'MemberController@postShares'
         ));
-        Route::get('member/bonus/{id}', array(
-            'as' => 'admin.member.bonus',
-            'uses' => 'MemberController@bonus'
-        ));
+
         Route::get('member/receipt/{id}', array(
             'as' => 'admin.member.receipt',
             'uses' => 'MemberController@getReceipt'

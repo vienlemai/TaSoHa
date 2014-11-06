@@ -18,10 +18,23 @@ class Common {
     }
 
     public static function IntToString($int) {
-        $strrev = strrev($int);
-        $arr = str_split($strrev, 3);
-        $result = implode(' ', $arr);
-        return (strrev($result));
+        if (is_float($int)) {
+            $whole = substr($int, 0, strpos($int, '.'));
+            $fraction = substr($int, strpos($int, '.'));
+            if ($whole == '') {
+                $whole = (string) $int;
+                $fraction = '';
+            }
+            $strrev = strrev($whole);
+            $arr = str_split($strrev, 3);
+            $result = implode(' ', $arr);
+            return (strrev($result)) . $fraction;
+        } else {
+            $strrev = strrev($int);
+            $arr = str_split($strrev, 3);
+            $result = implode(' ', $arr);
+            return (strrev($result));
+        }
     }
 
 }

@@ -252,4 +252,18 @@ class MyBonus extends Eloquent {
         }
     }
 
+    public static function getByMonth($month) {
+        $bonus = MyBonus::lists('name', 'id');
+        $bonusAmoun = array();
+        foreach ($bonus as $k => $v) {
+            $bonusAmoun[$k]['name'] = $v;
+            $amount = DB::table('member_bonus')
+                ->where('bonus_id', $k)
+                ->where('month', $month)
+                ->sum('amount');
+            $bonusAmoun[$k]['amount'] = round($amount, 1);
+        }
+        return $bonusAmoun;
+    }
+
 }

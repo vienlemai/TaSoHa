@@ -52,7 +52,7 @@
                             <td><?php echo $member->full_name ?></td>
                             <td>{{$member->sunMember->parent->member->full_name or ''}}</td>
                             <td>{{$member->binaryMember->parent->member->full_name or ''}}</td>
-                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y') ?></td>
+                            <td><?php echo $member->created_at->format('d \t\h\á\n\g m, Y H:i') ?></td>
                             <td>
                                 <?php if ($allowShow): ?>
                                     <a href="<?php echo route('admin.members.show', $member->id) ?>" class="text-primary">

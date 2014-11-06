@@ -54,6 +54,7 @@ return array(
 	|
 	*/
 
+	//'from' => array('address' => 'trasoha@gmail.com', 'name' => 'Tasoha'),
 	'from' => array('address' => 'maivien3101990@gmail.com', 'name' => 'Tasoha'),
 
 	/*
@@ -93,6 +94,7 @@ return array(
 	|
 	*/
 
+	//'password' => 'toilatyphu',
 	'password' => 'MaiVien158',
 
 	/*

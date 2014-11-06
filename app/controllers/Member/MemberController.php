@@ -28,8 +28,9 @@ class MemberController extends MemberBaseController {
         ));
     }
 
-    public function tree($type = 'binary') {
-        $this->layout->content = View::make('member.member.tree', array(
+    public function tree() {
+        $type = Input::get('type', 'sun');
+        $this->layout->contetn = View::make('member.member.tree', array(
                 'type' => $type,
         ));
     }
@@ -125,9 +126,9 @@ class MemberController extends MemberBaseController {
             $member = Auth::member()->get();
             $member->update(Input::all());
             $member->save();
-            Session::flash('success', 'Đổi mật khẩu thành công');
             $result['success'] = true;
-            $result['message'] = 'Đổi mật khẩu thành công';
+            $result['message'] = 'Mật khẩu của bạn đã được đổi thành công';
+            $result['redirect'] = route('member.profile');
         } else {
             $result['success'] = false;
             \Former::withErrors($v->messages());
@@ -136,7 +137,11 @@ class MemberController extends MemberBaseController {
         return Response::json($result);
     }
 
-    public function updateProfile() {
+    public function getUpdateProfile() {
+        $this->layout->content = View::make('member.member.update_profile');
+    }
+
+    public function postUpdateProfile() {
         $member = Auth::member()->get();
         $v = Member::validateUpdateSelfProfile(Input::all(), $member->id);
         $result = array();
@@ -144,17 +149,94 @@ class MemberController extends MemberBaseController {
             $member->fill(Input::all());
             $member->save();
             $result['success'] = true;
-            $result['message'] = 'Cập nhật thông tin cá nhân thành công.';
+            $result['message'] = 'Thông tin cá nhân của bạn đã được cập nhật thành công.';
+            $result['redirect'] = route('member.profile');
         } else {
             \Former::withErrors($v->messages());
             $result['success'] = false;
-            $result['html'] = View::make('member.member._form_personal_info')->render();
+            $result['html'] = View::make('member.member.partials._form_personal_info')->render();
         }
         return Response::json($result);
     }
 
     public function profile() {
-        $this->layout->content = View::make('member.member.profile');
+        $memberId = Auth::member()->get()->id;
+        $member = Member::with(array(
+                'sunMember.parent.member',
+                'binaryMember.parent.member'
+            ))
+            ->find($memberId);
+        $this->layout->content = View::make('member.member.profile', array(
+                'member' => $member
+        ));
+    }
+
+    public function bonus() {
+        //dd(Input::all());
+        $month = Input::get('month', \Carbon\Carbon::now()->format('m/Y'));
+        $memberId = Auth::member()->get()->id;
+        $member = \Member::find($memberId);
+        $bonusAmount = \MyBonus::getBonus($memberId, $month);
+        $statistic = DB::table('statistics')
+            ->where('month', $month)
+            ->first();
+        $receipt = DB::table('receipts')
+            ->where('month', $month)
+            ->where('member_id', $memberId)
+            ->first();
+        $isPaid = false;
+        $isCalculated = false;
+        if ($statistic !== null) {
+            $isCalculated = true;
+        }
+        if ($receipt !== null) {
+            $isPaid = true;
+        }
+        //$months = \Member::getMonthLogByMember($id);
+        $months = \Member::getMonthsLog();
+        $total = DB::table('member_bonus')
+            ->where('member_id', $memberId)
+            ->where('month', $month)
+            ->sum('amount');
+        $viewData = array(
+            'member' => $member,
+            'bonus' => $bonusAmount,
+            'isPaid' => $isPaid,
+            'isCalculated' => $isCalculated,
+            'month' => $month,
+            'receipt' => $receipt,
+            'total' => round($total, 1),
+            'months' => $months
+        );
+        if (\Request::ajax()) {
+            return View::make('member.member.partials._bonus', $viewData);
+        } else {
+            $this->layout->content = View::make('member.member.bonus', $viewData);
+        }
+    }
+
+    public function bills() {
+        $month = Input::get('month', \Carbon\Carbon::now()->format('m/Y'));
+        $memberId = Auth::member()->get()->id;
+        $bills = \Bill::where('member_id', $memberId)
+                ->whereBetween('created_at', array(
+                    \Carbon\Carbon::createFromFormat('m/Y', $month)->startOfMonth(),
+                    \Carbon\Carbon::createFromFormat('m/Y', $month)->endOfMonth(),
+                ))->get();
+        //$months = \Member::getMonthLogByMember($id);
+        $months = \Member::getMonthsLog();
+        $member = \Member::find($memberId);
+        $viewData = array(
+            'member' => $member,
+            'bills' => $bills,
+            'months' => $months,
+            'month' => $month,
+        );
+        if (\Request::ajax()) {
+            return View::make('member.member.partials._bills', $viewData);
+        } else {
+            $this->layout->content = View::make('member.member.bills', $viewData);
+        }
     }
 
 }

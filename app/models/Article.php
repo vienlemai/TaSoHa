@@ -58,6 +58,14 @@ class Article extends LaravelBook\Ardent\Ardent {
         }
     }
 
+    public static function recentNews() {
+        $news = self::whereIn('category_id', ArticleCategory::$CAT_NEWS)
+            ->orderBy('created_at', 'DESC')
+            ->take(5)
+            ->get();
+        return $news;
+    }
+
     public static function paging($params) {
         $query = self::with('category');
         if (isset($params['keyword'])) {

@@ -19,15 +19,17 @@
                 <h3 class="box-title">Thông tin hoa hồng</h3>
                 <div class="box-tools pull-right">
                     <select name="month" class="form-control" id="bonus-month-select">
-                        <?php foreach ($months as $month): ?>
-                            <option value="<?php echo $month ?>"><?php echo $month ?></option>
+                        <?php foreach ($months as $m): ?>
+                            <option value="<?php echo $m ?>" <?php echo $month == $m ? 'selected' : '' ?>><?php echo $m ?></option>
                         <?php endforeach; ?>
                     </select>
                 </div>
             </div>
             <input id="member-id" type="hidden" name="" value="<?php echo $member->id ?>"/>
             <div id="member-bonus-content">
+                <div class="box-body">
 
+                </div>
             </div>
             <div class="box-footer">
 
@@ -64,7 +66,7 @@
             type: 'get',
             data: {month: month},
             success: function(data) {
-                $('#member-bonus-content').html(data);
+                $('#member-bonus-content .box-body').html(data);
             },
             error: function() {
                 alert('Đã có lỗi xảy ra, vui lòng thử lại');

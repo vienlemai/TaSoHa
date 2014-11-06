@@ -11,6 +11,7 @@
         <link rel="stylesheet" type="text/css" href="{{asset('assets/js/plugins/jorgchar/css/prettify.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/frontend/css/main.css')}}">
         <link rel="stylesheet" type="text/css" href="{{asset('assets/css/addon.css')}}">
+        @yield('addon_css')
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
           <script src="../bower_components/html5shiv/dist/html5shiv.js"></script>
@@ -19,7 +20,7 @@
     </head>
     <body>
         <div class="container" id="wrapper">
-            <div class="row">
+            <div class="row header-wraper">
                 <?php echo View::make('layouts.frontend._header')->render() ?>     
             </div>
             <div class="row clearfix">
@@ -28,11 +29,11 @@
 
             <div id="content-wrapper">
                 <div class="row">
-                    <div class="col-lg-12">
-                        <div class="col-lg-3">
+                    <div class="col-lg-12 no-padding">
+                        <div class="col-lg-3 no-padding">
                             <?php echo View::make('layouts.member._left_menu')->render() ?>   
                         </div>
-                        <div class="col-lg-9">
+                        <div class="col-lg-9 no-padding" id="right-content">
                             @include('layouts.frontend._flash')
                             @yield('content')
                         </div>
@@ -55,5 +56,7 @@
         <script type="text/javascript" src="{{asset('assets/js/helper.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/member.js')}}"></script>
         <script type="text/javascript" src="{{asset('assets/js/common.js')}}"></script>
+        @yield('addon_js')
+        @yield('inline_js')
     </body>
 </html>

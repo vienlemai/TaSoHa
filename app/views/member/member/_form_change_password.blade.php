@@ -1,7 +1,7 @@
 <?php
 echo Former::open(route('member.change_password'))
     ->data_update_html_for('#change-pass-wrap')
-    ->class('form-horizontal form-ajax refresh-on-success')
+    ->class('form-horizontal form-ajax')
     ->method('post');
 ?>
 <?php

@@ -87,19 +87,6 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
             $member->created_by = Auth::admin()->get()->id;
         });
         static::created(function($member) {
-            //create bonuse row for member
-            //$bonus = MyBonus::get(array('id'));
-//            foreach ($bonus as $b) {
-//                DB::table('member_bonus')
-//                    ->insert(array(
-//                        'member_id' => $member->id,
-//                        'bonus_id' => $b->id,
-//                        'created_at' => Carbon\Carbon::now(),
-//                        'updated_at' => Carbon\Carbon::now(),
-//                        'amount' => 0,
-//                        'auto_amount' => 0
-//                ));
-//            }
             DB::table('team_bonus')
                 ->insert(array('member_id' => $member->id));
         });
@@ -114,7 +101,7 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
         $rules = array(
             'email' => 'required|email|unique:members,email,' . $id,
             'full_name' => 'required',
-            'username' => 'required',
+            //'username' => 'required',
             'password' => 'required|min:6',
             'password_confirmation' => 'required|same:password',
             //'day_of_birth' => 'required',
@@ -123,6 +110,21 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
             //'identify_date' => 'required',
             //'location' => 'required',
             //'phone' => 'required|numeric'
+        );
+
+        return Validator::make($input, $rules);
+    }
+
+    public static function validateEdit($input, $id) {
+        $rules = array(
+            'email' => 'required|email|unique:members,email,' . $id,
+            'full_name' => 'required',
+//            'day_of_birth' => 'required',
+//            'identify_number' => 'required|numeric',
+//            'identify_location' => 'renquired|required',
+//            'identify_date' => 'required',
+//            'location' => 'required',
+//            'phone' => 'required|numeric'
         );
 
         return Validator::make($input, $rules);
@@ -438,16 +440,14 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
     }
 
     public static function updateManagerBonus($month) {
-        $listBill = DB::table('bills')
-            ->where('month', $month)
-            ->list('member_id');
-        $listRecencies = DB::table('members')
-            ->lists('regency', 'id');
         $sunMembers = SunMember::with(array(
                 'member' => function($query) {
-                $query->where('regency', '>=', self::CAP_PHO_BAN);
+                $query->select(array('id', 'full_name', 'regency'));
             }
-            ))->get();
+            ))->whereHas('member', function($query) {
+                $query->where('regency', '>=', self::CAP_PHO_BAN);
+            })
+            ->get();
         foreach ($sunMembers as $sunMember) {
             $descendants = DB::table('sun_members')
                 ->where('lft', '>=', $sunMember->lft)
@@ -459,6 +459,7 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
                     Carbon\Carbon::createFromFormat('m/Y', $month)->endOfMonth(),
                 ))->whereIn('member_id', $descendants)
                 ->sum('score');
+            $scoreToCal = $childrenScore * 5 / 100;
             $ancestors = SunMember::with(array(
                     'member' => function($query) {
                     $query->select(array(
@@ -466,17 +467,23 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
                         'full_name',
                         'regency'
                     ));
-                }))->where('lft', '<=', $sunMember->lft)
+                }))->whereHas('member', function($query) use($sunMember) {
+                    $query->where('regency', '<=', $sunMember->member->regency)
+                    ->where('regency', '>=', Member::CAP_PHO_BAN);
+                })->where('lft', '<=', $sunMember->lft)
                 ->where('rgt', '>=', $sunMember->rgt)
                 ->where('id', '!=', $sunMember->id)
                 ->orderBy('depth', 'DESC')
-                ->remember(10)
                 ->get();
+            $i = 1;
             foreach ($ancestors as $node) {
-                $ignoreCount = 0;
-                $depth = abs($node->depth - $sunMember->depth) - $ignoreCount;
-                if ($listRecencies[$node->member_id] <= $listRecencies[$sunMember->member_id] && $listRecencies[$node->member_id] >= self::CAP_PHO_BAN) {
-                    
+                if (isset(MyBonus::$MANAGER_BONUS_CONFIGS[$node->member->regency][$i])) {
+                    $tyle = MyBonus::$MANAGER_BONUS_CONFIGS[$node->member->regency][$i];
+                    $amount = $scoreToCal * $tyle / 100;
+                    Event::fire('member.update.bonus', array($node->member_id, MyBonus::HH_LANH_DAO, $amount, $month));
+                    $i++;
+                } else {
+                    break;
                 }
             }
         }
@@ -514,6 +521,7 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
         if ($monthlyLog == null) {
             Member::updateDirectBonus($month);
             Member::updateShareBonus($month);
+            Member::updateManagerBonus($month);
             $bonusSum = DB::table('member_bonus')
                 ->where('month', $month)
                 ->sum('amount');
@@ -528,7 +536,6 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
                     'score' => $scoreSum,
                     'bonus' => round($bonusSum, 1),
             ));
-
             return true;
         } else {
             return false;
@@ -556,24 +563,9 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
             $member->created_at = $member->created_at->addMonth();
         }
         if (!in_array($now->format('m/Y'), $months)) {
-            array_push($months, $month);
+            array_push($months, $now->format('m/Y'));
         }
         return $months;
-    }
-
-    public static function validateEdit($input, $id) {
-        $rules = array(
-            'email' => 'required|email|unique:members,email,' . $id,
-            'full_name' => 'required',
-            'day_of_birth' => 'required',
-            'identify_number' => 'required|numeric',
-            'identify_location' => 'renquired|required',
-            'identify_date' => 'required',
-            'location' => 'required',
-            'phone' => 'required|numeric'
-        );
-
-        return Validator::make($input, $rules);
     }
 
     public static function validateChangePassword($input, $id = null) {
@@ -585,6 +577,18 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
         $messages = array(
             'required' => 'Không được để trống',
             'passmembercheck' => 'Mật khẩu không đúng',
+            'same' => 'Mật khẩu phải giống nhau',
+        );
+        return Validator::make($input, $rules, $messages);
+    }
+
+    public static function validateAdminChangePassword($input) {
+        $rules = array(
+            'password' => 'required|min:6',
+            'password_confirmation' => 'required|same:password',
+        );
+        $messages = array(
+            'required' => 'Không được để trống',
             'same' => 'Mật khẩu phải giống nhau',
         );
         return Validator::make($input, $rules, $messages);
@@ -618,9 +622,9 @@ class Member extends Illuminate\Database\Eloquent\Model implements UserInterface
         $query = $instance->newQuery();
         if (isset($params['keyword']) && $params['keyword'] !== '') {
             $query->where(function($query) use ($params) {
-                $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%');
-                $query->orWhere('email', 'like', '%' . $params['keyword'] . '%');
-                $query->orWhere('username', 'like', '%' . $params['keyword'] . '%');
+                $query->orWhere('full_name', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('email', 'like', '%' . $params['keyword'] . '%')
+                    ->orWhere('uid', 'like', '%' . $params['keyword'] . '%');
             });
         } else {
             $month = isset($params['month']) ? $params['month'] : \Carbon\Carbon::now()->format('m/Y');

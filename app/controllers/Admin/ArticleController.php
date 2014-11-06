@@ -32,7 +32,7 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function create() {
-       $categories = \ArticleCategory::lists('name', 'id');
+        $categories = \ArticleCategory::lists('name', 'id');
         $this->layout->content = View::make('admin.article.create', array(
                 'categories' => $categories,
         ));
@@ -44,12 +44,14 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function store() {
+        var_dump(Input::all());
         $article = new Article(Input::all());
         $article->created_by = Auth::admin()->get()->id;
         if ($article->save()) {
             Session::flash('success', trans('messages.article_save_success', array('title' => $article->title)));
             return Redirect::route('admin.articles.index');
         } else {
+            dd($article->errors());
             return Redirect::back()->withInput()->withErrors($article->errors());
         }
     }
@@ -71,7 +73,7 @@ class ArticleController extends AdminBaseController {
      * @return Response
      */
     public function edit($id) {
-        $categories = ArticleCategory::all();
+        $categories = \ArticleCategory::lists('name', 'id');
         $article = Article::findOrFail($id);
         $this->layout->content = View::make('admin.article.edit', array(
                 'categories' => $categories,

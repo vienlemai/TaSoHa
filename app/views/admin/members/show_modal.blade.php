@@ -52,22 +52,33 @@
             </table>
         </div><!-- /.tab-pane -->
         <div class="tab-pane" id="<?php echo 'tab_bonus-' . $member->id ?>">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <td>Tên hoa hồng</td>
-                        <td>Tổng điểm</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($bonus as $b): ?>
+            <div class="row">
+                <div class="box-tools pull-right">
+                    <select name="month" class="form-control" id="bonus-month-select" data-member-id="<?php echo $member->id ?>">
+                        <?php foreach ($months as $m): ?>
+                            <option value="<?php echo $m ?>" <?php echo $month == $m ? 'selected' : '' ?>><?php echo $m ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <div id="member-bonus-content">
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td><?php echo $b['name']; ?></td>
-                            <td><?php echo $b['amount'] ?></td>
+                            <td>Tên hoa hồng</td>
+                            <td>Tổng điểm</td>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($bonus as $b): ?>
+                            <tr>
+                                <td><?php echo $b['name']; ?></td>
+                                <td><?php echo $b['amount'] ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
         </div><!-- /.tab-pane -->
     </div><!-- /.tab-content -->
 </div>

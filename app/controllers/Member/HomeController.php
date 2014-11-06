@@ -42,21 +42,17 @@ class HomeController extends MemberBaseController {
             'email' => Input::get('email'),
             'password' => Input::get('password')), Input::has('remember_me')
         );
-        $res = array();
         if ($checkLogin) {
-            $res['success'] = true;
+            return Redirect::route('member.profile');
         } else {
-            $res['success'] = false;
-            $res['message'] = trans('messages.login_fail');
+            Session::flash('login_error', trans('messages.login_fail'));
+            return Redirect::back();
         }
-        return Response::json($res);
     }
 
     public function getLogout() {
         Auth::member()->logout();
         return Redirect::route('fe.root');
     }
-    
-    
 
 }

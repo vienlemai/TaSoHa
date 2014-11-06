@@ -25,8 +25,8 @@ class MemberController extends AdminBaseController {
                 'binaryMember.parent.member'
             ))
             ->orderBy('created_at', 'desc')
-            ->select(array('id', 'full_name', 'created_at'))
-            ->paginate();
+            ->select(array('id', 'full_name', 'created_at', 'uid'))
+            ->paginate(20);
         $months = \Member::getMonthsLog();
         $month = Input::get('month', \Carbon\Carbon::now()->format('m/Y'));
         $this->layout->content = View::make('admin.members.index', array(
@@ -107,20 +107,23 @@ class MemberController extends AdminBaseController {
         $member = Member::with('creator')
             ->findOrFail($id);
         $member->updateTeamBonus();
-        $months = \Member::getMonthLogByMember($id);
+        //$months = \Member::getMonthLogByMember($id);
+        $months = \Member::getMonthsLog();
         $month = \Carbon\Carbon::now()->format('m/Y');
         $bonusAmoun = \MyBonus::getBonus($id, $month);
         if (\Request::ajax()) {
             return View::make('admin.members.show_modal', array(
                     'member' => $member,
                     'bonus' => $bonusAmoun,
-                    'months' => $months
+                    'months' => $months,
+                    'month' => $month
             ));
         }
         $this->layout->content = View::make('admin.members.show', array(
                 'member' => $member,
                 'bonus' => $bonusAmoun,
-                'months' => $months
+                'months' => $months,
+                'month' => $month
         ));
     }
 
@@ -245,13 +248,14 @@ class MemberController extends AdminBaseController {
      */
     public function update($id) {
         $member = \Member::findOrFail($id);
-        $v = Member::validate(Input::all(), $id);
+        $v = Member::validateEdit(Input::all(), $id);
         if ($v->passes()) {
             $member->fill(Input::all());
             $member->save();
             Session::flash('success', 'Chỉnh sửa thành công thành viên <b>' . $member->full_name . '</b>');
             return Redirect::route('admin.members.index');
         } else {
+            dd($v->messages());
             return Redirect::back()->withInput()->withErrors($v->messages());
         }
     }
@@ -322,7 +326,7 @@ class MemberController extends AdminBaseController {
 
     public function postChangePassword($id) {
         $member = Member::findOrFail($id);
-        $v = Member::validateChangePassword(Input::all(), $id);
+        $v = Member::validateAdminChangePassword(Input::all());
         if ($v->passes()) {
             $member->password = Hash::make(Input::get('password'));
             $member->save();

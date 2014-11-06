@@ -45,30 +45,34 @@ class Bill extends BaseModel {
                 'right_left' => 0,
                 'need_to_up' => false
         ));
+        DB::table('team_bonus')->truncate();
         DB::table('members')
             ->update(array(
                 'score' => 0,
                 'children_score' => 0,
                 'regency' => 0
         ));
+        DB::table('members')->truncate();
+        DB::table('binary_members')->truncate();
+        DB::table('sun_members')->truncate();
         DB::table('second_scores')
             ->truncate();
         DB::table('bills')
             ->truncate();
-        $members = Member::orderBy('id', 'asc')->get();
-        foreach ($members as $member) {
-            $loops = (int) rand(1, 5);
-            for ($i = 0; $i < $loops; $i++) {
-                $random = rand(150, 15000);
-                $bill = new Bill(array(
-                    'product_name' => 'mua ' . str_random(10),
-                    'price' => $random * 20,
-                    'score' => $random,
-                    'member_id' => $member->id
-                ));
-                $bill->forceSave();
-            }
-        }
+//        $members = Member::orderBy('id', 'asc')->get();
+//        foreach ($members as $member) {
+//            $loops = (int) rand(1, 5);
+//            for ($i = 0; $i < $loops; $i++) {
+//                $random = rand(150, 15000);
+//                $bill = new Bill(array(
+//                    'product_name' => 'mua ' . str_random(10),
+//                    'price' => $random * 20,
+//                    'score' => $random,
+//                    'member_id' => $member->id
+//                ));
+//                $bill->forceSave();
+//            }
+//        }
     }
 
     public function creator() {

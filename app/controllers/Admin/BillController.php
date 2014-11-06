@@ -27,7 +27,7 @@ class BillController extends AdminBaseController {
             ->whereBetween('created_at', array($start, $end))
             //->condition(\Input::all())
             ->orderBy('created_at', 'desc')
-            ->paginate();
+            ->paginate(25);
         $months = \Member::getMonthsLog();
         $this->layout->content = View::make('admin.bills.index', array(
                 'bills' => $bills,

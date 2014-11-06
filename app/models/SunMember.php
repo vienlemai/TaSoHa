@@ -40,4 +40,18 @@ class SunMember extends Node {
         return ($data);
     }
 
+    public static function getNode($id) {
+        $node = self::with(array(
+                'children',
+                'children.member'
+            ))->find($id);
+        $data[] = array(
+            'id' => $node->id,
+            'member_id' => $node->member_id,
+            'text' => $node->member->full_name,
+            'children' => $node->children->isEmpty() ? false : true,
+        );
+        return ($data);
+    }
+
 }
